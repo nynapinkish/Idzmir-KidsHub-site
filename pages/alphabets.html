@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Alphabets — Idzmir Kids Hub</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">🌟 Idzmir Kids Hub</div>
+      <nav>
+        <a href="../html/index.html">Home</a> |
+        <a href="../html/login.html">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="content">
+    <h2 class="page-title">🔤 Learn the Alphabets</h2>
+
+    <section class="alpha-grid" id="alphaGrid" aria-label="Alphabet letters">
+      <!-- JS will populate A-Z tiles here -->
+    </section>
+  </main>
+
+  <!-- modal -->
+  <div id="alphaModal" class="modal" aria-hidden="true" role="dialog">
+    <div class="modal-card">
+      <button id="modalClose" class="modal-close" aria-label="Close">✕</button>
+      <div class="modal-letter" id="modalLetter">A</div>
+      <div class="modal-word" id="modalWord">A is for Apple</div>
+      <audio id="modalAudio" preload="auto"></audio>
+      <div class="modal-controls">
+        <button id="playAudio">🔊 Play</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p>&copy; 2025 Idzmir Kids Hub</p>
+  </footer>
+
+  <script src="../js/script.js"></script>
+  <script>
+    // initialize page (create grid) — minimal inline boot
+    if (typeof initAlphabetPage === 'function') initAlphabetPage();
+  </script>
+</body>
+</html>
