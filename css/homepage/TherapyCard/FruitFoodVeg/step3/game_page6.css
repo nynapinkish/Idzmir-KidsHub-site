@@ -1,0 +1,200 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Arial', sans-serif;
+  background: url('../../../../../assets/images/backgroundSpatial.webp') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  position: relative;
+  padding-top: 0.5px;
+  overflow: hidden;
+}
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../../../../../assets/images/backgroundSpatial.webp') no-repeat center center fixed;
+  background-size: cover;
+  z-index: -1;
+  opacity: 0.8;
+  filter: blur(12px);
+  pointer-events: none;
+}
+/* Header & Navigation */
+.header {
+  background: linear-gradient(135deg, #003e8d 0%, #003e8d 100%);
+  padding: 15px 40px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  align-items: center;
+}
+.nav-item {
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+}
+.nav-item:hover {
+  opacity: 0.8;
+}
+.nav-separator {
+  color: white;
+  opacity: 0.6;
+}
+/* Score Display */
+.score-display {
+  position: fixed;
+  top: 100px;
+  right: 40px;
+  background: linear-gradient(135deg, #FDD835 0%, #F9A825 100%);
+  border: 4px solid #003e8d;
+  border-radius: 20px;
+  padding: 10px 25px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #003e8d;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 999;
+}
+/* Banner */
+.banner-section {
+  text-align: center;
+  padding: 20px;
+  margin-top: 70px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.banner-yellow {
+  background: linear-gradient(135deg, #FFD700 0%, #FFB400 100%);
+  padding: 5px 80px;
+  border-radius: 38px;
+  font-size: 28px;
+  font-weight: 800;
+  color: #003e8d;
+  box-shadow: 0 4px 12px rgba(255, 180, 0, 0.3);
+  font-family: 'Poppins', sans-serif;
+}
+.banner-blue {
+  background: linear-gradient(135deg, #003e8d 20%, #003e8d 100%);
+  padding: 6px 60px;
+  border-radius: 38px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #FFD700;
+  box-shadow: 0 4px 12px rgba(0, 62, 141, 0.3);
+  font-family: 'Poppins', sans-serif;
+}
+/* Game Container */
+.game-container {
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+/* Each Row with Line and Image */
+.line-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  position: relative;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+.dashed-line {
+  flex: 1;
+  min-width: 900px;
+  height: 100px;
+  margin-right: 80px;
+  position: relative;
+  background-image: url("data:image/svg+xml,%3Csvg width='300' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 0 5 L 75 95 L 150 5 L 225 95 L 300 5' stroke='%23333' stroke-width='3' fill='none' stroke-dasharray='8,5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-position: left center;
+}
+.animal-image-container {
+  width: 120px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: -5px;
+}
+.animal-image-container img {
+  max-width: 250%;
+  max-height: 110%;
+  object-fit: contain;
+  margin-bottom: 35px;
+}
+/* Back & Next Buttons */
+.back-button-container {
+  position: fixed;
+  bottom: 20px;
+  left: -10px;
+  z-index: 100;
+}
+.back-button {
+  width: 130px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.back-button:hover {
+  transform: scale(1.1);
+}
+.next-button-container {
+  position: fixed;
+  bottom: 25px;
+  right: -10px;
+}
+.next-button {
+  width: 130px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.next-button:hover {
+  transform: scale(1.1);
+}
+@media (max-width: 768px) {
+  .banner-yellow,
+  .banner-blue {
+    font-size: 20px;
+    padding: 8px 40px;
+  }
+  .game-container {
+    padding: 0 20px;
+  }
+  .animal-image-container {
+    width: 100px;
+    height: 80px;
+  }
+  
+  .line-row {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .dashed-line {
+    min-width: auto;
+  }
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Konsep Warna - Hijau - Idzmir Kids Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../css/ColorShapeConcepts/green/green.css">
+  <link rel="stylesheet" href="../../../css/homepage/header.css">
+
+</head>
+<body>
+
+<!-- Header Placeholder - will be loaded dynamically -->
+<div id="header-placeholder"></div>
+  
+  <div class="container">
+    <!-- Banner Konsep Warna dan Bentuk -->
+    <div class="main-banner">
+      <h1>Konsep Warna dan Bentuk</h1>
+    </div>
+
+    <div class="learning-section">
+      <div class="color-side">
+        <div class="color-label">
+          <span class="word">hijau</span>
+          <img src="../../../assets/images/speaker.png" class="speaker" onclick="playAudio('hijau')" alt="Play Audio">
+        </div>
+        <!-- Klik stroke green image ni untuk muncul buah -->
+        <div class="color-brush" id="strokeImage"></div>
+      </div>
+
+<div class="fruit-grid" id="fruitGrid">
+    <!-- Baris 1 - saiz biasa -->
+    <div class="fruit"><img src="../../../assets/images/apple.png" alt="Epal Hijau"></div>
+    <div class="fruit"><img src="../../../assets/images/grapes1.png" alt="Anggur Hijau"></div>
+    <div class="fruit"><img src="../../../assets/images/guava.png" alt="Jambu Batu"></div>
+    
+    <!-- Baris 2 - saiz biasa -->
+    <div class="fruit"><img src="../../../assets/images/watermelon.png" alt="Tembikai"></div>
+    <div class="fruit"><img src="../../../assets/images/cucumber.png" alt="Timun"></div>
+    <div class="fruit"><img src="../../../assets/images/broccoli.png" alt="Brokoli"></div>
+
+    <!-- Baris 3 - BESAR -->
+    <div class="fruit fruit-large"><img src="../../../assets/images/kiwi.png" alt="Kiwi"></div>
+    <div class="fruit fruit-large"><img src="../../../assets/images/pear1.png" alt="Pir Hijau"></div>
+    <div class="fruit fruit-large"><img src="../../../assets/images/bittergourd.png" alt="Peria"></div>
+</div>
+
+    <!-- BACK BUTTON -->
+   <div class="back-button-container">
+      <a href="../../../../html/ColorShapeConcepts/yellow/yellow.html">
+  <img src="../../../assets/images/back.png" alt="Back Button" class="back-button">
+</a>
+
+<!-- NEXT BUTTON - ✅ BUANG <a> TAG -->
+<div class="next-button-container">
+  <img src="../../../assets/images/next.png" alt="Next Button" class="next-button">
+</div>  </div>
+    
+  <script src="../../../js/ColorShapeConcepts/green/green.js"></script>
+
+  <!-- Load initHeader.js FIRST -->
+<script src="../../../../js/homepage/initHeader.js"></script>
+
+<!-- THEN call initializeHeader with correct path -->
+<script>
+  initializeHeader('../../homepage/header.html');
+</script>
+
+</body>
+</html>

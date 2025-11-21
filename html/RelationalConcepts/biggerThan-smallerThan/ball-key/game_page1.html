@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jom Pilih! - Idzmir Kids Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../css/RelationalConcepts/biggerThan-smallerThan/ball-key/game_page1.css">
+  <link rel="stylesheet" href="../../../../css/homepage/header.css">
+
+</head>
+<body>
+
+<!-- Header Placeholder - will be loaded dynamically -->
+<div id="header-placeholder"></div>
+
+<!-- Score Display - During Game -->
+<div class="score-display" id="scoreDisplay" style="display: none;">
+  <span class="score-label">SKOR</span>
+  <span id="scoreText">0/4</span>
+</div>
+
+<div class="banner-section">
+    <div class="banner-yellow">Lebih Besar Daripada VS Lebih Kecil Daripada</div>
+    <div class="banner-blue">Jom Pilih!</div>
+</div>
+
+  <!-- Main Layout -->
+  <div class="main-layout">
+
+    <!-- Left Section - Question Box -->
+    <div class="left-section">
+      <div class="question-label">lebih besar daripada</div>
+      <div class="question-box" id="questionBox">
+        <!-- Tukar question mark kepada gambar bola -->
+        <img src="../../../../assets/images/ball.png" alt="Ball" class="question-image">
+        <img class="answer-image" src="" alt="Answer">
+      </div>
+    </div>
+
+    <!-- Right Section - Options -->
+    <div class="right-section">
+      <div class="options-grid">
+        <div class="option-item clickable-image" data-answer="correct" onclick="selectOption(this, 'tv.png', 'TV')">
+          <img src="../../../../assets/images/tv.png" alt="TV" loading="lazy">
+        </div>
+        <div class="option-item clickable-image" data-answer="wrong" onclick="selectOption(this, 'key.png', 'Keys')">
+          <img src="../../../../assets/images/key.png" alt="Keys" loading="lazy">
+        </div>
+        <div class="option-item clickable-image" data-answer="correct" onclick="selectOption(this, 'almari.png', 'Almari')">
+          <img src="../../../../assets/images/almari.png" alt="Almari" loading="lazy">
+        </div>
+        <div class="option-item clickable-image" data-answer="correct" onclick="selectOption(this, 'gastank.png', 'Gas Tank')">
+          <img src="../../../../assets/images/gastank.png" alt="Gas Tank" loading="lazy">
+        </div>
+        <div class="option-item clickable-image" data-answer="wrong" onclick="selectOption(this, 'gam.png', 'gam')">
+          <img src="../../../../assets/images/gam.png" alt="gam" loading="lazy">
+        </div>
+        <div class="option-item clickable-image" data-answer="correct" onclick="selectOption(this, 'book.png', 'Books')">
+          <img src="../../../../assets/images/book.png" alt="Books" loading="lazy">
+        </div>
+        <div class="option-item clickable-image" data-answer="wrong" onclick="selectOption(this, 'pencil.png', 'Pencil')">
+          <img src="../../../../assets/images/pencil.png" alt="Pencil" loading="lazy">
+        </div>
+        <div class="option-item clickable-image" data-answer="wrong" onclick="selectOption(this, 'eraser.png', 'Eraser')">
+          <img src="../../../../assets/images/eraser.png" alt="Eraser" loading="lazy">
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- End Main Layout -->
+
+<!-- 🎉 SCORE MODAL (Hidden by default) -->
+<div class="score-modal" id="scoreModal" style="display: none;">
+  <div class="score-container">
+    <!-- ⭐ Stars embedded at top of bukit -->
+    <div class="stars-container">
+      <div class="star star-small">
+        <img src="../../../../assets/images/star1.png" class="star-image" alt="Star" />
+      </div>
+      <div class="star star-large">
+        <img src="../../../../assets/images/star2.png" class="star-image" alt="Star" />
+      </div>
+      <div class="star star-small">
+        <img src="../../../../assets/images/star3.png" class="star-image" alt="Star" />
+      </div>
+    </div>
+
+    <!-- 🏷️ Title -->
+    <div class="score-title">Markah anda</div>
+
+    <!-- 📦 Score Box -->
+    <div class="score-box-wrapper">
+      <div class="score-box">
+        <div class="score-value" id="finalScoreDisplay">0/4</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Back Button -->
+<div class="back-button-container">
+  <a href="../../../../html/RelationalConcepts/biggerThan-smallerThan/biggerThan-smallerThan.html">
+    <img src="../../../../assets/images/back.png" alt="Back Button" class="back-button">
+  </a>
+</div>
+
+<!-- Next Button -->
+<div class="next-button-container">
+  <a href="../../../../html/RelationalConcepts/biggerThan-smallerThan/ball-key/game_page2.html">
+    <img src="../../../../assets/images/next.png" alt="Next Button" class="next-button" id="nextButton" style="display: none;">
+  </a>
+</div>
+
+<!-- Load initHeader.js FIRST -->
+<script src="../../../../js/homepage/initHeader.js"></script>
+
+<!-- Initialize Header -->
+<script>
+  if (typeof initializeHeader === 'function') {
+    initializeHeader('../../../homepage/header.html');
+  }
+</script>
+
+<!-- Load Game Logic -->
+<script src="../../../../js/RelationalConcepts/biggerThan-smallerThan/ball-key/game_page1.js"></script>
+
+</body>
+</html>

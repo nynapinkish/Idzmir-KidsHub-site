@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tulis & Jejak - Kuning - Idzmir Kids Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../html/STORE/yellow/writeTraceYellow.css"> -->
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <img src="../../../assets/images/logo1.png" alt="Idzmir Kids Hub Logo">
+      <nav class="nav-menu">
+        <img src="../../../assets/images/logo2.png" alt="Idzmir Kids Hub Secondary Logo">
+      </nav>
+    </div>
+    <nav class="nav-menu">
+      <a href="#" class="nav-item">Home</a>
+      <a href="#" class="nav-item">Apps</a>
+      <a href="#" class="nav-item">Parents & Teachers</a>
+      <a href="#" class="nav-item">Tutorial</a>
+      <a href="#" class="nav-item">Sign Up</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <!-- BACK BUTTON AT TOP LEFT -->
+    <div class="next-button-container">
+      <a href="../../../../html/ColorShapeConcepts/yellow/yellow.html">
+        <img src="../../../assets/images/back.png" alt="Back Button" class="back-button">
+      </a>
+    </div>
+
+    <div class="banner">
+      <h2 class="card-title">Kuning</h2>
+    </div>
+
+    <div class="trace-section">
+      <h2>Jejak Perkataan</h2>
+      <div id="guideMessage" class="guide-text" style="display: none;"></div>
+      
+      <div class="trace-container">
+        <canvas id="traceCanvas" class="trace-canvas" width="900" height="300"></canvas>
+        <div class="canvas-label">Jejak huruf putus-putus dengan tetikus atau jari anda</div>
+      </div>
+
+      <div class="trace-buttons">
+        <button class="btn btn-clear" onclick="clearCanvas()">Padam</button>
+        <button class="btn btn-guide" onclick="toggleGuide()">Papar Panduan</button>
+      </div>
+
+      <div id="successMsg" class="success-message" style="display: none;">
+        ⭐ Hebat! Anda mejejas perkataan dengan sempurna! ⭐
+      </div>
+    </div>
+  </div>  
+  
+  <script src="../../../../html/STORE/yellow/writeTraceYellow.js"></script>
+</body>
+</html>

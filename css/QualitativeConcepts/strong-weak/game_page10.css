@@ -1,0 +1,695 @@
+/* Reset and basic styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Background image - backgroundGrass (on top) */
+body {
+    font-family: 'Arial', sans-serif;
+    min-height: 105vh;
+    position: relative;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Apply the backgroundSpatial image first (di belakang sekali) */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../../../assets/images/backgroundSpatial.webp') no-repeat center center fixed;
+    background-size: cover;
+    z-index: -2; /* Place this behind everything */
+    opacity: 1;
+}
+
+/* Apply the backgroundGrass image on top (di depan) */
+body::after {
+    content: '';
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 130%;
+    background: url('../../../assets/images/backgroundGrass.webp') no-repeat center bottom fixed;
+    background-size: cover;
+    z-index: 1; /* Layer paling depan untuk grass */
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* Ensure all content appears above backgrounds */
+.header,
+.banner,
+.fruit-selection,
+.basket,
+.score-display,
+.banner-container,
+.image-container,
+.next-button-container,
+.back-button-container,
+.finish-button-container {
+    position: relative;
+    z-index: 100;
+}
+
+/* Header - FIXED SIZE */
+.header {
+    background: rgba(0, 62, 141, 0.95);
+    backdrop-filter: blur(6px);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    z-index: 1000;
+}
+
+/* Logo - FIXED SIZE */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.logo img {
+    height: 45px;
+    width: auto;
+}
+
+/* Navigation */
+.nav-menu {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.nav-item {
+    font-family: 'Poppins', sans-serif;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.nav-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Banner Section - FIXED SIZE */
+.banner {
+    background-color: #FFB400;
+    padding: 10px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 60px;
+}
+
+/* ==================== SCORE DISPLAY - GAME STYLE WITH DECORATIONS ==================== */
+
+.score-display {
+    position: fixed;
+    top: 90px;
+    right: 30px;
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    color: #003E8D;
+    padding: 18px 25px;
+    border-radius: 15px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    box-shadow: 
+        0 8px 20px rgba(255, 180, 0, 0.5),
+        inset 0 2px 5px rgba(255, 255, 255, 0.5),
+        0 0 0 4px #003E8D,
+        0 0 0 6px #FFD700;
+    z-index: 1000;
+    min-width: 130px;
+    text-align: center;
+    transform: rotate(-2deg);
+    animation: scoreFloat 3s ease-in-out infinite;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.score-display::before {
+    content: '⭐';
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    font-size: 25px;
+    animation: starSpin 2s linear infinite;
+}
+
+.score-display::after {
+    content: '⭐';
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    font-size: 25px;
+    animation: starSpin 2s linear infinite reverse;
+}
+
+.score-display #scoreText {
+    display: block;
+    font-size: 32px;
+    margin-top: 6px;
+    color: #003E8D;
+    font-weight: 900;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    animation: scoreGlow 1.5s ease-in-out infinite;
+}
+
+.score-display .score-label {
+    display: block;
+    font-size: 25px;
+    color: #003E8D;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+@keyframes scoreFloat {
+    0%, 100% {
+        transform: rotate(-2deg) translateY(0px);
+    }
+    50% {
+        transform: rotate(-2deg) translateY(-10px);
+    }
+}
+
+@keyframes starSpin {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    50% {
+        transform: rotate(180deg) scale(1.2);
+    }
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+@keyframes scoreGlow {
+    0%, 100% {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    50% {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2), 0 0 20px rgba(255, 180, 0, 0.8);
+    }
+}
+
+/* ==================== SCORE MODAL - INSIDE/OUTSIDE STYLE WITH GAME LIST ==================== */
+
+.score-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    animation: fadeIn 0.3s ease;
+    overflow: auto;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Score Container - WITH GAME LIST DESIGN */
+.score-modal .score-container {
+    position: relative;
+    width: 420px;
+    background: linear-gradient(135deg, #ffd54f 0%, #ffca28 100%);
+    border: 8px solid #003d82;
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), inset 0 2px 5px rgba(255, 255, 255, 0.3);
+    padding: 20px 20px 28px 20px;
+    overflow: visible;
+    animation: slideUp 0.5s ease;
+    z-index: 2;
+    margin: 50px auto;
+}
+
+/* Stars Container */
+.stars-container {
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 2;
+}
+
+.star {
+    position: relative;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4));
+    animation: starBounce 0.8s ease-in-out infinite;
+}
+
+@keyframes starBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.star-small {
+    width: 100px;
+    height: 80px;
+    margin-left: -80px;
+    margin-right: -80px;
+    margin-top: 35px;
+}
+
+.star-large {
+    width: 180px;
+    height: 100px;
+    margin-top: 0;
+    z-index: 3;
+}
+
+.star-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: filter 0.5s ease-in-out;
+}
+
+/* Score Title & Subtitle */
+.score-title {
+    font-size: 19px;
+    font-weight: 900;
+    font-family: 'Poppins', sans-serif;
+    color: #003e8d;
+    margin-top: 15px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+}
+
+.score-subtitle {
+    font-size: 30px;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    color: #003e8d;
+    text-align: center;
+    margin-top: 2px;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+}
+
+/* Games Score List */
+.games-score-list {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px 0;
+    max-height: 140px;
+    overflow-y: auto;
+    border: 3px solid #003d82;
+}
+
+.game-score-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 8px;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #003e8d;
+}
+
+.game-score-row:last-child {
+    border-bottom: none;
+}
+
+.game-name {
+    flex: 1;
+}
+
+.game-points {
+    text-align: right;
+    min-width: 70px;
+    font-weight: 700;
+    color: #003d82;
+}
+
+/* Scrollbar Styling */
+.games-score-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.games-score-list::-webkit-scrollbar-track {
+    background: #e9ecef;
+    border-radius: 10px;
+}
+
+.games-score-list::-webkit-scrollbar-thumb {
+    background: #003e8d;
+    border-radius: 10px;
+}
+
+/* Total Score Box */
+.total-score-box {
+    background: linear-gradient(135deg, #003d82 0%, #005bb3 100%);
+    border-radius: 10px;
+    padding: 5px;
+    text-align: center;
+    margin-top: 10px;
+    color: #ffd54f;
+    font-weight: 800;
+    border: 3px solid #ffd54f;
+}
+
+.total-score-box .label {
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    color: #ffd54f;
+}
+
+.total-score-box .percentage {
+    font-size: 50px;
+    margin-top: 3px;
+    font-weight: 800;
+    color: #ffd54f;
+}
+
+/* Modal Buttons */
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 14px;
+}
+
+.modal-button {
+    background-color: #003d82;
+    color: #ffd54f;
+    font-size: 19px;
+    padding: 8px 26px;
+    border: none;
+    border-radius: 50px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+}
+
+.modal-button:hover {
+    background-color: #ffd54f;
+    color: #003d82;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.modal-button:active {
+    transform: translateY(-1px);
+}
+
+@keyframes bounceButton {
+    0%, 100% { 
+        transform: translateY(0) scale(1); 
+    }
+    50% { 
+        transform: translateY(-10px) scale(1.05); 
+    }
+}
+
+/* Banner Section - FIXED SIZES */
+.banner-container {
+    margin-top: 70px;
+    text-align: center;
+    padding: 15px;
+}
+
+.banner-yellow {
+    background: linear-gradient(135deg, #FFD700 0%, #FFB400 100%);
+    padding: 15px 30px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    color: #003E8D;
+    font-size: 30px;
+    font-weight: 800;
+    border-radius: 35px;
+    margin: 0 auto 15px;
+    max-width: 950px;
+    box-shadow: 0 6px 20px rgba(255, 180, 0, 0.4);
+    text-transform: capitalize;
+}
+
+.banner-blue {
+    background: linear-gradient(135deg, #003E8D 0%, #0052B4 100%);
+    padding: 8px 2px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    color: #FFD700;
+    font-size: 30px;
+    font-weight: 700;
+    border-radius: 35px;
+    margin: 0 auto;
+    max-width: 550px;
+    box-shadow: 0 6px 20px rgba(0, 62, 141, 0.4);
+}
+
+/* Image container - POSITIONED ON TABLE */
+.image-container {
+    display: flex;
+    justify-content: center;
+    gap: 0px; /* lebih rapat */
+    align-items: flex-end;
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 1200px;
+    z-index: 500;
+}
+
+/* PANJANG */
+.image-item.strong {
+    width: 750px;
+    height: 800px;
+    object-fit: contain;
+    cursor: pointer;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    margin-bottom: -180px; /* naikkan sikit */
+    margin-left: 10px;
+}
+
+/* PENDEK */
+.image-item.weak {
+    width: 650px;
+    height: 700px;
+    object-fit: contain;
+    cursor: pointer;
+    margin-left: -210px;
+    margin-bottom: -150px; /* turunkan sikit */
+}
+
+/* Base style for both */
+.image-item {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.image-item:hover {
+    transform: scale(1.15);
+}
+
+/* Animation for correct answer - GREEN GLOW */
+.correct-glow {
+    animation: glowGreen 0.8s ease-in-out forwards !important;
+}
+
+@keyframes glowGreen {
+    0% {
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+        transform: scale(1);
+    }
+    50% {
+        filter: drop-shadow(0 0 40px #00ff00) 
+                drop-shadow(0 0 80px #00ff00) 
+                drop-shadow(0 0 120px #00ff00) 
+                brightness(1);
+        transform: scale(1.2);
+    }
+    100% {
+        filter: drop-shadow(0 0 30px #00ff00) 
+                drop-shadow(0 0 60px #00ff00) 
+                brightness(1);
+        transform: scale(1.15);
+    }
+}
+
+/* Animation for wrong answer - RED SHAKE */
+.wrong-shake {
+    animation: shakeRed 0.8s ease-in-out forwards !important;
+}
+
+@keyframes shakeRed {
+    0% {
+        transform: translateX(0) rotate(0deg);
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    }
+    10% {
+        transform: translateX(-15px) rotate(-5deg);
+        filter: drop-shadow(0 0 40px #ff0000) 
+                drop-shadow(0 0 80px #ff0000) 
+                brightness(1);
+    }
+    20% {
+        transform: translateX(15px) rotate(5deg);
+        filter: drop-shadow(0 0 40px #ff0000) 
+                drop-shadow(0 0 80px #ff0000) 
+                brightness(1);
+    }
+    30% {
+        transform: translateX(-15px) rotate(-5deg);
+        filter: drop-shadow(0 0 40px #ff0000) 
+                drop-shadow(0 0 80px #ff0000) 
+                brightness(1);
+    }
+    40% {
+        transform: translateX(15px) rotate(5deg);
+        filter: drop-shadow(0 0 40px #ff0000) 
+                drop-shadow(0 0 80px #ff0000) 
+                brightness(1);
+    }
+    50% {
+        transform: translateX(-10px) rotate(-3deg);
+        filter: drop-shadow(0 0 40px #ff0000) 
+                drop-shadow(0 0 80px #ff0000) 
+                brightness(1);
+    }
+    60% {
+        transform: translateX(10px) rotate(3deg);
+        filter: drop-shadow(0 0 40px #ff0000) 
+                drop-shadow(0 0 80px #ff0000) 
+                brightness(1);
+    }
+    70% {
+        transform: translateX(-5px) rotate(-2deg);
+        filter: drop-shadow(0 0 30px #ff0000) 
+                drop-shadow(0 0 60px #ff0000) 
+                brightness(1);
+    }
+    80% {
+        transform: translateX(5px) rotate(2deg);
+        filter: drop-shadow(0 0 30px #ff0000) 
+                drop-shadow(0 0 60px #ff0000) 
+                brightness(1);
+    }
+    90% {
+        transform: translateX(-3px) rotate(-1deg);
+        filter: drop-shadow(0 0 20px #ff0000) 
+                drop-shadow(0 0 40px #ff0000) 
+                brightness(1);
+    }
+    100% {
+        transform: translateX(0) rotate(0deg);
+        filter: drop-shadow(0 0 15px #ff0000) 
+                drop-shadow(0 0 30px #ff0000) 
+                brightness(1);
+    }
+}
+
+/* ==================== FINISH BUTTON ==================== */
+
+.finish-button-container {
+    position: fixed;
+    bottom: 20px;
+    right: 50px;
+    z-index: 100;
+}
+
+.finish-button {
+    background-color: #FFD700;
+    color: #003d82;
+    font-size: 28px;
+    padding: 15px 55px;
+    border: none;
+    border-radius: 50px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    font-family: 'Poppins', sans-serif;
+}
+
+.finish-button:hover {
+    background-color: #003d82;
+    color: #FFD700;
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.finish-button:active {
+    transform: scale(1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .finish-button-container {
+        right: 30px;
+    }
+
+    .finish-button {
+        font-size: 22px;
+        padding: 12px 45px;
+    }
+}

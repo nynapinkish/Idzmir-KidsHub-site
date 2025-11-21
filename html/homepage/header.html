@@ -1,0 +1,44 @@
+<header class="header">
+  <div class="logo">
+    <img src="/assets/images/logo1.png" alt="Idzmir Kids Hub Logo">
+    <img src="/assets/images/logo2.png" alt="Idzmir Kids Hub">
+  </div>
+
+  <nav class="nav-menu">
+    <a href="../../../html/homepage/homepage.html" class="nav-item">Home</a>
+    <a href="#about" class="nav-item">About</a>
+    <a href="#tutorial" class="nav-item tutorial">Tutorial</a>
+    <a href="#contact" class="nav-item">Contact</a>
+  </nav>
+
+  <button id="signupBtn" class="sign-up-btn">Sign Up</button>
+
+  <div class="user-profile" id="userProfile" style="display: none;" onclick="toggleUserMenu()">
+    <img src="../../../../../assets/images/default-avatar.png" alt="User Avatar" class="profile-pic" id="profilePic">
+    <span class="profile-name" id="profileName">Guest</span>
+  </div>
+</header>
+
+<script>
+  // Handle Sign Up button click
+  document.addEventListener('DOMContentLoaded', function() {
+    const signupBtn = document.getElementById('signupBtn');
+    if (signupBtn) {
+      signupBtn.addEventListener('click', handleHeaderSignUpClick);
+    }
+  });
+
+  function handleHeaderSignUpClick() {
+    // Check if we're on homepage
+    if (window.location.href.includes('homepage.html')) {
+      // On homepage - trigger modal directly
+      if (typeof showWelcomeFlow === 'function') {
+        showWelcomeFlow();
+      }
+    } else {
+      // On other pages - redirect to homepage with signup flag
+      localStorage.setItem('redirectToSignUp', 'true');
+      window.location.href = '../../html/homepage/homepage.html';
+    }
+  }
+</script>

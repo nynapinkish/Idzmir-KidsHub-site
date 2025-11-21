@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Konsep Warna - Oren - Idzmir Kids Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../css/ColorShapeConcepts/orange/orange.css">
+  <link rel="stylesheet" href="../../../css/homepage/header.css">
+</head>
+<body>
+
+<!-- Header Placeholder - will be loaded dynamically -->
+<div id="header-placeholder"></div>
+  
+  <div class="container">
+    <!-- Banner Konsep Warna dan Bentuk -->
+    <div class="main-banner">
+      <h1>Konsep Warna dan Bentuk</h1>
+    </div>
+
+    <div class="learning-section">
+      <div class="color-side">
+        <div class="color-label">
+          <span class="word">oren</span>
+          <img src="../../../assets/images/speaker.png" class="speaker" onclick="playAudio('oren')" alt="Play Audio">
+        </div>
+        <!-- Klik stroke orange image ni untuk muncul buah -->
+        <div class="color-brush" id="strokeImage"></div>
+      </div>
+
+      <!-- Buah disembunyikan dulu, muncul bila klik stroke -->
+      <div class="fruit-grid" id="fruitGrid">
+        <!-- Baris 1 - saiz biasa -->
+        <div class="fruit"><img src="../../../assets/images/carrot.png" alt="lobak merah"></div>
+        <div class="fruit"><img src="../../../assets/images/papaya.png" alt="betik"></div>
+        <div class="fruit"><img src="../../../assets/images/orange1.png" alt="oren"></div>
+        
+        <!-- Baris 2 - saiz biasa -->
+        <div class="fruit"><img src="../../../assets/images/persimmon.png" alt="persimmon"></div>
+        <div class="fruit"><img src="../../../assets/images/carrot2.png" alt="lobak merah"></div>
+        <div class="fruit"><img src="../../../assets/images/orange2.png" alt="oren"></div>
+        
+        <!-- Baris 3 - BESAR -->
+        <div class="fruit fruit-large"><img src="../../../assets/images/mango1.png" alt="mangga"></div>
+        <div class="fruit"><img src="../../../assets/images/jackfruit1.png" alt="nangka"></div>
+        <div class="fruit"><img src="../../../assets/images/pumpkin.png" alt="labu"></div>
+      </div>
+    </div>
+
+    <!-- START THE GAME Button -->
+    <div class="start-button-container">
+      <a href="../../../../html/ColorShapeConcepts/yellow/game_page1.html">
+        <button class="start-button">START THE GAME</button>
+      </a>
+    </div>
+
+  <!-- BACK BUTTON -->
+  <div class="back-button-container">
+    <a href="../../../../html/ColorShapeConcepts/purple/purple.html">
+      <img src="../../../assets/images/back.png" alt="Back Button" class="back-button">
+    </a>
+  </div>
+  
+  <script src="../../../js/ColorShapeConcepts/orange/orange.js"></script>
+
+  <!-- Load initHeader.js FIRST -->
+  <script src="../../../../js/homepage/initHeader.js"></script>
+
+  <!-- THEN call initializeHeader with correct path -->
+  <script>
+    initializeHeader('../../homepage/header.html');
+  </script>
+
+</body>
+</html>

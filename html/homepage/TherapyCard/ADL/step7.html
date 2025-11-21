@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rutin Harian - Idzmir Kids Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../css/homepage/TherapyCard/ADL/step7.css">
+  <link rel="stylesheet" href="../../../../css/homepage/header.css">
+</head>
+<body>
+
+<!-- Header -->
+<div id="header-placeholder"></div>
+
+  <!-- Score Display -->
+  <div class="score-display">
+    <span class="score-text">Markah: <span id="scoreDisplay">0</span></span>
+  </div>
+
+  <!-- Main Container -->
+  <div class="container">
+    <div class="banner">
+      <h1 class="banner-title">SPIN & SAY</h1>
+    </div>
+
+    <div class="instruction-banner">
+      <p class="instruction-text">Spin the yellow wheel and peek through the window!</p>
+    </div>
+
+    <div class="game-area">
+      <!-- Wheel Section -->
+      <div class="wheel-section">
+        <div class="wheel-container" id="wheelContainer">
+          <!-- Static items in background -->
+          <div class="items-background">
+            <!-- Item 1: Bottom slice (0° - 60°) - ball -->
+            <div class="static-item item-bottom" data-item="ball">
+              <img src="../../../../assets/images/ball.png" alt="Ball">
+            </div>
+            
+            <!-- Item 2: Bottom-left slice (60° - 120°) - key -->
+            <div class="static-item item-bottom-left" data-item="key">
+              <img src="../../../../assets/images/key.png" alt="Key">
+            </div>
+            
+            <!-- Item 3: Top-left slice (120° - 180°) - table -->
+            <div class="static-item item-left" data-item="table">
+              <img src="../../../../assets/images/table.png" alt="Table">
+            </div>
+            
+            <!-- Item 4: Top slice (180° - 240°) - yoyo -->
+            <div class="static-item item-top" data-item="yoyo">
+              <img src="../../../../assets/images/yoyo.png" alt="Yoyo">
+            </div>
+
+            <!-- Item 5: Top-right slice (240° - 300°) - icecube -->
+            <div class="static-item item-top-right" data-item="iceCube">
+              <img src="../../../../assets/images/iceCube.png" alt="Ice Cube">
+            </div>
+            
+            <!-- Item 6: Bottom-right slice (300° - 360°) - newspaper -->
+            <div class="static-item item-right" data-item="newspaper">
+              <img src="../../../../assets/images/newspaper.png" alt="Newspaper">
+            </div>
+          </div>
+          
+          <!-- Border biru -->
+          <div class="wheel-border"></div>
+
+          <!-- Roda kuning dengan cutout segitiga -->
+          <div class="wheel" id="wheel">
+            <div class="wheel-center"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Letter Section -->
+      <div class="letter-section">
+        <div class="letter-display">
+          <span class="letter-big" id="letterBig">S</span>
+          <span class="letter-small" id="letterSmall">s</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Message Box -->
+  <div class="message" id="messageBox">
+    <p class="message-text" id="messageText"></p>
+  </div>
+
+  <!-- Next Button -->
+  <div class="next-button-container" id="nextBtnContainer">
+    <a href="step8.html">
+      <img src="../../../../assets/images/next.png" alt="Next Button" class="next-button">
+    </a>
+  </div>
+
+  <!-- Load initHeader.js FIRST -->
+<script src="../../../../js/homepage/initHeader.js"></script>
+
+<script src="../../../../js/homepage/TherapyCard/ADL/step7.js"></script>
+
+<!-- Initialize Header - TAMBAH INI! -->
+<script>
+  if (typeof initializeHeader === 'function') {
+    initializeHeader('../../../homepage/header.html');
+  }
+</script>
+
+</body>
+</html>

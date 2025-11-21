@@ -1,0 +1,640 @@
+/* Reset and basic styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: url('../../../assets/images/backgroundGames1.webp') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden; 
+}
+
+/* Background blur overlay */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../../../assets/images/backgroundGames1.webp') no-repeat center center fixed;
+    background-size: cover;
+    filter: blur(8px);
+    z-index: -1;
+    opacity: 0.7;
+}
+
+/* Page Content */
+.game-container {
+    max-width: 1600px;
+    margin: 150px auto;
+    padding: 0 40px;
+}
+
+/* ==================== SCORE DISPLAY - GAME STYLE ==================== */
+.score-display {
+    position: fixed !important;
+    top: 90px !important;
+    right: 30px !important;
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%) !important;
+    color: #003E8D !important;
+    padding: 18px 25px !important;
+    border-radius: 15px !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 800 !important;
+    box-shadow: 
+        0 8px 20px rgba(255, 180, 0, 0.5),
+        inset 0 2px 5px rgba(255, 255, 255, 0.5),
+        0 0 0 4px #003E8D,
+        0 0 0 6px #FFD700 !important;
+    z-index: 1000 !important;
+    min-width: 130px !important;
+    text-align: center !important;
+    transform: rotate(-2deg) !important;
+    animation: scoreFloat 3s ease-in-out infinite !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.score-display::before {
+    content: '⭐';
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    font-size: 25px;
+    animation: starSpin 2s linear infinite;
+}
+
+.score-display::after {
+    content: '⭐';
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    font-size: 25px;
+    animation: starSpin 2s linear infinite reverse;
+}
+
+.score-display .score-label {
+    display: block;
+    font-size: 25px;
+    color: #003E8D;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.score-display #scoreText {
+    display: block;
+    font-size: 32px;
+    margin-top: 6px;
+    color: #003E8D;
+    font-weight: 900;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    animation: scoreGlow 1.5s ease-in-out infinite;
+}
+
+@keyframes scoreFloat {
+    0%, 100% {
+        transform: rotate(-2deg) translateY(0px);
+    }
+    50% {
+        transform: rotate(-2deg) translateY(-10px);
+    }
+}
+
+@keyframes starSpin {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    50% {
+        transform: rotate(180deg) scale(1.2);
+    }
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+@keyframes scoreGlow {
+    0%, 100% {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    50% {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2), 0 0 20px rgba(255, 180, 0, 0.8);
+    }
+}
+
+/* ==================== SCORE MODAL - WITH GAME LIST ==================== */
+
+.score-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    animation: fadeIn 0.3s ease;
+    overflow: auto;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Score Container - WITH GAME LIST DESIGN */
+.score-modal .score-container {
+    position: relative;
+    width: 420px;
+    background: linear-gradient(135deg, #ffd54f 0%, #ffca28 100%);
+    border: 8px solid #003d82;
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), inset 0 2px 5px rgba(255, 255, 255, 0.3);
+    padding: 20px 20px 28px 20px;
+    overflow: visible;
+    animation: slideUp 0.5s ease;
+    z-index: 2;
+    margin: 50px auto;
+}
+
+/* Stars Container */
+.stars-container {
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 2;
+}
+
+.star {
+    position: relative;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4));
+    animation: starBounce 0.8s ease-in-out infinite;
+}
+
+@keyframes starBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.star-small {
+    width: 100px;
+    height: 80px;
+    margin-left: -80px;
+    margin-right: -80px;
+    margin-top: 35px;
+}
+
+.star-large {
+    width: 180px;
+    height: 100px;
+    margin-top: 0;
+    z-index: 3;
+}
+
+.star-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: filter 0.5s ease-in-out;
+}
+
+/* Score Title & Subtitle */
+.score-title {
+    font-size: 19px;
+    font-weight: 900;
+    font-family: 'Poppins', sans-serif;
+    color: #003e8d;
+    margin-top: 15px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+}
+
+.score-subtitle {
+    font-size: 24px;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    color: #003e8d;
+    text-align: center;
+    margin-top: 2px;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+}
+
+/* ✅✅✅ GAMES SCORE LIST - INI YANG PENTING! ✅✅✅ */
+.games-score-list {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px 0;
+    max-height: 140px;
+    overflow-y: auto;
+    border: 3px solid #003d82;
+}
+
+.game-score-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 8px;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #003e8d;
+    font-family: 'Poppins', sans-serif;
+}
+
+.game-score-row:last-child {
+    border-bottom: none;
+}
+
+.game-name {
+    flex: 1;
+    text-align: left;
+}
+
+.game-points {
+    text-align: right;
+    min-width: 70px;
+    font-weight: 700;
+    color: #003d82;
+}
+
+/* Scrollbar Styling */
+.games-score-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.games-score-list::-webkit-scrollbar-track {
+    background: #e9ecef;
+    border-radius: 10px;
+}
+
+.games-score-list::-webkit-scrollbar-thumb {
+    background: #003e8d;
+    border-radius: 10px;
+}
+
+/* Total Score Box */
+.total-score-box {
+    background: linear-gradient(135deg, #003d82 0%, #005bb3 100%);
+    border-radius: 10px;
+    padding: 5px;
+    text-align: center;
+    margin-top: 10px;
+    color: #ffd54f;
+    font-weight: 800;
+    border: 3px solid #ffd54f;
+}
+
+.total-score-box .label {
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    color: #ffd54f;
+    font-family: 'Poppins', sans-serif;
+}
+
+.total-score-box .percentage {
+    font-size: 50px;
+    margin-top: 3px;
+    font-weight: 800;
+    color: #ffd54f;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Modal Buttons */
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 14px;
+}
+
+.modal-button {
+    background-color: #003d82;
+    color: #ffd54f;
+    font-size: 19px;
+    padding: 8px 26px;
+    border: none;
+    border-radius: 50px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+}
+
+.modal-button:hover {
+    background-color: #ffd54f;
+    color: #003d82;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.modal-button:active {
+    transform: translateY(-1px);
+}
+
+@keyframes bounceButton {
+    0%, 100% { 
+        transform: translateY(0) scale(1); 
+    }
+    50% { 
+        transform: translateY(-10px) scale(1.05); 
+    }
+}
+
+/* ==================== GAME LAYOUT ==================== */
+
+.game-title {
+    background: #003d82;
+    color: #ffc107;
+    font-size: 2.1em;
+    font-weight: 800;
+    text-align: center;
+    padding: 15px 60px;
+    border-radius: 30px;
+    margin-bottom: 120px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: -90px;
+}
+
+.main-layout {
+    display: flex;
+    gap: 50px;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.left-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.question-label {
+    background: #ffd54f;
+    color: #003d82;
+    font-size: 1.8em;
+    font-weight: 700;
+    padding: 20px 60px;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    margin-top: -90px;
+}
+
+.question-box {
+    background: #ffffff;
+    border: 5px solid #003d82;
+    border-radius: 25px;
+    padding: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 350px;
+    height: 350px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    font-family: 'Poppins', sans-serif; 
+    font-weight: bold;
+    position: relative;
+}
+
+.question-mark {
+    font-size: 12em;
+    color: #003d82;
+    font-weight: 800;
+    animation: bounce-question 1s infinite;
+}
+
+.question-icon {
+    width: 90px;
+    height: auto;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    opacity: 0.5;
+}
+
+.question-box .answer-image {
+    display: none;
+    max-width: 80%;
+    max-height: 80%;
+    object-fit: contain;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.question-box.reveal .question-mark {
+    display: none;
+}
+
+.question-box.reveal .answer-image {
+    display: block;
+}
+
+@keyframes bounce-question {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+.right-section {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    flex: 1;
+    max-width: 900px;
+}
+
+.question-prompt {
+    background: #ffd54f;
+    color: #003d82;
+    font-size: 1.8em;
+    font-weight: 700;
+    text-align: center;
+    padding: 20px 60px;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    margin-top: -90px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.options-section {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.option-card {
+    background: rgba(255, 255, 255, 0.9);
+    border: 5px solid #003d82;
+    border-radius: 25px;
+    padding: 40px;
+    width: 240px;
+    height: 240px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    position: relative;
+    backdrop-filter: blur(10px);
+    margin-top: 50px;
+}
+
+.option-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    border-color: #ffc107;
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.option-card img {
+    max-width: 150%;
+    max-height: 150%;
+    object-fit: contain;
+    width: 150%;
+    height: auto;
+}
+
+@keyframes bounceButton {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.modal-button {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modal-button.bouncing {
+  animation: bounceButton 1s ease-in-out infinite;
+}
+
+/* Animation untuk jawapan SALAH - shake & red */
+@keyframes shakeWrong {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+    20%, 40%, 60%, 80% { transform: translateX(10px); }
+}
+
+.option-card.wrong-answer {
+    animation: shakeWrong 0.6s ease-in-out;
+    background: rgba(244, 67, 54, 0.2) !important;
+    border-color: #f44336 !important;
+}
+
+/* Animation untuk jawapan BETUL - green glow */
+.option-card.correct-answer {
+    background: rgba(76, 175, 80, 0.2) !important;
+    border-color: #4caf50 !important;
+    box-shadow: 0 0 25px rgba(76, 175, 80, 0.5) !important;
+}
+
+.option-card.correct-move {
+    animation: moveToQuestion 1.5s ease-in-out forwards;
+    z-index: 1000;
+}
+
+@keyframes moveToQuestion {
+    0% {
+        transform: translateX(0) translateY(0) scale(1);
+    }
+    50% {
+        transform: translateX(-400px) translateY(-100px) scale(0.8);
+    }
+    100% {
+        transform: translateX(-600px) translateY(-150px) scale(0.6);
+        opacity: 0;
+    }
+}
+
+.question-box.reveal {
+    animation: revealAnswer 1.5s ease-in-out forwards;
+}
+
+@keyframes revealAnswer {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Responsive */
+@media (max-width: 1400px) {
+    .main-layout {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .right-section {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+  .score-display {
+    top: 100px !important;
+    right: 20px !important;
+    padding: 12px 18px !important;
+    min-width: 100px !important;
+  }
+  
+  .score-display .score-label {
+    font-size: 14px !important;
+  }
+  
+  .score-display #scoreText {
+    font-size: 24px !important;
+  }
+}

@@ -1,0 +1,633 @@
+/* =========================================
+   RESET & BACKGROUND
+========================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background: url('../../../../../assets/images/backgroundSpatial.webp') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  position: relative;
+  padding-top: 0.5px;
+  overflow: hidden;
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../../../../../assets/images/backgroundSpatial.webp') no-repeat center center fixed;
+  background-size: cover;
+  z-index: -1;
+  opacity: 0.8;
+  filter: blur(12px);
+}
+
+/* =========================================
+   HEADER
+========================================= */
+.header {
+  background: rgba(0, 62, 141, 0.95);
+  backdrop-filter: blur(6px);
+  padding: 5px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.logo img {
+  height: 100px;
+  width: auto;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+.nav-item {
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  text-decoration: none;
+  font-size: 17px;
+  padding: 8px 1px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* =========================================
+   SCORE DISPLAY
+========================================= */
+.score-display {
+  position: fixed;
+  top: 130px;
+  right: 40px;
+  background: linear-gradient(135deg, #FDD835 0%, #F9A825 100%);
+  border: 4px solid #1565C0;
+  border-radius: 20px;
+  padding: 10px 25px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #1565C0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 999;
+}
+
+/* =========================================
+   BANNER
+========================================= */
+.banner-section {
+  text-align: center;
+  padding: 12px 20px 15px;
+  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.banner-yellow {
+  background: linear-gradient(135deg, #FFD700 0%, #FFB400 100%);
+  padding: 6px 125px;
+  border-radius: 38px;
+  font-size: 28px;
+  font-weight: 800;
+  color: #003E8D;
+  box-shadow: 0 4px 12px rgba(255, 180, 0, 0.3);
+  font-family: 'Poppins', sans-serif;
+}
+
+.banner-blue {
+  background: linear-gradient(135deg, #23398b 20%, #003E8D 100%);
+  padding: 6px 100px;
+  border-radius: 38px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #FFD700;
+  box-shadow: 0 4px 12px rgba(0, 62, 141, 0.3);
+  font-family: 'Poppins', sans-serif;
+}
+
+/* =========================================
+   GAME AREA - CENTERED LAYOUT WITH JARS
+========================================= */
+.game-area {
+  max-width: 1400px;
+  margin: 20px auto 0;
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Main Game Container - Jars + Side Icons */
+.game-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 1300px;
+}
+
+/* Left Side Icons (4 items) */
+.left-icons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  margin-right: -180px;
+  margin-top: -30px;
+}
+
+/* Center Area - Jars */
+.jars-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.jars-container {
+  display: flex;
+  gap: -120px;
+  align-items: flex-end;
+  justify-content: center;
+  margin-top: -30px;
+}
+
+.jar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.jar-item:first-child {
+  margin-right: -200px;
+}
+
+.jar-item:last-child {
+  margin-left: -200px;
+}
+
+.jar-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+}
+
+.jar-img {
+  width: 790px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  transform: scaleY(1.1);
+}
+
+/* Dropzone Circles Container - positioned inside jar */
+.dropzone-container {
+  position: absolute;
+  top: 85px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0;
+  z-index: 10;
+  width: 320px;
+  height: 350px;
+}
+
+/* Staggered layout - custom positioning for natural look */
+.dropzone-circle:nth-child(1) {
+  position: absolute;
+  top: 25px;
+  left: 35px;
+}
+
+.dropzone-circle:nth-child(2) {
+  position: absolute;
+  top: 25px;
+  right: 35px;
+}
+
+.dropzone-circle:nth-child(3) {
+  position: absolute;
+  bottom: 35px;
+  left: 55px;
+}
+
+.dropzone-circle:nth-child(4) {
+  position: absolute;
+  bottom: 35px;
+  right: 55px;
+}
+
+.dropzone-circle {
+  width: 100px;
+  height: 100px;
+  border: 3px dashed rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.dropzone-circle.drag-over {
+  border-color: #FFD700;
+  background: rgba(255, 215, 0, 0.3);
+  border-style: solid;
+  transform: scale(1.1);
+}
+
+.dropzone-circle.filled {
+  border-color: #4CAF50;
+  border-style: solid;
+  background: rgba(76, 175, 80, 0.1);
+}
+
+.dropzone-circle img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+}
+
+.jar-label {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  padding: 10px 50px;
+  border-radius: 30px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  z-index: 30;
+}
+
+/* Red jar label */
+.jar-item:first-child .jar-label {
+  background: linear-gradient(135deg, #e53935 0%, #c62828 100%);
+}
+
+/* Yellow jar label */
+.jar-item:last-child .jar-label {
+  background: linear-gradient(135deg, #FFD700 0%, #FFA000 100%);
+  color: #ffffff;
+  margin-left: 15px;
+}
+
+/* Right Side Icons (4 items) */
+.right-icons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  margin-left: -180px;
+  margin-top: -30px;
+}
+
+/* Icon Styling */
+.icon-item {
+  width: 110px;
+  height: 110px;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Yellow items - yellow background */
+.icon-item[data-type="yellow"] {
+  background: rgba(255, 235, 150, 0.5);
+}
+
+.icon-item[data-type="yellow"]:hover {
+  background: rgba(255, 235, 150, 0.7);
+}
+
+/* Red items - pink background */
+.icon-item[data-type="red"] {
+  background: rgba(255, 192, 203, 0.5);
+}
+
+.icon-item[data-type="red"]:hover {
+  background: rgba(255, 192, 203, 0.7);
+}
+
+.icon-item:active {
+  cursor: grabbing;
+}
+
+.icon-item:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.icon-item.dragging {
+  opacity: 0.5;
+  cursor: grabbing;
+}
+
+.icon-img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* =========================================
+   BACK & NEXT BUTTONS
+========================================= */
+.back-button-container {
+  position: fixed;
+  bottom: 20px;
+  left: -10px;
+  z-index: 100;
+}
+
+.back-button {
+  width: 130px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.back-button:hover {
+  transform: scale(1.1);
+}
+
+.next-button-container {
+  position: fixed;
+  bottom: 25px;
+  right: -10px;
+}
+
+.next-button {
+  width: 130px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.next-button:hover {
+  transform: scale(1.1);
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+@media (max-width: 1200px) {
+  .game-container {
+    gap: 30px;
+  }
+  
+  .jar-img {
+    width: 320px;
+  }
+  
+  .jars-container {
+    gap: 30px;
+  }
+  
+  .dropzone-container {
+    top: 50px;
+    width: 200px;
+    height: 220px;
+  }
+  
+  .dropzone-circle:nth-child(1) {
+    left: 20px;
+    top: 15px;
+  }
+  
+  .dropzone-circle:nth-child(2) {
+    right: 20px;
+    top: 15px;
+  }
+  
+  .dropzone-circle:nth-child(3) {
+    left: 35px;
+    bottom: 20px;
+  }
+  
+  .dropzone-circle:nth-child(4) {
+    right: 35px;
+    bottom: 20px;
+  }
+  
+  .dropzone-circle {
+    width: 75px;
+    height: 75px;
+  }
+  
+  .dropzone-circle img {
+    width: 65px;
+    height: 65px;
+  }
+  
+  .icon-item {
+    width: 90px;
+    height: 90px;
+  }
+  
+  .icon-img {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .left-icons, .right-icons {
+    gap: 15px;
+  }
+}
+
+@media (max-width: 900px) {
+  .game-container {
+    flex-direction: column;
+    gap: 25px;
+  }
+  
+  .left-icons, .right-icons {
+    flex-direction: row;
+    gap: 15px;
+    margin: 0;
+  }
+  
+  .jar-img {
+    width: 250px;
+  }
+  
+  .jars-container {
+    gap: 20px;
+  }
+  
+  .dropzone-container {
+    top: 40px;
+    width: 160px;
+    height: 170px;
+  }
+  
+  .dropzone-circle:nth-child(1) {
+    left: 15px;
+    top: 10px;
+  }
+  
+  .dropzone-circle:nth-child(2) {
+    right: 15px;
+    top: 10px;
+  }
+  
+  .dropzone-circle:nth-child(3) {
+    left: 25px;
+    bottom: 15px;
+  }
+  
+  .dropzone-circle:nth-child(4) {
+    right: 25px;
+    bottom: 15px;
+  }
+  
+  .dropzone-circle {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .dropzone-circle img {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .jar-label {
+    font-size: 18px;
+    padding: 8px 40px;
+  }
+  
+  .icon-item {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .icon-img {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .banner-yellow {
+    font-size: 22px;
+    padding: 8px 60px;
+  }
+  
+  .banner-blue {
+    font-size: 18px;
+    padding: 6px 50px;
+  }
+}
+
+@media (max-width: 600px) {
+  .game-area {
+    padding: 0 20px;
+  }
+  
+  .jar-img {
+    width: 200px;
+  }
+  
+  .dropzone-container {
+    top: 30px;
+    width: 130px;
+    height: 140px;
+  }
+  
+  .dropzone-circle:nth-child(1) {
+    left: 12px;
+    top: 8px;
+  }
+  
+  .dropzone-circle:nth-child(2) {
+    right: 12px;
+    top: 8px;
+  }
+  
+  .dropzone-circle:nth-child(3) {
+    left: 20px;
+    bottom: 12px;
+  }
+  
+  .dropzone-circle:nth-child(4) {
+    right: 20px;
+    bottom: 12px;
+  }
+  
+  .dropzone-circle {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .dropzone-circle img {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .icon-item {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .icon-img {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .banner-yellow {
+    font-size: 18px;
+    padding: 6px 40px;
+  }
+  
+  .banner-blue {
+    font-size: 16px;
+    padding: 5px 35px;
+  }
+}

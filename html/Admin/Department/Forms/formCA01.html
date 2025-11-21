@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Prospect Inquiry Form - CA-01</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", Arial, sans-serif;
+            background-color: #f0f2f5;
+            padding: 20px;
+        }
+
+        .ca01-form-wrapper {
+            font-family: "Poppins", Arial, sans-serif;
+            background-color: #f6f8fb;
+            color: #002060;
+            max-width: 700px;
+            background: url('../CA-01/image/bg.webp') no-repeat center center;
+            background-size: cover;
+            margin: 40px auto;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .ca01-form-wrapper h2 {
+            text-align: center;
+            color: #004aad;
+            margin-bottom: 20px;
+        }
+
+        .ca01-form-wrapper h3 {
+            color: #004aad;
+            border-bottom: 2px solid #ffcc00;
+            display: inline-block;
+            padding-bottom: 5px;
+            margin-top: 35px;
+        }
+
+        .ca01-form-wrapper label {
+            display: block;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        .ca01-form-wrapper small {
+            display: block;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .ca01-form-wrapper input,
+        .ca01-form-wrapper select,
+        .ca01-form-wrapper textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 0.95rem;
+        }
+
+        .ca01-gender-container {
+            display: flex;
+            gap: 5px;
+            margin-top: 0px;
+            margin-bottom: 35px;
+            justify-content: flex-start;
+        }
+
+        .ca01-gender-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            padding: 5px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100px;
+            height: 115px;
+        }
+
+        .ca01-gender-option span {
+            display: block;
+            width: 100%;
+            margin-left: 15px;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+
+        .ca01-gender-option input {
+            display: none;
+        }
+
+        .ca01-gender-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 60%;
+            border: none;
+            margin-bottom: 10px;
+            transition: transform 0.3s ease, border 0.3s ease;
+        }
+
+        .ca01-gender-option:hover {
+            background: #f0f6ff;
+        }
+
+        .ca01-gender-option input:checked + .ca01-gender-img {
+            border: 4px solid #004aad;
+            transform: scale(1.05);
+            background-color: transparent;
+        }
+
+        .ca01-section {
+            margin-top: 50px;
+        }
+
+        .ca01-btn {
+            display: block;
+            width: 100%;
+            background-color: #004aad;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .ca01-btn:hover {
+            background-color: #003080;
+        }
+
+        .consent {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f6ff;
+            border-radius: 8px;
+        }
+
+        .consent-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            cursor: pointer;
+            font-weight: normal;
+        }
+
+        .consent-label input[type="checkbox"] {
+            width: auto;
+            margin-top: 3px;
+            cursor: pointer;
+        }
+
+        .consent-label span {
+            flex: 1;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="ca01-form-wrapper">
+        <h2>NEW PROSPECT INQUIRY FORM</h2>
+
+        <form id="formCA01">
+            <div class="ca01-section">
+                <h3>SECTION A: PARENT / GUARDIAN DETAILS</h3>
+
+                <label>Parent's Full Name</label>
+                <small>First Name</small>
+                <input type="text" name="ParentFirstName" placeholder="Hamidah" required>
+                <small>Last Name</small>
+                <input type="text" name="ParentLastName" placeholder="binti Hadi" required>
+
+                <label>Phone Number</label>
+                <input type="tel" name="PhoneNumber" placeholder="60123456789" required>
+
+                <label>Email</label>
+                <input type="email" name="Email" placeholder="hamidahhadi@gmail.com" required>
+            </div>
+
+            <div class="ca01-section">
+                <h3>SECTION B: CHILD / CLIENT DETAILS</h3>
+
+                <label>Child's Full Name</label>
+                <small>First Name</small>
+                <input type="text" name="ChildFirstName" placeholder="Hamidah" required>
+                <small>Last Name</small>
+                <input type="text" name="ChildLastName" placeholder="binti Hadi" required>
+
+                <label>Date of Birth</label>
+                <input type="date" name="DateofBirth" required>
+
+                <label>Gender</label>
+                <div class="ca01-gender-container">
+                    <label class="ca01-gender-option">
+                        <input type="radio" name="gender" value="male" required>
+                        <img src="../form/CA-01/image/boy.png" alt="Male" class="ca01-gender-img">
+                        <span>Male</span>
+                    </label>
+                    <label class="ca01-gender-option">
+                        <input type="radio" name="gender" value="female" required>
+                        <img src="../form/CA-01/image/girl.png" alt="Female" class="ca01-gender-img">
+                        <span>Female</span>
+                    </label>
+                </div>
+
+                <label>Diagnosis</label>
+                <select name="Diagnosis" required>
+                    <option value="">-- Please choose --</option>
+                    <option value="Speech Delay">Speech Delay</option>
+                    <option value="ASD">ASD</option>
+                    <option value="Developmental Delay">Developmental Delay</option>
+                    <option value="Not Diagnosed Yet">Not Diagnosed Yet</option>
+                </select>
+            </div>
+
+            <div class="ca01-section">
+                <h3>SECTION C: INQUIRY DETAILS</h3>
+
+                <label>Service Interested In</label>
+                <select name="ServiceInterested" required>
+                    <option value="">-- Please choose --</option>
+                    <option value="Screening and Consultation">Screening and Consultation</option>
+                    <option value="Consultation">Consultation</option>
+                    <option value="Assessment">Assessment</option>
+                    <option value="Therapy Class">Therapy Class</option>
+                    <option value="Education and Readiness School Program">Education & Readiness School Program</option>
+                    <option value="Home Program">Home Program</option>
+                    <option value="Parenting Class">Parenting Class</option>
+                    <option value="Parents Growth Circle">Parents Growth Circle</option>
+                    <option value="Other/Special Service">Other / Special Service</option>
+                </select>
+
+                <label>Preferred Day</label>
+                <select name="PreferredDay" required>
+                    <option value="">-- Please choose --</option>
+                    <option value="Weekday">Weekday</option>
+                    <option value="Saturday">Saturday</option>
+                    <option value="Flexible">Flexible</option>
+                </select>
+
+                <label>Preferred Time</label>
+                <select name="PreferredTime" required>
+                    <option value="">-- Please choose --</option>
+                    <option value="Morning">Morning</option>
+                    <option value="Afternoon">Afternoon</option>
+                    <option value="Evening">Evening</option>
+                </select>
+            </div>
+
+            <div class="ca01-section">
+                <h3>SECTION D: HOW DID YOU HEAR ABOUT US?</h3>
+
+                <label>Source of Information</label>
+                <select name="SourceOfInformation" required>
+                    <option value="">-- Please choose --</option>
+                    <option value="Google">Google</option>
+                    <option value="Facebook">Facebook</option>
+                    <option value="Instagram">Instagram</option>
+                    <option value="Walk In">Walk In</option>
+                    <option value="Referral">Referral</option>
+                    <option value="Friends and Family">Friends and Family</option>
+                    <option value="Website">Website</option>
+                    <option value="Event Booth">Event Booth</option>
+                </select>
+
+                <label>Referral Name (if applicable)</label>
+                <input type="text" name="ReferralName" placeholder="e.g. Ms. Aida">
+
+                <div class="consent">
+                    <label class="consent-label">
+                        <input type="checkbox" name="consent" required>
+                        <span>I agree to allow Idzmir Kids Hub to use my information for service communication, registration and follow-up related to programs I am interested in.</span>
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit" class="ca01-btn">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = document.getElementById("formCA01");
+
+            if (form) {
+                form.addEventListener("submit", (e) => {
+                    e.preventDefault();
+                    alert("Thank you! Your inquiry has been submitted successfully.");
+                    form.reset();
+                });
+            }
+        });
+    </script>
+</body>
+</html>

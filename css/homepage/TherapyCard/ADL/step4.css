@@ -1,0 +1,884 @@
+/* Reset and basic styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background: url('../../../../assets/images/backgroundSpatial.webp') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ensure header shows */
+#header-placeholder {
+  display: block !important;
+}
+
+/* Background blur overlay */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../../../../assets/images/backgroundSpatial.webp') no-repeat center center fixed;
+  background-size: cover;
+  filter: blur(8px);
+  z-index: -1;
+  opacity: 0.7;
+}
+
+/* Header */
+.header {
+  background: #003e8d;
+  backdrop-filter: blur(6px);
+  padding: 10px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.logo img {
+  height: 90px;
+  width: auto;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+.nav-item {
+  font-family: 'Poppins', sans-serif;
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 17px;
+  padding: 8px 15px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Page Content */
+.container {
+  max-width: 1400px;
+  margin: 60px auto 0;
+  padding: 15px;
+  position: relative;
+  z-index: 5;
+}
+
+/* Banner Besar Kuning */
+.banner-large {
+  width: 65%;
+  height: 75px;
+  background: linear-gradient(135deg, #ffd032 0%, #ffb700 100%);
+  border-radius: 30px;
+  margin: 5px auto 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 8px 20px rgba(0, 61, 130, 0.25);
+  margin-top: 20px;
+}
+
+.banner-large h1 {
+  font-size: 44px;
+  font-weight: 700;
+  color: #003d82;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Banner Kecil Biru */
+.banner-small {
+  width: 40%;
+  height: 70px;
+  background: #003e8d;
+  border-radius: 40px;
+  margin: 0 auto 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffd032;
+  font-weight: 700;
+  font-size: 32px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+  z-index: 2;
+  margin-top: -50px;
+}
+
+/* ==================== Score Display (Top Right) - GAME STYLE ==================== */
+.score-display {
+  position: fixed;
+  top: 140px;
+  right: 40px;
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  color: #003E8D;
+  padding: 18px 25px;
+  border-radius: 15px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  box-shadow: 
+    0 8px 20px rgba(255, 180, 0, 0.5),
+    inset 0 2px 5px rgba(255, 255, 255, 0.5),
+    0 0 0 4px #003E8D,
+    0 0 0 6px #FFD700;
+  z-index: 999;
+  min-width: 130px;
+  text-align: center;
+  transform: rotate(-2deg);
+  animation: scoreFloat 3s ease-in-out infinite;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.score-display::before {
+  content: '⭐';
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  font-size: 25px;
+  animation: starSpin 2s linear infinite;
+}
+
+.score-display::after {
+  content: '⭐';
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  font-size: 25px;
+  animation: starSpin 2s linear infinite reverse;
+}
+
+.score-display .score-label {
+  display: block;
+  font-size: 25px;
+  color: #003E8D;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.score-display #scoreText {
+  display: block;
+  font-size: 32px;
+  margin-top: 6px;
+  color: #003E8D;
+  font-weight: 900;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  animation: scoreGlow 1.5s ease-in-out infinite;
+}
+
+@keyframes scoreFloat {
+  0%, 100% {
+    transform: rotate(-2deg) translateY(0px);
+  }
+  50% {
+    transform: rotate(-2deg) translateY(-10px);
+  }
+}
+
+@keyframes starSpin {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.2);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+@keyframes scoreGlow {
+  0%, 100% {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  50% {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2), 0 0 20px rgba(255, 180, 0, 0.8);
+  }
+}
+
+/* Main Game Container */
+.game-container {
+  max-width: 1400px;
+  margin: 15px auto;
+  position: relative;
+  z-index: 6;
+}
+
+/* Top Row - Drop Zones (White Circles) */
+.drop-zones-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 70px;
+  position: relative;
+  gap: 50px;
+}
+
+.drop-zone {
+  width: 220px;
+  height: 220px;
+  background: white;
+  border: 5px solid #333;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.18);
+  flex-shrink: 0;
+}
+
+.drop-zone.drag-over {
+  border-color: #ffd032;
+  border-width: 7px;
+  transform: scale(1.06);
+  box-shadow: 0 0 35px rgba(255, 208, 50, 0.6);
+}
+
+.drop-zone.filled.correct {
+  border-color: #4caf50;
+  background: #e8f5e9;
+  border-width: 7px;
+}
+
+.drop-zone.filled.wrong {
+  border-color: #f44336;
+  background: #ffebee;
+  border-width: 7px;
+}
+
+.step-number {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #003e8d;
+  color: #ffd032;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 22px;
+  border: 3px solid white;
+  z-index: 10;
+}
+
+.drop-zone-placeholder {
+  color: #ccc;
+  font-size: 16px;
+  text-align: center;
+  pointer-events: none;
+}
+
+.drop-zone img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.drop-zone .card-text-inside {
+  font-size: 18px;
+  font-weight: 700;
+  color: #003d82;
+  text-align: center;
+  line-height: 1.2;
+  margin-top: 8px;
+  pointer-events: none;
+}
+
+/* Arrows between circles */
+.arrow {
+  width: 55px;
+  height: 3px;
+  background: #003d82;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.arrow::after {
+  content: '';
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 12px solid #003d82;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+}
+
+/* Bottom Row - Draggable Cards */
+.cards-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 45px;
+  margin: -30px auto 0;
+  margin-top: -60px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: grab;
+  transition: transform 0.3s ease;
+}
+
+.card:active {
+  cursor: grabbing;
+}
+
+.card:hover:not(.used) {
+  transform: translateY(-12px);
+}
+
+.card.dragging {
+  opacity: 0.5;
+}
+
+.card.used {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.card-circle {
+  width: 200px;
+  height: 200px;
+  background: #ffd032;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  padding: 24px;
+  position: relative;
+  z-index: 10;
+}
+
+.card-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  margin-bottom: 12px;
+}
+
+.card-text-inside {
+  font-size: 18px;
+  font-weight: 700;
+  color: #003d82;
+  text-align: center;
+  line-height: 1.2;
+  pointer-events: none;
+}
+
+/* Animation Effects */
+.correct-animation {
+  animation: correctPulse 0.6s ease-in-out;
+}
+
+.wrong-animation {
+  animation: wrongShake 0.6s ease-in-out;
+}
+
+@keyframes correctPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); box-shadow: 0 0 40px rgba(76, 175, 80, 0.7); }
+}
+
+@keyframes wrongShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-15px); }
+  50% { transform: translateX(15px); }
+  75% { transform: translateX(-15px); }
+}
+
+/* ==================== Score Modal (Final Result) - BUKIT STYLE ==================== */
+.score-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  animation: fadeIn 0.3s ease;
+  overflow: hidden;
+}
+
+/* Batch Score Modal Container (smaller) - TETAP SAMA */
+#batchScoreModal .score-container {
+  position: relative;
+  width: 400px;
+  background-color: #ffffff;
+  border-top-left-radius: 120px;
+  border-top-right-radius: 120px;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  padding: 40px 30px;
+  height: 320px;
+  overflow: visible;
+  animation: slideUp 0.5s ease;
+  z-index: 2;
+}
+
+/* Batch Score Modal - Score Title */
+#batchScoreModal .score-title {
+  font-size: 36px;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  color: #003e8d;
+  margin-top: 45px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Overall Score Modal Container (larger with list) */
+#scoreModal .score-container {
+  position: relative;
+  width: 450px;
+  background: linear-gradient(135deg, #ffd54f 0%, #ffca28 100%);
+  border: 8px solid #003d82;
+  border-top-left-radius: 100px;
+  border-top-right-radius: 100px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), inset 0 2px 5px rgba(255, 255, 255, 0.3);
+  padding: 25px 25px 30px 25px;
+  overflow: visible;
+  animation: slideUp 0.5s ease;
+  z-index: 2;
+  margin: 50px auto;
+}
+
+/* Stars Container */
+.stars-container {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 2;
+}
+
+.star {
+  position: relative;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4));
+  animation: starBounce 0.8s ease-in-out infinite;
+}
+
+@keyframes starBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.star-small {
+  width: 100px;
+  height: 80px;
+  margin-left: -80px;
+  margin-right: -80px;
+  margin-top: 35px;
+}
+
+.star-large {
+  width: 180px;
+  height: 100px;
+  margin-top: 0;
+  z-index: 3;
+}
+
+.star-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Score Titles */
+.score-title {
+  font-size: 18px;
+  font-weight: 900;
+  font-family: 'Poppins', sans-serif;
+  color: #003e8d;
+  margin-top: 18px;
+  text-align: center;
+  text-transform: none;
+  letter-spacing: 1.5px;
+}
+
+.score-subtitle {
+  font-size: 28px;
+  font-weight: 800;
+  font-family: 'Poppins', sans-serif;
+  color: #003e8d;
+  text-align: center;
+  margin-top: 3px;
+  margin-bottom: 15px;
+  letter-spacing: 0.8px;
+}
+
+/* Games Score List */
+.games-score-list {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 12px;
+  margin: 12px 0 15px 0;
+  max-height: 150px;
+  overflow-y: auto;
+  border: 4px solid #003d82;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+.game-score-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 10px;
+  border-bottom: 2px solid #e8e8e8;
+  font-family: 'Poppins', sans-serif;
+}
+
+.game-score-row:last-child {
+  border-bottom: none;
+}
+
+.game-name {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 600;
+  color: #003e8d;
+}
+
+.game-points {
+  text-align: right;
+  min-width: 70px;
+  font-size: 15px;
+  font-weight: 800;
+  color: #003d82;
+}
+
+/* Scrollbar Styling */
+.games-score-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.games-score-list::-webkit-scrollbar-track {
+  background: #e9ecef;
+  border-radius: 10px;
+}
+
+.games-score-list::-webkit-scrollbar-thumb {
+  background: #003e8d;
+  border-radius: 10px;
+}
+
+/* Total Score Box */
+.total-score-box {
+  background: linear-gradient(135deg, #003d82 0%, #0051b3 100%);
+  border-radius: 12px;
+  padding: 10px 15px;
+  text-align: center;
+  margin-top: 12px;
+  color: #ffd54f;
+  font-weight: 800;
+  border: 4px solid #ffd54f;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.total-score-box .label {
+  font-size: 13px;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #ffd54f;
+  margin-bottom: 5px;
+}
+
+.total-score-box .percentage {
+  font-size: 48px;
+  margin-top: 2px;
+  font-weight: 900;
+  font-family: 'Poppins', sans-serif;
+  color: #ffd54f;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Modal Buttons */
+.modal-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.modal-button {
+  background-color: #003d82;
+  color: #ffd54f;
+  font-size: 17px;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 50px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  font-family: 'Poppins', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+#continueBtn:hover,
+#finishBtn:hover {
+  background-color: #ffd54f;
+  color: #003d82;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+#continueBtn:active,
+#finishBtn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Score Box Wrapper (for batch modal) */
+.score-box-wrapper {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fdf6ec;
+  border-radius: 10px;
+  width: 260px;
+  height: 120px;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+}
+
+.score-box {
+  background-color: #fdf6ec;
+  border-radius: 10px;
+  width: 90px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.score-value {
+  font-size: 46px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  to { 
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* NEXT BUTTON - Image style */
+.next-button-container {
+  position: fixed;
+  bottom: 30px;
+  right: -10px;
+  z-index: 10001;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  display: none;
+}
+
+.next-button {
+  width: 130px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  display: block;
+}
+
+.next-button:hover {
+  transform: scale(1.15);
+}
+
+@keyframes bounceButton {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+  .drop-zones-row, .cards-row {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 35px;
+  }
+  
+  .arrow {
+    display: none;
+  }
+  
+  .drop-zone, .card-circle {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .score-display {
+    top: 100px;
+    right: 20px;
+    padding: 12px 18px;
+  }
+  
+  #batchScoreModal .score-container {
+    width: 320px;
+    padding: 30px 20px;
+    height: 280px;
+  }
+  
+  #scoreModal .score-container {
+    width: 380px;
+    padding: 20px 15px 25px 15px;
+  }
+  
+  .score-subtitle {
+    font-size: 24px;
+  }
+  
+  .games-score-list {
+    max-height: 120px;
+  }
+  
+  .total-score-box .percentage {
+    font-size: 40px;
+  }
+  
+  .modal-button {
+    font-size: 16px;
+    padding: 7px 22px;
+  }
+}
+
+@media (max-width: 768px) {
+  .banner-large {
+    width: 85%;
+    height: 65px;
+  }
+  
+  .banner-large h1 {
+    font-size: 32px;
+  }
+  
+  .banner-small {
+    width: 60%;
+    height: 60px;
+    font-size: 24px;
+  }
+  
+  .drop-zone, .card-circle {
+    width: 160px;
+    height: 160px;
+  }
+  
+  .step-number {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+  
+  .score-display {
+    top: 90px;
+    right: 10px;
+    padding: 10px 15px;
+  }
+  
+  .score-display .score-label {
+    font-size: 18px;
+  }
+  
+  .score-display #scoreText {
+    font-size: 24px;
+  }
+  
+  #scoreModal .score-container {
+    width: 340px;
+  }
+  
+  .star-small {
+    width: 80px;
+    height: 60px;
+    margin-left: -60px;
+    margin-right: -60px;
+  }
+  
+  .star-large {
+    width: 140px;
+    height: 80px;
+  }
+}

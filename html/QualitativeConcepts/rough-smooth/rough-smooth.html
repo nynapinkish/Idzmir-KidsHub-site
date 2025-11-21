@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Konsep Ruang - Idzmir Kids Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../css/QualitativeConcepts/rough-smooth/rough-smooth.css">
+  <link rel="stylesheet" href="../../../css/homepage/header.css">
+
+</head>
+<body>
+
+<!-- Header Placeholder - will be loaded dynamically -->
+<div id="header-placeholder"></div>
+
+  <div class="container">
+    <div class="banner">
+        <h2 class="card-title">Konsep Jumlah & Bilangan</h2>
+    </div>
+
+    <!-- Cards Container -->
+    <div class="cards-container">
+
+      <!-- Kad 1: Rough -->
+      <div class="card rough" onclick="document.getElementById('audio-rough').play();">
+        <div class="yellow-accent"></div>
+
+        <div class="card-header">
+          <h2 class="card-title">kasar</h2>
+        </div>
+        <div class="card-body">
+          <img src="../../../assets/images/rough.png" alt="rough" class="card-image">
+        </div>
+
+        <!-- Hidden Audio -->
+        <audio id="audio-rough">
+          <source src="../../../assets/audio/rough.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+
+      <!-- Kad 2: Smooth -->
+      <div class="card smooth" onclick="document.getElementById('audio-smooth').play();">
+        <div class="yellow-accent"></div>
+
+        <div class="card-header">
+          <h2 class="card-title">licin</h2>
+        </div>
+        <div class="card-body">
+          <img src="../../../assets/images/smooth.png" alt="smooth" class="card-image">
+        </div>
+
+        <!-- Hidden Audio -->
+        <audio id="audio-smooth">
+          <source src="../../../assets/audio/smooth.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+    </div>
+
+        <!-- BACK BUTTON -->
+   <div class="back-button-container">
+      <a href="../../../../html/QualitativeConcepts/hard-soft/hard-soft.html">
+  <img src="../../../assets/images/back.png" alt="Back Button" class="back-button">
+</a>
+
+    <div class="next-button-container">
+      <a href="../../../../html/QualitativeConcepts/fast-slow/fast-slow.html">
+        <img src="../../../assets/images/next.png" alt="Next Button" class="next-button">
+      </a>
+    </div>
+  </div>
+
+    <!-- Load initHeader.js FIRST -->
+<script src="../../../../js/homepage/initHeader.js"></script>
+
+<!-- THEN call initializeHeader with correct path -->
+<script>
+  initializeHeader('../../homepage/header.html');
+</script>
+
+</body>
+</html>

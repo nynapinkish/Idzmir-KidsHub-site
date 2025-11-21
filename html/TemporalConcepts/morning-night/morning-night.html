@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Konsep Masa - Idzmir Kids Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../css/TemporalConcepts/morning-night/morning-night.css">
+  <link rel="stylesheet" href="../../../css/homepage/header.css">
+</head>
+<body>
+
+<!-- Header Placeholder -->
+<div id="header-placeholder"></div>
+
+<div class="container">
+  <!-- Banner with the title -->
+  <div class="banner">
+    <h2 class="card-title">Konsep Masa</h2>
+  </div>
+
+  <!-- Cards Container -->
+  <div class="cards-container">
+
+    <!-- Kad 1: Pagi -->
+    <div class="card pagi" onclick="document.getElementById('audio-pagi').play();">
+      <div class="yellow-accent"></div>
+
+      <!-- Speaker Icon -->
+      <img src="../../../assets/images/speaker.png" alt="Play Audio" class="audio-icon"
+           onclick="event.stopPropagation(); document.getElementById('audio-pagi').play();">
+
+      <div class="card-header">
+        <h2 class="card-title">Pagi</h2>
+      </div>
+      <div class="card-body">
+        <img src="../../../assets/images/morning.png" alt="Pagi" class="card-image">
+      </div>
+
+      <!-- Hidden Audio -->
+      <audio id="audio-pagi">
+        <source src="../../../assets/audio/morning.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+
+    <!-- Kad 2: Malam -->
+    <div class="card malam" onclick="document.getElementById('audio-malam').play();">
+      <div class="yellow-accent"></div>
+
+      <!-- Speaker Icon -->
+      <img src="../../../assets/images/speaker.png" alt="Play Audio" class="audio-icon"
+           onclick="event.stopPropagation(); document.getElementById('audio-malam').play();">
+
+      <div class="card-header">
+        <h2 class="card-title">Malam</h2>
+      </div>
+      <div class="card-body">
+        <img src="../../../assets/images/night.png" alt="Malam" class="card-image">
+      </div>
+
+      <!-- Hidden Audio -->
+      <audio id="audio-malam">
+        <source src="../../../assets/audio/night.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </div>
+
+  <!-- START THE GAME Button -->
+  <div class="start-button-container">
+    <a href="../../../../html/TemporalConcepts/before-after/game_page1.html">
+      <button class="start-button">MULAKAN PERMAINAN</button>
+    </a>
+  </div>
+</div>
+
+<!-- BACK BUTTON - Outside container so it's fixed -->
+<div class="back-button-container">
+  <a href="../../../../html/TemporalConcepts/now-then/now-then.html">
+    <img src="../../../assets/images/back.png" alt="Back Button" class="back-button">
+  </a>
+</div>
+
+<!-- Load initHeader.js -->
+<script src="../../../../js/homepage/initHeader.js"></script>
+
+<!-- Initialize Header -->
+<script>
+  initializeHeader('../../homepage/header.html');
+</script>
+
+</body>
+</html>

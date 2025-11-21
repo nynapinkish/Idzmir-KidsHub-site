@@ -1,0 +1,411 @@
+/* =========================================
+   RESET & BACKGROUND
+========================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background: url('../../../../assets/images/backgroundSpatial.webp') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  position: relative;
+  padding-top: 0.5px;
+  overflow: hidden;
+}
+
+/* Background blur overlay */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../../../assets/images/backgroundSpatial.webp') no-repeat center center fixed;
+    background-size: cover;
+    filter: blur(8px);
+    z-index: -1;
+    opacity: 0.7;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+.header {
+  background: rgba(0, 62, 141, 0.95);
+  backdrop-filter: blur(6px);
+  padding: 5px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.logo img {
+  height: 100px;
+  width: auto;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+.nav-item {
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  text-decoration: none;
+  font-size: 17px;
+  padding: 8px 1px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Page Content */
+.container {
+    max-width: 100%;
+    margin: 120px auto 0;
+    padding: 20px 40px;
+}
+
+/* =========================================
+   MAIN CONTENT
+========================================= */
+main {
+  padding-top: 60px;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.match-mismatch {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 20px 80px 20px;
+  gap: 30px;
+}
+
+/* Title Section dengan VS */
+.title-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  text-align: center;
+}
+
+.title-row {
+  font-family: 'Poppins', sans-serif;
+  font-size: 50px;
+  font-weight: 800;
+  color: #FFD700;
+  text-shadow: 2px 2px 0 #1e4d7b;
+  letter-spacing: 1px;
+}
+
+.title-left {
+  width: 100%;
+  font-size: 45px;
+  font-weight: 800;
+  color: #FFD700;
+  text-shadow: 2px 2px 0 #1e4d7b;
+}
+
+.title-vs {
+  font-size: 48px;
+  font-weight: 800;
+  color: #FFD700;
+  text-shadow: 2px 2px 0 #1e4d7b;
+}
+
+.title-right {
+  width: 100%;
+  font-size: 45px;
+  font-weight: 800;
+  color: #FFD700;
+  text-shadow: 2px 2px 0 #1e4d7b;
+}
+
+/* --- GRID CARD LAYOUT - 3 COLUMNS --- */
+.relational-concepts-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 290px);
+    gap: 60px;
+    width: 90%;
+    margin: -20px auto 0 auto;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.concept-item {
+  position: relative;
+  background: #fff;
+  border: 5px solid #1e4d7b;
+  border-radius: 30px;  
+  width: 330px;
+  height: 330px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.concept-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Image container for single image */
+.concept-item.multiple-images .image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 80px;
+  width: 100%;
+}
+
+/* Image size */
+.concept-item.multiple-images .image-container img {
+  width: 100%;
+  max-height: 3800px;
+  object-fit: contain;
+  margin: auto;
+}
+
+/* Label */
+.concept-item p {
+    background-color: #1e4d7b;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    text-align: center;
+    width: 100%;
+    padding: 18px 10px;
+    border-radius: 0 0 25px 25px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.concept-item.multiple-images > img {
+    display: none;
+}
+
+.concept-item.multiple-images .image-container {
+  flex: 1;
+  padding: 0;
+  margin: 0;
+  height: 110%;
+  width: 110%;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+.concept-item.multiple-images .image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 25px 25px 0 0;
+}
+
+/* Single image dalam card */
+.concept-item > img {
+  width: 180%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 25px;
+}
+
+/* Multiple images padding */
+.concept-item.multiple-images {
+  padding: 10px 10px 60px 10px;
+}
+
+.concept-item.multiple-images .image-container img:nth-child(1) {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.concept-item.multiple-images .image-container img:nth-child(2) {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.concept-item.multiple-images .image-container img:nth-child(3) {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    max-height: 160px;
+}
+
+/* =========================================
+   ADJUST CARD 1 - Ball vs Key
+========================================= */
+.concept-item:nth-child(1) .image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+.concept-item:nth-child(1) .image-container img {
+  width: 150%;
+  height: 150%;
+  object-fit: contain;
+  object-position: center;
+  margin-top: -50px;
+  margin-left: 40px;
+}
+
+/* =========================================
+   ADJUST CARD 2 - Elephant vs Chicken
+========================================= */
+.concept-item:nth-child(2) .image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #ffffff;
+}
+
+.concept-item:nth-child(2) .image-container img {
+  width: 133%;
+  height: 133%;
+  object-fit: contain;
+  object-position: center;
+  margin-top: -30px;
+  margin-left: 15px;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+@media (max-width: 1500px) {
+    .relational-concepts-container {
+        grid-template-columns: repeat(2, 420px);
+        gap: 60px;
+    }
+    
+    .relational-concepts h2 {
+        font-size: 54px;
+    }
+}
+
+@media (max-width: 768px) {
+    .relational-concepts-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .relational-concepts h2 {
+        font-size: 48px;
+    }
+    
+    .concept-item {
+        width: 90%;
+        height: auto;
+        aspect-ratio: 1;
+    }
+    
+    .concept-item p {
+        font-size: 18px;
+        padding: 14px 8px;
+    }
+}
+
+@media (max-width: 600px) {
+    .relational-concepts h2 {
+        font-size: 36px;
+    }
+    
+    .concept-item p {
+        font-size: 16px;
+    }
+}
+
+/* =========================================
+   BUTTONS
+========================================= */
+.next-game-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    position: relative;
+    z-index: 10;
+    margin-top: 50px;
+}
+
+.back-button-container {
+  position: fixed;
+  bottom: 20px;
+  left: -10px;
+  z-index: 100;
+}
+
+.back-button {
+  width: 130px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.back-button:hover {
+  transform: scale(1.1);
+}
+
+.next-button-container {
+  position: fixed;
+  bottom: 20px;
+  right: -10px;
+  z-index: 100;
+}
+
+.next-button {
+  width: 130px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.next-button:hover {
+  transform: scale(1.1);
+}

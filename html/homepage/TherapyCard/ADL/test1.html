@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jom Pilih! - Idzmir Kids Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* Reset and basic styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: url('../../../../assets/images/backgroundGames1.webp') no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Background blur overlay */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('../../../../assets/images/backgroundGames1.webp') no-repeat center center fixed;
+      background-size: cover;
+      filter: blur(8px);
+      z-index: -1;
+      opacity: 0.7;
+    }
+
+    /* Header */
+    .header {
+      background: #003e8d;
+      backdrop-filter: blur(6px);
+      padding: 5px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    /* Logo */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .logo img {
+      height: 70px;
+      width: auto;
+    }
+
+    /* Navigation */
+    .nav-menu {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .nav-item {
+      font-family: 'Poppins', sans-serif;
+      color: #FFFFFF;
+      text-decoration: none;
+      font-size: 15px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-item:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Banner Section */
+    .banner-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 40px;
+      width: 100%;
+      margin-top: 80px;
+    }
+
+    /* Yellow Banner */
+    .banner-yellow {
+      width: auto;
+      max-width: 750px;
+      height: auto;
+      min-height: 60px;
+      background: linear-gradient(135deg, #ffd032 0%, #ffb800 100%);
+      border-radius: 50px;
+      padding: 8px 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 26px;
+      font-weight: 700;
+      color: #003d82;
+      text-shadow: none;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    /* Blue Banner */
+    .banner-blue {
+      width: auto;
+      max-width: 500px;
+      height: 55px;
+      background: #003d82;
+      border-radius: 50px;
+      padding: 3px 85px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 32px;
+      font-weight: 700;
+      color: #ffd032;
+      text-shadow: none;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .main-layout {
+      display: flex;
+      gap: 50px;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 0 80px;
+      margin-top: 40px;
+    }
+
+    .left-section {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .question-label {
+      background: #ffd54f;
+      color: #003d82;
+      font-size: 1.8em;
+      font-weight: 700;
+      padding: 12px 50px;
+      border-radius: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .question-box {
+      background: #ffffff;
+      border: 6px solid #003d82;
+      border-radius: 30px;
+      padding: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 380px;
+      height: 380px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+      position: relative;
+    }
+
+    .question-mark {
+      font-size: 12em;
+      color: #003d82;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .question-box .answer-image {
+      display: none;
+      max-width: 120%;
+      max-height: 120%;
+      object-fit: contain;
+    }
+
+    .question-box.reveal .question-mark {
+      display: none;
+    }
+
+    .question-box.reveal .answer-image {
+      display: block;
+    }
+
+    .right-section {
+      background: #ffffff;
+      border: 6px solid #003d82;
+      border-radius: 30px;
+      padding: 40px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+      width: 700px;
+      height: 380px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .right-section-title {
+      background: #ffd54f;
+      color: #003d82;
+      font-size: 1.3em;
+      font-weight: 700;
+      padding: 10px 40px;
+      border-radius: 25px;
+      text-align: center;
+      margin-bottom: 25px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 25px;
+      align-items: center;
+      justify-items: center;
+      width: 100%;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 120px;
+      height: 120px;
+      cursor: pointer;
+    }
+
+    .option-item img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.1));
+    }
+
+    .option-item img:hover {
+      transform: scale(1.15);
+    }
+
+    /* Next Button */
+    .next-button-container {
+      position: fixed;
+      bottom: 20px;
+      right: -10px;
+      z-index: 100;
+    }
+
+    .next-button {
+      width: 130px;
+      height: auto;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      border: none;
+      background: none;
+      padding: 0;
+    }
+
+    .next-button:hover {
+      transform: scale(1.1);
+    }
+
+    /* Back Button */
+    .back-button-container {
+      position: fixed;
+      bottom: 20px;
+      left: -10px;
+      z-index: 100;
+    }
+
+    .back-button {
+      width: 130px;
+      height: auto;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      border: none;
+      background: none;
+      padding: 0;
+    }
+
+    .back-button:hover {
+      transform: scale(1.1);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .main-layout {
+        flex-direction: column;
+        gap: 30px;
+        padding: 0 40px;
+      }
+
+      .right-section {
+        min-width: auto;
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .banner-yellow {
+        font-size: 20px;
+        padding: 10px 40px;
+      }
+
+      .banner-blue {
+        font-size: 24px;
+        padding: 5px 50px;
+      }
+
+      .question-label {
+        font-size: 1.4em;
+        padding: 10px 40px;
+      }
+
+      .question-box {
+        width: 280px;
+        height: 280px;
+        padding: 40px;
+      }
+
+      .question-mark {
+        font-size: 8em;
+      }
+
+      .right-section {
+        padding: 30px;
+      }
+
+      .right-section-title {
+        font-size: 1.1em;
+        padding: 8px 25px;
+        margin-bottom: 15px;
+      }
+
+      .options-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+      }
+
+      .option-item {
+        width: 100px;
+        height: 100px;
+      }
+
+      .next-button,
+      .back-button {
+        width: 100px;
+      }
+
+      .main-layout {
+        padding: 0 20px;
+        margin-top: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .banner-yellow {
+        font-size: 16px;
+        padding: 8px 25px;
+      }
+
+      .banner-blue {
+        font-size: 18px;
+        padding: 3px 30px;
+      }
+
+      .question-label {
+        font-size: 1.2em;
+        padding: 8px 30px;
+      }
+
+      .question-box {
+        width: 200px;
+        height: 200px;
+        padding: 30px;
+      }
+
+      .question-mark {
+        font-size: 5em;
+      }
+
+      .right-section {
+        padding: 15px;
+        border-width: 4px;
+        min-width: auto;
+        width: 100%;
+      }
+
+      .right-section-title {
+        font-size: 0.9em;
+        padding: 6px 15px;
+        margin-bottom: 10px;
+      }
+
+      .options-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+
+      .option-item {
+        width: 70px;
+        height: 70px;
+      }
+
+      .next-button,
+      .back-button {
+        width: 80px;
+      }
+
+      .main-layout {
+        padding: 0 10px;
+        gap: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header Placeholder - will be loaded dynamically -->
+<div id="header-placeholder"></div>
+
+<div class="banner-section">
+    <div class="banner-yellow">Lebih Besar Daripada VS Lebih Kecil Daripada</div>
+    <div class="banner-blue">Jom Pilih!</div>
+</div>
+
+  <!-- Main Layout -->
+  <div class="main-layout">
+
+    <!-- Left Section - Question Box -->
+    <div class="left-section">
+      <div class="question-label">Rujukan</div>
+      <div class="question-box" id="questionBox">
+        <div class="question-mark">?</div>
+        <img class="answer-image" src="" alt="Answer">
+      </div>
+    </div>
+
+    <!-- Right Section - Options -->
+    <div class="right-section">
+      <div class="right-section-title">Cari item yang sama dengan yang di dalam kotak</div>
+      <div class="options-grid">
+        <div class="option-item" onclick="selectOption(this, 'image/ball.png')">
+          <img src="image/ball.png" alt="Ball" loading="lazy">
+        </div>
+        <div class="option-item" onclick="selectOption(this, 'image/clock.png')">
+          <img src="image/clock.png" alt="Clock" loading="lazy">
+        </div>
+        <div class="option-item" onclick="selectOption(this, 'image/icecream.png')">
+          <img src="image/icecream.png" alt="Ice Cream" loading="lazy">
+        </div>
+        <div class="option-item" onclick="selectOption(this, 'image/ball2.png')">
+          <img src="image/ball2.png" alt="Ball 2" loading="lazy">
+        </div>
+        <div class="option-item" onclick="selectOption(this, 'image/pizza.png')">
+          <img src="image/pizza.png" alt="Pizza" loading="lazy">
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- End Main Layout -->
+
+<!-- Back Button -->
+<div class="back-button-container">
+  <a href="../../../../html/RelationalConcepts/biggerThan-smallerThan/klcc-tree/klcc-tree.html">
+    <img src="../../../../assets/images/back.png" alt="Back Button" class="back-button">
+  </a>
+</div>
+
+<!-- Next Button -->
+<div class="next-button-container">
+  <a href="../../../../html/RelationalConcepts/biggerThan-smallerThan/elephant-chicken/game_page1.html">
+    <img src="../../../../assets/images/next.png" alt="Next Button" class="next-button">
+  </a>
+</div>
+
+<!-- Load initHeader.js FIRST -->
+<script src="../../../../js/homepage/initHeader.js"></script>
+
+<!-- Initialize Header -->
+<script>
+  if (typeof initializeHeader === 'function') {
+    initializeHeader('../../../homepage/header.html');
+  }
+</script>
+
+<!-- Game Logic -->
+<script>
+  function selectOption(element, imageName) {
+    const questionBox = document.getElementById('questionBox');
+    const answerImage = questionBox.querySelector('.answer-image');
+    
+    answerImage.src = imageName;
+    questionBox.classList.add('reveal');
+    
+    // Optional: Hide question mark and show answer after animation
+    setTimeout(() => {
+      questionBox.classList.remove('reveal');
+    }, 2000);
+  }
+</script>
+
+</body>
+</html>

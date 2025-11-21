@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            color: #333; 
+            line-height: 1.4; 
+            font-size: 12px; 
+            padding: 1rem; 
+        }
+        .dashboard-section h2 { 
+            margin-bottom: 0.75rem; 
+            color: #21537c; 
+            font-size: 1.4rem; 
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .dashboard-section h2::before {
+            font-size: 1.2rem;
+        }
+        .table-container { 
+            background: white; 
+            padding: 1rem; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 20px rgba(33, 83, 124, 0.1);
+            border: 1px solid rgba(33, 83, 124, 0.05);
+        }
+        .vu-actions {
+            display: flex;
+            gap: 0.6rem;
+            margin-bottom: 0.75rem;
+            align-items: center;
+            flex-wrap: wrap;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #f0f2f5;
+        }
+        .vu-actions input {
+            padding: 0.5rem 0.75rem;
+            padding-left: 2rem;
+            border: 1px solid #e0e4e8;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            transition: all 0.3s ease;
+            background: #f8f9fa url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2321537c' viewBox='0 0 24 24' width='14' height='14'%3E%3Cpath d='M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3C/svg%3E") no-repeat 0.6rem center;
+            min-width: 180px;
+        }
+        .vu-actions input:focus {
+            outline: none;
+            border-color: #21537c;
+            box-shadow: 0 0 0 3px rgba(33, 83, 124, 0.1);
+            background-color: white;
+        }
+        .vu-actions select {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid #e0e4e8;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            background: #f8f9fa;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .vu-actions select:focus {
+            outline: none;
+            border-color: #21537c;
+            box-shadow: 0 0 0 3px rgba(33, 83, 124, 0.1);
+        }
+        .vu-actions button {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            background: linear-gradient(135deg, #fed236 0%, #f5c518 100%);
+            color: #21537c;
+            border: none;
+            cursor: pointer;
+            margin-left: auto;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(254, 210, 54, 0.3);
+        }
+        .vu-actions button:hover { 
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(254, 210, 54, 0.4);
+        }
+        .vu-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.7rem;
+        }
+        .vu-table th, .vu-table td {
+            padding: 0.6rem 0.5rem;
+            text-align: left;
+        }
+        .vu-table thead {
+            background: linear-gradient(135deg, #21537c 0%, #1a4568 100%);
+        }
+        .vu-table th {
+            color: white;
+            font-weight: 500;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            position: relative;
+            transition: background 0.3s;
+        }
+        .vu-table th:hover { background: rgba(255,255,255,0.1); }
+        .vu-table th:first-child { border-radius: 8px 0 0 8px; }
+        .vu-table th:last-child { border-radius: 0 8px 8px 0; }
+        .vu-table tbody tr {
+            border-bottom: 1px solid #f0f2f5;
+            transition: all 0.2s ease;
+        }
+        .vu-table tbody tr:hover {
+            background: linear-gradient(90deg, rgba(33,83,124,0.03) 0%, rgba(254,210,54,0.05) 100%);
+            transform: scale(1.002);
+        }
+        .vu-table tbody tr:last-child { border-bottom: none; }
+        .vu-center { text-align: center; }
+        .status {
+            padding: 0.25rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.6rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+        .status::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+        .status.active { 
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); 
+            color: #2e7d32; 
+        }
+        .status.active:hover { 
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+        }
+        .status.active::before { background: #4caf50; }
+        .status.inactive { 
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%); 
+            color: #c62828;
+        }
+        .status.inactive:hover { 
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(244, 67, 54, 0.3);
+        }
+        .status.inactive::before { background: #f44336; }
+        .btn-view, .btn-edit, .btn-del {
+            padding: 0.3rem 0.5rem;
+            border-radius: 6px;
+            font-size: 0.6rem;
+            cursor: pointer;
+            border: none;
+            margin: 0 2px;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+        .btn-view { 
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); 
+            color: #1565c0; 
+        }
+        .btn-edit { 
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); 
+            color: #2e7d32; 
+        }
+        .btn-del { 
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%); 
+            color: #c62828; 
+        }
+        .btn-view:hover { transform: translateY(-2px); box-shadow: 0 3px 8px rgba(21,101,192,0.2); }
+        .btn-edit:hover { transform: translateY(-2px); box-shadow: 0 3px 8px rgba(46,125,50,0.2); }
+        .btn-del:hover { transform: translateY(-2px); box-shadow: 0 3px 8px rgba(198,40,40,0.2); }
+        .table-footer { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-top: 0.75rem; 
+            padding-top: 0.75rem;
+            border-top: 2px solid #f0f2f5;
+            font-size: 0.65rem;
+            color: #666;
+        }
+        .pagination { display: flex; gap: 0.3rem; }
+        .btn { 
+            background: linear-gradient(135deg, #21537c 0%, #1a4568 100%); 
+            color: white; 
+            border: none; 
+            padding: 0.3rem 0.6rem; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-size: 0.65rem;
+            transition: all 0.2s ease;
+        }
+        .btn:hover { transform: translateY(-1px); box-shadow: 0 2px 6px rgba(33,83,124,0.3); }
+        .btn-secondary { 
+            background: linear-gradient(135deg, #fed236 0%, #f5c518 100%); 
+            color: #21537c; 
+            font-weight: 600;
+        }
+        .vu-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background: rgba(33, 83, 124, 0.4);
+            backdrop-filter: blur(4px);
+        }
+        .vu-modal-content {
+            background: white;
+            padding: 1.25rem;
+            border-radius: 16px;
+            width: 340px;
+            margin: 5% auto;
+            box-shadow: 0 20px 60px rgba(33, 83, 124, 0.3);
+            animation: slideIn 0.3s ease;
+            border-top: 4px solid #fed236;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-30px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .vu-modal-content h3 { 
+            color: #21537c; 
+            font-size: 0.95rem; 
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f0f2f5;
+            font-weight: 600;
+        }
+        .vu-close { 
+            float: right; 
+            font-size: 1.3rem; 
+            cursor: pointer; 
+            color: #aaa;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+        .vu-close:hover { background: #f0f2f5; color: #333; }
+        .vu-detail-row, .vu-input-row { 
+            margin: 0.5rem 0; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            padding: 0.3rem 0;
+        }
+        .vu-detail-row { border-bottom: 1px dashed #eee; }
+        .vu-label { font-weight: 500; width: 40%; font-size: 0.7rem; color: #21537c; }
+        .vu-detail-row span:last-child { font-size: 0.7rem; color: #555; }
+        .vu-input-row input, .vu-input-row select { 
+            width: 55%; 
+            padding: 0.4rem 0.6rem; 
+            border-radius: 8px; 
+            border: 1px solid #e0e4e8; 
+            font-size: 0.7rem;
+            transition: all 0.2s;
+        }
+        .vu-input-row input:focus, .vu-input-row select:focus {
+            outline: none;
+            border-color: #21537c;
+            box-shadow: 0 0 0 3px rgba(33, 83, 124, 0.1);
+        }
+        .vu-btn-save, .vu-btn-create { 
+            width: 100%; 
+            padding: 0.5rem; 
+            background: linear-gradient(135deg, #21537c 0%, #1a4568 100%); 
+            color: white; 
+            border-radius: 8px; 
+            margin-top: 0.75rem; 
+            cursor: pointer; 
+            border: none; 
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .vu-btn-save:hover, .vu-btn-create:hover { 
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(33, 83, 124, 0.3);
+        }
+        .vu-btn-cancel { 
+            width: 100%; 
+            padding: 0.5rem; 
+            background: #f0f2f5; 
+            border-radius: 8px; 
+            margin-top: 0.4rem; 
+            cursor: pointer; 
+            border: none; 
+            font-size: 0.7rem;
+            color: #666;
+            transition: all 0.2s;
+        }
+        .vu-btn-cancel:hover { background: #e4e6e9; }
+        .del-btn-confirm { 
+            width: 100%; 
+            padding: 0.5rem; 
+            background: linear-gradient(135deg, #ef5350 0%, #c62828 100%); 
+            color: white; 
+            border-radius: 8px; 
+            margin-top: 0.75rem; 
+            cursor: pointer; 
+            border: none; 
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .del-btn-confirm:hover { 
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(198, 40, 40, 0.3);
+        }
+        .del-btn-cancel { 
+            width: 100%; 
+            padding: 0.5rem; 
+            background: #f0f2f5; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            border: none; 
+            margin-top: 0.4rem; 
+            font-size: 0.7rem;
+            color: #666;
+        }
+        @media screen and (max-width: 600px){
+            .vu-actions { flex-direction: column; align-items: stretch; }
+            .vu-actions button { margin-left: 0; margin-top: 0.3rem; }
+            .vu-input-row { flex-direction: column; align-items: flex-start; }
+            .vu-label, .vu-input-row input, .vu-input-row select { width: 100%; margin: 0.2rem 0; }
+            .vu-modal-content { width: 90%; margin: 10% auto; }
+        }
+    </style>
+</head>
+<body>
+<section class="dashboard-section">
+    <h2>Manage Users</h2>
+    <div class="table-container">
+        <div class="vu-actions">
+            <input type="text" placeholder="Search by ID or Name...">
+            <select id="roleFilter">
+                <option value="">All Department</option>
+                <option>HR</option>
+                <option>Accountant</option>
+                <option>Admin/IT</option>
+                <option>Marketing</option>
+                <option>Clinical</option>
+                <option>Development</option>
+            </select>
+            <select id="statusFilter">
+                <option value="">All Status</option>
+                <option>Active</option>
+                <option>Inactive</option>
+            </select>
+            <button onclick="openCreateModal()">+ Create User</button>
+        </div>
+        <table class="vu-table">
+            <thead>
+                <tr>
+                    <th onclick="sortTable(0)">User ID ↕</th>
+                    <th onclick="sortTable(1)">Full Name ↕</th>
+                    <th>Password</th>
+                    <th>Email</th>
+                    <th onclick="sortTable(4)">Position ↕</th>
+                    <th>Department</th>
+                    <th onclick="sortTable(6)">Status ↕</th>
+                    <th class="vu-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-password="1234pass">
+                    <td>1234</td><td>Siti Aisyah</td><td>••••••</td><td>aisyah@gmail.com</td><td>Admin</td><td>HR</td>
+                    <td><span class="status active" onclick="toggleStatus(this)">Active</span></td>
+                    <td class="vu-center">
+                        <button class="btn-view" onclick="openViewModal(this.parentNode.parentNode)">View</button>
+                        <button class="btn-edit" onclick="openEditModal(this.parentNode.parentNode)">Edit</button>
+                        <button class="btn-del" onclick="openDeleteModal(this.parentNode.parentNode)">Delete</button>
+                    </td>
+                </tr>
+                <tr data-password="5678pass">
+                    <td>5678</td><td>Ahmad Razif</td><td>••••••</td><td>razif@gmail.com</td><td>Teacher</td><td>Accountant</td>
+                    <td><span class="status inactive" onclick="toggleStatus(this)">Inactive</span></td>
+                    <td class="vu-center">
+                        <button class="btn-view" onclick="openViewModal(this.parentNode.parentNode)">View</button>
+                        <button class="btn-edit" onclick="openEditModal(this.parentNode.parentNode)">Edit</button>
+                        <button class="btn-del" onclick="openDeleteModal(this.parentNode.parentNode)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="table-footer">
+            <div>Showing <strong>2</strong> of <strong>2</strong> users</div>
+            <div class="pagination">
+                <button class="btn">← Prev</button>
+                <button class="btn btn-secondary">1</button>
+                <button class="btn">Next →</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- VIEW MODAL -->
+<div id="viewModal" class="vu-modal">
+    <div class="vu-modal-content">
+        <span class="vu-close" onclick="closeAllModals()">&times;</span>
+        <h3>User Details</h3>
+        <div class="vu-detail-row"><span class="vu-label">User ID</span><span id="vuID"></span></div>
+        <div class="vu-detail-row"><span class="vu-label">Full Name</span><span id="vuName"></span></div>
+        <div class="vu-detail-row"><span class="vu-label">Password</span><span id="vuPassword"></span></div>
+        <div class="vu-detail-row"><span class="vu-label">Email</span><span id="vuEmail"></span></div>
+        <div class="vu-detail-row"><span class="vu-label">Position</span><span id="vuPosition"></span></div>
+        <div class="vu-detail-row"><span class="vu-label">Department</span><span id="vuDepartment"></span></div>
+        <div class="vu-detail-row"><span class="vu-label">Status</span><span id="vuStatus"></span></div>
+        <button class="vu-btn-cancel" onclick="closeAllModals()">Close</button>
+    </div>
+</div>
+
+<!-- EDIT MODAL -->
+<div id="editModal" class="vu-modal">
+    <div class="vu-modal-content">
+        <span class="vu-close" onclick="closeAllModals()">&times;</span>
+        <h3>Edit User</h3>
+        <div class="vu-input-row"><label class="vu-label">User ID</label><input type="text" id="editID"></div>
+        <div class="vu-input-row"><label class="vu-label">Full Name</label><input type="text" id="editName"></div>
+        <div class="vu-input-row"><label class="vu-label">Password</label><input type="text" id="editPassword"></div>
+        <div class="vu-input-row"><label class="vu-label">Email</label><input type="email" id="editEmail"></div>
+        <div class="vu-input-row"><label class="vu-label">Position</label><input type="text" id="editPosition"></div>
+        <div class="vu-input-row">
+            <label class="vu-label">Department</label>
+            <select id="editDepartment">
+                <option>HR</option>
+                <option>Accountant</option>
+                <option>Admin/IT</option>
+                <option>Marketing</option>
+                <option>Clinical</option>
+                <option>RTS</option>
+            </select>
+        </div>
+        <div class="vu-input-row"><label class="vu-label">Status</label><select id="editStatus"><option>Active</option><option>Inactive</option></select></div>
+        <button class="vu-btn-save" onclick="saveEdit()">Save Changes</button>
+        <button class="vu-btn-cancel" onclick="closeAllModals()">Cancel</button>
+    </div>
+</div>
+
+<!-- DELETE MODAL -->
+<div id="deleteModal" class="vu-modal">
+    <div class="vu-modal-content">
+        <span class="vu-close" onclick="closeAllModals()">&times;</span>
+        <h3 style="color:#c62828;">Delete User?</h3>
+        <p style="font-size:0.75rem; color:#666; margin: 0.5rem 0;">Are you sure you want to delete this user?</p>
+        <p id="deleteUserName" style="color:#21537c; font-weight:600; font-size:0.85rem; background:#f0f2f5; padding:0.5rem; border-radius:8px; text-align:center;"></p>
+        <button class="del-btn-confirm" onclick="confirmDelete()">Yes, Delete</button>
+        <button class="del-btn-cancel" onclick="closeAllModals()">Cancel</button>
+    </div>
+</div>
+
+<!-- CREATE MODAL -->
+<div id="createModal" class="vu-modal">
+    <div class="vu-modal-content">
+        <span class="vu-close" onclick="closeAllModals()">&times;</span>
+        <h3>Create New User</h3>
+        <form id="createForm">
+<div class="vu-input-row">
+    <label class="vu-label" style="margin-top:20px;">
+        User ID
+        <span style="display:block; font-size:0.6rem; color:#888; margin-top:2px;">
+            *last 4 digits IC number
+        </span>
+    </label>
+
+    <input type="text" id="createUserId">
+</div>
+            <div class="vu-input-row"><label class="vu-label">Full Name</label><input type="text" id="createName" placeholder="Enter name"></div>
+            <div class="vu-input-row"><label class="vu-label">Password</label><input type="text" id="createPassword" placeholder="Enter password"></div>
+            <div class="vu-input-row"><label class="vu-label">Email</label><input type="email" id="createEmail" placeholder="email@example.com"></div>
+            <div class="vu-input-row"><label class="vu-label">Position</label><input type="text" id="createPosition" placeholder="e.g. Admin"></div>
+            <div class="vu-input-row">
+                <label class="vu-label">Department</label>
+                <select id="createDepartment">
+                    <option>HR</option>
+                    <option>Accountant</option>
+                    <option>Admin/IT</option>
+                    <option>Marketing</option>
+                    <option>Clinical</option>
+                    <option>RTS</option>
+                </select>
+            </div>
+            <div class="vu-input-row"><label class="vu-label">Status</label><select id="createStatus"><option>Active</option><option>Inactive</option></select></div>
+            <button type="button" class="vu-btn-create" onclick="createUser()">Create User</button>
+            <button type="button" class="vu-btn-cancel" onclick="closeAllModals()">Cancel</button>
+        </form>
+    </div>
+</div>
+
+<script>
+let selectedRow = null;
+
+// Toggle Status (Click to change Active/Inactive)
+function toggleStatus(el) {
+    if (el.textContent.trim() === "Active") {
+        el.textContent = "Inactive";
+        el.className = "status inactive";
+    } else {
+        el.textContent = "Active";
+        el.className = "status active";
+    }
+}
+
+// View Modal - Shows REAL password
+function openViewModal(row) {
+    selectedRow = row;
+    document.getElementById("vuID").textContent = row.children[0].textContent;
+    document.getElementById("vuName").textContent = row.children[1].textContent;
+    // Get real password from data attribute
+    document.getElementById("vuPassword").textContent = row.getAttribute("data-password") || row.children[2].textContent;
+    document.getElementById("vuEmail").textContent = row.children[3].textContent;
+    document.getElementById("vuPosition").textContent = row.children[4].textContent;
+    document.getElementById("vuDepartment").textContent = row.children[5].textContent;
+    document.getElementById("vuStatus").textContent = row.children[6].innerText.trim();
+    document.getElementById("viewModal").style.display = "block";
+}
+
+// Edit Modal
+function openEditModal(row) {
+    selectedRow = row;
+    document.getElementById("editID").value = row.children[0].textContent;
+    document.getElementById("editName").value = row.children[1].textContent;
+    // Get real password from data attribute
+    document.getElementById("editPassword").value = row.getAttribute("data-password") || "";
+    document.getElementById("editEmail").value = row.children[3].textContent;
+    document.getElementById("editPosition").value = row.children[4].textContent;
+    document.getElementById("editDepartment").value = row.children[5].textContent;
+    document.getElementById("editStatus").value = row.children[6].innerText.trim();
+    document.getElementById("editModal").style.display = "block";
+}
+
+function saveEdit() {
+    selectedRow.children[0].textContent = document.getElementById("editID").value;
+    selectedRow.children[1].textContent = document.getElementById("editName").value;
+    // Save real password to data attribute
+    selectedRow.setAttribute("data-password", document.getElementById("editPassword").value);
+    selectedRow.children[3].textContent = document.getElementById("editEmail").value;
+    selectedRow.children[4].textContent = document.getElementById("editPosition").value;
+    selectedRow.children[5].textContent = document.getElementById("editDepartment").value;
+    let statusCell = selectedRow.children[6].querySelector("span");
+    statusCell.textContent = document.getElementById("editStatus").value;
+    statusCell.className = "status " + (statusCell.textContent === "Active" ? "active" : "inactive");
+    closeAllModals();
+}
+
+function openDeleteModal(row) {
+    selectedRow = row;
+    document.getElementById("deleteUserName").textContent = row.children[1].textContent;
+    document.getElementById("deleteModal").style.display = "block";
+}
+
+function confirmDelete() {
+    selectedRow.remove();
+    closeAllModals();
+}
+
+function openCreateModal() {
+    document.getElementById("createForm").reset();
+    document.getElementById("createModal").style.display = "block";
+}
+
+function createUser() {
+    const tableBody = document.querySelector(".vu-table tbody");
+    const id = document.getElementById("createID").value;
+    const name = document.getElementById("createName").value;
+    const password = document.getElementById("createPassword").value;
+    const email = document.getElementById("createEmail").value;
+    const position = document.getElementById("createPosition").value;
+    const department = document.getElementById("createDepartment").value;
+    const status = document.getElementById("createStatus").value;
+
+    if (!id || !name || !password || !email || !position || !department || !status) {
+        alert("Please fill all required fields!");
+        return;
+    }
+
+    const newRow = document.createElement("tr");
+    newRow.setAttribute("data-password", password);
+    newRow.innerHTML = `
+        <td>${id}</td>
+        <td>${name}</td>
+        <td>••••••</td>
+        <td>${email}</td>
+        <td>${position}</td>
+        <td>${department}</td>
+        <td><span class="status ${status === "Active" ? "active" : "inactive"}" onclick="toggleStatus(this)">${status}</span></td>
+        <td class="vu-center">
+            <button class="btn-view" onclick="openViewModal(this.parentNode.parentNode)">View</button>
+            <button class="btn-edit" onclick="openEditModal(this.parentNode.parentNode)">Edit</button>
+            <button class="btn-del" onclick="openDeleteModal(this.parentNode.parentNode)">Delete</button>
+        </td>
+    `;
+    tableBody.appendChild(newRow);
+    closeAllModals();
+}
+
+function closeAllModals() {
+    document.getElementById("viewModal").style.display = "none";
+    document.getElementById("editModal").style.display = "none";
+    document.getElementById("deleteModal").style.display = "none";
+    document.getElementById("createModal").style.display = "none";
+}
+
+/* ===================== SEARCH & FILTER ===================== */
+window.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.querySelector(".vu-actions input");
+    const roleFilter = document.getElementById("roleFilter");
+    const statusFilter = document.getElementById("statusFilter");
+    const tableBody = document.querySelector(".vu-table tbody");
+
+    function filterTable() {
+        const searchVal = searchInput.value.toLowerCase();
+        const roleVal = roleFilter.value;
+        const statusVal = statusFilter.value;
+
+        tableBody.querySelectorAll("tr").forEach(row => {
+            const id = row.children[0].textContent.toLowerCase();
+            const name = row.children[1].textContent.toLowerCase();
+            const role = row.children[4].textContent;
+            const status = row.children[6].textContent.trim();
+            const matchesSearch = id.includes(searchVal) || name.includes(searchVal);
+            const matchesRole = !roleVal || role === roleVal;
+            const matchesStatus = !statusVal || status === statusVal;
+            row.style.display = (matchesSearch && matchesRole && matchesStatus) ? "" : "none";
+        });
+    }
+
+    searchInput.addEventListener("keyup", filterTable);
+    roleFilter.addEventListener("change", filterTable);
+    statusFilter.addEventListener("change", filterTable);
+});
+
+/* ===================== SORTING TABLE ===================== */
+function sortTable(n) {
+    const table = document.querySelector(".vu-table");
+    let rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+    switching = true;
+    dir = "asc";
+    while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (i = 1; i < rows.length - 1; i++) {
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("TD")[n];
+            y = rows[i + 1].getElementsByTagName("TD")[n];
+            let xVal = x.textContent.toLowerCase();
+            let yVal = y.textContent.toLowerCase();
+            if (dir == "asc" && xVal > yVal) { shouldSwitch = true; break; }
+            if (dir == "desc" && xVal < yVal) { shouldSwitch = true; break; }
+        }
+        if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+            switchcount++;
+        } else {
+            if (switchcount === 0 && dir == "asc") { dir = "desc"; switching = true; }
+        }
+    }
+}
+</script>
+</body>
+</html>

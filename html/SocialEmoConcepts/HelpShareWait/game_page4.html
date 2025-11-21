@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jom Pilih! - Idzmir Kids Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../css/SocialEmoConcepts/HelpShareWait/game_page4.css">
+  <link rel="stylesheet" href="../../../css/homepage/header.css">
+</head>
+<body>
+
+<!-- Header Placeholder - will be loaded dynamically -->
+<div id="header-placeholder"></div>
+
+<!-- Score Display - HIDDEN by default, shows after first answer -->
+<div class="score-display" id="scoreDisplay" style="display: none;">
+  <span class="score-label">SKOR</span>
+  <span id="scoreText">0/3</span>
+</div>
+
+<div class="game-container">
+  <div class="game-title">Jom Pilih!</div>
+
+  <div class="main-layout">
+    <div class="left-section">
+      <div class="question-label">tolong</div>
+      <div class="question-box" id="questionBox">
+        <div class="question-mark">?</div>
+        <img src="../../../assets/images/help.png" alt="tolong" class="question-icon">
+        <img class="answer-image" id="answerImage" src="" alt="Jawapan">
+      </div>
+    </div>
+
+    <div class="right-section">
+      <div class="question-prompt">Mana yang nampak tolong?</div>
+      
+      <div class="options-section">
+        <div class="option-card" data-answer="correct">
+          <img src="../../../assets/images/help.png" alt="tolong" class="card-image">
+        </div>
+
+        <div class="option-card" data-answer="wrong">
+          <img src="../../../assets/images/share.png" alt="kongsi" class="card-image">
+        </div>
+
+        <div class="option-card" data-answer="wrong">
+          <img src="../../../assets/images/wait.png" alt="tunggu" class="card-image">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Score Modal -->
+<div class="score-modal" id="scoreModal" style="display: none;">
+  <div class="score-container">
+    <div class="stars-container">
+      <div class="star star-small"><img src="../../../assets/images/star1.png" class="star-image" /></div>
+      <div class="star star-large"><img src="../../../assets/images/star2.png" class="star-image" /></div>
+      <div class="star star-small"><img src="../../../assets/images/star3.png" class="star-image" /></div>
+    </div>
+    <div class="score-title">Keseluruhan Markah</div>
+    <div class="score-subtitle">Konsep Perbandingan / Relasional </div>
+    <div class="games-score-list" id="gamesScoreList"></div>
+    <div class="total-score-box">
+      <div class="label">Peratusan Markah Keseluruhan (%)</div>
+      <div class="percentage" id="totalScorePercentage">0%</div>
+    </div>
+    <div class="modal-buttons">
+      <button class="modal-button" id="continueBtn">Teruskan</button>
+      <button class="modal-button" id="finishBtn">Selesai</button>
+    </div>
+  </div>
+</div>
+
+<script src="../../../js/SocialEmoConcepts/HelpShareWait/game_page4.js"></script>
+
+<!-- Load initHeader.js FIRST -->
+<script src="../../../../js/homepage/initHeader.js"></script>
+
+<!-- THEN call initializeHeader with correct path -->
+<script>
+  initializeHeader('../../homepage/header.html');
+</script>
+
+</body>
+</html>

@@ -1,0 +1,442 @@
+/* Reset and basic styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  background: url('../../../../assets/images/backgroundGames1.webp') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  padding-top: 80px;
+}
+/* Background blur overlay */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../../../../assets/images/backgroundGames1.webp') no-repeat center center fixed;
+  background-size: cover;
+  filter: blur(8px);
+  z-index: -1;
+  opacity: 0.7;
+}
+/* Header */
+.header {
+  background: #003e8d;
+  backdrop-filter: blur(6px);
+  padding: 5px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+.nav-menu {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.nav-item {
+  font-family: 'Poppins', sans-serif;
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 15px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+/* Banner Section */
+.banner-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 40px;
+  width: 100%;
+  margin-top: 80px;
+}
+/* Blue Banner */
+.banner-blue {
+  width: auto;
+  max-width: 800px;
+  height: auto;
+  min-height: 70px;
+  background: #003d82;
+  border-radius: 50px;
+  padding: 10px 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  font-weight: 700;
+  color: #ffd032;
+  text-shadow: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  line-height: 1.3;
+}
+/* Yellow Banner - Left (Rujukan) */
+.banner-yellow {
+  width: auto;
+  height: auto;
+  min-height: 60px;
+  background: linear-gradient(135deg, #ffd032 0%, #ffb800 100%);
+  border-radius: 50px;
+  padding: 12px 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  font-weight: 700;
+  color: #003d82;
+  text-shadow: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  line-height: 1.3;
+  margin-bottom: 15px;
+}
+/* Yellow Banner - Right (Cari item) */
+.banner-yellow-right {
+  width: 800px;
+  height: auto;
+  min-height: 60px;
+  background: linear-gradient(135deg, #ffd032 0%, #ffb800 100%);
+  border-radius: 50px;
+  padding: 12px 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  font-weight: 700;
+  color: #003d82;
+  text-shadow: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  line-height: 1.3;
+  margin-bottom: 15px;
+}
+/* Right Section Wrapper */
+.right-section-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+/* Main Layout */
+.main-layout {
+  display: flex;
+  gap: 50px;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+  padding: 0 40px;
+  margin-top: 20px;
+  margin-bottom: 100px;
+}
+/* Left Section - Question Card */
+.left-section {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  justify-content: flex-start;
+}
+.question-label {
+  background: #ffd54f;
+  color: #003d82;
+  font-size: 1.8em;
+  font-weight: 700;
+  padding: 12px 50px;
+  border-radius: 30px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  text-align: center;
+  white-space: nowrap;
+  display: none;
+}
+.question-box {
+  background: #ffffff;
+  border: 6px solid #003d82;
+  border-radius: 30px;
+  padding: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+  height: 400px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  position: relative;
+}
+.question-box .answer-image {
+  max-width: 120%;
+  max-height: 120%;
+  object-fit: contain;
+}
+/* Right Section - Options Card */
+.right-section {
+  background: #ffffff;
+  border: 6px solid #003d82;
+  border-radius: 30px;
+  padding: 5px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  width: 800px;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+.right-section-title {
+  background: #ffd54f;
+  color: #003d82;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 8px 25px;
+  border-radius: 20px;
+  text-align: center;
+  margin-bottom: 25px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  display: none;
+}
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0px;
+  align-items: center;
+  justify-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+}
+/* OPTION ITEM */
+.option-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 270px;
+  height: 250px;
+  cursor: pointer;
+  padding: 0px;
+  margin-left: -61px;
+}
+.option-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.1));
+}
+.option-item img:hover {
+  transform: scale(1.15);
+}
+
+/* Navigation Buttons */
+.back-button-container {
+  position: fixed;
+  bottom: 20px;
+  left: -10px;
+  z-index: 100;
+}
+.next-button-container {
+  position: fixed;
+  bottom: 20px;
+  right: -10px;
+  z-index: 100;
+}
+.back-button,
+.next-button {
+  width: 130px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  border: none;
+  background: none;
+  padding: 0;
+}
+.back-button:hover,
+.next-button:hover {
+  transform: scale(1.1);
+}
+
+/* ===== HIGHLIGHT STYLES ===== */
+
+/* Image highlight filter - BUKAN box shadow */
+.option-item img.highlighted-correct {
+  filter: drop-shadow(0 0 30px #4CAF50) drop-shadow(0 0 15px #4CAF50);
+}
+
+.option-item img.highlighted-wrong {
+  filter: drop-shadow(0 0 30px #F44336) drop-shadow(0 0 15px #F44336);
+}
+
+/* Score container */
+.score-container {
+  position: fixed;
+  top: 100px;
+  right: 40px;
+  background: white;
+  padding: 20px 30px;
+  border-radius: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #003d82;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  z-index: 500;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .main-layout {
+    flex-direction: column;
+    gap: 40px;
+    padding: 0 40px;
+    margin-top: 40px;
+  }
+  .yellow-banners {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .right-section {
+    width: 100%;
+    height: auto;
+  }
+  .question-box {
+    width: 100%;
+    height: auto;
+  }
+  .options-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+  }
+  .option-item {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+  }
+}
+@media (max-width: 768px) {
+  .banner-yellow {
+    font-size: 18px;
+    padding: 10px 40px;
+  }
+  .banner-yellow-right {
+    font-size: 16px;
+    padding: 10px 35px;
+  }
+  .banner-blue {
+    font-size: 24px;
+    padding: 8px 50px;
+  }
+  .question-label {
+    font-size: 1.6em;
+    padding: 10px 50px;
+  }
+  .question-box {
+    width: 300px;
+    height: 300px;
+    padding: 40px;
+  }
+  .right-section {
+    padding: 20px;
+    width: 100%;
+    height: auto;
+  }
+  .right-section-title {
+    font-size: 13px;
+    padding: 6px 20px;
+    margin-bottom: 15px;
+  }
+  .options-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+  }
+  .back-button,
+  .next-button {
+    width: 100px;
+  }
+  .main-layout {
+    padding: 0 20px;
+  }
+}
+@media (max-width: 480px) {
+  .banner-section {
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+  .banner-yellow {
+    font-size: 14px;
+    padding: 8px 25px;
+  }
+  .banner-yellow-right {
+    font-size: 12px;
+    padding: 8px 20px;
+  }
+  .banner-blue {
+    font-size: 18px;
+    padding: 6px 30px;
+  }
+  .question-label {
+    font-size: 1.4em;
+    padding: 8px 30px;
+  }
+  .question-box {
+    width: 220px;
+    height: 220px;
+    padding: 30px;
+    border-width: 4px;
+  }
+  .right-section {
+    padding: 15px;
+    width: 100%;
+    height: auto;
+  }
+  .right-section-title {
+    font-size: 11px;
+    padding: 5px 15px;
+    margin-bottom: 12px;
+  }
+  .options-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+  }
+  .option-item {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    padding: 0px;
+  }
+  .back-button,
+  .next-button {
+    width: 80px;
+  }
+  .main-layout {
+    padding: 0 10px;
+    gap: 20px;
+    margin-bottom: 60px;
+  }
+  .yellow-banners {
+    gap: 15px;
+  }
+}

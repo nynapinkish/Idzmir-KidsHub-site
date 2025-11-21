@@ -1,0 +1,818 @@
+/* Reset and basic styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: url('../../../../assets/images/backgroundGames1.webp') no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Background blur overlay */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('../../../../assets/images/backgroundGames1.webp') no-repeat center center fixed;
+      background-size: cover;
+      filter: blur(8px);
+      z-index: -1;
+      opacity: 0.7;
+    }
+
+    /* Header */
+    .header {
+      background: #003e8d;
+      backdrop-filter: blur(6px);
+      padding: 5px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    /* Logo */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .logo img {
+      height: 70px;
+      width: auto;
+    }
+
+    /* Navigation */
+    .nav-menu {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .nav-item {
+      font-family: 'Poppins', sans-serif;
+      color: #FFFFFF;
+      text-decoration: none;
+      font-size: 15px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-item:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+
+    /* Banner Section */
+    .banner-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 40px;
+      width: 100%;
+      margin-top: 80px;
+    }
+
+ /* Yellow Banner */
+    .banner-yellow {
+      width: auto;
+      max-width: 750px;
+      height: auto;
+      min-height: 60px;
+      background: linear-gradient(135deg, #ffd032 0%, #ffb800 100%);
+      border-radius: 50px;
+      padding: 8px 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 26px;
+      font-weight: 700;
+      color: #003d82;
+      text-shadow: none;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    /* Blue Banner */
+    .banner-blue {
+      width: auto;
+      max-width: 500px;
+      height: 55px;
+      background: #003d82;
+      border-radius: 50px;
+      padding: 3px 85px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 32px;
+      font-weight: 700;
+      color: #ffd032;
+      text-shadow: none;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .main-layout {
+      display: flex;
+      gap: 50px;
+      align-items: flex-start;
+      justify-content: center;
+      position: relative;
+      padding: 0 80px;
+      margin-top: 90px;
+    }
+
+    .left-section {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+      margin-top: -80px;
+      justify-content: flex-start;
+    }
+
+    .question-label {
+      background: #ffd54f;
+      color: #003d82;
+      font-size: 1.8em;
+      font-weight: 700;
+      padding: 12px 50px;
+      border-radius: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .question-box {
+      background: #ffffff;
+      border: 6px solid #003d82;
+      border-radius: 30px;
+      padding: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 380px;
+      height: 380px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+      position: relative;
+    }
+
+    .question-mark {
+      font-size: 12em;
+      color: #003d82;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    /* Question Image (Ball) - Gambar awal dalam kotak soalan */
+    .question-box .question-image {
+      max-width: 110%;
+      max-height: 110%;
+      object-fit: contain;
+    }
+
+    .question-box .answer-image {
+      display: none;
+      max-width: 120%;
+      max-height: 120%;
+      object-fit: contain;
+    }
+
+    .question-box.reveal .question-mark {
+      display: none;
+    }
+
+    .question-box.reveal .question-image {
+      display: none;
+    }
+
+    .question-box.reveal .answer-image {
+      display: block;
+    }
+
+    .right-section {
+      background: #ffffff;
+      border: 6px solid #003d82;
+      border-radius: 30px;
+      padding: 40px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+      width: 700px;
+      height: 380px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 25px 30px;
+      align-items: center;
+      justify-items: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 120px;
+      height: 120px;
+      cursor: pointer;
+    }
+
+    .option-item img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.1));
+    }
+
+    .option-item img:hover {
+      transform: scale(1.15);
+    }
+
+    /* Individual Image Size Control */
+    /* TV - Besar */
+    .option-item img[alt="TV"] {
+      max-width: 250%;
+      max-height: 250%;
+    }
+
+    /* Keys - Kecil */
+    .option-item img[alt="Keys"] {
+      max-width: 160%;
+      max-height: 60%;
+    }
+
+    /* Almari - Sederhana Besar */
+    .option-item img[alt="Almari"] {
+      max-width: 150%;
+      max-height: 150%;
+    }
+
+    /* Gas Tank - Besar */
+    .option-item img[alt="Gas Tank"] {
+      max-width: 210%;
+      max-height: 210%;
+    }
+
+    /* Gam - Kecil */
+    .option-item img[alt="gam"] {
+      max-width: 135%;
+      max-height: 135%;
+    }
+
+    /* Books - Sederhana */
+    .option-item img[alt="Books"] {
+      max-width: 180%;
+      max-height: 180%;
+    }
+
+    /* Pencil - Kecil */
+    .option-item img[alt="Pencil"] {
+      max-width: 165%;
+      max-height: 165%;
+    }
+
+    /* Eraser - Sangat Kecil */
+    .option-item img[alt="Eraser"] {
+      max-width: 110%;
+      max-height: 110%;
+    }
+
+    /* Next Button */
+    .next-button-container {
+      position: fixed;
+      bottom: 20px;
+      right: -10px;
+      z-index: 10001; /* Higher than modal (10000) */
+    }
+
+    .next-button {
+      width: 130px;
+      height: auto;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      border: none;
+      background: none;
+      padding: 0;
+    }
+
+    .next-button:hover {
+      transform: scale(1.1);
+    }
+
+    /* Back Button */
+    .back-button-container {
+      position: fixed;
+      bottom: 20px;
+      left: -10px;
+      z-index: 100;
+    }
+
+    .back-button {
+      width: 130px;
+      height: auto;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      border: none;
+      background: none;
+      padding: 0;
+    }
+
+    .back-button:hover {
+      transform: scale(1.1);
+    }
+
+    /* Selected Item Styles */
+    .option-item.selected {
+      pointer-events: none;
+    }
+
+    .option-item.correct {
+      transition: all 0.3s ease;
+    }
+
+    .option-item.wrong {
+      transition: all 0.3s ease;
+    }
+
+    /* =========================================
+       SCORE DISPLAY - GAME STYLE (Top Right)
+    ========================================= */
+    .score-display {
+      position: fixed;
+      top: 130px;
+      right: 40px;
+      background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+      color: #003E8D;
+      padding: 18px 25px;
+      border-radius: 15px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      box-shadow: 
+        0 8px 20px rgba(255, 180, 0, 0.5),
+        inset 0 2px 5px rgba(255, 255, 255, 0.5),
+        0 0 0 4px #003E8D,
+        0 0 0 6px #FFD700;
+      z-index: 1000;
+      min-width: 130px;
+      text-align: center;
+      transform: rotate(-2deg);
+      animation: scoreFloat 3s ease-in-out infinite;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .score-display::before {
+      content: '⭐';
+      position: absolute;
+      top: -12px;
+      left: -12px;
+      font-size: 25px;
+      animation: starSpin 2s linear infinite;
+    }
+
+    .score-display::after {
+      content: '⭐';
+      position: absolute;
+      top: -12px;
+      right: -12px;
+      font-size: 25px;
+      animation: starSpin 2s linear infinite reverse;
+    }
+
+    .score-display #scoreText {
+      display: block;
+      font-size: 32px;
+      margin-top: 6px;
+      color: #003E8D;
+      font-weight: 900;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      animation: scoreGlow 1.5s ease-in-out infinite;
+    }
+
+    .score-display .score-label {
+      display: block;
+      font-size: 25px;
+      color: #003E8D;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    @keyframes scoreFloat {
+      0%, 100% {
+        transform: rotate(-2deg) translateY(0px);
+      }
+      50% {
+        transform: rotate(-2deg) translateY(-10px);
+      }
+    }
+
+    @keyframes starSpin {
+      0% {
+        transform: rotate(0deg) scale(1);
+      }
+      50% {
+        transform: rotate(180deg) scale(1.2);
+      }
+      100% {
+        transform: rotate(360deg) scale(1);
+      }
+    }
+
+    @keyframes scoreGlow {
+      0%, 100% {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      }
+      50% {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2), 0 0 20px rgba(255, 180, 0, 0.8);
+      }
+    }
+
+    /* =========================================
+       SCORE MODAL (End Game)
+    ========================================= */
+    .score-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      animation: fadeIn 0.3s ease;
+      overflow: hidden;
+    }
+
+    .score-modal .score-container {
+      position: relative;
+      width: 400px;
+      background-color: #ffffff;
+      border-top-left-radius: 120px;
+      border-top-right-radius: 120px;
+      border-bottom-left-radius: 25px;
+      border-bottom-right-radius: 25px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      padding: 40px 30px;
+      height: 320px;
+      overflow: visible;
+      animation: slideUp 0.5s ease;
+      z-index: 2;
+    }
+
+    .stars-container {
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      z-index: 2;
+    }
+
+    .star {
+      position: relative;
+      filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4));
+      animation: starBounce 0.8s ease-in-out infinite;
+    }
+
+    @keyframes starBounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    .star-small {
+      width: 150px;
+      height: 120px;
+      margin-left: -120px;
+      margin-right: -120px;
+      margin-top: 50px;
+    }
+
+    .star-large {
+      width: 280px;
+      height: 150px;
+      margin-top: 0;
+      z-index: 3;
+    }
+
+    .star-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .score-title {
+      font-size: 36px;
+      font-weight: 700;
+      font-family: 'Poppins', sans-serif;
+      color: #003e8d;
+      margin-top: 45px;
+      text-align: center;
+    }
+
+    .score-box-wrapper {
+      position: absolute;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #fdf6ec;
+      border-radius: 10px;
+      width: 260px;
+      height: 120px;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    .score-box {
+      background-color: #fdf6ec;
+      border-radius: 10px;
+      width: 90px;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .score-value {
+      font-size: 46px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { 
+        transform: translateY(100px);
+        opacity: 0;
+      }
+      to { 
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* =========================================
+       CORRECT ANSWER - GREEN GLOW
+    ========================================= */
+    .correct-glow {
+      animation: glowGreenSoft 0.8s ease-in-out forwards !important;
+      pointer-events: none !important;
+    }
+
+    @keyframes glowGreenSoft {
+      0% {
+        filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+        transform: scale(1);
+      }
+      50% {
+        filter: drop-shadow(0 0 20px rgba(76, 175, 80, 0.8)) 
+                drop-shadow(0 0 40px rgba(76, 175, 80, 0.6)) 
+                brightness(1.2);
+        transform: scale(1.08);
+      }
+      100% {
+        filter: drop-shadow(0 0 15px rgba(76, 175, 80, 0.7)) 
+                drop-shadow(0 0 30px rgba(76, 175, 80, 0.5)) 
+                brightness(1.15);
+        transform: scale(1.05);
+      }
+    }
+
+    /* =========================================
+       WRONG ANSWER - RED SHAKE
+    ========================================= */
+    .wrong-shake {
+      animation: shakeRed 0.8s ease-in-out forwards !important;
+    }
+
+    @keyframes shakeRed {
+      0% {
+        transform: translateX(0) rotate(0deg);
+        filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+      }
+      10% {
+        transform: translateX(-10px) rotate(-3deg);
+        filter: drop-shadow(0 0 30px #ff0000) 
+                drop-shadow(0 0 60px #ff0000) 
+                brightness(1.3);
+      }
+      20% {
+        transform: translateX(10px) rotate(3deg);
+        filter: drop-shadow(0 0 30px #ff0000) 
+                drop-shadow(0 0 60px #ff0000) 
+                brightness(1.3);
+      }
+      30% {
+        transform: translateX(-10px) rotate(-3deg);
+        filter: drop-shadow(0 0 30px #ff0000) 
+                drop-shadow(0 0 60px #ff0000) 
+                brightness(1.3);
+      }
+      40% {
+        transform: translateX(10px) rotate(3deg);
+        filter: drop-shadow(0 0 30px #ff0000) 
+                drop-shadow(0 0 60px #ff0000) 
+                brightness(1.3);
+      }
+      50% {
+        transform: translateX(-8px) rotate(-2deg);
+        filter: drop-shadow(0 0 30px #ff0000) 
+                drop-shadow(0 0 60px #ff0000) 
+                brightness(1.3);
+      }
+      60% {
+        transform: translateX(8px) rotate(2deg);
+        filter: drop-shadow(0 0 30px #ff0000) 
+                drop-shadow(0 0 60px #ff0000) 
+                brightness(1.3);
+      }
+      70% {
+        transform: translateX(-5px) rotate(-1deg);
+        filter: drop-shadow(0 0 20px #ff0000) 
+                drop-shadow(0 0 40px #ff0000) 
+                brightness(1.2);
+      }
+      80% {
+        transform: translateX(5px) rotate(1deg);
+        filter: drop-shadow(0 0 20px #ff0000) 
+                drop-shadow(0 0 40px #ff0000) 
+                brightness(1.2);
+      }
+      90% {
+        transform: translateX(-3px) rotate(-0.5deg);
+        filter: drop-shadow(0 0 15px #ff0000) 
+                drop-shadow(0 0 30px #ff0000) 
+                brightness(1.1);
+      }
+      100% {
+        transform: translateX(0) rotate(0deg);
+        filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+      }
+    }
+
+    @keyframes bounceButton {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .main-layout {
+        flex-direction: column;
+        gap: 30px;
+        padding: 0 40px;
+      }
+
+      .right-section {
+        min-width: auto;
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .game-title {
+        font-size: 2em;
+        padding: 10px 40px;
+        margin-bottom: 30px;
+      }
+
+      .question-label {
+        font-size: 1.8em;
+        padding: 10px 60px;
+      }
+
+      .question-box {
+        width: 280px;
+        height: 280px;
+        padding: 40px;
+      }
+
+      .question-mark {
+        font-size: 8em;
+      }
+
+      .right-section {
+        padding: 30px 40px;
+      }
+
+      .options-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+
+      .option-item {
+        width: 100px;
+        height: 100px;
+      }
+
+      .next-button,
+      .back-button {
+        width: 100px;
+      }
+
+      .main-layout {
+        padding: 0 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .game-container {
+        margin: 120px auto 0;
+        padding: 20px 10px 0;
+      }
+
+      .game-title {
+        font-size: 1.5em;
+        padding: 8px 30px;
+        margin-bottom: 20px;
+      }
+
+      .question-label {
+        font-size: 1.5em;
+        padding: 8px 40px;
+      }
+
+      .question-box {
+        width: 200px;
+        height: 200px;
+        padding: 30px;
+      }
+
+      .question-mark {
+        font-size: 5em;
+      }
+
+      .right-section {
+        padding: 20px 20px;
+        border-width: 4px;
+        min-width: auto;
+      }
+
+      .options-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+
+      .option-item {
+        width: 80px;
+        height: 80px;
+      }
+
+      .next-button,
+      .back-button {
+        width: 80px;
+      }
+
+      .main-layout {
+        padding: 0 10px;
+        gap: 20px;
+      }
+    }

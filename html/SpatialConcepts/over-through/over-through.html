@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spatial Concepts - Idzmir Kids Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../css/SpatialConcepts/over-through/over-through.css">
+  <link rel="stylesheet" href="../../../css/homepage/header.css">
+
+</head>
+<body>
+
+<!-- Header Placeholder - will be loaded dynamically -->
+<div id="header-placeholder"></div>
+
+  <div class="container">
+    <!-- Banner with the title -->
+    <div class="banner">
+      <h2 class="card-title">Konsep Ruang</h2>
+    </div>
+
+<!-- Cards Container -->
+    <div class="cards-container">
+
+      <!-- Card 1: Melepasi -->
+      <div class="card melepasi" onclick="document.getElementById('audio-melepasi').play();">
+        <div class="yellow-accent"></div>
+
+        <!-- Speaker Icon -->
+        <img src="../../../assets/images/speaker.png" alt="Play Audio" class="audio-icon" onclick="event.stopPropagation(); document.getElementById('audio-melepasi').play();">
+
+        <div class="card-header">
+          <h2 class="card-title">melepasi</h2>
+        </div>
+        <div class="card-body">
+          <img src="../../../assets/images/over.png" alt="melepasi" class="card-image">
+        </div>
+
+        <!-- Hidden Audio -->
+        <audio id="audio-melepasi">
+          <source src="../../../assets/audio/over.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+
+      <!-- Card 2: Melalui -->
+      <div class="card melalui" onclick="document.getElementById('audio-melalui').play();">
+        <div class="yellow-accent"></div>
+
+        <!-- Speaker Icon -->
+        <img src="../../../assets/images/speaker.png" alt="Play Audio" class="audio-icon" onclick="event.stopPropagation(); document.getElementById('audio-melalui').play();">
+
+        <div class="card-header">
+          <h2 class="card-title">melalui</h2>
+        </div>
+        <div class="card-body">
+          <img src="../../../assets/images/through.png" alt="melalui" class="card-image">
+        </div>
+
+        <!-- Hidden Audio -->
+        <audio id="audio-melalui">
+          <source src="../../../assets/audio/through.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BACK BUTTON -->
+   <div class="back-button-container">
+    <a href="../../../../html/SpatialConcepts/between-around/between-around.html">
+  <img src="../../../assets/images/back.png" alt="Back Button" class="back-button">
+</a>
+
+  <!-- NEXT BUTTON -->
+  <div class="next-button-container">
+    <a href="../../../../html/SpatialConcepts/up-down/up-down.html">
+      <img src="../../../assets/images/next.png" alt="Next Button" class="next-button">
+    </a>
+  </div>
+
+    <!-- Load initHeader.js FIRST -->
+<script src="../../../../js/homepage/initHeader.js"></script>
+
+<!-- THEN call initializeHeader with correct path -->
+<script>
+  initializeHeader('../../homepage/header.html');
+</script>
+
+</body>
+</html>

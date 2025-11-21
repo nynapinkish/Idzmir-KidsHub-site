@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Konsep Ruang - Idzmir Kids Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../css/QualitativeConcepts/strong-weak/strong-weak.css">
+  <link rel="stylesheet" href="../../../css/homepage/header.css">
+
+</head>
+<body>
+
+<!-- Header Placeholder - will be loaded dynamically -->
+<div id="header-placeholder"></div>
+
+  <div class="container">
+    <!-- Banner with the title -->
+    <div class="banner">
+        <h2 class="card-title">Konsep Jumlah & Bilangan</h2>
+    </div>
+
+   <!-- Cards Container -->
+    <div class="cards-container">
+
+      <!-- Kad 1: Kuat -->
+      <div class="card kuat" onclick="document.getElementById('audio-kuat').play();">
+        <div class="yellow-accent"></div>
+
+        <!-- Speaker Icon -->
+        <img src="../../../assets/images/speaker.png" alt="Play Audio" class="audio-icon" onclick="document.getElementById('audio-kuat').play();">
+
+        <div class="card-header">
+          <h2 class="card-title">kuat</h2>
+        </div>
+        <div class="card-body">
+          <img src="../../../assets/images/strong.png" alt="Kuat" class="card-image">
+        </div>
+
+        <!-- Hidden Audio -->
+        <audio id="audio-kuat">
+          <source src="../../../assets/audio/strong.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+
+      <!-- Kad 2: Lemah -->
+      <div class="card lemah" onclick="document.getElementById('audio-lemah').play();">
+        <div class="yellow-accent"></div>
+
+        <!-- Speaker Icon -->
+        <img src="../../../assets/images/speaker.png" alt="Play Audio" class="audio-icon" onclick="document.getElementById('audio-lemah').play();">
+
+        <div class="card-header">
+          <h2 class="card-title">lemah</h2>
+        </div>
+        <div class="card-body">
+          <img src="../../../assets/images/weak.png" alt="Lemah" class="card-image">
+        </div>
+
+        <!-- Hidden Audio -->
+        <audio id="audio-lemah">
+          <source src="../../../assets/audio/weak.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+    </div>
+
+    <!-- START THE GAME Button -->
+    <div class="start-button-container">
+      <a href="../../../../html/QualitativeConcepts/big-small/game_page1.html">
+    <button class="start-button">MULAKAN PERMAINAN</button>
+        </a>
+    </div>
+  </div>
+
+          <!-- BACK BUTTON -->
+   <div class="back-button-container">
+      <a href="../../../../html/QualitativeConcepts/loud-quiet/loud-quiet.html">
+  <img src="../../../assets/images/back.png" alt="Back Button" class="back-button">
+</a>
+
+    <!-- Load initHeader.js FIRST -->
+<script src="../../../../js/homepage/initHeader.js"></script>
+
+<!-- THEN call initializeHeader with correct path -->
+<script>
+  initializeHeader('../../homepage/header.html');
+</script>
+
+</body>
+</html>

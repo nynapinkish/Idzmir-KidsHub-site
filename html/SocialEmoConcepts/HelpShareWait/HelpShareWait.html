@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social / Emotional Concepts - Idzmir Kids Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../css/SocialEmoConcepts/HelpShareWait/HelpShareWait.css">
+  <link rel="stylesheet" href="../../../css/homepage/header.css">
+</head>
+<body>
+
+<!-- Header Placeholder - will be loaded dynamically -->
+<div id="header-placeholder"></div>
+
+<div class="container">
+    <!-- Banner with the title -->
+    <div class="banner">
+        <h2 class="card-title">Konsep Sosial dan Emosi</h2>
+    </div>
+
+    <!-- Cards Container -->
+    <div class="cards-container">
+
+        <!-- Card 1: Help - ✅ TAMBAH onclick -->
+        <div class="card 1" onclick="document.getElementById('audio-help').play();">
+            <div class="yellow-accent"></div>
+
+            <!-- Speaker Icon -->
+            <img src="../../../assets/images/speaker.png" alt="Play Audio" class="audio-icon" onclick="event.stopPropagation(); document.getElementById('audio-help').play();">
+
+            <div class="card-header">
+                <h2 class="card-title">tolong</h2>
+            </div>
+            <div class="card-body">
+                <img src="../../../assets/images/help.png" alt="help" class="card-image">
+            </div>
+
+            <!-- Hidden Audio -->
+            <audio id="audio-help">
+                <source src="../../../assets/audio/help.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+
+        <!-- Card 2: Share - ✅ TAMBAH onclick -->
+        <div class="card 2" onclick="document.getElementById('audio-share').play();">
+            <div class="yellow-accent"></div>
+
+            <!-- Speaker Icon -->
+            <img src="../../../assets/images/speaker.png" alt="Play Audio" class="audio-icon" onclick="event.stopPropagation(); document.getElementById('audio-share').play();">
+
+            <div class="card-header">
+                <h2 class="card-title">kongsi</h2>
+            </div>
+            <div class="card-body">
+                <img src="../../../assets/images/share.png" alt="share" class="card-image">
+            </div>
+
+            <!-- Hidden Audio -->
+            <audio id="audio-share">
+                <source src="../../../assets/audio/share.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+
+        <!-- Card 3: Wait - ✅ TAMBAH onclick -->
+        <div class="card 3" onclick="document.getElementById('audio-wait').play();">
+            <div class="yellow-accent"></div>
+
+            <!-- Speaker Icon -->
+            <img src="../../../assets/images/speaker.png" alt="Play Audio" class="audio-icon" onclick="event.stopPropagation(); document.getElementById('audio-wait').play();">
+
+            <div class="card-header">
+                <h2 class="card-title">tunggu</h2>
+            </div>
+            <div class="card-body">
+                <img src="../../../assets/images/wait.png" alt="wait" class="card-image">
+            </div>
+
+            <!-- Hidden Audio -->
+            <audio id="audio-wait">
+                <source src="../../../assets/audio/wait.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+
+    </div>
+
+    <!-- BACK BUTTON -->
+    <div class="back-button-container">
+        <a href="../../../../html/SocialEmoConcepts/FriendlyMean/FriendlyMean.html">
+            <img src="../../../assets/images/back.png" alt="Back Button" class="back-button">
+        </a>
+    </div>
+
+    <!-- START THE GAME Button -->
+    <div class="start-button-container">
+        <a href="../../../../html/SocialEmoConcepts/HappySadAngryScary/game_page1.html">
+            <button class="start-button">START THE GAME</button>
+        </a>
+    </div>
+</div>
+
+<!-- Load initHeader.js FIRST -->
+<script src="../../../../js/homepage/initHeader.js"></script>
+
+<!-- THEN call initializeHeader with correct path -->
+<script>
+  initializeHeader('../../homepage/header.html');
+</script>
+
+</body>
+</html>

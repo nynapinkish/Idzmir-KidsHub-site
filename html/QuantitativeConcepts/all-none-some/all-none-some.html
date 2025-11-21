@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Konsep Ruang - Idzmir Kids Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../css/QuantitativeConcepts/all-none-some/all-none-some.css">
+  <link rel="stylesheet" href="../../../css/homepage/header.css">
+
+</head>
+<body>
+
+<!-- Header Placeholder - will be loaded dynamically -->
+<div id="header-placeholder"></div>
+
+  <div class="container">
+    <!-- Banner with the title -->
+    <div class="banner">
+        <h2 class="card-title">Konsep Jumlah & Bilangan</h2>
+    </div>
+
+    <!-- Cards Container -->
+    <div class="cards-container">
+
+      <!-- Card 1: Semua -->
+      <div class="card semua" onclick="document.getElementById('audio-semua').play();">
+        <div class="yellow-accent"></div>
+
+        <!-- Speaker Icon -->
+        <img src="../../../assets/images/speaker.png" alt="Play Audio" class="audio-icon" onclick="document.getElementById('audio-semua').play();">
+
+        <div class="card-header">
+          <h2 class="card-title">semua</h2>
+        </div>
+        <div class="card-body">
+          <img src="../../../assets/images/all.png" alt="Semua" class="card-image">
+        </div>
+
+        <!-- Hidden Audio -->
+        <audio id="audio-semua">
+          <source src="../../../assets/audio/all.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+
+      <!-- Card 2: Tiada -->
+      <div class="card tiada" onclick="document.getElementById('audio-tiada').play();">
+        <div class="yellow-accent"></div>
+
+        <!-- Speaker Icon -->
+        <img src="../../../assets/images/speaker.png" alt="Play Audio" class="audio-icon" onclick="document.getElementById('audio-tiada').play();">
+
+        <div class="card-header">
+          <h2 class="card-title">tiada</h2>
+        </div>
+        <div class="card-body">
+          <img src="../../../assets/images/none.png" alt="Tiada" class="card-image">
+        </div>
+
+        <!-- Hidden Audio -->
+        <audio id="audio-tiada">
+          <source src="../../../assets/audio/none.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+
+      <!-- Card 3: Sesetengah -->
+      <div class="card setengah" onclick="document.getElementById('audio-setengah').play();">
+        <div class="yellow-accent"></div>
+
+        <!-- Speaker Icon -->
+        <img src="../../../assets/images/speaker.png" alt="Play Audio" class="audio-icon" onclick="document.getElementById('audio-setengah').play();">
+
+        <div class="card-header">
+          <h2 class="card-title">sesetengah</h2>
+        </div>
+        <div class="card-body">
+          <img src="../../../assets/images/some.png" alt="Sesetengah" class="card-image">
+        </div>
+
+        <!-- Hidden Audio -->
+        <audio id="audio-setengah">
+          <source src="../../../assets/audio/some.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+    </div>
+
+    <!-- BACK BUTTON -->
+   <div class="back-button-container">
+      <a href="../../../../html/QuantitativeConcepts/more-less/more-less.html">
+  <img src="../../../assets/images/back.png" alt="Back Button" class="back-button">
+</a>
+
+    <!-- NEXT BUTTON -->
+    <div class="next-button-container">
+      <a href="../../../../html/QuantitativeConcepts/same-different/same-different.html">
+        <img src="../../../assets/images/next.png" alt="Next Button" class="next-button">
+      </a>
+    </div>
+  </div>
+
+    <!-- Load initHeader.js FIRST -->
+<script src="../../../../js/homepage/initHeader.js"></script>
+
+<!-- THEN call initializeHeader with correct path -->
+<script>
+  initializeHeader('../../homepage/header.html');
+</script>
+
+</body>
+</html>

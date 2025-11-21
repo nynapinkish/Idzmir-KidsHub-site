@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rutin Harian - Idzmir Kids Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../css/homepage/TherapyCard/ADL/step6.css">
+  <link rel="stylesheet" href="../../../../css/homepage/header.css">
+</head>
+<body>
+
+<!-- Header -->
+<div id="header-placeholder"></div>
+
+  <div class="score-display">
+    <div class="score-row">
+      <span>✓ Betul:</span>
+      <span id="correctCount">0</span>
+    </div>
+    <div class="score-row">
+      <span>✗ Salah:</span>
+      <span id="wrongCount">0</span>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="title-banner">
+      <h1>BATHROOM</h1>
+    </div>
+
+    <div class="instruction-banner">
+      <h2>Can you match each object to the correct shape?</h2>
+    </div>
+
+    <div class="game-container">
+      <div class="left-section">
+        <img id="itemImage" src="" alt="Item" class="item-image">
+        <div id="wordLabel" class="word-label"></div>
+      </div>
+
+      <div class="right-section" id="lettersContainer">
+        <!-- Letters will be generated here -->
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="overlay"></div>
+  <div class="result-popup" id="resultPopup">
+    <h2>🎉 Tahniah!</h2>
+    <div class="score-summary">
+      <div><strong>Jawapan Betul:</strong> <span id="finalCorrect">0</span></div>
+      <div><strong>Jawapan Salah:</strong> <span id="finalWrong">0</span></div>
+      <div style="margin-top: 15px; font-size: 28px; color: #003d82;">
+        <strong>Markah: <span id="finalScore">0</span>/50</strong>
+      </div>
+    </div>
+    <button onclick="restartGame()">Main Semula</button>
+  </div>
+
+      <!-- NEXT BUTTON FOR GAME 2 -->
+      <div class="next-button-container" id="nextBtn2">
+        <a href="step6.html">
+          <img src="../../../../assets/images/next.png" alt="Next Button" class="next-button">
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Load initHeader.js FIRST -->
+<script src="../../../../js/homepage/initHeader.js"></script>
+
+<script src="../../../../js/homepage/TherapyCard/ADL/step6.js"></script>
+
+<!-- Initialize Header - TAMBAH INI! -->
+<script>
+  if (typeof initializeHeader === 'function') {
+    initializeHeader('../../../homepage/header.html');
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  
+  <!-- Link to Google Fonts for Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Lilita+One&display=swap" rel="stylesheet">
+  
+  <title>Idzmir Kids Hub</title>
+  <link rel="stylesheet" href="../../css/homepage/homepage.css">
+  <link rel="stylesheet" href="../../css/homepage/header.css">
+
+</head>
+
+<body>
+
+  <div class="background-image"></div>
+  
+  <!-- Header Placeholder - Header akan load di sini -->
+  <div id="header-placeholder"></div>
+  
+  <!-- Welcome Banner -->
+  <div class="welcome-banner">
+    <h1 class="welcome-banner-title">WELCOME TO OUR AMAZING IDZMIR ADVENTURE!</h1>
+    <p class="welcome-banner-subtitle">LEARN, PLAY, AND GROW WITH FUN FARM FRIENDS!</p>
+  </div>
+
+  <!-- Main Content Grid -->
+  <main class="main-container">
+    <!-- Assessment Section -->
+    <section class="section assessment" data-title="Assessment">
+      <div class="cards-wrapper">
+        <div class="card" onclick="handleCardClick('spatial')">
+          <img src="../../assets/images/spatial.png" alt="Spatial Concepts" class="card-img">
+          <div class="card-title">Spatial Concepts <br> (Position & Direction)</div>
+        </div>
+        <div class="card" onclick="handleCardClick('quantitative')">
+          <img src="../../assets/images/quantitative.png" alt="Quantitative Concepts" class="card-img">
+          <div class="card-title">Quantitative Concepts <br> (Amount & Number)</div>
+        </div>
+        <div class="card" onclick="handleCardClick('qualitative')">
+          <img src="../../assets/images/qualitative.png" alt="Qualitative Concepts" class="card-img">
+          <div class="card-title">Qualitative Concepts <br> (Descriptive Features)</div>
+        </div>
+        <div class="card" onclick="handleCardClick('temporal')">
+          <img src="../../assets/images/temporal.png" alt="Temporal Concepts" class="card-img">
+          <div class="card-title">Temporal Concepts <br> (Time & Sequence)</div>
+        </div>
+        <div class="card" onclick="handleCardClick('color-shape')">
+          <img src="../../assets/images/color-shape.png" alt="Color & Shape" class="card-img">
+          <div class="card-title">Color & Shape Concepts</div>
+        </div>
+        <div class="card" onclick="handleCardClick('relational')">
+          <img src="../../assets/images/comparative.png" alt="Comparative Concepts" class="card-img">
+          <div class="card-title">Comparative / <br> Relational Concepts</div>
+        </div>
+        <div class="card" onclick="handleCardClick('social-emotional')">
+          <img src="../../assets/images/social.png" alt="Social Emotional" class="card-img">
+          <div class="card-title">Social / Emotional <br> Concepts</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Therapy Card Section -->
+    <section class="section therapy" data-title="Therapy Card">
+      <div class="cards-wrapper">
+        <div class="card" onclick="handleCardClick('sensory')">
+          <img src="../../assets/images/sensory.png" alt="Physical Motor" class="card-img">
+          <div class="card-title">Sensory Processing</div>
+        </div>
+        <div class="card" onclick="handleCardClick('gross')">
+          <img src="../../assets/images/gross.png" alt="Cognitive Rehab" class="card-img">
+          <div class="card-title">Gross Motor</div>
+        </div>
+        <div class="card" onclick="handleCardClick('social')">
+          <img src="../../assets/images/social.png" alt="Speech" class="card-img">
+          <div class="card-title">Social Play</div>
+        </div>
+        <div class="card" onclick="handleCardClick('fine-motor')">
+          <img src="../../assets/images/fine-motor.png" alt="Sensory" class="card-img">
+          <div class="card-title">Fine Motor</div>
+        </div>
+        <div class="card" onclick="handleCardClick('communication')">
+          <img src="../../assets/images/communication.png" alt="Social Emotional" class="card-img">
+          <div class="card-title">Communication</div>
+        </div>
+        <div class="card" onclick="handleCardClick('cognitive')">
+          <img src="../../assets/images/cognitive.png" alt="Daily Living" class="card-img">
+          <div class="card-title">Cognitive Abilities</div>
+        </div>
+        <div class="card" onclick="handleCardClick('living')">
+          <img src="../../assets/images/living.png" alt="Behavioral" class="card-img">
+          <div class="card-title">Activity Daily Living (ADL)</div>
+        </div>
+        <div class="card" onclick="handleCardClick('instrumental')">
+          <img src="../../assets/images/instrumental.png" alt="Medical" class="card-img">
+          <div class="card-title">Instrumental Activity <br> Daily Living (IADL)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seasonal Section -->
+    <section class="section seasonal" data-title="School">
+      <div class="cards-wrapper">
+        <div class="card" onclick="handleCardClick('winter')">
+          <img src="../../assets/images/winter.png" alt="Winter" class="card-img">
+          <div class="card-title">Winter</div>
+        </div>
+        <div class="card" onclick="handleCardClick('spring')">
+          <img src="../../assets/images/spring.png" alt="Spring" class="card-img">
+          <div class="card-title">Spring</div>
+        </div>
+        <div class="card" onclick="handleCardClick('summer')">
+          <img src="../../assets/images/summer.png" alt="Summer" class="card-img">
+          <div class="card-title">Summer</div>
+        </div>
+        <div class="card" onclick="handleCardClick('autumn')">
+          <img src="../../assets/images/autumn.png" alt="Autumn" class="card-img">
+          <div class="card-title">Autumn</div>
+        </div>
+        <div class="card" onclick="handleCardClick('calendar')">
+          <img src="../../assets/images/calendar.png" alt="Calendar" class="card-img">
+          <div class="card-title">Calendar</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- New Modal System -->
+  <div id="modalOverlay" class="modal-overlay">
+    <!-- Welcome Parents Modal -->
+    <div id="welcomeParents" class="welcome-modal">
+      <div class="welcome-accent"></div>
+      <div class="welcome-content">
+        <h1 class="welcome-title">Selamat Datang, Super Parents!</h1>
+        <div>
+          <p class="welcome-text">
+            Permainan ini bukan sekadar aktiviti, ia adalah peluang untuk anak anda belajar, meneroka, dan bersinar dengan cara mereka sendiri.
+          </p>
+          <p class="welcome-text">
+            Mata akan disimpan secara automatik.
+          </p>
+          <p class="welcome-text">
+            Ingat: Main dengan jujur, belajar dengan seronok, dan nikmati setiap saat!
+          </p>
+          <p class="welcome-text">
+            Setiap langkah kecil mereka adalah pencapaian besar.
+          </p>
+          <p class="welcome-text">
+            Mari temani anak anda dalam dunia bermain + belajar yang penuh warna!
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hey There Modal -->
+    <div id="heyThere" class="heythere-modal" style="display: none;">
+      <div class="heythere-accent"></div>
+      <div class="heythere-content">
+        <h1 class="heythere-title">HEY THERE!</h1>
+        <p class="heythere-subtitle">
+          Please Sign Up first before <br> join the learning!
+        </p>
+        <div class="heythere-buttons">
+          <button class="btn-primary" onclick="goToExplorerName()">Sign Up Now</button>
+          <button class="btn-primary" onclick="closeLater()">Later</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Explorer Name Modal -->
+    <div id="explorerName" class="explorer-modal" style="display: none;">
+      <div class="explorer-accent"></div>
+      <div class="explorer-content">
+        <h1 class="explorer-title">Write Your Explorer Name!</h1>
+        <p class="explorer-subtitle">What would you like to be called in FarmLand?</p>
+        
+        <div class="input-group">
+          <input 
+            type="text" 
+            id="nameInput" 
+            class="explorer-input" 
+            placeholder="Enter your explorer name..."
+            onkeypress="handleNameKeyPress(event)"
+          >
+          <button class="btn-set" onclick="setExplorerNameNew()">SET</button>
+        </div>
+        
+        <p id="nameSuccess" class="success-message">✓ Name saved successfully!</p>
+        
+        <div style="display: flex; justify-content: flex-end;">
+          <button class="arrow-btn" onclick="continueToAge()">
+            <img src="../../assets/images/nextBlue.png" alt="Next">
+          </button>        
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Age Selection Modal -->
+  <div id="ageModal" class="modal-overlay">
+    <div class="age-modal-wrapper">
+      <div class="age-accent"></div>
+      <div class="modal-content">
+        <h2>How Old Are You?</h2>
+        <p>Pick your age group for the perfect farm adventure!</p>
+        
+        <div class="age-options">
+          <button onclick="selectAge('4-6', this)">4–6 Years</button>
+          <button onclick="selectAge('7-9', this)">7–9 Years</button>
+          <button onclick="selectAge('10-12', this)">10–12 Years</button>
+        </div>
+
+        <p id="ageMessage" style="color: green; margin-top: 10px;"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Animal Selection Modal -->
+  <div id="animalModal" class="modal-overlay">
+    <div class="animal-modal-wrapper">
+      <div class="animal-accent"></div>
+      <div class="modal-content">
+        <h2>Choose Your Animal Buddy!</h2>
+        <p id="animalMessage">Pick your favorite animal to be your learning partner!</p>
+
+        <div class="animal-options">
+          <img src="/assets/images/lion.png" alt="Lion" class="animal" onclick="selectAnimal('Lion', this)">
+          <img src="/assets/images/elephant.png" alt="Elephant" class="animal" onclick="selectAnimal('Elephant', this)">
+          <img src="/assets/images/tiger.png" alt="Tiger" class="animal" onclick="selectAnimal('Tiger', this)">
+        </div>
+
+        <button onclick="finishSignup()">Finish</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Final Result Popup -->
+  <div id="lastResultPopup" class="modal-overlay" style="display:none;">
+    <div class="result-modal-wrapper">
+      <div class="result-accent"></div>
+      <div class="result-content">
+        <div class="celebration-header">
+          <div class="confetti">🎉</div>
+          <h2 class="result-title">Welcome to FarmLand!</h2>
+          <p class="result-subtitle">Your adventure begins now!</p>
+        </div>
+        
+        <div class="result-card">
+          <div class="profile-section">
+            <div class="avatar-container">
+              <img id="resultImage" src="" alt="Animal Buddy" class="result-avatar">
+            </div>
+            <div class="info-section">
+              <div class="info-item">
+                <span class="info-label">Explorer Name</span>
+                <span class="info-value" id="resultName">-</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Age Group</span>
+                <span class="info-value" id="resultAge">-</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Adventure Buddy</span>
+                <span class="info-value" id="resultBuddy">-</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <button class="btn-adventure" onclick="closeLastResult()">
+          Let's Start Adventure 🚀
+        </button>
+      </div>
+    </div>
+  </div>
+
+<!-- Firebase & Other Scripts -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyCpDrWgLXXHK7_9nioEQGBKJkUv4byCEd4",
+    authDomain: "idzmir-kids-hub.firebaseapp.com",
+    projectId: "idzmir-kids-hub",
+    storageBucket: "idzmir-kids-hub.appspot.com",
+    messagingSenderId: "301692363279",
+    appId: "1:301692363279:web:ba7c6547b36e433d6eb97a",
+    measurementId: "G-FB6YEMCCJ3"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+  const auth = firebase.auth();
+</script>
+
+<!-- Load Header System -->
+<script src="../../js/homepage/initHeader.js"></script>
+<script>
+  initializeHeader('header.html');
+</script>
+
+<!-- Load Page Scripts -->
+<script src="../../js/homepage/homepage.js"></script>
+<script src="../../js/aidaForm.js"></script>
+
+</body>
+</html>

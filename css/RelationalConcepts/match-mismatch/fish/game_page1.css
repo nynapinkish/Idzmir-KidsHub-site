@@ -1,0 +1,353 @@
+/* =========================================
+   RESET & BACKGROUND
+========================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Arial', sans-serif;
+  background: url('../../../../assets/images/backgroundSpatial.webp') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 20vh;
+  position: relative;
+  padding-top: 0.5px;
+  overflow: hidden;
+  height: 100vh;
+}
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../../../../assets/images/backgroundSpatial.webp') no-repeat center center fixed;
+  background-size: cover;
+  z-index: -1;
+  opacity: 0.7;
+  filter: blur(9px);
+}
+/* =========================================
+   HEADER
+========================================= */
+.header {
+  background: rgba(0, 62, 141, 0.95);
+  backdrop-filter: blur(6px);
+  padding: 5px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+.logo img {
+  height: 100px;
+  width: auto;
+}
+.nav-menu {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+.nav-item {
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  text-decoration: none;
+  font-size: 17px;
+  padding: 8px 1px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+/* =========================================
+   SCORE DISPLAY
+========================================= */
+.score-display {
+  position: fixed;
+  top: 130px;
+  right: 40px;
+  background: linear-gradient(135deg, #FDD835 0%, #F9A825 100%);
+  border: 4px solid #1565C0;
+  border-radius: 20px;
+  padding: 10px 25px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #1565C0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 999;
+}
+/* =========================================
+   BANNER - SMALLER WITH SMALLER BACKGROUNDS
+========================================= */
+.banner-section {
+  text-align: center;
+  padding: 12px 20px 8px;
+  margin-top: 108px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.banner-yellow {
+  background: linear-gradient(135deg, #FFD700 0%, #FFB400 100%);
+  padding: 7px 90px;
+  border-radius: 38px;
+  font-size: 30px;
+  font-weight: 800;
+  color: #003E8D;
+  box-shadow: 0 4px 12px rgba(255, 180, 0, 0.3);
+  font-family: 'Poppins', sans-serif;
+  margin-top: -20px;
+}
+.banner-blue {
+  background: linear-gradient(135deg, #003E8D 0%, #0052B4 100%);
+  padding: 7px 50px;
+  border-radius: 38px;
+  font-size: 27px;
+  font-weight: 700;
+  color: #FFD700;
+  box-shadow: 0 4px 12px rgba(0, 62, 141, 0.3);
+  font-family: 'Poppins', sans-serif;
+}
+/* =========================================
+   IMAGE LAYOUT
+========================================= */
+.image-layout {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 60px;
+  margin: 120px auto 60px;
+  width: 85%;
+  max-width: 1100px;
+}
+/* =========================================
+   LEFT IMAGE - SMALLER
+========================================= */
+.left-image {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.left-image img {
+  position: absolute;
+  top: -5px;
+  left: -20px;
+  width: 400px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+  transition: transform 0.3s ease;
+}
+.left-image img:hover {
+  transform: scale(1.05);
+}
+/* Button jawapan - WITH BANNER IMAGE */
+.answer-btn-container {
+  position: absolute;
+  top: 220px;
+  left: -90px;
+  z-index: 10;
+  width: 300px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.answer-design {
+  background: url('../../../../assets/images/banner.png') no-repeat center center;
+  background-size: contain;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 200%;
+  height: 250%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: -290px;
+}
+.answer-design:hover {
+  transform: scale(1.05);
+}
+.answer-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 35px;
+  font-weight: 700;
+  color: #003e8d;
+  text-align: center;
+  display: inline-block;
+  z-index: 20;
+  position: relative;
+  margin-top: -31px;
+  left: 10px;
+}
+/* =========================================
+   RIGHT IMAGES - SMALLER
+========================================= */
+.right-images {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: -15px;
+}
+.right-images img {
+  width: 360px;
+  height: auto;
+  border-radius: 12px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+.right-images img:hover {
+  transform: scale(1.06);
+}
+/* Positioning individu - ADJUSTED */
+.right-images img:nth-child(1) {
+  position: relative;
+  top: -70px;
+  left: 170px;
+}
+.right-images img:nth-child(2) {
+  position: relative;
+  top: -70px;
+  left: 100px;
+}
+.right-images img:nth-child(3) {
+  position: relative;
+  top: -70px;
+  left: 160px;
+}
+.right-images img:nth-child(4) {
+  position: relative;
+  top: -70px;
+  left: 110px;
+}
+
+/* BACK BUTTON */
+.back-button-container {
+  position: fixed;
+  bottom: 20px;
+  left: -10px;
+  z-index: 100;
+}
+
+.back-button {
+  width: 130px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.back-button:hover {
+  transform: scale(1.1);
+}
+
+/* Next button - SMALLER */
+.next-button-container {
+  position: fixed;
+  bottom: 25px;
+  right: -10px;
+}
+
+.next-button {
+  width: 130px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.next-button:hover {
+  transform: scale(1.1);
+}
+
+/* =========================================
+   RESPONSIVE (MOBILE)
+========================================= */
+@media (max-width: 900px) {
+  body {
+    overflow-y: auto;
+    height: auto;
+    min-height: 100vh;
+  }
+  .image-layout {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    margin: 350px auto 60px;
+  }
+  .left-image img {
+    position: static;
+    transform: none;
+    width: 220px;
+    margin-bottom: 20px;
+  }
+  .answer-btn-container {
+    position: static;
+    margin-top: 15px;
+  }
+  .answer-design {
+    padding: 10px 30px;
+  }
+  .answer-text {
+    font-size: 20px;
+  }
+  .right-images {
+    margin-top: 30px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  .right-images img {
+    position: static !important;
+    width: 140px;
+    left: 0 !important;
+    top: 0 !important;
+  }
+  .banner-section {
+    margin-top: 140px;
+  }
+  .banner-yellow {
+    font-size: 20px;
+    padding: 7px 50px;
+  }
+  .banner-blue {
+    font-size: 18px;
+    padding: 7px 40px;
+  }
+  .score-display {
+    top: 100px;
+    right: 15px;
+    font-size: 16px;
+    padding: 8px 16px;
+    border: 3px solid #1565C0;
+  }
+  .logo img {
+    height: 60px;
+  }
+  .nav-menu {
+    gap: 10px;
+  }
+  .nav-item {
+    font-size: 12px;
+    padding: 6px 8px;
+  }
+}

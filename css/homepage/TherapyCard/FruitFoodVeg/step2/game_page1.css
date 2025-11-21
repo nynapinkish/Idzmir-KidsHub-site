@@ -1,0 +1,424 @@
+/* =========================================
+       RESET & BACKGROUND
+    ========================================= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Arial', sans-serif;
+      background: url('../../../../../assets/images/backgroundSpatial.webp') no-repeat center center fixed;
+      background-size: cover;
+      min-height: 20vh;
+      position: relative;
+      padding-top: 0.5px;
+      overflow: hidden;
+      height: 100vh;
+    }
+    
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('../../../../../assets/images/backgroundSpatial.webp') no-repeat center center fixed;
+      background-size: cover;
+      z-index: -1;
+      opacity: 1;
+      filter: blur(12px);
+    }
+    
+    /* =========================================
+       HEADER
+    ========================================= */
+    .header {
+      background: rgba(0, 62, 141, 0.95);
+      backdrop-filter: blur(6px);
+      padding: 5px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    
+    .logo img {
+      height: 100px;
+      width: auto;
+    }
+    
+    .nav-menu {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+    }
+    
+    .nav-item {
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      text-decoration: none;
+      font-size: 17px;
+      padding: 8px 1px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-item:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    /* =========================================
+       SCORE DISPLAY
+    ========================================= */
+    .score-display {
+      position: fixed;
+      top: 130px;
+      right: 40px;
+      background: linear-gradient(135deg, #FDD835 0%, #F9A825 100%);
+      border: 4px solid #1565C0;
+      border-radius: 20px;
+      padding: 10px 25px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #1565C0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      z-index: 999;
+    }
+    
+    /* =========================================
+       BANNER
+    ========================================= */
+    .banner-section {
+      text-align: center;
+      padding: 12px 20px 8px;
+      margin-top: 90px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .banner-yellow {
+      background: linear-gradient(135deg, #FFD700 0%, #FFB400 100%);
+      padding: 7px 90px;
+      border-radius: 38px;
+      font-size: 30px;
+      font-weight: 800;
+      color: #003E8D;
+      box-shadow: 0 4px 12px rgba(255, 180, 0, 0.3);
+      font-family: 'Poppins', sans-serif;
+      margin-top: -20px;
+    }
+    
+    .banner-blue {
+      background: linear-gradient(135deg, #003E8D 0%, #0052B4 100%);
+      padding: 7px 50px;
+      border-radius: 38px;
+      font-size: 27px;
+      font-weight: 700;
+      color: #FFD700;
+      box-shadow: 0 4px 12px rgba(0, 62, 141, 0.3);
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    /* =========================================
+       GAME CONTAINER
+    ========================================= */
+    .game-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 60px;
+      margin: 50px auto;
+      padding: 0 40px;
+      max-width: 1200px;
+    }
+    
+    /* =========================================
+       SILHOUETTES ROW (TOP) - DROP ZONES
+    ========================================= */
+    .silhouette-row {
+      display: flex;
+      flex-direction: row;
+      gap: 120px;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .silhouette-container {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .silhouette-img {
+      width: 250px;
+      height: 150px;
+      object-fit: contain;
+      filter: brightness(0) saturate(100%) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+      position: absolute;
+      pointer-events: none;
+      z-index: 1;
+      transition: transform 0.3s ease;
+    }
+    
+    .silhouette-container.drag-over {
+      transform: scale(1.1);
+    }
+    
+    .silhouette-container.correct .silhouette-img {
+      filter: none;
+      animation: successPulse 0.5s ease;
+    }
+    
+    .silhouette-container.wrong {
+      animation: shake 0.5s ease;
+    }
+    
+    .silhouette-container.wrong .silhouette-img {
+      filter: brightness(0) saturate(100%) drop-shadow(0 0 25px #FF0000);
+    }
+    
+    .matched-image {
+      width: 250px;
+      height: 150px;
+      object-fit: contain;
+      position: absolute;
+      z-index: 2;
+      animation: fadeIn 0.3s ease;
+      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+    }
+    
+    @keyframes successPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+    
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      75% { transform: translateX(10px); }
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    
+    /* =========================================
+       OPTIONS ROW (BOTTOM) - DRAGGABLE
+    ========================================= */
+    .options-row {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .option-img {
+      width: 250px;
+      height: 150px;
+      object-fit: contain;
+      cursor: grab;
+      transition: all 0.3s ease;
+      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+    }
+    
+    .option-img:hover {
+      transform: scale(1.05);
+    }
+    
+    .option-img:active {
+      cursor: grabbing;
+    }
+    
+    .option-img.used {
+      opacity: 0.3 !important;
+      cursor: not-allowed !important;
+      pointer-events: none !important;
+      filter: grayscale(100%) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3)) !important;
+    }
+    
+    .option-img.used:hover {
+      transform: none !important;
+    }
+    
+    /* BACK BUTTON */
+    .back-button-container {
+      position: fixed;
+      bottom: 20px;
+      left: -10px;
+      z-index: 100;
+    }
+
+    .back-button {
+      width: 130px;
+      height: auto;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .back-button:hover {
+      transform: scale(1.1);
+    }
+
+    /* Next button */
+    .next-button-container {
+      position: fixed;
+      bottom: 25px;
+      right: -10px;
+    }
+
+    .next-button {
+      width: 130px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .next-button:hover {
+      transform: scale(1.1);
+    }
+    
+    /* =========================================
+       RESPONSIVE (MOBILE)
+    ========================================= */
+    @media (max-width: 900px) {
+      body {
+        overflow-y: auto;
+        height: auto;
+        min-height: 100vh;
+      }
+      
+      .game-container {
+        padding: 0 20px;
+        margin: 350px auto 60px;
+        gap: 40px;
+      }
+      
+      .silhouette-row, .options-row {
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+      
+      .silhouette-container, .silhouette-img, .option-img, .matched-image {
+        width: 100px;
+        height: 100px;
+      }
+      
+      .banner-section {
+        margin-top: 140px;
+      }
+      
+      .banner-yellow {
+        font-size: 20px;
+        padding: 7px 50px;
+      }
+      
+      .banner-blue {
+        font-size: 18px;
+        padding: 7px 40px;
+      }
+      
+      .score-display {
+        top: 100px;
+        right: 15px;
+        font-size: 16px;
+        padding: 8px 16px;
+        border: 3px solid #1565C0;
+      }
+      
+      .logo img {
+        height: 60px;
+      }
+      
+      .nav-menu {
+        gap: 10px;
+      }
+      
+      .nav-item {
+        font-size: 12px;
+        padding: 6px 8px;
+      }
+    }
+    
+    /* =========================================
+       POPUP
+    ========================================= */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+    
+    .popup-content {
+      background: linear-gradient(135deg, #1565C0 0%, #0D47A1 100%);
+      padding: 50px 80px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    }
+    
+    .popup-score {
+      color: #FFD700;
+      font-size: 64px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    
+    .popup-label {
+      color: white;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    
+    .popup-stats {
+      color: #FFD700;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    
+    .popup-button {
+      background: linear-gradient(135deg, #FFD700 0%, #FFC107 100%);
+      color: #1565C0;
+      border: none;
+      padding: 15px 40px;
+      font-size: 20px;
+      font-weight: bold;
+      border-radius: 50px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: transform 0.3s ease;
+    }
+    
+    .popup-button:hover {
+      transform: scale(1.05);
+    }

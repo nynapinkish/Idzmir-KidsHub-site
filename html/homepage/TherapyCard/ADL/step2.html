@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rutin Harian - Idzmir Kids Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../css/homepage/TherapyCard/ADL/step2.css">
+  <link rel="stylesheet" href="../../../../css/homepage/header.css">
+</head>
+<body>
+
+<!-- Header -->
+<div id="header-placeholder"></div>
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Banner Kuning -->
+    <div class="banner">
+      <h2 class="card-title">Rutin Harian</h2>
+    </div>
+
+    <!-- Score Display -->
+<div class="score-display" id="scoreDisplay" style="display: none;">
+  <span class="score-label">SKOR</span>
+  <span id="scoreText">0/2</span>
+</div>
+
+    <!-- Game Layout -->
+    <div class="game-layout">
+      <!-- Kiri - Gambar / Drop Zone -->
+      <div class="question-section">
+        <div class="drop-zone" id="dropZone">
+          <img src="https://via.placeholder.com/300x300.png?text=Loading..." alt="Gambar Soalan" class="question-image" id="questionImage">
+        </div>
+        <h2 class="activity-title" id="activityTitle">Basuh Tangan</h2>
+      </div>
+
+      <!-- Kanan - Kad Jawapan -->
+      <div class="cards-container" id="cardsContainer"></div>
+    </div>
+  </div>
+
+    <!-- 🎉 SCORE MODAL (Hidden by default) -->
+<div class="score-modal" id="scoreModal" style="display: none;">
+  <div class="score-container">
+    <!-- ⭐ Stars embedded at top of bukit -->
+    <div class="stars-container">
+      <div class="star star-small">
+        <img src="../../../../assets/images/star1.png" class="star-image" alt="Star" />
+      </div>
+      <div class="star star-large">
+        <img src="../../../../assets/images/star2.png" class="star-image" alt="Star" />
+      </div>
+      <div class="star star-small">
+        <img src="../../../../assets/images/star3.png" class="star-image" alt="Star" />
+      </div>
+    </div>
+
+    <!-- 🏷️ Title -->
+    <div class="score-title">Markah anda</div>
+
+    <!-- 📦 Score Box -->
+    <div class="score-box-wrapper">
+      <div class="score-box">
+        <div class="score-value" id="finalScoreDisplay">2/2</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- NEXT BUTTON -->
+    <div class="next-button-container">
+      <a href="step3.html">
+        <img src="../../../../assets/images/next.png" alt="Next Button" class="next-button">
+      </a>
+    </div>
+  </div>
+<!-- Load initHeader.js FIRST -->
+<script src="../../../../js/homepage/initHeader.js"></script>
+
+<script src="../../../../js/homepage/TherapyCard/ADL/step2.js"></script>
+
+<!-- Initialize Header - TAMBAH INI! -->
+<script>
+  if (typeof initializeHeader === 'function') {
+    initializeHeader('../../../homepage/header.html');
+  }
+</script>
+
+</body>
+</html>

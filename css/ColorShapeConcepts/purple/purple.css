@@ -1,0 +1,326 @@
+/* Reset and basic styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background: url('../../../assets/images/backgroundSpatial.webp') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background blur overlay */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../../../assets/images/backgroundSpatial.webp') no-repeat center center fixed;
+  background-size: cover;
+  filter: blur(8px);
+  z-index: -1;
+  opacity: 0.7;
+}
+
+/* Header */
+.header {
+  background: #003e8d;
+  backdrop-filter: blur(6px);
+  padding: 10px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.logo img {
+  height: 60px;
+  width: auto;
+}
+
+/* Navigation */
+.nav-menu {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+.nav-item {
+  font-family: 'Poppins', sans-serif;
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 90px auto 0;
+  padding: 20px;
+}
+
+/* Banner Konsep Warna dan Bentuk - SMALLER */
+.main-banner {
+  background: linear-gradient(180deg, #ffe76a 0%, #ffd032 100%);
+  border-radius: 30px;
+  padding: 15px 30px;
+  text-align: center;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 12px rgba(255, 208, 50, 0.4);
+}
+
+.main-banner h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: #003d82;
+  margin: 0;
+}
+
+.learning-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 40px;
+  flex-wrap: wrap;
+  padding-top: 10px;
+}
+
+/* Left side (color brush) */
+.color-side {
+  flex: 1;
+  max-width: 35%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: -80px;
+}
+
+/* Color label - SMALLER */
+.color-label {
+  position: relative;
+  background: linear-gradient(180deg, #592884);
+  border-radius: 30px;
+  padding: 35px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 32px;
+  color: #ffffff;
+  margin: 0 auto 15px;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.4);
+  width: 300px;
+  text-align: center;
+}
+
+.word {
+  flex: none;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Speaker icon - SMALLER */
+.speaker {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 45px;
+  height: 40px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  z-index: 10;
+  border-radius: 50%;
+  padding: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.speaker:hover {
+  transform: scale(1.02) translateY(-50%);
+}
+
+.speaker:active {
+  transform: scale(0.98) translateY(-50%);
+}
+
+/* Brush background - SMALLER */
+.color-brush {
+  width: 550px;
+  height: 380px;
+  background: url('../../../assets/images/purpleStroke.png') no-repeat center/cover;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.color-brush:hover {
+  transform: scale(1.02);
+}
+
+.color-brush:active {
+  transform: scale(0.98);
+}
+
+/* Fruit grid - hidden initially */
+.fruit-grid {
+  flex: 1;
+  max-width: 60%;
+  display: none;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  justify-items: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.fruit-grid.show {
+  display: grid;
+  opacity: 1;
+}
+
+/* Each fruit - SEMUA SAMA BESAR */
+.fruit {
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.fruit:hover {
+  transform: scale(1.08);
+}
+
+.fruit img {
+  width: 180px !important;
+  height: 120px !important;
+  object-fit: contain;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: transform 0.3s ease;
+}
+
+/* 3 BUAH BAWAH - BESAR */
+.fruit-large img {
+  width: 250px !important;
+  height: 170px !important;
+  object-fit: contain;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: transform 0.3s ease;
+}
+
+.fruit p {
+  margin-top: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #003e8d;
+}
+
+/* Bounce in animation */
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translateY(50px);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.1) translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.fruit.show img {
+  animation: bounceIn 0.6s forwards;
+}
+
+.fruit img:hover {
+  transform: scale(1.15);
+}
+
+/* BACK BUTTON */
+.back-button-container {
+  position: fixed;
+  bottom: 20px;
+  left: -10px;
+  z-index: 100;
+}
+
+.back-button {
+  width: 130px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.back-button:hover {
+  transform: scale(1.1);
+}
+
+
+/* Next button - SMALLER */
+.next-button-container {
+  position: fixed;
+  bottom: 25px;
+  right: -10px;
+}
+
+.next-button {
+  width: 130px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.next-button:hover {
+  transform: scale(1.1);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .learning-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .color-side, .fruit-grid {
+    max-width: 100%;
+  }
+
+  .fruit-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

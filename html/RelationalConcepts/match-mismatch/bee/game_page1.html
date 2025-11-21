@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Padan vs Ketidakpadanan - Idzmir Kids Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../css/RelationalConcepts/match-mismatch/bee/game_page1.css">
+  <link rel="stylesheet" href="../../../css/homepage/header.css">
+
+</head>
+<body>
+
+<!-- Header Placeholder - will be loaded dynamically -->
+<div id="header-placeholder"></div>
+
+  <!-- =============================
+       SKOR PAPARAN
+  ============================= -->
+  <div class="score-display">
+    Skor: <span id="scoreText">0</span>
+  </div>
+
+<!-- =============================
+     BANNER
+============================= -->
+<div class="banner-container">
+  <div class="banner-yellow">
+    <span class="banner-text">Padan vs Ketidakpadanan</span>
+  </div>
+  <div class="banner-blue">yang mana lebah?</div>
+</div>
+  <!-- =============================
+       LAYOUT GAMBAR
+  ============================= -->
+  <div class="image-layout">
+    <div class="left-image">
+      <img src="../../../../assets/images/bee.png" alt="Bee" data-answer="correct">
+      <div class="answer-btn-container">
+        <div class="answer-design">
+          <span class="answer-text">Lebah</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-images">
+      <img src="../../../../assets/images/cow.png" alt="Lembu" data-answer="wrong">
+      <img src="../../../../assets/images/cat1.png" alt="Kucing belang" data-answer="correct">
+      <img src="../../../../assets/images/cat2.png" alt="Kucing oren" data-answer="correct">
+      <img src="../../../../assets/images/dog.png" alt="Anjing" data-answer="wrong">
+
+    </div>
+  </div>
+
+    <!-- Load initHeader.js FIRST -->
+<script src="../../../../js/homepage/initHeader.js"></script>
+
+<!-- THEN call initializeHeader with correct path -->
+<script>
+  initializeHeader('../../homepage/header.html');
+</script>
+
+</body>
+</html>

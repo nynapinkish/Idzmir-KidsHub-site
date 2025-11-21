@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rutin Harian - Idzmir Kids Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../css/homepage/TherapyCard/ADL/step7.1.css">
+  <link rel="stylesheet" href="../../../../css/homepage/header.css">
+</head>
+<body>
+
+<!-- Header -->
+<div id="header-placeholder"></div>
+
+  <!-- Score Display -->
+  <div class="score-display">
+    <span class="score-text">Markah: <span id="scoreDisplay">0</span></span>
+  </div>
+
+  <!-- Main Container -->
+  <div class="container">
+    <div class="title-container">
+      <h1 class="title" id="gameTitle">BEDROOM</h1>
+      <p class="instruction">Can you match each object to the correct shape?</p>
+    </div>
+
+    <div class="game-area">
+      <!-- Letter Display di tengah -->
+      <div class="letter-display">
+        <span class="letter-big" id="letterBig">S</span>
+        <span class="letter-small" id="letterSmall">s</span>
+      </div>
+
+      <!-- Objects scattered around -->
+      <div id="objectsContainer"></div>
+    </div>
+  </div>
+
+  <!-- Message Box -->
+  <div class="message" id="messageBox">
+    <p class="message-text" id="messageText"></p>
+  </div>
+
+  <!-- Next Button -->
+  <div class="next-button-container" id="nextBtnContainer">
+    <a href="step8.html">
+      <img src="../../../../assets/images/next.png" alt="Next Button" class="next-button">
+    </a>
+  </div>
+
+  <!-- Load initHeader.js FIRST -->
+<script src="../../../../js/homepage/initHeader.js"></script>
+
+<script src="../../../../js/homepage/TherapyCard/ADL/step7.1.js"></script>
+
+<!-- Initialize Header - TAMBAH INI! -->
+<script>
+  if (typeof initializeHeader === 'function') {
+    initializeHeader('../../../homepage/header.html');
+  }
+</script>
+
+</body>
+</html>

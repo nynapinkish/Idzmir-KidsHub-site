@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Padan vs Ketidakpadanan - Idzmir Kids Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../css/RelationalConcepts/match-mismatch/cow/game_page1.css">
+  <link rel="stylesheet" href="../../../../css/homepage/header.css">
+</head>
+<body>
+
+<!-- Header Placeholder - will be loaded dynamically -->
+<div id="header-placeholder"></div>
+
+<!-- Score Display - During Game -->
+<div class="score-display" id="scoreDisplay" style="display: none;">
+  <span class="score-label">SKOR</span>
+  <span id="scoreText">0/2</span>
+</div>
+
+<!-- =============================
+     BANNER
+============================= -->
+<div class="banner-section">
+  <div class="banner-yellow">
+    <span class="banner-text">Padan vs Ketidakpadanan</span>
+  </div>
+  <div class="banner-blue">yang mana lembu?</div>
+</div>
+
+<!-- =============================
+     LAYOUT GAMBAR
+============================= -->
+<div class="image-layout">
+  <div class="left-image">
+    <img src="../../../../assets/images/cow.png" alt="Lembu besar" data-answer="reference">
+    <div class="answer-btn-container">
+      <div class="answer-design">
+        <span class="answer-text">lembu</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="right-images">
+    <!-- ✅ ADDED clickable-image class! -->
+    <img src="../../../../assets/images/cow1.png" alt="Lembu1" data-answer="correct" class="clickable-image">
+    <img src="../../../../assets/images/badaksumbu.png" alt="badak sumbu" data-answer="wrong" class="clickable-image">
+    <img src="../../../../assets/images/dog.png" alt="anjing" data-answer="wrong" class="clickable-image">
+    <img src="../../../../assets/images/cow.png" alt="lembu" data-answer="correct" class="clickable-image">
+  </div>
+</div>
+
+<!-- 🎉 SCORE MODAL (Hidden by default) -->
+<div class="score-modal" id="scoreModal" style="display: none;">
+  <div class="score-container">
+    <!-- ⭐ Stars embedded at top of bukit -->
+    <div class="stars-container">
+      <div class="star star-small">
+        <img src="../../../../assets/images/star1.png" class="star-image" alt="Star" />
+      </div>
+      <div class="star star-large">
+        <img src="../../../../assets/images/star2.png" class="star-image" alt="Star" />
+      </div>
+      <div class="star star-small">
+        <img src="../../../../assets/images/star3.png" class="star-image" alt="Star" />
+      </div>
+    </div>
+
+    <!-- 🏷️ Title -->
+    <div class="score-title">Markah anda</div>
+
+    <!-- 📦 Score Box -->
+    <div class="score-box-wrapper">
+      <div class="score-box">
+        <div class="score-value" id="finalScoreDisplay">2/2</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BACK BUTTON -->
+<div class="back-button-container">
+  <a href="../../../../html/RelationalConcepts/match-mismatch/cat/game_page1.html">
+    <img src="../../../../assets/images/back.png" alt="Back Button" class="back-button">
+  </a>
+</div>
+
+<!-- NEXT BUTTON -->
+<div class="next-button-container">
+  <a href="../../../../html/RelationalConcepts/match-mismatch/chicken/game_page1.html">
+    <img src="../../../../assets/images/next.png" alt="Next Button" class="next-button" id="nextButton" style="display: none;">
+  </a>
+</div>
+
+<script src="../../../../js/RelationalConcepts/match-mismatch/cow/game_page1.js"></script>
+
+<!-- Load initHeader.js FIRST -->
+<script src="../../../../js/homepage/initHeader.js"></script>
+
+<!-- THEN call initializeHeader with correct path -->
+<script>
+  initializeHeader('../../../homepage/header.html');
+</script>
+
+</body>
+</html>

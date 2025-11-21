@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Total Score Berbukit Square + Animation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ✨ Fireworks background */
+    .fireworks {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .firework {
+      position: absolute;
+      bottom: 0;
+      width: 5px;
+      height: 5px;
+      background: #fff;
+      border-radius: 50%;
+      animation: shoot 1.5s ease-out infinite;
+    }
+
+    @keyframes shoot {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-800px) scale(0);
+        opacity: 0;
+      }
+    }
+
+    /* 🟦 Score container */
+    .score-container {
+      position: relative;
+      width: 480px;
+      background-color: #ffffff;
+      border-top-left-radius: 200px;
+      border-top-right-radius: 200px;
+      border-bottom-left-radius: 40px;
+      border-bottom-right-radius: 40px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      padding: 50px 40px;
+      text-align: center;
+      height: 300px;
+      overflow: visible;
+      z-index: 10;
+      transform: scale(0);
+      animation: popUp 0.8s ease-out forwards;
+    }
+
+    @keyframes popUp {
+      0% {
+        transform: scale(0);
+        opacity: 0;
+      }
+      60% {
+        transform: scale(1.1);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .stars-container {
+      position: absolute;
+      top: -160px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      z-index: 2;
+    }
+
+    .star {
+      position: relative;
+      filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.4));
+    }
+
+    .star-small {
+      width: 300px;
+      height: 250px;
+      margin-left: -250px;
+      margin-right: -250px;
+      margin-top: 90px;
+    }
+
+    .star-large {
+      width: 560px;
+      height: 280px;
+      margin-top: 0;
+      z-index: 3;
+    }
+
+    .score-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: #003e8d;
+      margin-top: 80px;
+    }
+
+    .score-box-wrapper {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #fdf6ec;
+      border-radius: 12px;
+      width: 400px;
+      height: 150px;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    .score-box {
+      background-color: #fdf6ec;
+      border-radius: 12px;
+      width: 140px;
+      height: 90px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .score-value {
+      font-size: 36px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .star-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* 🌟 Next Button */
+    .next-button-container {
+      position: fixed;
+      bottom: 20px;
+      right: 60px;
+      z-index: 100;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 0.6s ease;
+    }
+
+    .next-button-container.show {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .next-button {
+      width: 170px;
+      height: auto;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .next-button:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🎆 Fireworks -->
+  <div class="fireworks">
+    <div class="firework" style="left:20%; animation-delay:0s;"></div>
+    <div class="firework" style="left:50%; animation-delay:0.3s;"></div>
+    <div class="firework" style="left:80%; animation-delay:0.6s;"></div>
+  </div>
+
+  <!-- 🏆 Score Container -->
+  <div class="score-container">
+    <div class="stars-container">
+      <div class="star star-small">
+        <img src="../../../../assets/images/star1.png" class="star-image" alt="Star" />
+      </div>
+      <div class="star star-large">
+        <img src="../../../../assets/images/star2.png" class="star-image" alt="Star" />
+      </div>
+      <div class="star star-small">
+        <img src="../../../../assets/images/star3.png" class="star-image" alt="Star" />
+      </div>
+    </div>
+
+    <div class="score-title">Total Score</div>
+    <div class="score-box-wrapper">
+      <div class="score-box">
+        <div class="score-value">2 / 2</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEXT BUTTON -->
+  <div class="next-button-container" id="nextBtnContainer">
+    <a href="../../../../html/QuantitativeConcepts/same-different/game_page3.html">
+      <img src="../../../assets/images/next.png" alt="Next Button" class="next-button">
+    </a>
+  </div>
+
+  <script>
+    // 🌠 Show Next Button after 3s
+    setTimeout(() => {
+      document.getElementById('nextBtnContainer').classList.add('show');
+    }, 3000);
+  </script>
+
+</body>
+</html>

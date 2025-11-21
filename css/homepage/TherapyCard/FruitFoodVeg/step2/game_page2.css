@@ -1,0 +1,358 @@
+/* =========================================
+   RESET & BACKGROUND
+========================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background: url('../../../../../assets/images/backgroundSpatial.webp') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  position: relative;
+  padding-top: 0.5px;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../../../../../assets/images/backgroundSpatial.webp') no-repeat center center fixed;
+  background-size: cover;
+  z-index: -1;
+  opacity: 0.8;
+  filter: blur(12px);
+}
+
+/* =========================================
+   HEADER
+========================================= */
+.header {
+  background: rgba(0, 62, 141, 0.95);
+  backdrop-filter: blur(6px);
+  padding: 5px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.logo img {
+  height: 100px;
+  width: auto;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+.nav-item {
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  text-decoration: none;
+  font-size: 17px;
+  padding: 8px 1px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* =========================================
+   SCORE DISPLAY
+========================================= */
+.score-display {
+  position: fixed;
+  top: 130px;
+  right: 40px;
+  background: linear-gradient(135deg, #FDD835 0%, #F9A825 100%);
+  border: 4px solid #1565C0;
+  border-radius: 20px;
+  padding: 10px 25px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #1565C0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 999;
+}
+
+/* =========================================
+   BANNER
+========================================= */
+.banner-section {
+  text-align: center;
+  padding: 12px 20px 25px;
+  margin-top: 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 70px;
+}
+
+.banner-yellow {
+  background: linear-gradient(135deg, #FFD700 0%, #FFB400 100%);
+  padding: 10px 90px;
+  border-radius: 38px;
+  font-size: 30px;
+  font-weight: 800;
+  color: #003E8D;
+  box-shadow: 0 4px 12px rgba(255, 180, 0, 0.3);
+  font-family: 'Poppins', sans-serif;
+}
+
+.banner-blue {
+  background: linear-gradient(135deg, #003E8D 0%, #0052B4 100%);
+  padding: 10px 50px;
+  border-radius: 38px;
+  font-size: 27px;
+  font-weight: 700;
+  color: #FFD700;
+  box-shadow: 0 4px 12px rgba(0, 62, 141, 0.3);
+  font-family: 'Poppins', sans-serif;
+}
+
+/* =========================================
+   GAME AREA - EXTRA BESAR + RAPAT
+========================================= */
+.game-area {
+  max-width: 2000px;  /* LEBIH LEBAR */
+  margin: 40px auto 0;
+  padding: 0 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+  margin-left: -80px;
+  margin-top: -10px;
+}
+
+/* REFERENCE (LEFT SIDE - JAGUNG) - EXTRA BESAR */
+.reference-item {
+  flex-shrink: 0;
+}
+
+.reference-img {
+  width: 550px;  /* EXTRA BESAR! */
+  height: 580px;
+  object-fit: contain;
+  display: block;
+}
+
+/* SILHOUETTES ROW - EXTRA BESAR + OVERLAP */
+.silhouettes-row {
+  display: flex;
+  flex-direction: row;
+  gap: 60px;  /* OVERLAP LEBIH BANYAK */
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  margin-left: -50px;
+}
+
+.silhouette-item {
+  width: 450px;  /* EXTRA BESAR! */
+  height: 450px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+  margin: -20px -90px -20px -60px;  /* EXTRA OVERLAP */
+}
+
+.silhouette-item:hover {
+  transform: scale(1.05);
+}
+
+.silhouette-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: brightness(0);
+}
+
+/* =========================================
+   BACK & NEXT BUTTONS
+========================================= */
+.back-button-container {
+  position: fixed;
+  bottom: 20px;
+  left: -10px;
+  z-index: 100;
+}
+
+.back-button {
+  width: 130px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.back-button:hover {
+  transform: scale(1.1);
+}
+
+.next-button-container {
+  position: fixed;
+  bottom: 25px;
+  right: -10px;
+}
+
+.next-button {
+  width: 130px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.next-button:hover {
+  transform: scale(1.1);
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+@media (max-width: 1800px) {
+  .game-area {
+    gap: 70px;
+  }
+  
+  .silhouettes-row {
+    gap: -90px;
+  }
+  
+  .reference-img {
+    width: 400px;
+    height: 430px;
+  }
+  
+  .silhouette-item {
+    width: 400px;
+    height: 400px;
+  }
+}
+
+@media (max-width: 1600px) {
+  .game-area {
+    gap: 60px;
+  }
+  
+  .silhouettes-row {
+    gap: -80px;
+  }
+  
+  .reference-img {
+    width: 370px;
+    height: 400px;
+  }
+  
+  .silhouette-item {
+    width: 370px;
+    height: 370px;
+  }
+}
+
+@media (max-width: 1400px) {
+  .game-area {
+    gap: 50px;
+  }
+  
+  .silhouettes-row {
+    gap: -70px;
+  }
+  
+  .reference-img {
+    width: 340px;
+    height: 370px;
+  }
+  
+  .silhouette-item {
+    width: 340px;
+    height: 340px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .game-area {
+    gap: 40px;
+  }
+  
+  .silhouettes-row {
+    gap: -60px;
+  }
+  
+  .reference-img {
+    width: 300px;
+    height: 330px;
+  }
+  
+  .silhouette-item {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+@media (max-width: 900px) {
+  .game-area {
+    flex-direction: column;
+    gap: 40px;
+    padding: 0 20px;
+  }
+  
+  .silhouettes-row {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .silhouette-item {
+    margin: 0;
+  }
+  
+  .reference-img {
+    width: 220px;
+    height: 250px;
+  }
+  
+  .silhouette-item {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .banner-yellow {
+    font-size: 24px;
+    padding: 10px 50px;
+  }
+  
+  .banner-blue {
+    font-size: 20px;
+    padding: 10px 40px;
+  }
+}

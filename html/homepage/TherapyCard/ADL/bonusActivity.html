@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jom Pilih! - Idzmir Kids Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../css/homepage/TherapyCard/ADL/bonusActivity.css">
+  <link rel="stylesheet" href="../../../../css/homepage/header.css">
+
+</head>
+<body>
+
+<!-- Header -->
+<div id="header-placeholder"></div>
+
+<!-- Banner Section -->
+<div class="banner-section">
+  <div class="banner-blue">Bonus Activity</div>
+</div>
+
+<!-- Main Layout -->
+<div class="main-layout">
+
+  <!-- Left Section - Question Card -->
+  <div class="left-section">
+    <div class="banner-yellow">Rujukan</div>
+    <div class="question-box" id="questionBox">
+      <!-- Reference image akan di-load dari JS -->
+      <img class="answer-image" id="referenceImage" src="" alt="Reference Image">
+    </div>
+  </div>
+
+  <!-- Right Section - Options -->
+  <div class="right-section-wrapper">
+    <!-- Soalan akan di-update dari JS -->
+    <div class="banner-yellow-right" id="questionTitle">Cari item yang sama dengan yang di dalam kotak</div>
+    <div class="right-section">
+      <div class="options-grid">
+        <!-- Items akan di-generate dari JS -->
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Back Button -->
+<div class="back-button-container">
+  <a href="../../../../html/RelationalConcepts/biggerThan-smallerThan/klcc-tree/klcc-tree.html">
+    <img src="../../../../assets/images/back.png" alt="Back Button" class="back-button">
+  </a>
+</div>
+
+<!-- Next Button -->
+<div class="next-button-container">
+  <a href="../../../../html/RelationalConcepts/biggerThan-smallerThan/elephant-chicken/game_page1.html">
+    <img src="../../../../assets/images/next.png" alt="Next Button" class="next-button">
+  </a>
+</div>
+
+<!-- Load initHeader.js FIRST -->
+<script src="../../../../js/homepage/initHeader.js"></script>
+
+<!-- Load bonusActivity.js (JS dari document anda) -->
+<script src="../../../../js/homepage/TherapyCard/ADL/bonusActivity.js"></script>
+
+<!-- Initialize Header -->
+<script>
+  if (typeof initializeHeader === 'function') {
+    initializeHeader('../../../homepage/header.html');
+  }
+</script>
+
+</body>
+</html>

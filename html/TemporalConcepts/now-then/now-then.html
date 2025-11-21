@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Konsep Masa - Idzmir Kids Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../css/TemporalConcepts/now-then/now-then.css">
+  <link rel="stylesheet" href="../../../css/homepage/header.css">
+
+</head>
+<body>
+
+<!-- Header Placeholder - will be loaded dynamically -->
+<div id="header-placeholder"></div>
+
+  <div class="container">
+    <!-- Banner with the title -->
+    <div class="banner">
+        <h2 class="card-title">Konsep Masa</h2>
+    </div>
+
+    <!-- Cards Container -->
+    <div class="cards-container">
+
+      <!-- Kad 1: Sekarang -->
+      <div class="card sekarang" onclick="document.getElementById('audio-sekarang').play();">
+        <div class="yellow-accent"></div>
+
+        <!-- Speaker Icon -->
+        <img src="../../../assets/images/speaker.png" alt="Play Audio" class="audio-icon" 
+             onclick="event.stopPropagation(); document.getElementById('audio-sekarang').play();">
+
+        <div class="card-header">
+          <h2 class="card-title">Sekarang</h2>
+        </div>
+        <div class="card-body">
+          <img src="../../../assets/images/now.png" alt="sekarang" class="card-image">
+        </div>
+
+        <!-- Hidden Audio -->
+        <audio id="audio-sekarang">
+          <source src="../../../assets/audio/now.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+
+      <!-- Kad 2: Kemudian -->
+      <div class="card kemudian" onclick="document.getElementById('audio-kemudian').play();">
+        <div class="yellow-accent"></div>
+
+        <!-- Speaker Icon -->
+        <img src="../../../assets/images/speaker.png" alt="Play Audio" class="audio-icon" 
+             onclick="event.stopPropagation(); document.getElementById('audio-kemudian').play();">
+
+        <div class="card-header">
+          <h2 class="card-title">Kemudian</h2>
+        </div>
+        <div class="card-body">
+          <img src="../../../assets/images/then.png" alt="kemudian" class="card-image">
+        </div>
+
+        <!-- Hidden Audio -->
+        <audio id="audio-kemudian">
+          <source src="../../../assets/audio/then.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+
+    </div>
+    
+    <!-- BACK BUTTON -->
+   <div class="back-button-container">
+      <a href="../../../../html/TemporalConcepts/before-after/before-after.html">
+  <img src="../../../assets/images/back.png" alt="Back Button" class="back-button">
+</a>
+
+    <!-- NEXT BUTTON -->
+    <div class="next-button-container">
+      <a href="../../../../html/TemporalConcepts/morning-night/morning-night.html">
+        <img src="../../../assets/images/next.png" alt="Next Button" class="next-button">
+      </a>
+    </div>
+  </div>
+
+    <!-- Load initHeader.js FIRST -->
+<script src="../../../../js/homepage/initHeader.js"></script>
+
+<!-- THEN call initializeHeader with correct path -->
+<script>
+  initializeHeader('../../homepage/header.html');
+</script>
+
+</body>
+</html>

@@ -1,0 +1,256 @@
+/* =========================================
+   RESET & BACKGROUND
+========================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background: url('../../../../../assets/images/backgroundSpatial.webp') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  position: relative;
+  padding-top: 0.5px;
+  overflow-y: auto;  /* Allow vertical scrolling */
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../../../../../assets/images/backgroundSpatial.webp') no-repeat center center fixed;
+  background-size: cover;
+  z-index: -1;
+  opacity: 0.8;
+  filter: blur(12px);
+}
+
+/* =========================================
+   HEADER
+========================================= */
+.header {
+  background: rgba(0, 62, 141, 0.95);
+  backdrop-filter: blur(6px);
+  padding: 5px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.logo img {
+  height: 100px;
+  width: auto;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+.nav-item {
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  text-decoration: none;
+  font-size: 17px;
+  padding: 8px 1px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* =========================================
+   SCORE DISPLAY
+========================================= */
+.score-display {
+  position: fixed;
+  top: 130px;
+  right: 40px;
+  background: linear-gradient(135deg, #FDD835 0%, #F9A825 100%);
+  border: 4px solid #1565C0;
+  border-radius: 20px;
+  padding: 10px 25px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #1565C0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 999;
+}
+
+/* =========================================
+   BANNER
+========================================= */
+.banner-section {
+  text-align: center;
+  padding: 12px 20px 15px;
+  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.banner-yellow {
+  background: linear-gradient(135deg, #FFD700 0%, #FFB400 100%);
+  padding: 6px 125px;
+  border-radius: 38px;
+  font-size: 28px;
+  font-weight: 800;
+  color: #003E8D;
+  box-shadow: 0 4px 12px rgba(255, 180, 0, 0.3);
+  font-family: 'Poppins', sans-serif;
+}
+
+.banner-blue {
+  background: linear-gradient(135deg, #23398b 20%, #003E8D 100%);
+  padding: 6px 100px;
+  border-radius: 38px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #FFD700;
+  box-shadow: 0 4px 12px rgba(0, 62, 141, 0.3);
+  font-family: 'Poppins', sans-serif;
+}
+
+/* =========================================
+   GAME AREA - CENTERED LAYOUT WITH JARS
+========================================= */
+.game-area {
+  max-width: 1400px;
+  margin: 20px auto 0;
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+    /* Game Area */
+    .game-container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+    }
+
+    .shapes-row {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    /* Canvas Styling */
+    .shape-canvas {
+      position: relative;
+    }
+
+    .shape-canvas canvas {
+      display: block;
+      background: transparent;
+      cursor: crosshair;
+      width: 95px !important;
+      height: 100px !important;
+    }
+
+    /* =========================================
+   BACK & NEXT BUTTONS
+========================================= */
+.back-button-container {
+  position: fixed;
+  bottom: 20px;
+  left: -10px;
+  z-index: 100;
+}
+
+.back-button {
+  width: 130px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.back-button:hover {
+  transform: scale(1.1);
+}
+
+.next-button-container {
+  position: fixed;
+  bottom: 25px;
+  right: -10px;
+}
+
+.next-button {
+  width: 130px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.next-button:hover {
+  transform: scale(1.1);
+}
+
+    @media (max-width: 768px) {
+      .game-container {
+        padding: 0 20px;
+        gap: 30px;
+      }
+
+      .shapes-row {
+        gap: 15px;
+      }
+
+      .banner-yellow {
+        font-size: 20px;
+        padding: 8px 40px;
+      }
+
+      .banner-blue {
+        font-size: 18px;
+        padding: 8px 40px;
+      }
+
+      .shape-canvas canvas {
+        width: 70px !important;
+        height: 70px !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .shapes-row {
+        gap: 10px;
+      }
+
+      .shape-canvas canvas {
+        width: 60px !important;
+        height: 60px !important;
+      }
+    }

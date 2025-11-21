@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Konsep Ruang - Idzmir Kids Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../css/QualitativeConcepts/hard-soft/hard-soft.css">
+  <link rel="stylesheet" href="../../../css/homepage/header.css">
+
+</head>
+<body>
+
+<!-- Header Placeholder - will be loaded dynamically -->
+<div id="header-placeholder"></div>
+
+  <div class="container">
+    <!-- Banner with the title -->
+    <div class="banner">
+        <h2 class="card-title">Konsep Jumlah & Bilangan</h2>
+    </div>
+
+    <!-- Cards Container -->
+    <div class="cards-container">
+
+      <!-- Kad 1: Keras -->
+      <div class="card keras" onclick="document.getElementById('audio-keras').play();">
+        <div class="yellow-accent"></div>
+
+        <!-- Speaker Icon -->
+        <img src="../../../assets/images/speaker.png" alt="Play Audio" class="audio-icon" onclick="document.getElementById('audio-keras').play();">
+
+        <div class="card-header">
+          <h2 class="card-title">keras</h2>
+        </div>
+        <div class="card-body">
+          <img src="../../../assets/images/hard.png" alt="Keras" class="card-image">
+        </div>
+
+        <!-- Hidden Audio -->
+        <audio id="audio-keras">
+          <source src="../../../assets/audio/hard.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+
+      <!-- Kad 2: Lembut -->
+      <div class="card lembut" onclick="document.getElementById('audio-lembut').play();">
+        <div class="yellow-accent"></div>
+
+        <!-- Speaker Icon -->
+        <img src="../../../assets/images/speaker.png" alt="Play Audio" class="audio-icon" onclick="document.getElementById('audio-lembut').play();">
+
+        <div class="card-header">
+          <h2 class="card-title">lembut</h2>
+        </div>
+        <div class="card-body">
+          <img src="../../../assets/images/soft.png" alt="Lembut" class="card-image">
+        </div>
+
+        <!-- Hidden Audio -->
+        <audio id="audio-lembut">
+          <source src="../../../assets/audio/soft.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+    </div>
+
+        <!-- BACK BUTTON -->
+   <div class="back-button-container">
+      <a href="../../../../html/QualitativeConcepts/wet-dry/wet-dry.html">
+  <img src="../../../assets/images/back.png" alt="Back Button" class="back-button">
+</a>
+
+    <!-- NEXT BUTTON -->
+    <div class="next-button-container">
+      <a href="../../../../html/QualitativeConcepts/rough-smooth/rough-smooth.html">
+        <img src="../../../assets/images/next.png" alt="Next Button" class="next-button">
+      </a>
+    </div>
+  </div>
+
+    <!-- Load initHeader.js FIRST -->
+<script src="../../../../js/homepage/initHeader.js"></script>
+
+<!-- THEN call initializeHeader with correct path -->
+<script>
+  initializeHeader('../../homepage/header.html');
+</script>
+
+</body>
+</html>

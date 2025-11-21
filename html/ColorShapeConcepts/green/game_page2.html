@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jom Pilih! - Idzmir Kids Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../css/ColorShapeConcepts/green/game_page2.css">
+  <link rel="stylesheet" href="../../../css/homepage/header.css">
+
+</head>
+<body>
+
+<!-- Header Placeholder - will be loaded dynamically -->
+<div id="header-placeholder"></div>
+
+<!-- Banner Section -->
+<div class="banner-container">
+  <div class="banner-yellow">
+    Konsep warna dan bentuk
+  </div>
+  <div class="banner-blue">
+    pilih buah yang berwarna hijau
+  </div>
+</div>
+
+<!-- Score Display (masa main game) -->
+<div class="score-display" id="scoreDisplay" style="display: none;">
+  <span class="score-label">SKOR</span>
+  <span id="scoreText">0/2</span>
+</div>
+
+<!-- Fruit Selection Section -->
+<div class="fruit-selection">
+  <img src="../../../assets/images/banana.png" alt="Banana" draggable="true" data-fruit="banana1" data-color="yellow" />
+  <img src="../../../assets/images/mango.png" alt="Mango" draggable="true" data-fruit="mango1" data-color="yellow" />
+  <img src="../../../assets/images/watermelon.png" alt="Watermelon" draggable="true" data-fruit="watermelon1" data-color="green" />
+  <img src="../../../assets/images/tomato.png" alt="Tomato" draggable="true" data-fruit="tomato1" data-color="red" />
+  <img src="../../../assets/images/apple.png" alt="Apple" draggable="true" data-fruit="apple1" data-color="green" />
+  <img src="../../../assets/images/mangosteen.png" alt="Mangosteen" draggable="true" data-fruit="mangosteen1" data-color="purple" />
+</div>
+
+ <!-- Table + Basket background combined -->
+  <div class="background-area" id="backgroundArea"></div>
+
+      <!-- NEXT BUTTON -->
+    <div class="next-button-container">
+      <a href="../../../../html/ColorShapeConcepts/red/game_page3.html">
+        <img src="../../../assets/images/next.png" alt="Next Button" class="next-button">
+      </a>
+    </div>
+
+      <!-- 🎉 SCORE MODAL (Hidden by default) -->
+<div class="score-modal" id="scoreModal" style="display: none;">
+  <div class="score-container">
+    <!-- ⭐ Stars embedded at top of bukit -->
+    <div class="stars-container">
+      <div class="star star-small">
+        <img src="../../../assets/images/star1.png" class="star-image" alt="Star" />
+      </div>
+      <div class="star star-large">
+        <img src="../../../assets/images/star2.png" class="star-image" alt="Star" />
+      </div>
+      <div class="star star-small">
+        <img src="../../../assets/images/star3.png" class="star-image" alt="Star" />
+      </div>
+    </div>
+
+    <!-- 🏷️ Title -->
+    <div class="score-title">Total Score</div>
+
+    <!-- 📦 Score Box -->
+    <div class="score-box-wrapper">
+      <div class="score-box">
+        <div class="score-value" id="finalScoreDisplay">2/2</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <!-- NEXT BUTTON -->
+    <div class="next-button-container">
+      <a href="../../../../html/ColorShapeConcepts/red/game_page3.html">
+        <img src="../../../assets/images/next.png" alt="Next Button" class="next-button">
+      </a>
+    </div>
+
+<script src="../../../js/ColorShapeConcepts/green/game_page2.js"></script>
+
+<!-- Load initHeader.js FIRST -->
+<script src="../../../../js/homepage/initHeader.js"></script>
+
+<!-- THEN call initializeHeader with correct path -->
+<script>
+  initializeHeader('../../homepage/header.html');
+</script>
+
+</body>
+</html>

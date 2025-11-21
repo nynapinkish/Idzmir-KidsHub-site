@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buah, Makanan & Sayur - Idzmir Kids Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../../css/homepage/TherapyCard/FruitFoodVeg/step1/game_page1.css">
+  <link rel="stylesheet" href="../../../../../css/homepage/header.css">
+</head>
+<body>
+
+<!-- Header Placeholder - will be loaded dynamically -->
+<div id="header-placeholder"></div>
+
+<!-- Score Display -->
+<div class="score-display">Skor: 0</div>
+
+<!-- =============================
+     BANNER
+============================= -->
+<div class="banner-section">
+  <div class="banner-yellow">
+    <span class="banner-text">Pencarian Berkembar Tropika</span>
+  </div>
+  <div class="banner-blue">yang mana lobak merah?</div>
+</div>
+
+<!-- =============================
+     LAYOUT GAMBAR
+============================= -->
+<div class="image-layout">
+  <div class="left-image">
+    <img src="../../../../assets/images/carrot5.png" alt="lobak merah" data-answer="correct">
+    <div class="answer-btn-container">
+      <div class="answer-design">
+        <span class="answer-text">lobak merah</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="right-images">
+    <img src="../../../../assets/images/pumpkin1.png" alt="labu" data-answer="wrong" data-index="0">
+    <img src="../../../../assets/images/carrot5.png" alt="lobak merah" data-answer="correct" data-index="1">
+    <img src="../../../../assets/images/cabbage.png" alt="kobis" data-answer="wrong" data-index="2">
+    <img src="../../../../assets/images/eggplant1.png" alt="terung" data-answer="wrong" data-index="3">
+  </div>
+</div>
+
+<!-- BACK BUTTON -->
+<div class="back-button-container">
+  <a href="../../../../../html/RelationalConcepts/match-mismatch/match-mismatch.html">
+    <img src="../../../../../assets/images/back.png" alt="Back Button" class="back-button">
+  </a>
+</div>
+
+<!-- NEXT BUTTON -->
+<div class="next-button-container">
+  <a href="../../../../../html/homepage/TherapyCard/FruitFoodVeg/step1/game_page2.html">
+    <img src="../../../../../assets/images/next.png" alt="Next Button" class="next-button">
+  </a>
+</div>
+
+<!-- Load initHeader.js FIRST -->
+<script src="../../../../../js/homepage/initHeader.js"></script>
+
+<!-- Game Logic -->
+<script src="../../../../../js/homepage/TherapyCard/FruitFoodVeg/step1/game_page1.js"></script>
+
+<!-- Initialize Header -->
+<script>
+  initializeHeader('../../../../homepage/header.html');
+</script>
+
+</body>
+</html>

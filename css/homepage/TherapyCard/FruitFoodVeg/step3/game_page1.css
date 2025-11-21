@@ -1,0 +1,330 @@
+/* =========================================
+   RESET & BACKGROUND
+========================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background: url('../../../../../assets/images/backgroundSpatial.webp') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  position: relative;
+  padding-top: 0.5px;
+  overflow: hidden;
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../../../../../assets/images/backgroundSpatial.webp') no-repeat center center fixed;
+  background-size: cover;
+  z-index: -1;
+  opacity: 0.8;
+  filter: blur(12px);
+}
+
+/* =========================================
+   HEADER
+========================================= */
+.header {
+  background: rgba(0, 62, 141, 0.95);
+  backdrop-filter: blur(6px);
+  padding: 5px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.logo img {
+  height: 100px;
+  width: auto;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+.nav-item {
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  text-decoration: none;
+  font-size: 17px;
+  padding: 8px 1px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* =========================================
+   SCORE DISPLAY
+========================================= */
+.score-display {
+  position: fixed;
+  top: 130px;
+  right: 40px;
+  background: linear-gradient(135deg, #FDD835 0%, #F9A825 100%);
+  border: 4px solid #1565C0;
+  border-radius: 20px;
+  padding: 10px 25px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #1565C0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 999;
+}
+
+/* =========================================
+   BANNER
+========================================= */
+.banner-section {
+  text-align: center;
+  padding: 12px 20px 15px;
+  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.banner-yellow {
+  background: linear-gradient(135deg, #FFD700 0%, #FFB400 100%);
+  padding: 6px 90px;
+  border-radius: 38px;
+  font-size: 30px;
+  font-weight: 800;
+  color: #003E8D;
+  box-shadow: 0 4px 12px rgba(255, 180, 0, 0.3);
+  font-family: 'Poppins', sans-serif;
+}
+
+.banner-blue {
+  background: linear-gradient(135deg, #23398b 20%, #003E8D 100%);
+  padding: 5px 90px;
+  border-radius: 38px;
+  font-size: 27px;
+  font-weight: 700;
+  color: #FFD700;
+  box-shadow: 0 4px 12px rgba(0, 62, 141, 0.3);
+  font-family: 'Poppins', sans-serif;
+}
+
+/* =========================================
+   GAME AREA - MACAM MOCKUP
+========================================= */
+.game-area {
+  max-width: 1400px;
+  margin: 30px auto 0;
+  padding: 0 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  margin-top: 10px;
+  margin-left: -50px;
+}
+
+/* REFERENCE (LEFT SIDE - STALL) - MACAM MOCKUP */
+.reference-item {
+  flex-shrink: 0;
+}
+
+.reference-img {
+  width: 850px;
+  height: 500px;
+  object-fit: contain;
+  display: block;
+}
+
+/* OPTIONS GRID (RIGHT SIDE - 3x3) - MACAM MOCKUP */
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 35px;
+  align-items: center;
+  justify-content: center;
+}
+
+.option-item {
+  width: 130px;
+  height: 130px;
+  background: #dbebf0;
+  border: 2px solid #000000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.option-item:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  border-color: #FFD700;
+}
+
+.option-img {
+  width: 110px;
+  height: 110px;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* =========================================
+   BACK & NEXT BUTTONS
+========================================= */
+.back-button-container {
+  position: fixed;
+  bottom: 20px;
+  left: -10px;
+  z-index: 100;
+}
+
+.back-button {
+  width: 130px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.back-button:hover {
+  transform: scale(1.1);
+}
+
+.next-button-container {
+  position: fixed;
+  bottom: 25px;
+  right: -10px;
+}
+
+.next-button {
+  width: 130px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.next-button:hover {
+  transform: scale(1.1);
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+@media (max-width: 1400px) {
+  .game-area {
+    gap: 15px;
+    padding: 0 30px;
+  }
+  
+  .reference-img {
+    width: 380px;
+    height: 360px;
+  }
+  
+  .option-item {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .option-img {
+    width: 95px;
+    height: 95px;
+  }
+  
+  .options-grid {
+    gap: 25px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .game-area {
+    gap: 12px;
+  }
+  
+  .reference-img {
+    width: 340px;
+    height: 320px;
+  }
+  
+  .option-item {
+    width: 110px;
+    height: 110px;
+  }
+  
+  .option-img {
+    width: 85px;
+    height: 85px;
+  }
+  
+  .options-grid {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 900px) {
+  .game-area {
+    flex-direction: column;
+    gap: 15px;
+    padding: 0 20px;
+    margin-top: 20px;
+  }
+  
+  .reference-img {
+    width: 280px;
+    height: 260px;
+  }
+  
+  .option-item {
+    width: 90px;
+    height: 90px;
+  }
+  
+  .option-img {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .options-grid {
+    gap: 10px;
+  }
+  
+  .banner-yellow {
+    font-size: 24px;
+    padding: 10px 50px;
+  }
+  
+  .banner-blue {
+    font-size: 20px;
+    padding: 10px 40px;
+  }
+}

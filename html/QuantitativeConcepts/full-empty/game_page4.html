@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jom Pilih! - Idzmir Kids Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../css/QuantitativeConcepts/full-empty/game_page4.css">
+  <link rel="stylesheet" href="../../../css/homepage/header.css">
+
+</head>
+<body>
+
+<!-- Header Placeholder - will be loaded dynamically -->
+<div id="header-placeholder"></div>
+
+<!-- Banner Section -->
+<div class="banner-container">
+  <div class="banner-yellow">
+    Konsep Jumlah & Bilangan
+  </div>
+  <div class="banner-blue">
+    Yang manakah penuh?
+  </div>
+</div>
+
+<!-- Score Display -->
+<div class="score-display" id="scoreDisplay" style="display: none;">
+  <span class="score-label">SKOR</span>
+  <span id="scoreText">0/2</span>
+</div>
+
+<div class="image-container">
+  <img src="../../../assets/images/full.png" alt="penuh" class="image-item">
+  <img src="../../../assets/images/empty.png" alt="kosong" class="image-item">
+</div>
+
+ <!-- Table + Basket background combined -->
+  <div class="background-area" id="backgroundArea"></div>
+
+   <!-- Table + Basket background combined -->
+  <div class="background-area" id="backgroundArea"></div>
+
+          <!-- 🎉 SCORE MODAL (Hidden by default) -->
+<div class="score-modal" id="scoreModal" style="display: none;">
+  <div class="score-container">
+    <!-- ⭐ Stars embedded at top of bukit -->
+    <div class="stars-container">
+      <div class="star star-small">
+        <img src="../../../assets/images/star1.png" class="star-image" alt="Star" />
+      </div>
+      <div class="star star-large">
+        <img src="../../../assets/images/star2.png" class="star-image" alt="Star" />
+      </div>
+      <div class="star star-small">
+        <img src="../../../assets/images/star3.png" class="star-image" alt="Star" />
+      </div>
+    </div>
+
+    <!-- 🏷️ Title -->
+    <div class="score-title">Markah anda</div>
+
+    <!-- 📦 Score Box -->
+    <div class="score-box-wrapper">
+      <div class="score-box">
+        <div class="score-value" id="finalScoreDisplay">2/2</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <!-- NEXT BUTTON -->
+    <div class="next-button-container">
+      <a href="../../../../html/QuantitativeConcepts/heavy-light/game_page5.html">
+        <img src="../../../assets/images/next.png" alt="Next Button" class="next-button">
+      </a>
+    </div>
+
+<script src="../../../js/QuantitativeConcepts/full-empty/game_page4.js"></script>
+
+  <!-- Load initHeader.js FIRST -->
+<script src="../../../../js/homepage/initHeader.js"></script>
+
+<!-- THEN call initializeHeader with correct path -->
+<script>
+  initializeHeader('../../homepage/header.html');
+</script>
+
+</body>
+</html>

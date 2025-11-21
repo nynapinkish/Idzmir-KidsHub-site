@@ -1,0 +1,373 @@
+/* Reset and basic styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: url('../../assets/images/backgroundSpatial.webp') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Background blur overlay */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../../assets/images/backgroundSpatial.webp') no-repeat center center fixed;
+    background-size: cover;
+    filter: blur(8px);
+    z-index: -1;
+    opacity: 0.7;
+}
+
+/* Header */
+.header {
+    background: #003e8d;
+    backdrop-filter: blur(6px);
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.logo img {
+    height: 90px;
+    width: auto;
+}
+
+/* Navigation */
+.nav-menu {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.nav-item {
+    font-family: 'Poppins', sans-serif;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 17px;
+    padding: 8px 1px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.nav-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Page Content */
+.container {
+    max-width: 1200px;
+    margin: 120px auto 0;
+    padding: 40px 20px;
+}
+
+.quantitative-concepts {
+  margin-top: 60px; /* naikkan lagi dari 80px */
+  padding-top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.quantitative-concepts h2 {
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 60px;
+    font-weight: 800;
+    color: #FFD700;
+    text-shadow: 3px 3px 0 #1e4d7b;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+/* --- GRID CARD LAYOUT - 3 ATAS, 2 BAWAH --- */
+.quantitative-concepts-container {
+    display: grid;
+    grid-template-columns: repeat(3, 300px); /* 3 kad atas - lebarkan sikit */
+    gap: 25px; /* tambah jarak antara kad */
+    justify-content: center;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+/* Tolak dua kad terakhir (bawah) ke kanan sikit */
+.quantitative-concepts-container .concept-item:nth-last-child(-n+2) {
+    margin-left: 160px; /* boleh ubah nilai ni — 100–200px ikut selera */
+}
+
+/* Concept item (card) */
+.concept-item {
+    position: relative;
+    background: #fff;
+    border: 5px solid #1e4d7b;
+    border-radius: 27px;
+    width: 300px;
+    height: 260px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 15px 37px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+}
+
+.concept-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.25);
+}
+
+/* Label */
+.concept-item p {
+    background-color: #1e4d7b;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 18px; /* kurangkan sikit dari 20px */
+    text-align: center;
+    width: 100%;
+    padding: 12px 8px; /* tambah padding atas bawah */
+    border-radius: 0 0 18px 18px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    line-height: 1.2; /* kurangkan line height untuk text compact */
+    min-height: 50px; /* pastikan semua label sama tinggi */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;   /* naik ke atas */
+    justify-content: center;
+    position: relative;
+    padding: 0;                /* buang padding bawah */
+    margin-top: -5px;         /* naikkan keseluruhan image container */
+}
+
+.image-container img {
+    width: 100%;
+    max-width: 220px;
+    height: auto;
+    object-fit: contain;
+    transform: translateY(-30px);  /* naikkan imej lagi */
+}
+
+/* Layout 1:1 (atas-bawah) untuk More/Less */
+.concept-item.vertical-layout .image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.concept-item.vertical-layout .image-container img {
+    max-width: 200px;
+}
+
+/* Layout grid untuk All/None/Some */
+.concept-item.grid-layout .image-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: -200px;
+}
+
+.concept-item.grid-layout .image-container img {
+    max-width: 200px;
+}
+
+/* Multiple Images untuk Heavy/Light */
+.concept-item.multiple-images .image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.concept-item.multiple-images .image-container img {
+    max-width: 200px;
+}
+
+/* Responsive */
+@media (max-width: 1400px) {
+    .quantitative-concepts-container {
+        grid-template-columns: repeat(auto-fit, 270px);
+        column-gap: 20px;
+        row-gap: 20px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .quantitative-concepts-container {
+        grid-template-columns: repeat(auto-fit, 250px);
+        column-gap: 15px;
+        row-gap: 15px;
+    }
+
+    .concept-item {
+        width: 250px;
+        height: 250px;
+    }
+
+    .concept-item p {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .quantitative-concepts-container {
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 15px;
+        row-gap: 15px;
+        width: 95vw;
+    }
+
+    .concept-item {
+        width: 100%;
+        height: 250px;
+    }
+
+    .concept-item p {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 600px) {
+    .quantitative-concepts-container {
+        grid-template-columns: 1fr;
+        width: 95vw;
+    }
+
+    .concept-item {
+        width: 100%;
+        height: 240px;
+    }
+
+    .quantitative-concepts h2 {
+        font-size: 36px;
+    }
+
+    .concept-item p {
+        font-size: 15px;
+    }
+}
+
+/* Card 1 – More / Less */
+.concept-item:nth-child(1) .image-container img {
+  max-width: 230px;
+  transform: translateY(-10px);
+}
+
+/* Card 2 – All / None / Some */
+.concept-item:nth-child(2) .image-container img {
+  max-width: 200px;
+  transform: translateY(-35px);
+}
+
+/* Card 3 – Same / Different */
+.concept-item:nth-child(3) .image-container img {
+  max-width: 550px;
+  transform: translateY(-20px);
+  margin-right: -20px;
+}
+
+/* Card 4 – Full / Empty */
+.concept-item:nth-child(4) .image-container img {
+  max-width: 300px;
+  transform: translateY(-10px);
+}
+
+/* Card 5 – Heavy / Light */
+.concept-item:nth-child(5) .image-container img {
+  max-width: 500px;
+  transform: translateY(-10px);
+  margin-right: -30px;
+}
+
+/* Next Game Button Container */
+.next-game-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    position: relative;
+    z-index: 10;
+    margin-top: 50px; /* Adds some spacing to avoid clipping */
+}
+
+/* BACK BUTTON */
+.back-button-container {
+  position: fixed;
+  bottom: 20px;
+  left: -10px; /* mirror dari right:-10px */
+  z-index: 100;
+}
+
+.back-button {
+  width: 130px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.back-button:hover {
+  transform: scale(1.1);
+}
+
+/* NEXT BUTTON */
+.next-button-container {
+  position: fixed;
+  bottom: 20px;
+  right: -10px;
+  z-index: 100;
+}
+
+.next-button {
+  width: 130px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.next-button:hover {
+  transform: scale(1.1);
+}

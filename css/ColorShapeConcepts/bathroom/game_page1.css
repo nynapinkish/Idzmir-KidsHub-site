@@ -1,0 +1,369 @@
+/* Reset and basic styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Background adjustments */
+body {
+    font-family: 'Arial', sans-serif;
+    background: url('../../../assets/images/backgroundBathroom.webp') no-repeat center top fixed;
+    background-size: cover;
+    background-position: center -50px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Ensure all content appears above backgrounds */
+.header,
+.banner,
+.fruit-selection,
+.basket,
+* {
+    position: relative;
+    z-index: 1;
+}
+
+/* Header - FIXED SIZE */
+.header {
+    background: rgba(0, 62, 141, 0.95);
+    backdrop-filter: blur(6px);
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    z-index: 1000;
+}
+
+/* Logo - FIXED SIZE */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.logo img {
+    height: 60px;
+    width: auto;
+}
+
+/* Navigation */
+.nav-menu {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.nav-item {
+    font-family: 'Poppins', sans-serif;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.nav-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Banner Section */
+.banner-container {
+    margin-top: 120px;
+    text-align: center;
+}
+
+/* Adjusted Yellow Banner */
+.banner-yellow {
+    background: linear-gradient(135deg, #FFD700 0%, #FFB400 100%);
+    padding: 10px 25px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    color: #003E8D;
+    font-size: 40px;
+    font-weight: 800;
+    border-radius: 40px;
+    margin: 0 auto 10px;
+    max-width: 800px;
+    box-shadow: 0 6px 20px rgba(255, 180, 0, 0.4);
+    text-transform: capitalize;
+}
+
+/* Adjusted Blue Banner */
+.banner-blue {
+    background: linear-gradient(135deg, #003E8D 0%, #0052B4 100%);
+    padding: 10px 30px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    color: #FFD700;
+    font-size: 35px;
+    font-weight: 700;
+    border-radius: 50px;
+    margin: 0 auto;
+    max-width: 900px;
+    box-shadow: 0 6px 20px rgba(0, 62, 141, 0.4);
+    margin-top: 20px;
+}
+
+/* Score Display - GAME STYLE with DECORATIONS */
+.score-display {
+    position: fixed;
+    top: 120px;
+    right: 40px;
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    padding: 25px 35px;
+    border-radius: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    z-index: 500;
+    min-width: 180px;
+    text-align: center;
+    transform: rotate(-2deg);
+    animation: scoreFloat 3s ease-in-out infinite;
+}
+
+.score-display::before {
+    content: '⭐';
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    font-size: 35px;
+    animation: starSpin 2s linear infinite;
+}
+
+.score-display::after {
+    content: '⭐';
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    font-size: 35px;
+    animation: starSpin 2s linear infinite reverse;
+}
+
+.score-display #scoreText {
+    display: block;
+    font-size: 42px;
+    margin-top: 8px;
+    color: #003E8D;
+    font-weight: 900;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    animation: scoreGlow 1.5s ease-in-out infinite;
+}
+
+@keyframes scoreFloat {
+    0%, 100% {
+        transform: rotate(-2deg) translateY(0px);
+    }
+    50% {
+        transform: rotate(-2deg) translateY(-10px);
+    }
+}
+
+@keyframes starSpin {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    50% {
+        transform: rotate(180deg) scale(1.2);
+    }
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+@keyframes scoreGlow {
+    0%, 100% {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    50% {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2), 0 0 20px rgba(255, 180, 0, 0.8);
+    }
+}
+
+/* Main Game Container */
+.game-container {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 280px);
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 40px;
+}
+
+/* ============================
+   ITEMS CONTAINER
+   ============================ */
+.items-container {
+    position: fixed;
+    right: 60px;
+    top: 62%; /* sedikit lebih bawah dari tengah */
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 30px;
+    padding: 20px 18px;
+    box-shadow: 0 10px 40px rgba(0, 62, 141, 0.3);
+    backdrop-filter: blur(10px);
+    border: 4px solid rgba(0, 62, 141, 0.25);
+    z-index: 100;
+    width: 600px; /* ⬅️ kecilkan dari 700px */
+    height: 520px; /* ⬅️ kecilkan dari 650px */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ============================
+   WRAPPER GRID
+   ============================ */
+.items-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 1fr;
+    gap: 10px; /* kurangkan jarak antara item */
+    align-items: center;
+    justify-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* ============================
+   ITEM CARD
+   ============================ */
+.item-card {
+    background: transparent;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+    transition: all 0.25s ease;
+    box-shadow: none;
+    border: none;
+    position: relative;
+    overflow: visible;
+}
+
+/* Semua item lebih besar tapi masih muat dalam grid */
+.item-card:nth-child(1),
+.item-card:nth-child(2),
+.item-card:nth-child(3),
+.item-card:nth-child(4) {
+    width: 95%;
+    height: 95%;
+}
+
+/* Item terakhir (meja / karpet) besar dan tengah bawah */
+.item-card:nth-child(5) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    align-self: end; /* turunkan kedudukan asas */
+    width: 80%;
+    height: 80%;
+    transform: translateY(-80px); /* ⬆️ naikkan sikit ke atas */
+}
+
+.item-card:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+.item-card:active {
+    cursor: grabbing;
+    transform: scale(0.97);
+}
+
+/* ============================
+   IMAGES
+   ============================ */
+.item-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
+    pointer-events: none;
+    filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.2));
+    transition: transform 0.3s ease;
+}
+
+/* Dragging State */
+.item-card.dragging {
+    opacity: 0.6;
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Scrollbar Hidden */
+.items-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* Responsive adjustments - MAINTAIN MIXED SIZES */
+@media (max-height: 900px) {
+    .items-container {
+        height: 650px;
+        width: 500px;
+    }
+    
+    /* Scale down proportionally but keep size differences */
+    .item-card:nth-child(1),
+    .item-card:nth-child(5) {
+        width: 210px;
+        height: 210px;
+    }
+    
+    .item-card:nth-child(2),
+    .item-card:nth-child(4) {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .item-card:nth-child(3) {
+        width: 160px;
+        height: 160px;
+    }
+}
+
+@media (max-width: 1600px) {
+    .items-container {
+        width: 500px;
+    }
+    
+    /* Scale down proportionally but keep size differences */
+    .item-card:nth-child(1),
+    .item-card:nth-child(5) {
+        width: 210px;
+        height: 210px;
+    }
+    
+    .item-card:nth-child(2),
+    .item-card:nth-child(4) {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .item-card:nth-child(3) {
+        width: 160px;
+        height: 160px;
+    }
+}

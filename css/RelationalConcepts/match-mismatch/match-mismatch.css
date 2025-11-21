@@ -1,0 +1,391 @@
+/* =========================================
+   RESET & BACKGROUND
+========================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background: url('../../../../assets/images/backgroundSpatial.webp') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  height: auto;
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../../../../assets/images/backgroundSpatial.webp') no-repeat center center fixed;
+  background-size: cover;
+  z-index: -1;
+  opacity: 0.7;
+  filter: blur(3px);
+}
+
+/* =========================================
+   HEADER
+========================================= */
+.header {
+  background: rgba(0, 62, 141, 0.95);
+  backdrop-filter: blur(6px);
+  padding: 3px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  height: 70px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.logo img {
+  height: 50px;
+  width: auto;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.nav-item {
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  text-decoration: none;
+  font-size: 12px;
+  padding: 5px 8px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Page Content */
+.container {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Title */
+.title {
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: #FFD700;
+    text-shadow: 1px 1px 0 #1e4d7b;
+    margin: 8px 0;
+    letter-spacing: 0.5px;
+}
+
+/* Relational Concepts Section */
+.match-mismatch {
+    margin-top: 70px;
+    padding: 15px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: calc(100vh - 90px);
+}
+
+.match-mismatch h2 {
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 64px;
+    font-weight: 800;
+    color: #FFD700;
+    text-shadow: 2px 2px 0 #1e4d7b;
+    letter-spacing: 0.5px;
+    margin-bottom: 38px;
+    width: 100%;
+}
+
+/* --- FLEX LAYOUT - STAGGERED FIXED --- */
+.match-mismatch-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    row-gap: 20px;
+    column-gap: 10px;
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    margin-top: -10px;
+}
+
+/* Concept item (card) - SMALLER SIZE */
+.concept-item {
+    position: relative;
+    background: #fff;
+    border: 5px solid #1e4d7b;
+    border-radius: 32px;
+    width: 260px !important;
+    min-width: 260px !important;
+    height: 240px !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: visible;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    padding: 20px 10px 0 10px;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+.concept-item:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Row structure - STAGGERED LAYOUT */
+/* Row 1: Cat, Cow, Chicken */
+.concept-item:nth-child(1),
+.concept-item:nth-child(2),
+.concept-item:nth-child(3) {
+    width: 240px !important;
+    flex-basis: 240px !important;
+    min-width: 240px !important;
+}
+
+/* Row 2: Snake, Dog, Spider - OFFSET TO RIGHT */
+.concept-item:nth-child(4),
+.concept-item:nth-child(5),
+.concept-item:nth-child(6) {
+    width: 240px !important;
+    flex-basis: 240px !important;
+    min-width: 240px !important;
+}
+
+/* Offset row 2 to the right - stagger layout */
+.concept-item:nth-child(4) {
+    margin-left: calc(50% - 180px);
+}
+
+/* Single image */
+.concept-item > img {
+  width: 100%;
+  height: auto;
+  max-height: 155px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Label */
+.concept-item p {
+    background-color: #1e4d7b;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    text-align: center;
+    width: 100%;
+    padding: 10px 0;
+    border-radius: 0 0 27px 27px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+}
+
+.concept-item.multiple-images {
+    padding: 20px 10px 0 10px;
+}
+
+.concept-item.multiple-images > img {
+    display: none;
+}
+
+.concept-item.multiple-images .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100%;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 50px;
+}
+
+.concept-item.multiple-images .image-container img {
+    width: 100%;
+    max-height: 140px;
+    object-fit: contain;
+}
+
+/* BACK BUTTON */
+.back-button-container {
+  position: fixed;
+  bottom: 20px;
+  left: -10px;
+  z-index: 100;
+}
+
+.back-button {
+  width: 130px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.back-button:hover {
+  transform: scale(1.1);
+}
+
+/* Next button - SMALLER */
+.next-button-container {
+  position: fixed;
+  bottom: 25px;
+  right: -10px;
+}
+
+.next-button {
+  width: 130px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.next-button:hover {
+  transform: scale(1.1);
+}
+
+/* =========================================
+   RESPONSIVE - Only for truly small screens
+========================================= */
+
+/* Only tablets below 900px */
+@media (max-width: 900px) {
+    .match-mismatch-container {
+        gap: 35px;
+        padding: 0 30px;
+    }
+    
+    .concept-item {
+        width: 380px !important;
+        min-width: 380px !important;
+        height: 380px !important;
+    }
+    
+    .concept-item:nth-child(1),
+    .concept-item:nth-child(2),
+    .concept-item:nth-child(3),
+    .concept-item:nth-child(4),
+    .concept-item:nth-child(5),
+    .concept-item:nth-child(6) {
+        width: 380px !important;
+        flex-basis: 380px !important;
+        min-width: 380px !important;
+    }
+    
+    .match-mismatch h2 {
+        font-size: 42px;
+    }
+    
+    .concept-item p {
+        font-size: 16px;
+    }
+    
+    .concept-item.multiple-images .image-container img {
+        max-height: 260px;
+    }
+}
+
+/* Small tablets */
+@media (max-width: 700px) {
+    .match-mismatch-container {
+        gap: 25px;
+        padding: 0 20px;
+    }
+    
+    .concept-item {
+        width: 320px !important;
+        min-width: 320px !important;
+        height: 320px !important;
+    }
+    
+    .concept-item:nth-child(1),
+    .concept-item:nth-child(2),
+    .concept-item:nth-child(3),
+    .concept-item:nth-child(4),
+    .concept-item:nth-child(5),
+    .concept-item:nth-child(6) {
+        width: 320px !important;
+        flex-basis: 320px !important;
+        min-width: 320px !important;
+    }
+    
+    .match-mismatch h2 {
+        font-size: 36px;
+    }
+    
+    .concept-item .image-container img {
+        max-height: 220px;
+    }
+}
+
+/* Mobile phones only */
+@media (max-width: 500px) {
+    .match-mismatch-container {
+        gap: 20px;
+        padding: 0 15px;
+    }
+    
+    .concept-item {
+        width: 280px !important;
+        min-width: 280px !important;
+        height: 280px !important;
+    }
+    
+    .concept-item:nth-child(1),
+    .concept-item:nth-child(2),
+    .concept-item:nth-child(3),
+    .concept-item:nth-child(4),
+    .concept-item:nth-child(5),
+    .concept-item:nth-child(6) {
+        width: 280px !important;
+        flex-basis: 280px !important;
+        min-width: 280px !important;
+    }
+    
+    .match-mismatch h2 {
+        font-size: 28px;
+        margin-bottom: 25px;
+    }
+    
+    .concept-item p {
+        font-size: 14px;
+        padding: 4px 0;
+    }
+    
+    .concept-item .image-container img {
+        max-height: 180px;
+    }
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spatial Concepts - Idzmir Kids Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../css/SpatialConcepts/top-bottom-middle/top-bottom-middle.css">
+  <link rel="stylesheet" href="../../../css/homepage/header.css">
+
+</head>
+<body>
+
+<!-- Header Placeholder - will be loaded dynamically -->
+<div id="header-placeholder"></div>
+
+<div class="container">
+    <!-- Banner with the title -->
+    <div class="banner">
+        <h2 class="card-title">Konsep Ruang</h2>
+    </div>
+
+   <!-- Cards Container -->
+    <div class="cards-container">
+
+      <!-- Card 1: Atas -->
+      <div class="card atas" onclick="document.getElementById('audio-atas').play();">
+        <div class="yellow-accent"></div>
+
+        <!-- Speaker Icon -->
+        <img src="../../../assets/images/speaker.png" alt="Play Audio" class="audio-icon" onclick="event.stopPropagation(); document.getElementById('audio-atas').play();">
+
+        <div class="card-header">
+          <h2 class="card-title">atas</h2>
+        </div>
+        <div class="card-body">
+          <img src="../../../assets/images/top.png" alt="Atas" class="card-image">
+        </div>
+
+        <!-- Hidden Audio -->
+        <audio id="audio-atas">
+          <source src="../../../assets/audio/top.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+
+      <!-- Card 2: Bawah -->
+      <div class="card bawah" onclick="document.getElementById('audio-bawah').play();">
+        <div class="yellow-accent"></div>
+
+        <!-- Speaker Icon -->
+        <img src="../../../assets/images/speaker.png" alt="Play Audio" class="audio-icon" onclick="event.stopPropagation(); document.getElementById('audio-bawah').play();">
+
+        <div class="card-header">
+          <h2 class="card-title">bawah</h2>
+        </div>
+        <div class="card-body">
+          <img src="../../../assets/images/bottom.png" alt="Bawah" class="card-image">
+        </div>
+
+        <!-- Hidden Audio -->
+        <audio id="audio-bawah">
+          <source src="../../../assets/audio/bottom.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+
+      <!-- Card 3: Tengah -->
+      <div class="card tengah" onclick="document.getElementById('audio-tengah').play();">
+        <div class="yellow-accent"></div>
+
+        <!-- Speaker Icon -->
+        <img src="../../../assets/images/speaker.png" alt="Play Audio" class="audio-icon" onclick="event.stopPropagation(); document.getElementById('audio-tengah').play();">
+
+        <div class="card-header">
+          <h2 class="card-title">tengah</h2>
+        </div>
+        <div class="card-body">
+          <img src="../../../assets/images/middle.png" alt="Tengah" class="card-image">
+        </div>
+
+        <!-- Hidden Audio -->
+        <audio id="audio-tengah">
+          <source src="../../../assets/audio/middle.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BACK BUTTON -->
+   <div class="back-button-container">
+    <a href="../../../../html/SpatialConcepts/near-far/near-far.html">
+  <img src="../../../assets/images/back.png" alt="Back Button" class="back-button">
+</a>
+
+  <!-- NEXT BUTTON -->
+  <div class="next-button-container">
+    <a href="../../../../html/SpatialConcepts/inside-outside/inside-outside.html">
+      <img src="../../../assets/images/next.png" alt="Next Button" class="next-button">
+    </a>
+  </div>
+
+    <!-- Load initHeader.js FIRST -->
+<script src="../../../../js/homepage/initHeader.js"></script>
+
+<!-- THEN call initializeHeader with correct path -->
+<script>
+  initializeHeader('../../homepage/header.html');
+</script>
+
+</body>
+</html>

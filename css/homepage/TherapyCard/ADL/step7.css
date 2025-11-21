@@ -1,0 +1,512 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: url('../../../../assets/images/backgroundSpatial.webp') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../../../../assets/images/backgroundSpatial.webp') no-repeat center center fixed;
+  background-size: cover;
+  filter: blur(8px);
+  z-index: -1;
+  opacity: 0.7;
+}
+
+.header {
+  background: #003e8d;
+  backdrop-filter: blur(6px);
+  padding: 8px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.logo img {
+  height: 60px;
+  width: auto;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.nav-item {
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.container {
+  padding: 60px 30px 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.banner {
+  width: 90%;
+  max-width: 650px;
+  height: 70px;
+  background: linear-gradient(#ffd032, #ffc107);
+  border-radius: 30px;
+  margin: 20px auto 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 5px 18px rgba(0, 61, 130, 0.3);
+}
+
+.banner-title {
+  font-size: 35px;
+  font-weight: 700;
+  color: #003d82;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.instruction-banner {
+  width: 100%;
+  max-width: 650px;
+  background: #003e8d;
+  border-radius: 25px;
+  margin: 0 auto 30px;
+  padding: 15px 15px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  margin-top: -10px;
+}
+
+.instruction-text {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.game-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 120px;
+  margin-top: -15px;
+}
+
+.wheel-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.wheel-container {
+  position: relative;
+  width: 450px;
+  height: 450px;
+  border-radius: 50%;
+  cursor: grab;
+  background: white;
+}
+
+.wheel-container:active {
+  cursor: grabbing;
+}
+
+/* Lapisan bawah: gambar statik yang tak rotate */
+.items-background {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.static-item {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.static-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Position items - setiap slice 60° (6 slices) */
+/* Adjust supaya gambar dalam slice dan tak keluar */
+
+/* Item 1: Bottom slice (0° - 60°) - ball */
+.item-bottom {
+  bottom: 35px;
+  left: 64%;
+  transform: translateX(-50%);
+  width: 210px;
+  height: 170px
+}
+
+/* Item 2: Bottom-left slice (60° - 120°) - key */
+.item-bottom-left {
+  bottom: 45px;
+  left: 65px;
+  width: 200px;
+  height: 170px
+}
+
+/* Item 3: Top-left slice (120° - 180°) - table */
+.item-left {
+  top: 50%;
+  left: -30px;
+  transform: translateY(-50%);
+  width: 210px;
+  height: 170px
+}
+
+/* Item 4: Top slice (180° - 240°) - yoyo */
+.item-top {
+  top: 40px;
+  left: 34%;
+  transform: translateX(-50%);
+  width: 210px;
+  height: 170px
+}
+
+/* Item 5: Top-right slice (240° - 300°) - icecube */
+.item-top-right {
+  top: 35px;
+  right: 70px;
+  width: 180px;
+  height: 170px
+}
+
+/* Item 6: Bottom-right slice (300° - 360°) - newspaper */
+.item-right {
+  top: 50%;
+  right: 25px;
+  transform: translateY(-50%);
+  width: 150px;
+  height: 170px
+}
+
+/* Border biru dengan garisan pembahagi */
+.wheel-border {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  z-index: 2;
+  pointer-events: none;
+
+  /* 6 garisan biru — setiap 60° */
+  background: conic-gradient(
+    from 0deg,
+    #003e8d 0deg 2deg,
+    transparent 2deg 60deg,
+    #003e8d 60deg 62deg,
+    transparent 62deg 120deg,
+    #003e8d 120deg 122deg,
+    transparent 122deg 180deg,
+    #003e8d 180deg 182deg,
+    transparent 182deg 240deg,
+    #003e8d 240deg 242deg,
+    transparent 242deg 300deg,
+    #003e8d 300deg 302deg,
+    transparent 302deg 360deg
+  );
+
+  border: 8px solid #003e8d;
+}
+
+.wheel-border::before,
+.wheel-border::after {
+  content: '';
+  position: absolute;
+  background: #003e8d;
+  width: 2px;
+  height: 100%;
+  top: 0;
+  left: 50%;
+  transform-origin: center;
+}
+
+.wheel-border::before { 
+  transform: translateX(-50%) rotate(60deg); 
+}
+
+.wheel-border::after { 
+  transform: translateX(-50%) rotate(120deg); 
+}
+
+.wheel {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #ffd032;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.1);
+  z-index: 4;
+  touch-action: none;
+  will-change: transform;
+
+  clip-path: polygon(
+    0% 0%, 
+    100% 0%, 
+    100% 100%, 
+    70% 100%,
+    50% 56%,
+    30% 100%,
+    0% 100%
+  );
+}
+
+.wheel-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  background: radial-gradient(circle at 30% 30%, #d9d9d9, #999 70%, #555);
+  border-radius: 50%;
+  border: 2px solid #777;
+  box-shadow:
+    inset 2px 2px 3px rgba(255, 255, 255, 0.7),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.4),
+    0 2px 6px rgba(0, 0, 0, 0.3);
+  z-index: 6;
+  pointer-events: none;
+}
+
+.wheel-center::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  background: radial-gradient(circle at 40% 40%, #333, #111 80%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) rotate(15deg);
+  clip-path: polygon(
+    50% 0%, 65% 20%, 85% 25%, 70% 45%, 78% 70%, 
+    50% 55%, 22% 70%, 30% 45%, 15% 25%, 35% 20%
+  );
+  box-shadow:
+    inset 1px 1px 2px rgba(255,255,255,0.2),
+    inset -2px -2px 3px rgba(0,0,0,0.8);
+}
+
+.letter-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.letter-display {
+  width: 220px;
+  height: 220px;
+  background: white;
+  border: 6px solid #003e8d;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.letter-big {
+  font-size: 130px;
+  font-weight: 800;
+  color: #003e8d;
+  line-height: 1;
+}
+
+.letter-small {
+  font-size: 110px;
+  font-weight: 800;
+  color: #003e8d;
+  line-height: 1;
+  margin-top: 25px;
+}
+
+.score-display {
+  position: fixed;
+  top: 85px;
+  right: 30px;
+  background: white;
+  padding: 12px 25px;
+  border-radius: 35px;
+  border: 3px solid #003e8d;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+}
+
+.score-text {
+  font-size: 18px;
+  font-weight: 700;
+  color: #003e8d;
+}
+
+.next-button-container {
+  position: fixed;
+  bottom: 20px;
+  right: 40px;
+  z-index: 100;
+  display: none;
+}
+
+.next-button {
+  width: 110px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.next-button:hover {
+  transform: scale(1.15);
+}
+
+.message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 30px 45px;
+  border-radius: 25px;
+  border: 5px solid #003e8d;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  display: none;
+  text-align: center;
+}
+
+.message.show {
+  display: block;
+  animation: popIn 0.3s ease;
+}
+
+@keyframes popIn {
+  0% { 
+    transform: translate(-50%, -50%) scale(0.5); 
+    opacity: 0; 
+  }
+  100% { 
+    transform: translate(-50%, -50%) scale(1); 
+    opacity: 1; 
+  }
+}
+
+.message-text {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.message.correct .message-text {
+  color: #4CAF50;
+}
+
+.message.wrong .message-text {
+  color: #f44336;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .game-area {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .wheel-container {
+    width: 280px;
+    height: 280px;
+  }
+
+  .letter-display {
+    width: 180px;
+    height: 180px;
+  }
+
+  .letter-big {
+    font-size: 90px;
+  }
+
+  .letter-small {
+    font-size: 60px;
+  }
+
+  .static-item {
+    width: 65px;
+    height: 65px;
+  }
+
+  .item-bottom {
+    bottom: 50px;
+  }
+
+  .item-top {
+    top: 50px;
+  }
+
+  .item-left {
+    left: 45px;
+  }
+
+  .item-right {
+    right: 45px;
+  }
+
+  .item-bottom-left {
+    bottom: 75px;
+    left: 70px;
+  }
+
+  .item-top-right {
+    top: 75px;
+    right: 70px;
+  }
+}

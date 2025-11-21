@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social / Emotional Concepts - Idzmir Kids Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../css/SocialEmoConcepts/TogetherAlone/togetherAlone.css">
+  <link rel="stylesheet" href="../../../css/homepage/header.css">
+</head>
+<body>
+
+<!-- Header Placeholder - will be loaded dynamically -->
+<div id="header-placeholder"></div>
+
+<div class="container">
+    <!-- Banner with the title -->
+    <div class="banner">
+        <h2 class="card-title">Konsep Sosial dan Emosi</h2>
+    </div>
+
+    <!-- Cards Container -->
+    <div class="cards-container">
+
+        <!-- Card 1: Together -->
+        <div class="card 1" onclick="document.getElementById('audio-together').play();">
+            <div class="yellow-accent"></div>
+
+            <!-- Speaker Icon -->
+            <img src="../../../assets/images/speaker.png" alt="Play Audio" class="audio-icon" onclick="event.stopPropagation(); document.getElementById('audio-together').play();">
+
+            <div class="card-header">
+                <h2 class="card-title">bersama-sama</h2>
+            </div>
+            <div class="card-body">
+                <img src="../../../assets/images/together.png" alt="together" class="card-image">
+            </div>
+
+            <!-- Hidden Audio - ✅ ID DIPERBAIKI -->
+            <audio id="audio-together">
+                <source src="../../../assets/audio/together.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+
+        <!-- Card 2: Alone -->
+        <div class="card 2" onclick="document.getElementById('audio-alone').play();">
+            <div class="yellow-accent"></div>
+
+            <!-- Speaker Icon -->
+            <img src="../../../assets/images/speaker.png" alt="Play Audio" class="audio-icon" onclick="event.stopPropagation(); document.getElementById('audio-alone').play();">
+
+            <div class="card-header">
+                <h2 class="card-title">sendiri</h2>
+            </div>
+            <div class="card-body">
+                <img src="../../../assets/images/alone.png" alt="alone" class="card-image">
+            </div>
+
+            <!-- Hidden Audio - ✅ ID DIPERBAIKI -->
+            <audio id="audio-alone">
+                <source src="../../../assets/audio/alone.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+    </div>
+</div>
+
+<!-- BACK BUTTON -->
+<div class="back-button-container">
+    <a href="../../../../html/SocialEmoConcepts/HappySadAngryScary/HappySadAngryScary.html">
+        <img src="../../../assets/images/back.png" alt="Back Button" class="back-button">
+    </a>
+</div>
+
+<!-- NEXT BUTTON -->
+<div class="next-button-container">
+    <a href="../../../../html/SocialEmoConcepts/FriendlyMean/FriendlyMean.html">
+        <img src="../../../assets/images/next.png" alt="Next Button" class="next-button">
+    </a>
+</div>
+
+<!-- Load initHeader.js FIRST -->
+<script src="../../../../js/homepage/initHeader.js"></script>
+
+<!-- THEN call initializeHeader with correct path -->
+<script>
+  initializeHeader('../../homepage/header.html');
+</script>
+
+</body>
+</html>

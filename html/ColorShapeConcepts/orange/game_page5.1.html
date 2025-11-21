@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konsep Warna dan Bentuk</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/ColorShapeConcepts/orange/game_page5.1.css">
+</head>
+<body>
+<header class="header">
+  <div class="logo">
+    <img src="../../../assets/images/logo1.png" alt="Idzmir Kids Hub Logo" onerror="this.style.display='none'">
+    <img src="../../../assets/images/logo2.png" alt="Idzmir Kids Hub" onerror="this.style.display='none'">
+  </div>
+  <nav class="nav-menu">
+    <a href="#" class="nav-item">Home</a>
+    <a href="#" class="nav-item">Apps</a>
+    <a href="#" class="nav-item">Parents & Teachers</a>
+    <a href="#" class="nav-item">Tutorial</a>
+    <a href="#" id="signupBtn" class="nav-item">Sign Up</a>
+  </nav>
+  <div id="userProfile" class="user-profile" style="display:none;">
+    <img id="profilePic" src="" alt="Profile" class="profile-pic">
+    <span id="profileName" class="profile-name"></span>
+  </div>
+</header>
+
+<!-- Score Display -->
+<div class="score-display">
+  Skor: <span id="scoreText">0</span>
+</div>
+
+<!-- Banner Section -->
+    <div class="banner-section">
+        <div class="banner-yellow">Konsep warna dan bentuk</div>
+        <div class="banner-blue">pilih buah lobak merah</div>
+    </div>
+
+    <!-- Game Container -->
+    <div class="game-container">
+        <!-- LEFT: Example Box -->
+        <div class="example-box">
+            <div class="example-label">
+                <div class="example-label-text">lobak merah</div>
+            </div>
+            <div class="example-image-container">
+                <img src="../../../assets/images/carrot.png" alt="Orange Carrot">
+            </div>
+        </div>
+
+        <!-- CENTER: Drop Zone (Dulang) -->
+        <div class="drop-zone" id="dropZone">
+        <img src="../../../assets/images/tray.png" alt="Tray" class="tray-background">            <div class="drop-placeholder">Seret ke sini</div>
+        </div>
+
+        <!-- RIGHT: Draggable Fruits -->
+        <div class="fruits-grid">
+            <div class="fruit-item" draggable="true" data-fruit="apple" data-color="green">
+                <img src="../../../assets/images/apple.png" alt="Apple">
+            </div>
+            <div class="fruit-item" draggable="true" data-fruit="carrot1" data-color="orange">
+                <img src="../../../assets/images/carrot1.png" alt="Carrot">
+            </div>
+            <div class="fruit-item" draggable="true" data-fruit="tomato" data-color="red">
+                <img src="../../../assets/images/tomato.png" alt="Tomato">
+            </div>
+            <div class="fruit-item" draggable="true" data-fruit="carrot" data-color="orange">
+                <img src="../../../assets/images/carrot2.png" alt="Carrot">
+            </div>
+            <div class="fruit-item" draggable="true" data-fruit="tomato2" data-color="red">
+                <img src="../../../assets/images/tomato2.png" alt="Tomato">
+            </div>
+            <div class="fruit-item" draggable="true" data-fruit="apple2" data-color="red">
+                <img src="../../../assets/images/apple2.png" alt="Apple">
+            </div>
+            <div class="fruit-item" draggable="true" data-fruit="carrot3" data-color="orange">
+                <img src="../../../assets/images/carrot3.png" alt="Carrot">
+            </div>
+            <div class="fruit-item" draggable="true" data-fruit="carrot4" data-color="orange">
+                <img src="../../../assets/images/carrot4.png" alt="Carrot">
+            </div>
+            <div class="fruit-item" draggable="true" data-fruit="apple3" data-color="red">
+                <img src="../../../assets/images/apple3.png" alt="Apple">
+            </div>
+        </div>
+    </div>
+
+    <!-- Completion Modal -->
+<div class="completion-modal" id="completionModal" style="display:none;">
+  <div class="modal-content">
+    <h2>🎉 Tahniah! 🎉</h2>
+    <p>Anda telah berjaya!</p>
+    <p>Skor Akhir: <strong id="finalScore">0</strong></p>
+    <button onclick="restartGame()">Main Lagi</button>
+  </div>
+</div>
+
+    <!-- Feedback Message -->
+    <div class="feedback-message" id="feedbackMessage"></div>
+    <script src="../../../js/ColorShapeConcepts/orange/game_page5.1.js"></script>
+</body>
+</html>

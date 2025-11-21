@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Konsep Warna dan Bentuk - Idzmir Kids Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../../css/homepage/TherapyCard/FruitFoodVeg/step3/game_page2.css">
+  <link rel="stylesheet" href="../../../../../css/homepage/header.css">
+</head>
+<body>
+
+<!-- Header Placeholder - will be loaded dynamically -->
+<div id="header-placeholder"></div>
+
+<!-- Score Display -->
+<div class="score-display">Skor: 0</div>
+
+<!-- Banner -->
+<div class="banner-section">
+  <div class="banner-yellow">
+    <span class="banner-text">Konsep warna dan bentuk</span>
+  </div>
+  <div class="banner-blue">yang mana lobak?</div>
+</div>
+
+<!-- GAME AREA -->
+<div class="game-area">
+  <div class="game-container">
+    
+    <!-- LEFT SIDE ICONS (4 items) -->
+    <div class="left-icons">
+      <div class="icon-item" data-type="fruit" draggable="true">
+        <img src="../../../../../assets/images/watermelon11.png" alt="Watermelon" class="icon-img">
+      </div>
+      <div class="icon-item" data-type="food" draggable="true">
+        <img src="../../../../../assets/images/lolipop.png" alt="Ice Cream" class="icon-img">
+      </div>
+      <div class="icon-item" data-type="food" draggable="true">
+        <img src="../../../../../assets/images/chips.png" alt="Chips" class="icon-img">
+      </div>
+      <div class="icon-item" data-type="fruit" draggable="true">
+        <img src="../../../../../assets/images/banana11.png" alt="Banana" class="icon-img">
+      </div>
+    </div>
+    
+    <!-- CENTER AREA - CARTS WITH DROPZONES -->
+    <div class="carts-area">
+      <div class="carts-container">
+        
+        <!-- FOOD CART -->
+        <div class="cart-item">
+          <div class="cart-wrapper">
+            <img src="../../../../../assets/images/troli.png" alt="Food Cart" class="cart-img">
+            
+            <!-- Dropzone circles for FOOD (3x2 grid = 6 circles) -->
+            <div class="dropzone-container" data-cart-type="food">
+              <div class="dropzone-circle" data-zone-id="food-1"></div>
+              <div class="dropzone-circle" data-zone-id="food-2"></div>
+              <div class="dropzone-circle" data-zone-id="food-3"></div>
+              <div class="dropzone-circle" data-zone-id="food-4"></div>
+            </div>
+          </div>
+          <div class="cart-label">food</div>
+        </div>
+        
+        <!-- FRUIT CART -->
+        <div class="cart-item">
+          <div class="cart-wrapper">
+            <img src="../../../../../assets/images/troli.png" alt="Fruit Cart" class="cart-img">
+            
+            <!-- Dropzone circles for FRUIT (3x2 grid = 6 circles) -->
+            <div class="dropzone-container" data-cart-type="fruit">
+              <div class="dropzone-circle" data-zone-id="fruit-1"></div>
+              <div class="dropzone-circle" data-zone-id="fruit-2"></div>
+              <div class="dropzone-circle" data-zone-id="fruit-3"></div>
+              <div class="dropzone-circle" data-zone-id="fruit-4"></div>
+            </div>
+          </div>
+          <div class="cart-label">fruit</div>
+        </div>
+        
+      </div>
+    </div>
+    
+    <!-- RIGHT SIDE ICONS (4 items) -->
+    <div class="right-icons">
+      <div class="icon-item" data-type="food" draggable="true">
+        <img src="../../../../../assets/images/cookies.png" alt="Cookies" class="icon-img">
+      </div>
+      <div class="icon-item" data-type="fruit" draggable="true">
+        <img src="../../../../../assets/images/nenas11.png" alt="Pineapple" class="icon-img">
+      </div>
+      <div class="icon-item" data-type="fruit" draggable="true">
+        <img src="../../../../../assets/images/manggis11.png" alt="Mangosteen" class="icon-img">
+      </div>
+      <div class="icon-item" data-type="food" draggable="true">
+        <img src="../../../../../assets/images/bread.png" alt="Bread" class="icon-img">
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<!-- BACK BUTTON -->
+<div class="back-button-container">
+  <a href="../../../../../html/RelationalConcepts/match-mismatch/match-mismatch.html">
+    <img src="../../../../../assets/images/back.png" alt="Back Button" class="back-button">
+  </a>
+</div>
+
+<!-- NEXT BUTTON -->
+<div class="next-button-container">
+  <a href="../../../../../html/homepage/TherapyCard/FruitFoodVeg/step1/game_page3.html">
+    <img src="../../../../../assets/images/next.png" alt="Next Button" class="next-button">
+  </a>
+</div>
+
+<!-- Load initHeader.js FIRST -->
+<script src="../../../../../js/homepage/initHeader.js"></script>
+
+<!-- Game Logic -->
+<script src="../../../../../js/homepage/TherapyCard/FruitFoodVeg/step3/game_page1.js"></script>
+
+<!-- Initialize Header -->
+<script>
+  initializeHeader('../../../../homepage/header.html');
+</script>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+const strokeImage = document.getElementById('strokeImage');
+const fruitGrid = document.getElementById('fruitGrid');
+const nextButton = document.querySelector('.next-button');
+
+// Audio function
+function playAudio(color) {
+  const audio = new Audio(`../../../assets/audio/oren.mp3`);
+  audio.play();
+}
+
+// Function untuk tunjuk buah
+function showFruits() {
+  if (!fruitGrid.classList.contains('show')) {
+    fruitGrid.classList.add('show');
+    const fruits = fruitGrid.querySelectorAll('.fruit img');
+    fruits.forEach((img, i) => {
+      setTimeout(() => {
+        img.style.opacity = '1';
+        img.style.transform = 'scale(1)';
+      }, i * 100);
+    });
+  }
+}
+
+// Klik stroke → tunjuk buah
+strokeImage.addEventListener('click', showFruits);
+
+// Klik Next → check dulu buah dah muncul ke belum
+nextButton.addEventListener('click', () => {
+  if (fruitGrid.classList.contains('show')) {
+    // Buah dah muncul → pergi ke red.html
+    window.location.href = '../yellow/game_page1.html';
+  } else {
+    // Buah belum muncul → tunjuk dulu
+    showFruits();
+  }
+});
+
+// Function untuk show finish screen
+function showFinishScreen(correct, total) {
+  const finishModal = document.getElementById('finishModal');
+  const scoreText = document.getElementById('finalScore');
+  
+  scoreText.textContent = `${correct} / ${total}`;
+  finishModal.classList.add('show');
+}

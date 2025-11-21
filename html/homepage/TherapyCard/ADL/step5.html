@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rutin Harian - Idzmir Kids Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../css/homepage/TherapyCard/ADL/step5.css">
+  <link rel="stylesheet" href="../../../../css/homepage/header.css">
+</head>
+<body>
+
+<!-- Header -->
+<div id="header-placeholder"></div>
+
+<div class="container">
+  <!-- Main Banner -->
+  <div class="banner">
+    <h1 class="banner-title">Rutin Harian</h1>
+  </div>
+
+  <!-- ✅ Score Display -->
+  <div class="score-display" id="scoreDisplay" style="display: none;">
+    <span class="score-label">SKOR</span>
+    <span id="scoreText">0/0</span>
+  </div>
+
+  <!-- GAME 1: Clean vs Dirty -->
+  <div class="game-section active" id="game1">
+    <div class="instruction-banner">
+      <h2 class="instruction-title">Cari yang bertentangan (Bersih vs Kotor)</h2>
+    </div>
+
+    <div class="game-container">
+      <div class="section">
+        <img src="../../../../assets/images/cleanRoom.png" alt="Clean Room">          
+        <div class="label clean-label">Bersih</div>
+        <div class="drop-row">
+          <div class="drop-box" data-zone="clean"></div>
+          <div class="drop-box" data-zone="clean"></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <img src="../../../../assets/images/dirtyRoom.png" alt="Dirty Room">          
+        <div class="label dirty-label">Kotor</div>
+        <div class="drop-row">
+          <div class="drop-box" data-zone="dirty"></div>
+          <div class="drop-box" data-zone="dirty"></div>
+        </div>
+      </div>
+
+      <div class="drag-box">
+        <div class="draggable1" draggable="true" data-type="dirty">
+          <img src="../../../../assets/images/dirty1.png" alt="Dirty Shirt">
+        </div>
+        <div class="draggable1" draggable="true" data-type="clean">
+          <img src="../../../../assets/images/clean1.png" alt="Clean Soap">
+        </div>
+        <div class="draggable1" draggable="true" data-type="clean">
+          <img src="../../../../assets/images/clean5.png" alt="Clean Bottle">
+        </div>
+        <div class="draggable1" draggable="true" data-type="dirty">
+          <img src="../../../../assets/images/dirty3.png" alt="Dirty Pants">
+        </div>
+      </div>
+    </div>
+
+    <!-- NEXT BUTTON FOR GAME 1 -->
+    <div class="next-button-container" id="nextBtn1">
+      <img src="../../../../assets/images/next.png" alt="Next Button" class="next-button">
+    </div>
+  </div>
+
+  <!-- GAME 2: Morning vs Night -->
+  <div class="game-section" id="game2">
+    <div class="instruction-banner">
+      <h2 class="instruction-title">Cari yang bertentangan (Pagi vs Malam)</h2>
+    </div>
+
+    <div class="game-container">
+      <div class="section">
+        <img src="../../../../assets/images/morningRoom.png" alt="Morning Room">          
+        <div class="label" style="background: linear-gradient(135deg, #FFD700, #FFA500); color: white;">Pagi</div>
+        <div class="drop-row">
+          <div class="drop-box" data-zone="morning"></div>
+          <div class="drop-box" data-zone="morning"></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <img src="../../../../assets/images/nightRoom.png" alt="Night Room">          
+        <div class="label" style="background: linear-gradient(135deg, #4A148C, #6A1B9A); color: white;">Malam</div>
+        <div class="drop-row">
+          <div class="drop-box" data-zone="night"></div>
+          <div class="drop-box" data-zone="night"></div>
+        </div>
+      </div>
+
+      <div class="drag-box">
+        <div class="draggable2" draggable="true" data-type="morning">
+          <img src="../../../../assets/images/morning5.png" alt="Morning Item 1">
+        </div>
+        <div class="draggable2" draggable="true" data-type="night">
+          <img src="../../../../assets/images/night5.png" alt="Night Item 1">
+        </div>
+        <div class="draggable2" draggable="true" data-type="morning">
+          <img src="../../../../assets/images/morning6.png" alt="Morning Item 2">
+        </div>
+        <div class="draggable2" draggable="true" data-type="night">
+          <img src="../../../../assets/images/night6.png" alt="Night Item 2">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 🎉 BATCH SCORE MODAL (After Game 1) -->
+<div class="score-modal" id="batchScoreModal" style="display: none;">
+  <div class="score-container">
+    <div class="stars-container">
+      <div class="star star-small">
+        <img src="../../../../assets/images/star1.png" class="star-image" alt="Star" />
+      </div>
+      <div class="star star-large">
+        <img src="../../../../assets/images/star2.png" class="star-image" alt="Star" />
+      </div>
+      <div class="star star-small">
+        <img src="../../../../assets/images/star3.png" class="star-image" alt="Star" />
+      </div>
+    </div>
+    
+    <div class="score-title">Markah Anda</div>
+    
+    <div class="score-box-wrapper">
+      <div class="score-box">
+        <div class="score-value" id="batchScoreDisplay">0/0</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 🎉 OVERALL SCORE MODAL (For Batch 3 - Final) -->
+<div class="score-modal" id="scoreModal" style="display: none;">
+  <div class="score-container">
+    <div class="stars-container">
+      <div class="star star-small">
+        <img src="../../../../assets/images/star1.png" class="star-image" alt="Star" />
+      </div>
+      <div class="star star-large">
+        <img src="../../../../assets/images/star2.png" class="star-image" alt="Star" />
+      </div>
+      <div class="star star-small">
+        <img src="../../../../assets/images/star3.png" class="star-image" alt="Star" />
+      </div>
+    </div>
+    
+    <div class="score-title">Keseluruhan Markah</div>
+    <div class="score-subtitle">Rutin Harian</div>
+    
+    <!-- Games Score List -->
+    <div class="games-score-list" id="gamesScoreList">
+      <!-- Populated by JavaScript -->
+    </div>
+    
+    <!-- Total Score Box -->
+    <div class="total-score-box">
+      <div class="label">Peratusan Markah Keseluruhan (%)</div>
+      <div class="percentage" id="totalScorePercentage">0%</div>
+    </div>
+    
+    <!-- Modal Buttons -->
+    <div class="modal-buttons">
+      <button class="modal-button" id="continueBtn">Teruskan</button>
+      <button class="modal-button" id="finishBtn">Selesai</button>
+    </div>
+  </div>
+</div>
+
+<!-- Load initHeader.js FIRST -->
+<script src="../../../../js/homepage/initHeader.js"></script>
+<script src="../../../../js/homepage/TherapyCard/ADL/step5.js"></script>
+
+<!-- Initialize Header -->
+<script>
+  if (typeof initializeHeader === 'function') {
+    initializeHeader('../../../homepage/header.html');
+  }
+</script>
+
+</body>
+</html>

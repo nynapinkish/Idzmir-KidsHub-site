@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social / Emotional Concepts - Idzmir Kids Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../css/SocialEmoConcepts/HappySadAngryScary/HappySadAngryScary.css">
+  <link rel="stylesheet" href="../../../css/homepage/header.css">
+</head>
+<body>
+
+<!-- Header Placeholder - will be loaded dynamically -->
+<div id="header-placeholder"></div>
+
+<div class="container">
+    <!-- Banner with the title -->
+    <div class="banner">
+        <h2 class="card-title">Konsep Sosial dan Emosi</h2>
+    </div>
+
+    <!-- Cards Container -->
+    <div class="cards-container">
+
+        <div class="card 1" onclick="document.getElementById('audio-happy').play();">
+            <div class="yellow-accent"></div>
+            
+            <!-- Speaker Icon -->
+            <img src="../../../assets/images/speaker.png" alt="Play Audio" class="audio-icon" onclick="event.stopPropagation(); document.getElementById('audio-happy').play();">
+            
+            <div class="card-header">
+                <h2 class="card-title">gembira</h2>
+            </div>
+            <div class="card-body">
+                <img src="../../../assets/images/happy.png" alt="happy" class="card-image">
+            </div>
+            
+            <!-- Hidden Audio -->
+            <audio id="audio-happy">
+                <source src="../../../assets/audio/happy.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+
+        <div class="card 2" onclick="document.getElementById('audio-sad').play();">
+            <div class="yellow-accent"></div>
+            
+            <!-- Speaker Icon -->
+            <img src="../../../assets/images/speaker.png" alt="Play Audio" class="audio-icon" onclick="event.stopPropagation(); document.getElementById('audio-sad').play();">
+            
+            <div class="card-header">
+                <h2 class="card-title">sedih</h2>
+            </div>
+            <div class="card-body">
+                <img src="../../../assets/images/sad.png" alt="sad" class="card-image">
+            </div>
+            
+            <!-- Hidden Audio -->
+            <audio id="audio-sad">
+                <source src="../../../assets/audio/sad.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+
+        <div class="card 3" onclick="document.getElementById('audio-angry').play();">
+            <div class="yellow-accent"></div>
+            
+            <!-- Speaker Icon -->
+            <img src="../../../assets/images/speaker.png" alt="Play Audio" class="audio-icon" onclick="event.stopPropagation(); document.getElementById('audio-angry').play();">
+            
+            <div class="card-header">
+                <h2 class="card-title">marah</h2>
+            </div>
+            <div class="card-body">
+                <img src="../../../assets/images/angry.png" alt="angry" class="card-image">
+            </div>
+            
+            <!-- Hidden Audio -->
+            <audio id="audio-angry">
+                <source src="../../../assets/audio/angry.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+
+        <div class="card 4" onclick="document.getElementById('audio-scary').play();">
+            <div class="yellow-accent"></div>
+            
+            <!-- Speaker Icon -->
+            <img src="../../../assets/images/speaker.png" alt="Play Audio" class="audio-icon" onclick="event.stopPropagation(); document.getElementById('audio-scary').play();">
+            
+            <div class="card-header">
+                <h2 class="card-title">takut</h2>
+            </div>
+            <div class="card-body">
+                <img src="../../../assets/images/scary.png" alt="scary" class="card-image">
+            </div>
+            
+            <!-- Hidden Audio -->
+            <audio id="audio-scary">
+                <source src="../../../assets/audio/scary.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+
+        <!-- BACK BUTTON -->
+        <div class="back-button-container">
+        <a href="../../../../html/homepage/socialEmoConcepts.html">
+            <img src="../../../assets/images/back.png" alt="Back Button" class="back-button">
+        </a>
+        </div>
+
+        <!-- NEXT BUTTON -->
+        <div class="next-button-container">
+        <a href="../../../../html/SocialEmoConcepts/TogetherAlone/TogetherAlone.html">
+            <img src="../../../assets/images/next.png" alt="Next Button" class="next-button">
+        </a>
+        </div>
+    </div>
+</div>
+
+<!-- Load initHeader.js FIRST -->
+<script src="../../../../js/homepage/initHeader.js"></script>
+
+<!-- THEN call initializeHeader with correct path -->
+<script>
+  initializeHeader('../../homepage/header.html');
+</script>
+
+</body>
+</html>

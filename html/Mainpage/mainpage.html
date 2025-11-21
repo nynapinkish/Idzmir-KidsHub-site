@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idzmir Kids Hub - Where Young Minds Flourish</title>
+    <link rel="stylesheet" href="../../../../css/Mainpage/mainpage.css">
+  <link rel="stylesheet" href="../../../../css/Mainpage/header.css">
+
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="logo">
+            <div class="logo-icon">
+                <img src="../../assets/images/logo1.png" alt="Idzmir Kids Hub Logo">
+            </div>
+            <span>Idzmir Kids Hub</span>
+        </div>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#edu-website">Learning Platform</a>
+            <a href="#features">Features</a>
+            <a href="#testimonials">Reviews</a>
+            <a href="#contact">Contact</a>
+            <button class="login-btn" onclick="openModal()">Login</button>
+        </div>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+    </nav>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
+    <div class="mobile-nav" id="mobileNav">
+        <a href="#about" onclick="toggleMobileMenu()">About</a>
+        <a href="#edu-website" onclick="toggleMobileMenu()">Learning Platform</a>
+        <a href="#features" onclick="toggleMobileMenu()">Features</a>
+        <a href="#testimonials" onclick="toggleMobileMenu()">Reviews</a>
+        <a href="#contact" onclick="toggleMobileMenu()">Contact</a>
+        <a href="#" onclick="openModal(); toggleMobileMenu();">Login</a>
+    </div>
+
+    <!-- Hero Section with Video Background -->
+    <section class="hero">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="../../assets/video/mainpage1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-badge">🏆 Award-Winning Early Childhood Education</div>
+            <h1 class="hero-title">Where Young Minds Flourish & Dreams Take Flight</h1>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn-primary">Schedule a Visit</a>
+                <a href="#about" class="btn-secondary">Learn More</a>
+            </div>
+        </div>
+        <div class="scroll-hint">
+            <span>DISCOVER MORE</span>
+            <span>↓</span>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="section-header">
+            <h2>About Idzmir Kids Hub</h2>
+            <p>A trusted name in early childhood education, committed to nurturing future leaders</p>
+        </div>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Building Tomorrow's Leaders Today</h3>
+                <p>Idzmir Kids Hub is a leading occupational therapy and early childhood education center located in the vibrant Danga Bay area of Johor Bahru. We specialize in providing comprehensive therapeutic services and educational programs designed to help children develop essential life skills and reach their full potential.</p>
+                <p>Our expert team combines occupational therapy with innovative teaching methodologies, creating a bilingual learning experience that prepares children for success. With our proven therapeutic approach and engaging curriculum, we've helped countless children overcome challenges and build strong foundations for lifelong achievement. Our 4.9/5 rating from 35+ families reflects our commitment to excellence.</p>
+                <div class="about-stats">
+                    <div class="stat-box">
+                        <h4>8+</h4>
+                        <p>Years Excellence</p>
+                    </div>
+                    <div class="stat-box">
+                        <h4>500+</h4>
+                        <p>Happy Students</p>
+                    </div>
+                    <div class="stat-box">
+                        <h4>15+</h4>
+                        <p>Expert Teachers</p>
+                    </div>
+                    <div class="stat-box">
+                        <h4>98%</h4>
+                        <p>Satisfaction Rate</p>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image">
+                <div class="mission-vision">
+                    <h4>🎯 Our Mission</h4>
+                    <p>To provide a safe, nurturing, and stimulating environment where children can develop holistically - intellectually, emotionally, physically, and socially - through innovative bilingual education and character-building programs.</p>
+                </div>
+                <div class="mission-vision">
+                    <h4>👁️ Our Vision</h4>
+                    <p>To be the leading early childhood education center in Malaysia, recognized for excellence in bilingual education, child development, and preparing future-ready global citizens with strong moral values.</p>
+                </div>
+                <div class="mission-vision">
+                    <h4>💎 Our Values</h4>
+                    <p>Excellence, Integrity, Innovation, Compassion, and Respect - guiding principles that shape every interaction and learning experience at Idzmir Kids Hub.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Educational Website Section -->
+    <section class="edu-website" id="edu-website">
+        <div class="section-header">
+            <h2>Interactive Learning Platform</h2>
+            <p>Access our comprehensive online educational tools designed for children's development</p>
+        </div>
+        <div class="edu-content">
+            <div class="edu-features">
+                <div class="edu-feature">
+                    <div class="edu-icon">📋</div>
+                    <div class="edu-text">
+                        <h4>Assessment Tools</h4>
+                        <p>Comprehensive evaluation of spatial concepts, quantitative abilities, temporal understanding, color & shape recognition, and social-emotional development.</p>
+                    </div>
+                </div>
+                <div class="edu-feature">
+                    <div class="edu-icon">🎴</div>
+                    <div class="edu-text">
+                        <h4>Therapy Cards</h4>
+                        <p>Interactive therapeutic activities for sensory processing, gross & fine motor skills, social play, communication, cognitive abilities, and daily living skills.</p>
+                    </div>
+                </div>
+                <div class="edu-feature">
+                    <div class="edu-icon">🏫</div>
+                    <div class="edu-text">
+                        <h4>Seasonal Learning</h4>
+                        <p>Engaging educational content organized by seasons - Winter, Spring, Summer, Autumn - with themed activities and calendar management tools.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="edu-preview">
+                <h3>🌟 Educational Modules</h3>
+                <div class="edu-modules">
+                    <div class="edu-module">
+                        <div class="edu-module-icon">🧮</div>
+                        <h5>Math Concepts</h5>
+                    </div>
+                    <div class="edu-module">
+                        <div class="edu-module-icon">🗣️</div>
+                        <h5>Communication</h5>
+                    </div>
+                    <div class="edu-module">
+                        <div class="edu-module-icon">🎨</div>
+                        <h5>Creative Arts</h5>
+                    </div>
+                    <div class="edu-module">
+                        <div class="edu-module-icon">🧠</div>
+                        <h5>Cognitive Skills</h5>
+                    </div>
+                    <div class="edu-module">
+                        <div class="edu-module-icon">🤸</div>
+                        <h5>Motor Skills</h5>
+                    </div>
+                    <div class="edu-module">
+                        <div class="edu-module-icon">📅</div>
+                        <h5>Daily Routines</h5>
+                    </div>
+                </div>
+                <div class="edu-cta">
+                    <a href="#contact" class="btn-primary">Access Learning Platform</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-header">
+            <h2>Why Choose Idzmir Kids Hub?</h2>
+            <p>Comprehensive programs designed to nurture every aspect of your child's development</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>Creative Learning</h3>
+                <p>Inspiring imagination through art, music, and drama activities that develop fine motor skills and self-expression</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">👨‍🏫</div>
+                <h3>Expert Teachers</h3>
+                <p>Qualified educators passionate about child development with years of experience and continuous professional training</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏡</div>
+                <h3>Safe Environment</h3>
+                <p>Secure, clean, and child-friendly facilities with 24/7 monitoring, safety protocols, and child-proofed spaces</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <h3>Bilingual Program</h3>
+                <p>English and Malay language development from early age for global readiness and cultural appreciation</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🧮</div>
+                <h3>STEM Focus</h3>
+                <p>Building future-ready skills through hands-on science, technology, engineering, and mathematics activities</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💪</div>
+                <h3>Holistic Growth</h3>
+                <p>Physical, emotional, social, and cognitive development programs for well-rounded children</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-header">
+            <h2>What Parents Say</h2>
+            <p>Real experiences from our wonderful community of parents</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="quote-icon">"</div>
+                <p class="testimonial-text">The best decision we made for our daughter! The teachers are incredibly caring and the bilingual program has helped her thrive. She comes home excited to tell us what she learned every day.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">S</div>
+                    <div class="author-info">
+                        <h5>Siti Abdullah</h5>
+                        <p>Parent of 4-year-old</p>
+                    </div>
+                </div>
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+            </div>
+            <div class="testimonial-card">
+                <div class="quote-icon">"</div>
+                <p class="testimonial-text">Outstanding facility and amazing staff! My son's confidence and social skills have improved tremendously. The educational platform they use is innovative and engaging.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">A</div>
+                    <div class="author-info">
+                        <h5>Ahmad Rahman</h5>
+                        <p>Parent of 5-year-old</p>
+                    </div>
+                </div>
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+            </div>
+            <div class="testimonial-card">
+                <div class="quote-icon">"</div>
+                <p class="testimonial-text">We love Idzmir Kids Hub! The curriculum is well-structured, the environment is safe and clean, and our twins are learning so much. The regular updates from teachers are wonderful too.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">L</div>
+                    <div class="author-info">
+                        <h5>Lisa Wong</h5>
+                        <p>Parent of 3-year-old twins</p>
+                    </div>
+                </div>
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="section-header">
+            <h2>Our Facilities & Activities</h2>
+            <p>Take a glimpse into our vibrant learning environment</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                🎨
+                <div class="gallery-overlay">
+                    <h4>Art Studio</h4>
+                </div>
+            </div>
+            <div class="gallery-item">
+                📚
+                <div class="gallery-overlay">
+                    <h4>Reading Corner</h4>
+                </div>
+            </div>
+            <div class="gallery-item">
+                ⚽
+                <div class="gallery-overlay">
+                    <h4>Outdoor Play Area</h4>
+                </div>
+            </div>
+            <div class="gallery-item">
+                🧪
+                <div class="gallery-overlay">
+                    <h4>Science Lab</h4>
+                </div>
+            </div>
+            <div class="gallery-item">
+                🎭
+                <div class="gallery-overlay">
+                    <h4>Performance Stage</h4>
+                </div>
+            </div>
+            <div class="gallery-item">
+                🍽️
+                <div class="gallery-overlay">
+                    <h4>Dining Hall</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="section-header">
+            <h2>Get In Touch</h2>
+            <p>Ready to give your child the best start? Contact us today for a tour!</p>
+        </div>
+        <div class="contact-content">
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-text">
+                        <h4>Location</h4>
+                        <p>G20 Blok 7 Danga Street Walk<br>Danga Way, Danga Bay, 80200<br>Johor Bahru, Johor</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <div class="contact-text">
+                        <h4>Phone</h4>
+                        <p>011-1612 4223</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">✉️</div>
+                    <div class="contact-text">
+                        <h4>Email</h4>
+                        <p>info@idzmirkidshub.com</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">🕒</div>
+                    <div class="contact-text">
+                        <h4>Operating Hours</h4>
+                        <p>Mon - Fri: 9:00 AM - 5:00 PM<br>⭐ Rated 4.9/5 (35 Reviews)</p>
+                    </div>
+                </div>
+            </div>
+
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label>Parent's Name</label>
+                    <input type="text" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" placeholder="+60 12-345 6789" required>
+                </div>
+                <div class="form-group">
+                    <label>Child's Age</label>
+                    <input type="text" placeholder="e.g., 3 years old" required>
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea placeholder="Tell us about your child and any special requirements..." required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Schedule a Visit</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Idzmir Kids Hub</h3>
+                <p>Nurturing excellence in early childhood education since 2016. Where young minds flourish and dreams take flight.</p>
+                <div class="social-links">
+                    <a href="#" class="social-icon">📘</a>
+                    <a href="#" class="social-icon">📷</a>
+                    <a href="#" class="social-icon">🐦</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#about">About Us</a>
+                <a href="#edu-website">Learning Platform</a>
+                <a href="#features">Our Features</a>
+                <a href="#testimonials">Testimonials</a>
+            </div>
+            <div class="footer-section">
+                <h3>Programs</h3>
+                <a href="#">Infant Care</a>
+                <a href="#">Toddler Program</a>
+                <a href="#">Preschool</a>
+                <a href="#">After School Care</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>📍 G20 Blok 7 Danga Street Walk<br>Danga Bay, 80200 Johor Bahru</p>
+                <p>📞 011-1612 4223</p>
+                <p>✉️ info@idzmirkidshub.com</p>
+                <p>⭐ 4.9/5 Rating (35 Reviews)</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Idzmir Kids Hub. All rights reserved. | Nurturing excellence in early childhood education.</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/60111612423" target="_blank" class="whatsapp-float" title="Chat with us on WhatsApp">
+        <img src="../../assets/images/whatsapp.png" alt="WhatsApp">
+    </a>
+
+<!-- Login Modal - Professional Style -->
+<div class="modal" id="loginModal">
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+        
+        <!-- Portal Selection View -->
+        <div class="portal-selection" id="loginOptions">
+            <!-- Logo will show from CSS ::before -->
+            <div class="portal-header">
+                <h2>Sign In</h2>
+                <p>Select your role to continue</p>
+            </div>
+            
+            <div class="portal-buttons">
+                <button class="portal-btn student-btn" onclick="showLoginForm('student')">
+                    🎓 Student Portal
+                </button>
+                <button class="portal-btn staff-btn" onclick="showLoginForm('staff')">
+                    👨‍🏫 Staff Portal
+                </button>
+                <button class="portal-btn admin-btn" onclick="showLoginForm('admin')">
+                    👨‍💼 Admin Portal
+                </button>
+            </div>
+        </div>
+
+        <!-- Login Form View -->
+        <div class="login-form-container" id="loginFormContainer" style="display: none;">
+            <!-- Logo will show from CSS ::before -->
+            <div class="form-header">
+                <h2 id="portalTitle">Sign In</h2>
+                <p id="welcomeMessage">Welcome back!</p>
+            </div>
+            
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="username">User Name <span>*</span></label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        class="form-input"
+                        placeholder="user name" 
+                        required
+                    >
+                </div>
+                
+                <div class="form-group password-group">
+                    <label for="password">Password <span>*</span></label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        class="form-input"
+                        placeholder="password" 
+                        required
+                    >
+                    <button type="button" class="toggle-password" onclick="togglePassword()">
+                        👁️
+                    </button>
+                </div>
+                
+                <div class="forgot-password">
+                    <a href="#forgot">Forget password ?</a>
+                </div>
+                
+                <button type="submit" class="submit-btn">Sign In</button>
+            </form>
+            
+            <button type="button" class="back-btn" onclick="backToPortalSelection()">
+                ← Back to Portal Selection
+            </button>
+        </div>
+    </div>
+</div>
+<!-- Load initHeader.js FIRST -->
+<script src="../../../js/homepage/initHeader.js"></script>
+
+<script src="../../../../js/Mainpage/mainpage.js"></script>
+
+<!-- THEN call initializeHeader with correct path -->
+<script>
+  initializeHeader('header.html');
+</script>
+
+</body>
+</html>

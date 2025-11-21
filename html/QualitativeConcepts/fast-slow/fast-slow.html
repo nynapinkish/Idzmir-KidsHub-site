@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Konsep Ruang - Idzmir Kids Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../css/QualitativeConcepts/fast-slow/fast-slow.css">
+  <link rel="stylesheet" href="../../../css/homepage/header.css">
+
+</head>
+<body>
+
+<!-- Header Placeholder - will be loaded dynamically -->
+<div id="header-placeholder"></div>
+
+  <div class="container">
+    <!-- Banner with the title -->
+    <div class="banner">
+        <h2 class="card-title">Konsep Jumlah & Bilangan</h2>
+    </div>
+
+    <!-- Cards Container -->
+    <div class="cards-container">
+
+      <!-- Kad 1: Laju -->
+      <div class="card laju" onclick="document.getElementById('audio-laju').play();">
+        <div class="yellow-accent"></div>
+
+        <!-- Speaker Icon -->
+        <img src="../../../assets/images/speaker.png" alt="Play Audio" class="audio-icon" onclick="document.getElementById('audio-laju').play();">
+
+        <div class="card-header">
+          <h2 class="card-title">laju</h2>
+        </div>
+        <div class="card-body">
+          <img src="../../../assets/images/fast.png" alt="Laju" class="card-image">
+        </div>
+
+        <!-- Hidden Audio -->
+        <audio id="audio-laju">
+          <source src="../../../assets/audio/fast.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+
+      <!-- Kad 2: Perlahan -->
+      <div class="card perlahan" onclick="document.getElementById('audio-perlahan').play();">
+        <div class="yellow-accent"></div>
+
+        <!-- Speaker Icon -->
+        <img src="../../../assets/images/speaker.png" alt="Play Audio" class="audio-icon" onclick="document.getElementById('audio-perlahan').play();">
+
+        <div class="card-header">
+          <h2 class="card-title">perlahan</h2>
+        </div>
+        <div class="card-body">
+          <img src="../../../assets/images/slow.png" alt="Perlahan" class="card-image">
+        </div>
+
+        <!-- Hidden Audio -->
+        <audio id="audio-perlahan">
+          <source src="../../../assets/audio/slow.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+    </div>
+
+        <!-- BACK BUTTON -->
+   <div class="back-button-container">
+      <a href="../../../../html/QualitativeConcepts/rough-smooth/rough-smooth.html">
+  <img src="../../../assets/images/back.png" alt="Back Button" class="back-button">
+</a>
+
+    <!-- NEXT BUTTON -->
+    <div class="next-button-container">
+      <a href="../../../../html/QualitativeConcepts/clean-dirty/clean-dirty.html">
+        <img src="../../../assets/images/next.png" alt="Next Button" class="next-button">
+      </a>
+    </div>
+  </div>
+
+    <!-- Load initHeader.js FIRST -->
+<script src="../../../../js/homepage/initHeader.js"></script>
+
+<!-- THEN call initializeHeader with correct path -->
+<script>
+  initializeHeader('../../homepage/header.html');
+</script>
+
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Konsep Warna dan Bentuk - Idzmir Kids Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../../css/homepage/TherapyCard/FruitFoodVeg/step3/game_page3.css">
+  <link rel="stylesheet" href="../../../../../css/homepage/header.css">
+</head>
+<body>
+
+<!-- Header Placeholder - will be loaded dynamically -->
+<div id="header-placeholder"></div>
+
+<!-- Score Display -->
+<div class="score-display">Skor: 0</div>
+
+<!-- Banner -->
+<div class="banner-section">
+  <div class="banner-yellow">
+    <span class="banner-text">Konsep warna dan bentuk</span>
+  </div>
+  <div class="banner-blue">yang mana lobak?</div>
+</div>
+
+<!-- GAME AREA -->
+<div class="game-area">
+  <div class="game-container">
+    
+    <!-- LEFT SIDE ICONS (4 items) -->
+    <div class="left-icons">
+      <div class="icon-item" data-type="yellow" draggable="true">
+        <img src="../../../../../assets/images/banana.png" alt="Banana" class="icon-img">
+      </div>
+      <div class="icon-item" data-type="red" draggable="true">
+        <img src="../../../../../assets/images/strawberry.png" alt="Strawberry" class="icon-img">
+      </div>
+      <div class="icon-item" data-type="red" draggable="true">
+        <img src="../../../../../assets/images/chili.png" alt="Chili" class="icon-img">
+      </div>
+      <div class="icon-item" data-type="yellow" draggable="true">
+        <img src="../../../../../assets/images/corn.png" alt="Corn" class="icon-img">
+      </div>
+    </div>
+    
+    <!-- CENTER AREA - JARS WITH DROPZONES -->
+    <div class="jars-area">
+      <div class="jars-container">
+        
+        <!-- RED FRUIT JAR -->
+        <div class="jar-item">
+          <div class="jar-wrapper">
+            <img src="../../../../../assets/images/redJar.png" alt="Red Fruit Jar" class="jar-img">
+            
+            <!-- Dropzone circles for RED FRUIT (4 circles) -->
+            <div class="dropzone-container" data-jar-type="red">
+              <div class="dropzone-circle" data-zone-id="red-1"></div>
+              <div class="dropzone-circle" data-zone-id="red-2"></div>
+              <div class="dropzone-circle" data-zone-id="red-3"></div>
+              <div class="dropzone-circle" data-zone-id="red-4"></div>
+            </div>
+          </div>
+          <div class="jar-label">red fruit</div>
+        </div>
+        
+        <!-- YELLOW FRUIT JAR -->
+        <div class="jar-item">
+          <div class="jar-wrapper">
+            <img src="../../../../../assets/images/yellowJar.png" alt="Yellow Fruit Jar" class="jar-img">
+            
+            <!-- Dropzone circles for YELLOW FRUIT (4 circles) -->
+            <div class="dropzone-container" data-jar-type="yellow">
+              <div class="dropzone-circle" data-zone-id="yellow-1"></div>
+              <div class="dropzone-circle" data-zone-id="yellow-2"></div>
+              <div class="dropzone-circle" data-zone-id="yellow-3"></div>
+              <div class="dropzone-circle" data-zone-id="yellow-4"></div>
+            </div>
+          </div>
+          <div class="jar-label">yellow fruit</div>
+        </div>
+        
+      </div>
+    </div>
+    
+    <!-- RIGHT SIDE ICONS (4 items) -->
+    <div class="right-icons">
+      <div class="icon-item" data-type="red" draggable="true">
+        <img src="../../../../../assets/images/apple.png" alt="Apple" class="icon-img">
+      </div>
+      <div class="icon-item" data-type="yellow" draggable="true">
+        <img src="../../../../../assets/images/banana.png" alt="Banana" class="icon-img">
+      </div>
+      <div class="icon-item" data-type="red" draggable="true">
+        <img src="../../../../../assets/images/tomato.png" alt="Tomato" class="icon-img">
+      </div>
+      <div class="icon-item" data-type="yellow" draggable="true">
+        <img src="../../../../../assets/images/lemon.png" alt="Lemon" class="icon-img">
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<!-- BACK BUTTON -->
+<div class="back-button-container">
+  <a href="../../../../../html/RelationalConcepts/match-mismatch/match-mismatch.html">
+    <img src="../../../../../assets/images/back.png" alt="Back Button" class="back-button">
+  </a>
+</div>
+
+<!-- NEXT BUTTON -->
+<div class="next-button-container">
+  <a href="../../../../../html/homepage/TherapyCard/FruitFoodVeg/step1/game_page3.html">
+    <img src="../../../../../assets/images/next.png" alt="Next Button" class="next-button">
+  </a>
+</div>
+
+<!-- Load initHeader.js FIRST -->
+<script src="../../../../../js/homepage/initHeader.js"></script>
+
+<!-- Game Logic -->
+<script src="../../../../../js/homepage/TherapyCard/FruitFoodVeg/step3/game_page3.js"></script>
+
+<!-- Initialize Header -->
+<script>
+  initializeHeader('../../../../homepage/header.html');
+</script>
+
+</body>
+</html>

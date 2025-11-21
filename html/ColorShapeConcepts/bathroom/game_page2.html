@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konsep Sosial/ Emosi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/SocialEmoConcepts/bathroom/game_page1.css">
+    <link rel="stylesheet" href="../../../css/homepage/header.css">
+
+</head>
+<body>
+
+<!-- Header Placeholder - will be loaded dynamically -->
+<div id="header-placeholder"></div>
+
+<!-- Banners -->
+<div class="banner-container">
+  <div class="banner-yellow">Konsep Sosial / Emosi</div>
+  <div class="banner-blue">letakkan bentuk perabot yang bersesuaian</div>
+</div>
+
+<!-- Score Display -->
+<div class="score-display">
+  Skor: <span id="scoreText">0</span>
+</div>
+
+<!-- Main Game Container -->
+<div class="game-container">
+  <!-- Draggable Items Container (Right Side) -->
+  <div class="items-container">
+    <div class="items-wrapper">
+      <div class="item-card" draggable="true" data-shape="rack">
+        <img src="../../../assets/images/rack.png" alt="Rack" onerror="this.style.background='#000'">
+      </div>
+      <div class="item-card" draggable="true" data-shape="cupboard">
+        <img src="../../../assets/images/cupboard.png" alt="Cupboard" onerror="this.style.background='#000'">
+      </div>
+      <div class="item-card" draggable="true" data-shape="love">
+        <img src="../../../assets/images/love.png" alt="Love" onerror="this.style.background='#000'">
+      </div>
+      <div class="item-card" draggable="true" data-shape="mirror">
+        <img src="../../../assets/images/mirror.png" alt="Mirror" onerror="this.style.background='#000'">
+      </div>
+      <div class="item-card" draggable="true" data-shape="floor">
+        <img src="../../../assets/images/floor.png" alt="Floor" onerror="this.style.background='#000'">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Link JavaScript File -->
+<script src="../../../js/SocialEmoConcepts/bathroom/game_page1.js"></script>
+
+  <!-- Load initHeader.js FIRST -->
+<script src="../../../../js/homepage/initHeader.js"></script>
+
+<!-- THEN call initializeHeader with correct path -->
+<script>
+  initializeHeader('../../homepage/header.html');
+</script>
+
+</body>
+</html>

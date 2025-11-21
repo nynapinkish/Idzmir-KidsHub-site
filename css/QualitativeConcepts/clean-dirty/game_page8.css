@@ -1,0 +1,569 @@
+/* Reset and basic styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Background image - backgroundGrass (on top) */
+body {
+    font-family: 'Arial', sans-serif;
+    min-height: 105vh;
+    position: relative;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Apply the backgroundSpatial image first (di belakang sekali) */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../../../assets/images/backgroundSpatial.webp') no-repeat center center fixed;
+    background-size: cover;
+    z-index: -2; /* Place this behind everything */
+    opacity: 1;
+}
+
+/* Apply the backgroundGrass image on top (di depan) */
+body::after {
+    content: '';
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 130%;
+    background: url('../../../assets/images/backgroundGrass.webp') no-repeat center bottom fixed;
+    background-size: cover;
+    z-index: 1; /* Layer paling depan untuk grass */
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* Ensure all content appears above backgrounds */
+.header,
+.banner,
+.fruit-selection,
+.basket,
+.score-display,
+.banner-container,
+.image-container,
+.next-button-container {
+    position: relative;
+    z-index: 100;
+}
+
+/* Header - FIXED SIZE */
+.header {
+    background: rgba(0, 62, 141, 0.95);
+    backdrop-filter: blur(6px);
+    padding: 8px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    z-index: 1000;
+}
+
+/* Logo - FIXED SIZE */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.logo img {
+    height: 45px;
+    width: auto;
+}
+
+/* Navigation */
+.nav-menu {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.nav-item {
+    font-family: 'Poppins', sans-serif;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.nav-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Banner Section - FIXED SIZE */
+.banner {
+    background-color: #FFB400;
+    padding: 10px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 60px;
+}
+
+/* Score Display - GAME STYLE with DECORATIONS */
+.score-display {
+    position: fixed;
+    top: 90px;
+    right: 30px;
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    color: #003E8D;
+    padding: 18px 25px;
+    border-radius: 15px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    box-shadow: 
+        0 8px 20px rgba(255, 180, 0, 0.5),
+        inset 0 2px 5px rgba(255, 255, 255, 0.5),
+        0 0 0 4px #003E8D,
+        0 0 0 6px #FFD700;
+    z-index: 1000;
+    min-width: 130px;
+    text-align: center;
+    transform: rotate(-2deg);
+    animation: scoreFloat 3s ease-in-out infinite;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.score-display::before {
+    content: '⭐';
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    font-size: 25px;
+    animation: starSpin 2s linear infinite;
+}
+
+.score-display::after {
+    content: '⭐';
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    font-size: 25px;
+    animation: starSpin 2s linear infinite reverse;
+}
+
+.score-display #scoreText {
+    display: block;
+    font-size: 32px;
+    margin-top: 6px;
+    color: #003E8D;
+    font-weight: 900;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    animation: scoreGlow 1.5s ease-in-out infinite;
+}
+
+.score-display .score-label {
+    display: block;
+    font-size: 25px;
+    color: #003E8D;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+@keyframes scoreFloat {
+    0%, 100% {
+        transform: rotate(-2deg) translateY(0px);
+    }
+    50% {
+        transform: rotate(-2deg) translateY(-10px);
+    }
+}
+
+@keyframes starSpin {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    50% {
+        transform: rotate(180deg) scale(1.2);
+    }
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+@keyframes scoreGlow {
+    0%, 100% {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    50% {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2), 0 0 20px rgba(255, 180, 0, 0.8);
+    }
+}
+
+/* Banner Section - FIXED SIZES */
+.banner-container {
+    margin-top: 90px;
+    text-align: center;
+    padding: 15px;
+}
+
+.banner-yellow { 
+    background: linear-gradient(135deg, #FFD700 0%, #FFB400 100%); 
+    padding: 15px 30px; 
+    text-align: center; 
+    font-family: 'Poppins', sans-serif; 
+    color: #003E8D; 
+    font-size: 30px; 
+    font-weight: 800; 
+    border-radius: 35px; 
+    margin: 0 auto 15px; 
+    max-width: 950px; 
+    box-shadow: 0 6px 20px rgba(255, 180, 0, 0.4); 
+    text-transform: capitalize; 
+}
+
+.banner-blue { 
+    background: linear-gradient(135deg, #003E8D 0%, #0052B4 100%); 
+    padding: 8px 2px; 
+    text-align: center; 
+    font-family: 'Poppins', sans-serif; 
+    color: #FFD700; 
+    font-size: 30px; 
+    font-weight: 700; 
+    border-radius: 35px; 
+    margin: 0 auto; 
+    max-width: 550px; 
+    box-shadow: 0 6px 20px rgba(0, 62, 141, 0.4); 
+}
+
+/* Score Modal Background - NEW FROM CSS2 */
+.score-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    animation: fadeIn 0.3s ease;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* Score Container - NEW FROM CSS2 */
+.score-modal .score-container {
+    position: relative;
+    width: 400px;
+    background-color: #ffffff;
+    border-top-left-radius: 120px;
+    border-top-right-radius: 120px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    padding: 40px 30px;
+    height: 320px;
+    overflow: visible;
+    animation: slideUp 0.5s ease;
+    z-index: 2;
+}
+
+.stars-container {
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 2;
+}
+
+.star {
+    position: relative;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4));
+    animation: starBounce 0.8s ease-in-out infinite;
+}
+
+@keyframes starBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.star-small {
+    width: 150px;
+    height: 120px;
+    margin-left: -120px;
+    margin-right: -120px;
+    margin-top: 50px;
+}
+
+.star-large {
+    width: 280px;
+    height: 150px;
+    margin-top: 0;
+    z-index: 3;
+}
+
+.star-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.score-title {
+    font-size: 36px;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    color: #003e8d;
+    margin-top: 45px;
+    text-align: center;
+}
+
+.score-box-wrapper {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fdf6ec;
+    border-radius: 10px;
+    width: 260px;
+    height: 120px;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+}
+
+.score-box {
+    background-color: #fdf6ec;
+    border-radius: 10px;
+    width: 90px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.score-value {
+    font-size: 46px;
+    font-weight: bold;
+    color: #333;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { 
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    to { 
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Image container - POSITIONED ON TABLE */
+.image-container {
+    display: flex;
+    justify-content: center;
+    gap: -10px;
+    align-items: flex-end;
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    z-index: 500;
+}
+
+/* Image yang BESAR */ 
+.image-item.big { 
+    width: 750px;
+    height: 450px;
+    object-fit: contain; 
+    cursor: pointer; 
+    transition: transform 0.3s ease; 
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3)); 
+    margin-left: 200px; 
+}
+
+.image-item.small {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    margin-right: 400px; 
+}
+
+/* Base style for both */
+.image-item {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.image-item:hover {
+    transform: scale(1.15) translateY(-10px);
+}
+
+/* Animation for correct answer - GREEN GLOW */
+.correct-glow {
+    animation: glowGreen 0.8s ease-in-out forwards !important;
+}
+
+/* NEXT BUTTON */
+.next-button-container {
+    position: fixed;
+    bottom: 20px;
+    right: -10px;
+    z-index: 500;
+}
+
+.next-button {
+    width: 130px;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.next-button:hover {
+    transform: scale(1.1);
+}
+
+@keyframes bounceButton {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes glowGreen {
+    0% {
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+        transform: scale(1);
+    }
+    50% {
+        filter: drop-shadow(0 0 40px #00ff00) 
+                drop-shadow(0 0 80px #00ff00) 
+                drop-shadow(0 0 120px #00ff00) 
+                brightness(1.5);
+        transform: scale(1.2);
+    }
+    100% {
+        filter: drop-shadow(0 0 30px #00ff00) 
+                drop-shadow(0 0 60px #00ff00) 
+                brightness(1.4);
+        transform: scale(1.15);
+    }
+}
+
+/* Animation for wrong answer - RED SHAKE */
+.wrong-shake {
+    animation: shakeRed 0.8s ease-in-out forwards !important;
+}
+
+@keyframes shakeRed {
+    0% {
+        transform: translateX(0) rotate(0deg);
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    }
+    10% {
+        transform: translateX(-15px) rotate(-5deg);
+        filter: drop-shadow(0 0 40px #ff0000) 
+                drop-shadow(0 0 80px #ff0000) 
+                brightness(1.4);
+    }
+    20% {
+        transform: translateX(15px) rotate(5deg);
+        filter: drop-shadow(0 0 40px #ff0000) 
+                drop-shadow(0 0 80px #ff0000) 
+                brightness(1.4);
+    }
+    30% {
+        transform: translateX(-15px) rotate(-5deg);
+        filter: drop-shadow(0 0 40px #ff0000) 
+                drop-shadow(0 0 80px #ff0000) 
+                brightness(1.4);
+    }
+    40% {
+        transform: translateX(15px) rotate(5deg);
+        filter: drop-shadow(0 0 40px #ff0000) 
+                drop-shadow(0 0 80px #ff0000) 
+                brightness(1.4);
+    }
+    50% {
+        transform: translateX(-10px) rotate(-3deg);
+        filter: drop-shadow(0 0 40px #ff0000) 
+                drop-shadow(0 0 80px #ff0000) 
+                brightness(1.4);
+    }
+    60% {
+        transform: translateX(10px) rotate(3deg);
+        filter: drop-shadow(0 0 40px #ff0000) 
+                drop-shadow(0 0 80px #ff0000) 
+                brightness(1.4);
+    }
+    70% {
+        transform: translateX(-5px) rotate(-2deg);
+        filter: drop-shadow(0 0 30px #ff0000) 
+                drop-shadow(0 0 60px #ff0000) 
+                brightness(1.3);
+    }
+    80% {
+        transform: translateX(5px) rotate(2deg);
+        filter: drop-shadow(0 0 30px #ff0000) 
+                drop-shadow(0 0 60px #ff0000) 
+                brightness(1.3);
+    }
+    90% {
+        transform: translateX(-3px) rotate(-1deg);
+        filter: drop-shadow(0 0 20px #ff0000) 
+                drop-shadow(0 0 40px #ff0000) 
+                brightness(1.2);
+    }
+    100% {
+        transform: translateX(0) rotate(0deg);
+        filter: drop-shadow(0 0 15px #ff0000) 
+                drop-shadow(0 0 30px #ff0000) 
+                brightness(1.1);
+    }
+}

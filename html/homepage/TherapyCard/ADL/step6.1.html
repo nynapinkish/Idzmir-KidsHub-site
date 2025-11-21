@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Balloon Coloring Game - Idzmir Kids Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../../css/homepage/TherapyCard/ADL/step6.1.css">
+  <link rel="stylesheet" href="../../../../css/homepage/header.css">
+</head>
+<body>
+
+<!-- Header Placeholder -->
+<div id="header-placeholder"></div>
+
+<!-- Main Content -->
+<div class="main-content">
+  
+  <!-- Title Banner -->
+  <div class="title-banner">
+    <div class="title-box">
+      <h1>SPIN & SAY</h1>
+    </div>
+  </div>
+
+  <!-- Instruction Banner -->
+  <div class="instruction-banner">
+    <div class="instruction-box">
+      <p>Click the image to color it! Pop the correct balloon!</p>
+    </div>
+  </div>
+
+  <!-- Game Container -->
+  <div class="game-container">
+    
+    <!-- LEFT - Color Palette -->
+    <div class="color-picker">
+      <h3>Choose Palette</h3>
+      <div class="color-grid" id="colorGrid"></div>
+      <button class="reset-btn" onclick="resetGame()">Reset</button>
+    </div>
+
+    <!-- CENTER - Number Image -->
+    <div class="center-section">
+      <div id="customSvgContainer"></div>
+    </div>
+
+    <!-- RIGHT - Balloon Answers -->
+    <div class="answer-section">
+      <div class="answer-grid" id="answerGrid"></div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Next Button -->
+<div class="next-button">
+  <button class="next-btn" onclick="handleNextLevel()">
+    <span>NEXT</span>
+    <svg class="next-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+    </svg>
+  </button>
+</div>
+
+<!-- Scripts -->
+<script src="../../../../js/homepage/initHeader.js"></script>
+<script src="../../../../js/homepage/TherapyCard/ADL/step6.1.js"></script>
+
+<script>
+  if (typeof initializeHeader === 'function') {
+    initializeHeader('../../../../html/homepage/header.html');
+  }
+</script>
+
+</body>
+</html>

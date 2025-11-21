@@ -1,0 +1,322 @@
+/* Reset and basic styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background: url('../../../assets/images/backgroundSpatial.webp') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background blur overlay */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../../../assets/images/backgroundSpatial.webp') no-repeat center center fixed;
+  background-size: cover;
+  filter: blur(8px);
+  z-index: -1;
+  opacity: 0.7;
+}
+
+/* Header */
+.header {
+  background: #003e8d;
+  backdrop-filter: blur(6px);
+  padding: 9px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.logo img {
+  height: 70px;
+  width: auto;
+}
+
+/* Navigation */
+.nav-menu {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+}
+
+.nav-item {
+  font-family: 'Poppins', sans-serif;
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 15px;
+  padding: 7px 1px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Page Content */
+.container {
+  max-width: 1100px;
+  margin: 135px auto 0;
+  padding: 35px 20px;
+}
+
+/* Banner Styling */
+.banner {
+  width: 70%;
+  height: 70px;
+  background: linear-gradient(#ffd032);
+  border-radius: 24px;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  box-shadow: 0 8px 25px rgba(0, 61, 130, 0.3);
+  margin-top: -60px; /* Move the banner upwards */
+  margin-left: 150px;
+}
+
+/* Title inside the banner (Blue text) */
+.banner .card-title {
+  font-size: 40px;
+  font-weight: 750;
+  color: #003d82;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+/* Title for each card (White text) */
+.card-header .card-title {
+  color: white;
+  font-size: 27px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Cards Container */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  gap: 40px;
+  margin-top: 70px;
+}
+
+.card {
+  background: white;
+  border-radius: 22px;
+  overflow: visible;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 1;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Yellow accent decoration - curved corner */
+.yellow-accent {
+  position: absolute;
+  top: -13px;
+  left: -13px;
+  width: 155px;
+  height: 120px;
+  background: #ffd032;
+  border-radius: 30px;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.yellow-accent::after {
+  content: '';
+  position: absolute;
+  bottom: -70px;
+  right: -70px;
+  width: 175px;
+  height: 175px;
+  background: white;
+  border-radius: 50%;
+}
+
+/* Card header */
+.card-header {
+  background: linear-gradient(#003e8d);
+  padding: 20px;
+  border-radius: 22px 22px 0 0;
+  position: relative;
+  z-index: 2;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Card body */
+.card-body {
+  padding: 10px 10px;
+  min-height: 250px;
+  position: relative;
+  background: white;
+  border-radius: 0 0 22px 22px;
+  display: flex; /* ✅ Tambah */
+  align-items: center; /* ✅ Center vertical */
+  justify-content: center; /* ✅ Center horizontal */
+}
+
+/* Card image */
+.card-image {
+  width: 70%;
+  max-width: 290px;
+  height: auto;
+  display: block;
+  margin: 0;
+}
+
+/* Content placeholder */
+.content-placeholder {
+  color: #999;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* BACK BUTTON */
+.back-button-container {
+  position: fixed;
+  bottom: 20px;
+  left: -10px;
+  z-index: 100;
+}
+
+.back-button {
+  width: 130px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.back-button:hover {
+  transform: scale(1.1);
+}
+
+/* NEXT BUTTON */
+.next-button-container {
+  position: fixed;
+  bottom: 20px;
+  right: -10px;
+  z-index: 100;
+}
+
+.next-button {
+  width: 130px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.next-button:hover {
+  transform: scale(1.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  /* responsive rules here */
+}
+
+/* Audio icon */
+.audio-icon {
+  position: absolute;
+  top: 19px;
+  right: 13px;
+  width: 60px;
+  height: 40px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  z-index: 10;
+}
+
+.audio-icon:hover {
+  transform: scale(1.15);
+}
+
+.audio-icon:active {
+  transform: scale(0.95);
+}
+
+/* Hide the actual audio element */
+audio {
+  display: none;
+}
+
+/* Make card clickable */
+.card {
+  cursor: pointer;
+}
+
+.card-image {
+  cursor: pointer;
+}
+/* START THE GAME Button Container - ✅ KURANGKAN MARGIN */
+
+.start-button-container {
+    text-align: center;
+    margin-top: 30px; /* ✅ Dikurangkan dari 50px ke 30px */
+    margin-bottom: 20px; /* ✅ Dikurangkan dari 30px ke 20px */
+}
+
+/* Button Styling */
+.start-button {
+    background-color: #FFD700;
+    color: #003d82;
+    font-size: 30px;
+    padding: 10px 40px;
+    border: none;
+    border-radius: 50px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Hover Effect for Button */
+.start-button:hover {
+    background-color: #003d82;
+    color: #FFD700;
+    transform: scale(1.1);
+}
+
+/* Active State for Button */
+.start-button:active {
+    transform: scale(1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
