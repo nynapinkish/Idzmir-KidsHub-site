@@ -1,200 +1,278 @@
-document.addEventListener('DOMContentLoaded', () => {
+// ===============================================
+// GAME TEMPLATE WITH LOCK SYSTEM (First Try Only)
+// ===============================================
+
+// ================= GAME CONFIGURATION =================
+const CONCEPT_TYPE = 'Spatial Concepts';
+const GAME_NAME = 'atas / bawah'; // ⚠️ CHANGED
+const GAME_KEY = 'atas_/_bawah';   // ⚠️ CHANGED
+const TOTAL_QUESTIONS = 2;          // ⚠️ CHANGED
+
+// ================= GAME LOCK STATE =================
+let gameAlreadyPlayed = false;
+let existingScore = 0;
+
+// ================= GAME DATA =================
+const questions = [
+    // ⚠️ REPLACED WITH USER QUESTIONS
+    {
+        label: "bawah",
+        question: "Mana yang di bawah?",
+        correctImg: "../../../assets/images/below.png",
+        options: [
+            { answer: "wrong", img: "../../../assets/images/above.png" },
+            { answer: "correct", img: "../../../assets/images/below.png" }
+        ]
+    },
+    {
+        label: "atas",
+        question: "Mana yang di atas?",
+        correctImg: "../../../assets/images/above.png",
+        options: [
+            { answer: "correct", img: "../../../assets/images/above.png" },
+            { answer: "wrong", img: "../../../assets/images/below.png" }
+        ]
+    }
+];
+
+// ================= GAME STATE =================
+let currentQuestionIndex = 0;
+let answered = false;
+let correctAnswers = 0;
+let attemptCount = 0;
+
+// ================= CHECK IF GAME ALREADY PLAYED =================
+async function checkGameStatus() {
+  try {
+    const studentId = sessionStorage.getItem('studentId');
+    if (!studentId) return false;
+
+    const db = firebase.firestore();
+    const studentQuery = await db.collection('students')
+      .where('studentId', '==', studentId)
+      .get();
+
+    if (studentQuery.empty) {
+      console.warn('Student not found in Firebase');
+      return false;
+    }
+
+    const studentDoc = studentQuery.docs[0];
+    const studentData = studentDoc.data();
+    
+    const conceptProgress = studentData.conceptProgress || {};
+    const spatialProgress = conceptProgress['Spatial Concepts'] || {};
+    const gamesCompleted = spatialProgress.gamesCompleted || {};
+    
+    if (gamesCompleted[GAME_KEY] && gamesCompleted[GAME_KEY] > 0) {
+      existingScore = gamesCompleted[GAME_KEY];
+      gameAlreadyPlayed = true;
+      return true;
+    }
+
+    return false;
+
+  } catch (error) {
+    console.error('Error checking game status:', error);
+    return false;
+  }
+}
+
+// ================= SHOW "ALREADY PLAYED" SCREEN =================
+async function showAlreadyPlayedScreen() {
+  const scoreModal = document.getElementById('scoreModal');
+  const finalScoreDisplay = document.getElementById('finalScoreDisplay');
+  const nextButtonContainer = document.querySelector('.next-button-container');
+  const nextButton = document.querySelector('.next-button');
+
+  const gameContainer = document.querySelector('.game-container');
+  if (gameContainer) gameContainer.style.display = 'none';
+
+  finalScoreDisplay.textContent = `${existingScore}/${TOTAL_QUESTIONS}`;
+
+  scoreModal.style.cssText = '';
+  scoreModal.style.display = 'flex';
+  scoreModal.style.position = 'fixed';
+  scoreModal.style.top = '0';
+  scoreModal.style.left = '0';
+  scoreModal.style.width = '100%';
+  scoreModal.style.height = '100%';
+  scoreModal.style.zIndex = '10000';
+  scoreModal.style.backgroundColor = 'rgba(0, 0, 0, 0.6)';
+  scoreModal.style.backdropFilter = 'blur(5px)';
+  scoreModal.style.alignItems = 'center';
+  scoreModal.style.justifyContent = 'center';
+
+  const modalContent = scoreModal.querySelector('.modal-content');
+  if (modalContent && !document.getElementById('alreadyPlayedMsg')) {
+    const msg = document.createElement('div');
+    msg.id = 'alreadyPlayedMsg';
+    msg.style.cssText =
+      'background: #ffc107; color: #000; padding: 12px 20px; border-radius: 8px; margin-bottom: 15px; text-align: center; font-weight: bold;';
+    msg.textContent = '🔒 Anda sudah main game ini! Ini markah anda.';
+    modalContent.insertBefore(msg, modalContent.firstChild);
+  }
+
+  if (nextButtonContainer && nextButton) {
+    nextButtonContainer.style.zIndex = '10001';
+    nextButton.style.opacity = '1';
+    nextButton.style.display = 'block';
+    nextButton.style.pointerEvents = 'auto';
+  }
+}
+
+// ================= INITIALIZE GAME =================
+document.addEventListener('DOMContentLoaded', async () => {
+
+  const hasPlayed = await checkGameStatus();
+  
+  if (hasPlayed) {
+    await showAlreadyPlayedScreen();
+    return;
+  }
+  
+  const initialized = initializeGame(CONCEPT_TYPE, GAME_NAME, TOTAL_QUESTIONS);
+  if (!initialized) return;
+
   const options = document.querySelectorAll('.option-card');
+  const feedback = document.getElementById('feedback');
   const questionBox = document.getElementById('questionBox');
   const answerImage = document.getElementById('answerImage');
-  const questionPrompt = document.querySelector('.question-prompt');
-  const questionLabel = document.querySelector('.question-label');
-  const questionIcon = document.querySelector('.question-icon');
-  const nextButtonContainer = document.querySelector('.next-button-container');
-  
-  let answered = false;
-  let currentQuestionIndex = 0;
-  let correctAnswers = 0;
-  let totalQuestions = 0;
 
-  // Set up questions
-  const questions = [
-    {
-      label: "tolong",
-      question: "Mana yang nampak tolong?",
-      correctImg: "../../../assets/images/help.png",
-      options: [
-        { answer: "correct", img: "../../../assets/images/help.png" },
-        { answer: "wrong", img: "../../../assets/images/share.png" },
-        { answer: "wrong", img: "../../../assets/images/wait.png" }
-      ]
-    },
-    {
-      label: "kongsi",
-      question: "Mana yang nampak kongsi?",
-      correctImg: "../../../assets/images/share.png",
-      options: [
-        { answer: "wrong", img: "../../../assets/images/help.png" },
-        { answer: "correct", img: "../../../assets/images/share.png" },
-        { answer: "wrong", img: "../../../assets/images/wait.png" }
-      ]
-    },
-    {
-      label: "tunggu",
-      question: "Mana yang nampak tunggu?",
-      correctImg: "../../../assets/images/wait.png",
-      options: [
-        { answer: "wrong", img: "../../../assets/images/help.png" },
-        { answer: "wrong", img: "../../../assets/images/share.png" },
-        { answer: "correct", img: "../../../assets/images/wait.png" }
-      ]
-    }
-  ];
+  showScoreDisplay();
+  updateScoreDisplay();
 
-  totalQuestions = questions.length;
-
-  // ==================== UPDATE SCORE DISPLAY ====================
-  function updateScoreDisplay() {
-    const scoreDisplay = document.getElementById('scoreDisplay');
-    const scoreText = document.getElementById('scoreText');
-    
-    if (scoreDisplay && scoreText) {
-      scoreDisplay.style.display = 'flex';
-      scoreText.textContent = `${correctAnswers}/${totalQuestions}`;
-    }
-  }
-
-  // ==================== SHOW SCORE MODAL - BESAR DI TENGAH ====================
-  function showScoringPopup() {
-    const scoreModal = document.getElementById('scoreModal');
-    const finalScoreDisplay = document.getElementById('finalScoreDisplay');
-    const nextButton = document.querySelector('.next-button');
-    
-    console.log("🎉 Showing BIG MODAL in center!");
-    
-    if (scoreModal && finalScoreDisplay) {
-      // Update score display
-      finalScoreDisplay.textContent = `${correctAnswers}/${totalQuestions}`;
-      console.log("Score updated to:", `${correctAnswers}/${totalQuestions}`);
-      
-      // Show modal - BESAR DI TENGAH
-      scoreModal.style.display = 'flex';
-      scoreModal.style.position = 'fixed';
-      scoreModal.style.top = '0';
-      scoreModal.style.left = '0';
-      scoreModal.style.width = '100%';
-      scoreModal.style.height = '100%';
-      scoreModal.style.zIndex = '10000';
-      scoreModal.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
-      scoreModal.style.backdropFilter = 'blur(5px)';
-      scoreModal.style.alignItems = 'center';
-      scoreModal.style.justifyContent = 'center';
-      
-      console.log("Modal displayed BESAR DI TENGAH!");
-      
-      // Show next button after 1 second with animation
-      if (nextButtonContainer && nextButton) {
-        nextButtonContainer.style.zIndex = '10001';
-        nextButton.style.opacity = '0';
-        nextButton.style.display = 'block';
-        nextButton.style.pointerEvents = 'none';
-        
-        setTimeout(() => {
-          nextButton.style.transition = 'opacity 0.5s ease-in-out';
-          nextButton.style.opacity = '1';
-          nextButton.style.pointerEvents = 'auto';
-          nextButton.style.animation = 'bounceButton 1s ease-in-out infinite';
-          console.log("Next button faded in and bouncing!");
-        }, 1000);
-      }
-    }
-  }
-
-  // ==================== CHANGE QUESTION ====================
-  function changeQuestion() {
-    answered = false;
-    currentQuestionIndex++;
-    
-    console.log("Current question index:", currentQuestionIndex);
-    console.log("Total questions:", questions.length);
-    
-    if (currentQuestionIndex >= questions.length) {
-      // All questions answered - show BIG modal
-      console.log("🎉 ALL QUESTIONS COMPLETED! Showing BIG popup...");
-      setTimeout(() => {
-        showScoringPopup();
-      }, 1500);
-      return;
-    }
-    
-    const currentQuestion = questions[currentQuestionIndex];
-
-    questionLabel.textContent = currentQuestion.label;
-    questionPrompt.textContent = currentQuestion.question;
-    questionIcon.src = currentQuestion.correctImg;
-
-    const optionCards = document.querySelectorAll(".option-card");
-    optionCards.forEach((option, index) => {
-      const optionImg = option.querySelector(".card-image");
-      if (optionImg) {
-        optionImg.src = currentQuestion.options[index].img;
-      }
-      option.dataset.answer = currentQuestion.options[index].answer;
-      
-      option.classList.remove('correct-answer', 'wrong-answer', 'correct-move');
-    });
-
-    questionBox.classList.remove('reveal');
-    if (answerImage) {
-      answerImage.src = "";
-      answerImage.style.display = 'none';
-    }
-    if (questionIcon) {
-      questionIcon.style.display = 'block';
-    }
-  }
-
-  // Attach event listeners
   options.forEach(option => {
     option.addEventListener('click', function() {
       if (answered) return;
-
       const answer = this.getAttribute('data-answer');
-      answered = true;
       
       if (answer === 'correct') {
-        // ✅ CORRECT ANSWER
-        correctAnswers++;
-        console.log("✅ Correct! Score:", correctAnswers + "/" + totalQuestions);
-        updateScoreDisplay();
-        
-        options.forEach(opt => opt.classList.remove('wrong-answer'));
-        this.classList.add('correct-answer');
-        
-        const correctImg = this.querySelector('.card-image');
-        if (answerImage && correctImg) {
-          answerImage.src = correctImg.src;
-          answerImage.style.display = 'block';
-          if (questionIcon) {
-            questionIcon.style.display = 'none';
-          }
-        }
-        
-        this.classList.add('correct-move');
-        
-        setTimeout(() => {
-          questionBox.classList.add('reveal');
-        }, 800);
-        
-        setTimeout(() => {
-          changeQuestion();
-        }, 2000);
-        
+        handleCorrectAnswerClick(this, options, questionBox, answerImage, feedback);
       } else {
-        // ❌ WRONG ANSWER
-        console.log("❌ Wrong!");
-        this.classList.add('wrong-answer');
-        
-        setTimeout(() => {
-          this.classList.remove('wrong-answer');
-          changeQuestion();
-        }, 1500);
+        handleWrongAnswerClick(this, feedback);
       }
     });
   });
 });
+
+// ================= SHOW SCORE DISPLAY =================
+function showScoreDisplay() {
+  const scoreDisplay = document.getElementById('scoreDisplay');
+  if (scoreDisplay) {
+    scoreDisplay.style.display = 'flex';
+  }
+}
+
+// ================= UPDATE SCORE DISPLAY =================
+function updateScoreDisplay() {
+  const scoreText = document.getElementById('scoreText');
+  if (scoreText) {
+    scoreText.textContent = `${correctAnswers}/${attemptCount}`;
+  }
+}
+
+// ================= HANDLE CORRECT ANSWER =================
+function handleCorrectAnswerClick(selectedCard, options, questionBox, answerImage, feedback) {
+  answered = true;
+  attemptCount++;
+  correctAnswers++;
+  
+  handleCorrectAnswer();
+  updateScoreDisplay();
+  
+  options.forEach(opt => opt.classList.remove('wrong-answer'));
+  selectedCard.classList.add('correct-answer');
+
+  const correctImg = selectedCard.querySelector('img:not(.arrow-indicator)');
+  if (answerImage && correctImg) {
+    answerImage.src = correctImg.src;
+  }
+
+  selectedCard.classList.add('correct-move');
+
+  setTimeout(() => {
+    if (questionBox) questionBox.classList.add('reveal');
+  }, 800);
+
+  if (attemptCount >= TOTAL_QUESTIONS) {
+    setTimeout(showFinalScoreModal, 2000);
+  } else {
+    setTimeout(changeQuestion, 2000);
+  }
+}
+
+// ================= HANDLE WRONG ANSWER =================
+function handleWrongAnswerClick(selectedCard, feedback) {
+  answered = true;
+  attemptCount++;
+
+  handleWrongAnswer();
+  updateScoreDisplay();
+  
+  selectedCard.classList.add('wrong-answer');
+
+  setTimeout(() => {
+    selectedCard.classList.remove('wrong-answer');
+  }, 600);
+
+  if (attemptCount >= TOTAL_QUESTIONS) {
+    setTimeout(showFinalScoreModal, 2000);
+  } else {
+    setTimeout(changeQuestion, 2000);
+  }
+}
+
+// ================= CHANGE QUESTION =================
+function changeQuestion() {
+  answered = false;
+  currentQuestionIndex = (currentQuestionIndex + 1) % questions.length;
+
+  const currentQuestion = questions[currentQuestionIndex];
+
+  document.querySelector('.question-label').textContent = currentQuestion.label;
+  document.querySelector('.question-prompt').textContent = currentQuestion.question;
+  document.querySelector('.question-icon').src = currentQuestion.correctImg;
+
+  const optionCards = document.querySelectorAll(".option-card");
+  optionCards.forEach((option, index) => {
+    option.querySelector("img:not(.arrow-indicator)").src =
+      currentQuestion.options[index].img;
+    option.dataset.answer = currentQuestion.options[index].answer;
+    option.classList.remove('correct-answer', 'wrong-answer', 'correct-move');
+  });
+
+  const questionBox = document.getElementById('questionBox');
+  const answerImage = document.getElementById('answerImage');
+
+  questionBox.classList.remove('reveal');
+  answerImage.src = "";
+  document.getElementById('feedback').textContent = "";
+}
+
+// ================= SHOW FINAL SCORE MODAL =================
+async function showFinalScoreModal() {
+  const scoreModal = document.getElementById('scoreModal');
+  const finalScoreDisplay = document.getElementById('finalScoreDisplay');
+
+  finalScoreDisplay.textContent = `${correctAnswers}/${attemptCount}`;
+
+  scoreModal.style.cssText = '';
+  scoreModal.style.display = 'flex';
+  scoreModal.style.position = 'fixed';
+  scoreModal.style.top = '0';
+  scoreModal.style.left = '0';
+  scoreModal.style.width = '100%';
+  scoreModal.style.height = '100%';
+  scoreModal.style.zIndex = '10000';
+  scoreModal.style.backgroundColor = 'rgba(0, 0, 0, 0.6)';
+  scoreModal.style.backdropFilter = 'blur(5px)';
+  scoreModal.style.alignItems = 'center';
+  scoreModal.style.justifyContent = 'center';
+
+  if (typeof gameSession !== 'undefined' && gameSession.endSession) {
+    await gameSession.endSession();
+  }
+}
+
+console.log('✅ Game script with lock system loaded!');

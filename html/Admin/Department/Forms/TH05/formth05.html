@@ -1,0 +1,1847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PATIENT DAILY REPORT 2025</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../Forms/TH05/formth05.css">
+</head>
+<body>
+
+<div class="th05-form-wrapper">
+  <h2>PATIENT DAILY REPORT 2025: ASSISTANT THERAPIST</h2>
+
+  <label class="section-title">PART A: STUDENT INFORMATION</label>
+  <small class="section-desc">
+      Information specific about  student including their feelings, pain level, mood, or any new or progressing symptoms.
+  </small>
+
+  <form id="formth05">
+
+      <!-- ================= PATIENT NAME ================= -->
+      <div class="input-group">
+          <label>Patient's Full Name</label>
+          <div class="two-col">
+              <div>
+                  <small>First Name</small>
+                  <input type="text" name="FirstName" placeholder="Airina Batrisyia" required>
+              </div>
+              <div>
+                  <small>Last Name</small>
+                  <input type="text" name="LastName" placeholder="binti Azim" required>
+              </div>
+          </div>
+      </div>
+
+        <div class="input-group">
+            <label>Session Conducted By</label>
+            <small>Choose therapist</small>
+
+            <div class="general-grid">
+                
+                <label class="general-item">
+                    <input type="radio" name="SessionConductedBy" value="Nur Dalila Kamilan" required>
+                    <span>Nur Dalila Kamilan</span>
+                </label>
+
+                <label class="general-item">
+                    <input type="radio" name="SessionConductedBy" value="Shilla Nurayeisha Mohamad Khir">
+                    <span>Shilla Nurayeisha Mohamad Khir</span>
+                </label>
+
+                <label class="general-item">
+                    <input type="radio" name="SessionConductedBy" value="Ricxstalonce Sating">
+                    <span>Ricxstalonce Sating</span>
+                </label>
+                
+                <label class="general-item">
+                    <input type="radio" name="SessionConductedBy" value="Siti Nor Farahin Mohd Rahid">
+                    <span>Siti Nor Farahin Mohd Rahid</span>
+                </label>
+
+                <label class="general-item">
+                    <input type="radio" name="SessionConductedBy" value="Nur Fatilah Mohamad">
+                    <span>Nur Fatilah Mohamad</span>
+                </label>
+
+                <label class="general-item">
+                    <input type="radio" name="SessionConductedBy" value="Siti Aqilah Sofia M.Tamizi">
+                    <span>Siti Aqilah Sofia M.Tamizi</span>
+                </label>
+
+                <label class="general-item">
+                    <input type="radio" name="SessionConductedBy" value="Nik Mohd Hairil Fazmi Mahadi">
+                    <span>Nik Mohd Hairil Fazmi Mahadi</span>
+                </label>
+
+                <label class="general-item">
+                    <input type="radio" name="SessionConductedBy" value="Nuwairah Kamarudin">
+                    <span>Nuwairah Kamarudin</span>
+                </label>
+
+                <label class="general-item">
+                    <input type="radio" name="SessionConductedBy" value="Nur Thaqifah Shaharuddin">
+                    <span>Nur Thaqifah Shaharuddin</span>
+                </label>
+
+                <label class="general-item">
+                    <input type="radio" name="SessionConductedBy" value="Yoganantini A/P Aiyaru">
+                    <span>Yoganantini A/P Aiyaru</span>
+                </label>
+
+                <label class="general-item">
+                    <input type="radio" name="SessionConductedBy" value="Ainul Bahrain Azman">
+                    <span>Ainul Bahrain Azman</span>
+                </label>
+
+                <label class="general-item">
+                    <input type="radio" name="SessionConductedBy" value="Noramanina Jamaludin">
+                    <span>Noramanina Jamaludin</span>
+                </label>
+
+                <!-- Pilihan "Other" -->
+                <label class="general-item">
+                    <input type="radio" name="SessionConductedBy" value="Other" id="SessionConductedBy">
+                    <span>Other:</span>
+                    <input type="text" name="SessionConductedByOtherText" id="SessionConductedByOtherText" placeholder="Please specify">
+                </label>
+            </div>
+        </div>
+
+      <div class="input-group">
+          <label>Date</label>
+          <input type="date" name="Date" required>
+
+          <label>Session</label>
+          <div class="two-col">
+              <div>
+                  <small>Start</small>
+                  <input type="text" name="SessionStart" placeholder="e.g., 02:00 PM" required>
+              </div>
+              <div>
+                  <small>End</small>
+                  <input type="text" name="SessionEnd" placeholder="e.g., 03:00 PM" required>
+              </div>
+          </div>
+      </div>
+
+
+    <!-- =================next page ================= -->
+    <div class="input-group">
+        <label>Unit of Rehabilitation</label>
+        <small>please select discipline that responsible for this patient.</small>
+
+        <div class="general-grid">
+            
+            <label class="general-item">
+                <input type="radio" name="unitOfRehabilitation" value="Occupational Therapy (OT)" required>
+                <span>Occupational Therapy (OT)</span>
+            </label>
+
+            <label class="general-item">
+                <input type="radio" name="unitOfRehabilitation" value="Physiotherapy (PT)">
+                <span>Physiotherapy (PT)</span>
+            </label>
+
+            <label class="general-item">
+                <input type="radio" name="unitOfRehabilitation" value="Speech Therapy (ST)">
+                <span>Speech Therapy (ST)</span>
+            </label>
+
+            <label class="general-item">
+                <input type="radio" name="unitOfRehabilitation" value="Ready to School (RTS)">
+                <span>Ready to School (RTS)</span>
+            </label>
+        </div>
+    </div>
+
+    <label>Condition / Diagnosis</label>
+    <small>Please select related ICD-10 for diagnosis/condition (if any)</small>
+    <select name="Condition/Diagnosis" required>
+        <option value="">---Please Choose---</option>
+        <option value="R62.0 Delayed milestones in childhood">R62.0 Delayed milestones in childhood</option>
+        <option value="R62.50 Unspecified lack of expected normal physiological development in childhood">R62.50 Unspecified lack of expected normal physiological development in childhood</option>
+        <option value="F88 Other disorders of psychological development (formal diagnosis from prediatrician only)">F88 other disorders of psychological development (formal diagnosis from prediatrician only)</option>
+        <option value="F84.0 Autism spectrum disorder (formal diagnosis from prediatrician only)">F84.0 Autism spectrum disorder (formal diagnosis from prediatrician only)</option>
+        <option value="F80.9 Speech and language delay (unspecified developmental disorder)">F80.9 speech and language delay (unspecified developmental disorder)</option>
+        <option value="R48.0 Dyslexia and other symbolic dysfunctions">R48.0 Dyslexia and other symbolic dysfunctions</option>
+        <option value="F82 Specific developmental disorder of motor function (formal diagnosis from prediatrician only)">F82 Specific developmental disorder of motor function (formal diagnosis from prediatrician only)</option>
+        <option value="R27.8 Other lack of coordination">R27.8 Other lack of coordination</option>
+        <option value="M62.81 Generalized muscle weakness">M62.81 Generalized muscle weakness</option>
+        <option value="R45.1 Restlessness and agitation">R45.1 Restlessness and agitation</option>
+        <option value="R45.81 low frustration tolerance">R45.81 low frustration tolerance</option>
+        <option value="F81.9 learning condition">F81.9 learning condition</option>
+        <option value="F91.9 Behavior: Conduct disorder, unspecified (formal diagnosis from pediatrician only)">F91.9 Behavior: Conduct disorder, unspecified (formal diagnosis from pediatrician only)</option>
+    </select>
+
+    <div class="input-group">
+        <label>Sent By</label>
+
+        <div class="general-grid">
+            
+            <label class="general-item">
+                <input type="radio" name="SentBy" value="Both parents" required>
+                <span>Both parents</span>
+            </label>
+
+            <label class="general-item">
+                <input type="radio" name="SentBy" value="Mothers">
+                <span>Mothers</span>
+            </label>
+
+            <label class="general-item">
+                <input type="radio" name="SentBy" value="Father">
+                <span>Father</span>
+            </label>
+
+            <label class="general-item">
+                <input type="radio" name="SentBy" value="Caregiver">
+                <span>Caregiver</span>
+            </label>
+
+            <!-- Pilihan "Other" -->
+            <label class="general-item">
+                <input type="radio" name="SentBy" value="Other" id="sentByOther">
+                <span>Other:</span>
+                <input type="text" name="SentByOtherText" id="sentByOtherText" placeholder="Please specify">
+            </label>
+        </div>
+    </div>
+
+    <!-- =================next page ================= -->
+    <label class="section-title">PART B: EMOTIONAL REGULATION BASED ON ZONE OF REGULATION</label>
+    <small class="section-desc">
+        Please state the student status while entering (student-IN) therapy session based on the Zone of Regulation
+    </small>
+
+    <div class="input-group">
+        <label>Blue Zone</label>
+        <small>Low energy or low engagement states like feeling sad, tired, bored or physically unwell. Children in this zone often appear withdrawn, lethargic, or disengaged. Use calming or alerting strategies to bring energy up.</small>
+
+        <div class="general-grid">
+            
+            <label class="general-item">
+                <input type="radio" name="BlueZone" value="Sad" required>
+                <span>Sad</span>
+            </label>
+
+            <label class="general-item">
+                <input type="radio" name="BlueZone" value="Tired">
+                <span>Tired</span>
+            </label>
+
+            <label class="general-item">
+                <input type="radio" name="BlueZone" value="Bored">
+                <span>Bored</span>
+            </label>
+            
+            <label class="general-item">
+                <input type="radio" name="BlueZone" value="Sick">
+                <span>Sick</span>
+            </label>
+
+            <!-- Pilihan "Other" -->
+            <label class="general-item">
+                <input type="radio" name="BlueZone" value="Other" id="BlueZoneOther">
+                <span>Other:</span>
+                <input type="text" name="BlueZoneOtherText" id="BlueZoneOtherText" placeholder="Please specify">
+            </label>
+        </div>
+    </div>
+
+
+    <div class="input-group">
+        <label>Green Zone</label>
+        <small>Optimal state for learning. Student is calm, focused and receptive. Appropriate for cognitive tasks or higher-level challenges. Minimal support required.</small>
+
+        <div class="general-grid">
+            
+            <label class="general-item">
+                <input type="radio" name="GreenZone" value="Calm" required>
+                <span>Calm</span>
+            </label>
+
+            <label class="general-item">
+                <input type="radio" name="GreenZone" value="Focused">
+                <span>Focused</span>
+            </label>
+
+            <label class="general-item">
+                <input type="radio" name="GreenZone" value="Ready to Learn">
+                <span>Ready to Learn</span>
+            </label>
+
+            <!-- Pilihan "Other" -->
+            <label class="general-item">
+                <input type="radio" name="GreenZone" value="Other" id="GreenZoneOther">
+                <span>Other:</span>
+                <input type="text" name="GreenZoneOtherText" id="GreenZoneOtherText" placeholder="Please specify">
+            </label>
+        </div>
+    </div>
+
+
+    <div class="input-group">
+        <label>Yellow Zone</label>
+        <small>Elevated emotions like anxiety, excitement, silliness, or restlessness. Student may fidget, act impulsively or seem easily distracted. Requires mild regulation interventions.</small>
+
+        <div class="general-grid">
+            
+            <label class="general-item">
+                <input type="radio" name="YellowZone" value="Frustrated" required>
+                <span>Frustrated</span>
+            </label>
+
+            <label class="general-item">
+                <input type="radio" name="YellowZone" value="Silly">
+                <span>Silly</span>
+            </label>
+
+            <label class="general-item">
+                <input type="radio" name="YellowZone" value="Wiggly">
+                <span>Wiggly</span>
+            </label>
+            
+            <label class="general-item">
+                <input type="radio" name="YellowZone" value="Anxious">
+                <span>Anxious</span>
+            </label>
+
+            <!-- Pilihan "Other" -->
+            <label class="general-item">
+                <input type="radio" name="YellowZone" value="Other" id="YellowZoneOther">
+                <span>Other:</span>
+                <input type="text" name="YellowZoneOtherText" id="YellowZoneOtherText" placeholder="Please specify">
+            </label>
+        </div>
+    </div>
+
+
+    <div class="input-group">
+        <label>Red Zone</label>
+        <small>Low energy or low engagement states like feeling sad, tired, bored or physically unwell. Children in this zone often appear withdrawn, lethargic, or disengaged. Use calming or alerting strategies to bring energy up.</small>
+
+        <div class="general-grid">
+            
+            <label class="general-item">
+                <input type="radio" name="redZone" value="Angry" required>
+                <span>Angry</span>
+            </label>
+
+            <label class="general-item">
+                <input type="radio" name="redZone" value="Aggresive">
+                <span>Aggresive</span>
+            </label>
+
+            <label class="general-item">
+                <input type="radio" name="redZone" value="Out of Control">
+                <span>Out of Control</span>
+            </label>
+
+            <!-- Pilihan "Other" -->
+            <label class="general-item">
+                <input type="radio" name="redZone" value="Other" id="redZoneOther">
+                <span>Other:</span>
+                <input type="text" name="redZoneOtherText" id="redZoneOtherText" placeholder="Please specify">
+            </label>
+        </div>
+    </div>
+    
+
+
+    <!-- =================next page ================= -->
+    <label class="section-title">PART C: REGULATION-FOCUSED ACTIVITY SUMMARY</label>
+
+    <label>RED ZONE ACTIVITY</label>
+
+    <label>ACTIVITY 1</label>
+
+    <label>Activity 1 with CPT code:</label>
+    <select name="Activity1CPTCode" required>
+        <option value="">---Please Choose---</option>
+        <option value="97530">97530 Tortilla Time (blanket)</option>
+        <option value="97533">97533 Rocking in Gymball</option>
+        <option value="97530">97530 Swing</option>
+        <option value="97530">97530 Deep Pressure</option>
+        <option value="97530">97530 Handstand</option>
+        <option value="97533">97533 Music (calming)</option>
+        <option value="97533">97533 Ear Massage</option>
+        <option value="97533">97533 Back Massage</option>
+        <option value="97533">97533 Joint Compression</option>
+        <option value="97530">97530 Water Bottle (drink)</option>
+        <option value="97533">97533 hand Massage</option>
+        <option value="97533">97533 Lap & Shoulder Weight</option>
+        <option value="97530">97530 Shoulder squeeze</option>
+        <option value="97110">97110 Hand Exercise</option>
+        <option value="97533">97533 Wrist & Ankle Weight</option>
+    </select>
+
+    <label>Description of Activity </label>
+    <input type="text" name="DescOfActivity" placeholder="My Answer is..." >
+    
+    <label>Activity Duration</label>
+    <small>Please select total duration of time that student attend for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="duration" name="ActivityDuration" placeholder="Enter number" style="padding-right: 70px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            minutes
+        </span>
+    </div>
+
+    <label>Activity Sets</label>
+    <small>Please select total set of repetitions that student perform for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="set" name="ActivitySets" placeholder="Enter number" style="padding-right: 70px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            sets
+        </span>
+    </div>
+    
+    <label>Activity Repetitions</label>
+    <small>Please select total of repetitions per set that student perform for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="Repetitions" name="ActivityRepetitions" placeholder="Enter number" style="padding-right: 90px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            repetitions
+        </span>
+    </div>
+
+    <div class="general2-group">
+        <label>Level of Difficulties</label>
+        <small>the complexity and demands of an activity assigned to the student</small>
+
+        <div class="general2-grid">
+            
+            <label class="general2-item">
+                <input type="radio" name="levelDifficulties" value="easy" required>
+                <span>EASY: Passive or guided, low energy, 1-step tasks, minimal instruction</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="levelDifficulties" value="MEDIUM">
+                <span>MEDIUM: Requires child to engage actively, 2–3 step tasks, modulated physical or sensory use</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="levelDifficulties" value="HARD">
+                <span>HARD: Child-led, sustained or complex activity, high regulation, endurance or coordination</span>
+            </label>
+        </div>
+    </div>
+
+    <div class="general2-group">
+        <label>Engagement Level</label>
+        <small> measures the student’s observed participation, attention and motivation during an activity</small>
+
+        <div class="general2-grid">
+            
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="LOW" required>
+                <span>LOW: Minimal interest, required frequent prompts or full assistance. Likely distracted or dysregulated</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="MEDIUM">
+                <span>MEDIUM: Some participation with verbal/gestural prompts. Shows moments of focus but may be inconsistent.</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="HIGH">
+                <span>HIGH: Actively engaged, motivated, and involved. Minimal support needed.</span>
+            </label>
+        </div>
+    </div>
+
+
+    <label>Remarks </label>
+    <input type="text" name="Remarks" placeholder="My Answer is..." >
+
+
+    <label>ACTIVITY 2</label>
+
+    <label>Activity 2 with CPT code:</label>
+    <select name="Activity2CPTCode" required>
+        <option value="">---Please Choose---</option>
+        <option value="97530">97530 Tortilla Time (blanket)</option>
+        <option value="97533">97533 Rocking in Gymball</option>
+        <option value="97530">97530 Swing</option>
+        <option value="97530">97530 Deep Pressure</option>
+        <option value="97530">97530 Handstand</option>
+        <option value="97533">97533 Music (calming)</option>
+        <option value="97533">97533 Ear Massage</option>
+        <option value="97533">97533 Back Massage</option>
+        <option value="97533">97533 Joint Compression</option>
+        <option value="97530">97530 Water Bottle (drink)</option>
+        <option value="97533">97533 hand Massage</option>
+        <option value="97533">97533 Lap & Shoulder Weight</option>
+        <option value="97530">97530 Shoulder squeeze</option>
+        <option value="97110">97110 Hand Exercise</option>
+        <option value="97533">97533 Wrist & Ankle Weight</option>
+    </select>
+
+    <label>Description of Activity</label>
+    <input type="text" name="DescOfActivity" placeholder="My Answer is..." >
+    
+    <label>Activity Duration</label>
+    <small>Please select total duration of time that student attend for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="duration" name="ActivityDuration" placeholder="Enter number" style="padding-right: 70px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            minutes
+        </span>
+    </div>
+
+    <label>Activity Sets</label>
+    <small>Please select total set of repetitions that student perform for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="set" name="ActivitySets" placeholder="Enter number" style="padding-right: 70px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            sets
+        </span>
+    </div>
+    
+    <label>Activity Repetitions</label>
+    <small>Please select total of repetitions per set that student perform for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="Repetitions" name="ActivityRepetitions" placeholder="Enter number" style="padding-right: 90px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            repetitions
+        </span>
+    </div>
+
+    <div class="general2-group">
+        <label>Level of Difficulties</label>
+        <small>the complexity and demands of an activity assigned to the student</small>
+
+        <div class="general2-grid">
+            
+            <label class="general2-item">
+                <input type="radio" name="redZone" value="easy" required>
+                <span>EASY: Passive or guided, low energy, 1-step tasks, minimal instruction</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="redZone" value="MEDIUM">
+                <span>MEDIUM: Requires child to engage actively, 2–3 step tasks, modulated physical or sensory use</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="redZone" value="HARD">
+                <span>HARD: Child-led, sustained or complex activity, high regulation, endurance or coordination</span>
+            </label>
+        </div>
+    </div>
+
+    <div class="general2-group">
+        <label>Engagement Level</label>
+        <small> measures the student’s observed participation, attention and motivation during an activity</small>
+
+        <div class="general2-grid">
+            
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="LOW" required>
+                <span>LOW: Minimal interest, required frequent prompts or full assistance. Likely distracted or dysregulated</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="MEDIUM">
+                <span>MEDIUM: Some participation with verbal/gestural prompts. Shows moments of focus but may be inconsistent.</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="HIGH">
+                <span>HIGH: Actively engaged, motivated, and involved. Minimal support needed.</span>
+            </label>
+        </div>
+    </div>
+
+
+    <label>Remarks </label>
+    <input type="text" name="Remarks" placeholder="My Answer is..." >
+
+
+    <label>ACTIVITY 3</label>
+
+    <label>Activity 3 with CPT code:</label>
+    <select name="Activity3CPTCode" required>
+        <option value="">---Please Choose---</option>
+        <option value="97530">97530 Tortilla Time (blanket)</option>
+        <option value="97533">97533 Rocking in Gymball</option>
+        <option value="97530">97530 Swing</option>
+        <option value="97530">97530 Deep Pressure</option>
+        <option value="97530">97530 Handstand</option>
+        <option value="97533">97533 Music (calming)</option>
+        <option value="97533">97533 Ear Massage</option>
+        <option value="97533">97533 Back Massage</option>
+        <option value="97533">97533 Joint Compression</option>
+        <option value="97530">97530 Water Bottle (drink)</option>
+        <option value="97533">97533 hand Massage</option>
+        <option value="97533">97533 Lap & Shoulder Weight</option>
+        <option value="97530">97530 Shoulder squeeze</option>
+        <option value="97110">97110 Hand Exercise</option>
+        <option value="97533">97533 Wrist & Ankle Weight</option>
+    </select>
+
+    <label>Description of Activity </label>
+    <input type="text" name="DescOfActivity" placeholder="My Answer is..." >
+    
+    <label>Activity Duration</label>
+    <small>Please select total duration of time that student attend for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="duration" name="ActivityDuration" placeholder="Enter number" style="padding-right: 70px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            minutes
+        </span>
+    </div>
+
+    <label>Activity Sets</label>
+    <small>Please select total set of repetitions that student perform for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="set" name="ActivitySets" placeholder="Enter number" style="padding-right: 70px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            sets
+        </span>
+    </div>
+    
+    <label>Activity Repetitions</label>
+    <small>Please select total of repetitions per set that student perform for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="Repetitions" name="ActivityRepetitions" placeholder="Enter number" style="padding-right: 90px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            repetitions
+        </span>
+    </div>
+
+    <div class="general2-group">
+        <label>Level of Difficulties</label>
+        <small>the complexity and demands of an activity assigned to the student</small>
+
+        <div class="general2-grid">
+            
+            <label class="general2-item">
+                <input type="radio" name="redZone" value="easy" required>
+                <span>EASY: Passive or guided, low energy, 1-step tasks, minimal instruction</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="redZone" value="MEDIUM">
+                <span>MEDIUM: Requires child to engage actively, 2–3 step tasks, modulated physical or sensory use</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="redZone" value="HARD">
+                <span>HARD: Child-led, sustained or complex activity, high regulation, endurance or coordination</span>
+            </label>
+        </div>
+    </div>
+
+    <div class="general2-group">
+        <label>Engagement Level</label>
+        <small> measures the student’s observed participation, attention and motivation during an activity</small>
+
+        <div class="general2-grid">
+            
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="LOW" required>
+                <span>LOW: Minimal interest, required frequent prompts or full assistance. Likely distracted or dysregulated</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="MEDIUM">
+                <span>MEDIUM: Some participation with verbal/gestural prompts. Shows moments of focus but may be inconsistent.</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="HIGH">
+                <span>HIGH: Actively engaged, motivated, and involved. Minimal support needed.</span>
+            </label>
+        </div>
+    </div>
+
+
+    <label>Remarks </label>
+    <input type="text" name="Remarks" placeholder="My Answer is..." >
+
+
+
+
+    <label>GREEN ZONE ACTIVITY</label>
+
+    <label>ACTIVITY 1</label>
+
+    <label>Activity 1 with CPT code:</label>
+    <select name="Activity1CPTCode" required>
+        <option value="">---Please Choose---</option>
+        <option value="97530">97530 Swing</option>
+        <option value="97533">97533 Music (alerting)</option>
+        <option value="97110">97110 Trampoline</option>
+        <option value="97110">97110 Bounce on Ball</option>
+        <option value="97530">97530 Handstand</option>
+        <option value="97110">97110 Dancing</option>
+        <option value="97150">97150 Action Song</option>
+        <option value="97110">97110 Happy Ball</option>
+        <option value="97533">97533 Sensory Circuit</option>
+        <option value="97150">97150 Taking Turn Activity</option>
+        <option value="97150">97150 Transfer Activity</option>
+        <option value="97533">97533 Face Tapping</option>
+        <option value="97533">97533 Tactile Input-full Body</option>
+        <option value="97533">97533 Rocking on Gymball</option>
+        <option value="97110">97110 Sports</option>
+        <option value="97110">97110 Starjumps</option>
+        <option value="97150">97150 Soccer</option>
+        <option value="97150">97150 Chase</option>
+        <option value="97110">97110 Scooter Board</option>
+    </select>
+
+    <label>Description of Activity </label>
+    <input type="text" name="DescOfActivity" placeholder="My Answer is..." >
+    
+    <label>Activity Duration</label>
+    <small>Please select total duration of time that student attend for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="duration" name="ActivityDuration" placeholder="Enter number" style="padding-right: 70px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            minutes
+        </span>
+    </div>
+
+    <label>Activity Sets</label>
+    <small>Please select total set of repetitions that student perform for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="set" name="ActivitySets" placeholder="Enter number" style="padding-right: 70px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            sets
+        </span>
+    </div>
+    
+    <label>Activity Repetitions</label>
+    <small>Please select total of repetitions per set that student perform for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="Repetitions" name="ActivityRepetitions" placeholder="Enter number" style="padding-right: 90px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            repetitions
+        </span>
+    </div>
+
+    <div class="general2-group">
+        <label>Level of Difficulties</label>
+        <small>the complexity and demands of an activity assigned to the student</small>
+
+        <div class="general2-grid">
+            
+            <label class="general2-item">
+                <input type="radio" name="levelDifficulties" value="easy" required>
+                <span>EASY: Passive or guided, low energy, 1-step tasks, minimal instruction</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="levelDifficulties" value="MEDIUM">
+                <span>MEDIUM: Requires child to engage actively, 2–3 step tasks, modulated physical or sensory use</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="levelDifficulties" value="HARD">
+                <span>HARD: Child-led, sustained or complex activity, high regulation, endurance or coordination</span>
+            </label>
+        </div>
+    </div>
+
+    <div class="general2-group">
+        <label>Engagement Level</label>
+        <small> measures the student’s observed participation, attention and motivation during an activity</small>
+
+        <div class="general2-grid">
+            
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="LOW" required>
+                <span>LOW: Minimal interest, required frequent prompts or full assistance. Likely distracted or dysregulated</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="MEDIUM">
+                <span>MEDIUM: Some participation with verbal/gestural prompts. Shows moments of focus but may be inconsistent.</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="HIGH">
+                <span>HIGH: Actively engaged, motivated, and involved. Minimal support needed.</span>
+            </label>
+        </div>
+    </div>
+
+
+    <label>Remarks </label>
+    <input type="text" name="Remarks" placeholder="My Answer is..." >
+
+
+    <label>ACTIVITY 2</label>
+
+    <label>Activity 2 with CPT code:</label>
+    <select name="Activity2CPTCode" required>
+        <option value="">---Please Choose---</option>
+        <option value="97530">97530 Swing</option>
+        <option value="97533">97533 Music (alerting)</option>
+        <option value="97110">97110 Trampoline</option>
+        <option value="97110">97110 Bounce on Ball</option>
+        <option value="97530">97530 Handstand</option>
+        <option value="97110">97110 Dancing</option>
+        <option value="97150">97150 Action Song</option>
+        <option value="97110">97110 Happy Ball</option>
+        <option value="97533">97533 Sensory Circuit</option>
+        <option value="97150">97150 Taking Turn Activity</option>
+        <option value="97150">97150 Transfer Activity</option>
+        <option value="97533">97533 Face Tapping</option>
+        <option value="97533">97533 Tactile Input-full Body</option>
+        <option value="97533">97533 Rocking on Gymball</option>
+        <option value="97110">97110 Sports</option>
+        <option value="97110">97110 Starjumps</option>
+        <option value="97150">97150 Soccer</option>
+        <option value="97150">97150 Chase</option>
+        <option value="97110">97110 Scooter Board</option>
+    </select>
+
+    <label>Description of Activity</label>
+    <input type="text" name="DescOfActivity" placeholder="My Answer is..." >
+    
+    <label>Activity Duration</label>
+    <small>Please select total duration of time that student attend for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="duration" name="ActivityDuration" placeholder="Enter number" style="padding-right: 70px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            minutes
+        </span>
+    </div>
+
+    <label>Activity Sets</label>
+    <small>Please select total set of repetitions that student perform for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="set" name="ActivitySets" placeholder="Enter number" style="padding-right: 70px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            sets
+        </span>
+    </div>
+    
+    <label>Activity Repetitions</label>
+    <small>Please select total of repetitions per set that student perform for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="Repetitions" name="ActivityRepetitions" placeholder="Enter number" style="padding-right: 90px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            repetitions
+        </span>
+    </div>
+
+    <div class="general2-group">
+        <label>Level of Difficulties</label>
+        <small>the complexity and demands of an activity assigned to the student</small>
+
+        <div class="general2-grid">
+            
+            <label class="general2-item">
+                <input type="radio" name="redZone" value="easy" required>
+                <span>EASY: Passive or guided, low energy, 1-step tasks, minimal instruction</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="redZone" value="MEDIUM">
+                <span>MEDIUM: Requires child to engage actively, 2–3 step tasks, modulated physical or sensory use</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="redZone" value="HARD">
+                <span>HARD: Child-led, sustained or complex activity, high regulation, endurance or coordination</span>
+            </label>
+        </div>
+    </div>
+
+    <div class="general2-group">
+        <label>Engagement Level</label>
+        <small> measures the student’s observed participation, attention and motivation during an activity</small>
+
+        <div class="general2-grid">
+            
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="LOW" required>
+                <span>LOW: Minimal interest, required frequent prompts or full assistance. Likely distracted or dysregulated</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="MEDIUM">
+                <span>MEDIUM: Some participation with verbal/gestural prompts. Shows moments of focus but may be inconsistent.</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="HIGH">
+                <span>HIGH: Actively engaged, motivated, and involved. Minimal support needed.</span>
+            </label>
+        </div>
+    </div>
+
+
+    <label>Remarks </label>
+    <input type="text" name="Remarks" placeholder="My Answer is..." >
+
+
+    <label>ACTIVITY 3</label>
+
+    <label>Activity 3 with CPT code:</label>
+    <select name="Activity3CPTCode" required>
+        <option value="">---Please Choose---</option>
+        <option value="97530">97530 Swing</option>
+        <option value="97533">97533 Music (alerting)</option>
+        <option value="97110">97110 Trampoline</option>
+        <option value="97110">97110 Bounce on Ball</option>
+        <option value="97530">97530 Handstand</option>
+        <option value="97110">97110 Dancing</option>
+        <option value="97150">97150 Action Song</option>
+        <option value="97110">97110 Happy Ball</option>
+        <option value="97533">97533 Sensory Circuit</option>
+        <option value="97150">97150 Taking Turn Activity</option>
+        <option value="97150">97150 Transfer Activity</option>
+        <option value="97533">97533 Face Tapping</option>
+        <option value="97533">97533 Tactile Input-full Body</option>
+        <option value="97533">97533 Rocking on Gymball</option>
+        <option value="97110">97110 Sports</option>
+        <option value="97110">97110 Starjumps</option>
+        <option value="97150">97150 Soccer</option>
+        <option value="97150">97150 Chase</option>
+        <option value="97110">97110 Scooter Board</option>
+    </select>
+
+    <label>Description of Activity </label>
+    <input type="text" name="DescOfActivity" placeholder="My Answer is..." >
+    
+    <label>Activity Duration</label>
+    <small>Please select total duration of time that student attend for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="duration" name="ActivityDuration" placeholder="Enter number" style="padding-right: 70px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            minutes
+        </span>
+    </div>
+
+    <label>Activity Sets</label>
+    <small>Please select total set of repetitions that student perform for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="set" name="ActivitySets" placeholder="Enter number" style="padding-right: 70px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            sets
+        </span>
+    </div>
+    
+    <label>Activity Repetitions</label>
+    <small>Please select total of repetitions per set that student perform for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="Repetitions" name="ActivityRepetitions" placeholder="Enter number" style="padding-right: 90px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            repetitions
+        </span>
+    </div>
+
+    <div class="general2-group">
+        <label>Level of Difficulties</label>
+        <small>the complexity and demands of an activity assigned to the student</small>
+
+        <div class="general2-grid">
+            
+            <label class="general2-item">
+                <input type="radio" name="redZone" value="easy" required>
+                <span>EASY: Passive or guided, low energy, 1-step tasks, minimal instruction</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="redZone" value="MEDIUM">
+                <span>MEDIUM: Requires child to engage actively, 2–3 step tasks, modulated physical or sensory use</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="redZone" value="HARD">
+                <span>HARD: Child-led, sustained or complex activity, high regulation, endurance or coordination</span>
+            </label>
+        </div>
+    </div>
+
+    <div class="general2-group">
+        <label>Engagement Level</label>
+        <small> measures the student’s observed participation, attention and motivation during an activity</small>
+
+        <div class="general2-grid">
+            
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="LOW" required>
+                <span>LOW: Minimal interest, required frequent prompts or full assistance. Likely distracted or dysregulated</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="MEDIUM">
+                <span>MEDIUM: Some participation with verbal/gestural prompts. Shows moments of focus but may be inconsistent.</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="HIGH">
+                <span>HIGH: Actively engaged, motivated, and involved. Minimal support needed.</span>
+            </label>
+        </div>
+    </div>
+
+
+    <label>Remarks </label>
+    <input type="text" name="Remarks" placeholder="My Answer is..." >
+    
+
+
+
+
+    <label>YELLOW ZONE ACTIVITY</label>
+
+    <label>ACTIVITY 1</label>
+
+    <label>Activity 1 with CPT code:</label>
+    <select name="Activity1CPTCode" required>
+        <option value="">---Please Choose---</option>
+        <option value="97532">97532 Braingym</option>
+        <option value="97533">97533 Sensory Walk</option>
+        <option value="97110">97110 Animal Walk</option>
+        <option value="97533">97533 Sensory Path</option>
+        <option value="97110">97110 Obstacle Course</option>
+        <option value="97532">97532 Meditation</option>
+        <option value="97110">97110 Figure 8-Walk</option>
+        <option value="97533">97533 Rocking on gymball</option>
+        <option value="97533">97533 Rocking Toys</option>
+        <option value="97530">97530 Belly Breathing </option>
+        <option value="97530">97530 Handstand</option>
+        <option value="97530">97530 Take a break</option>
+        <option value="97110">97110 Stretching</option>
+        <option value="97110">97110 Mat Exercise</option>
+        <option value="97110">97110 Trampoline</option>
+        <option value="97110">97110 Ball pass</option>
+        <option value="97110">97110 Scooter pull</option>
+        <option value="97110">97110 Peanut Ball Plank</option>
+        <option value="97530">97530 Hands and Knee</option>
+        <option value="97530">97530 Bumpy Roll</option>
+        <option value="97110">97110 Crawling</option>
+        <option value="97110">97110 Wheelbarrow Walk</option>
+        <option value="97110">97110 Exercise Band</option>
+        <option value="97110">97110 Finger Chair Push-up</option>
+        <option value="97110">97110 Cycling</option>
+    </select>
+
+    <label>Description of Activity </label>
+    <input type="text" name="DescOfActivity" placeholder="My Answer is..." >
+    
+    <label>Activity Duration</label>
+    <small>Please select total duration of time that student attend for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="duration" name="ActivityDuration" placeholder="Enter number" style="padding-right: 70px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            minutes
+        </span>
+    </div>
+
+    <label>Activity Sets</label>
+    <small>Please select total set of repetitions that student perform for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="set" name="ActivitySets" placeholder="Enter number" style="padding-right: 70px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            sets
+        </span>
+    </div>
+    
+    <label>Activity Repetitions</label>
+    <small>Please select total of repetitions per set that student perform for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="Repetitions" name="ActivityRepetitions" placeholder="Enter number" style="padding-right: 90px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            repetitions
+        </span>
+    </div>
+
+    <div class="general2-group">
+        <label>Level of Difficulties</label>
+        <small>the complexity and demands of an activity assigned to the student</small>
+
+        <div class="general2-grid">
+            
+            <label class="general2-item">
+                <input type="radio" name="levelDifficulties" value="easy" required>
+                <span>EASY: Passive or guided, low energy, 1-step tasks, minimal instruction</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="levelDifficulties" value="MEDIUM">
+                <span>MEDIUM: Requires child to engage actively, 2–3 step tasks, modulated physical or sensory use</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="levelDifficulties" value="HARD">
+                <span>HARD: Child-led, sustained or complex activity, high regulation, endurance or coordination</span>
+            </label>
+        </div>
+    </div>
+
+    <div class="general2-group">
+        <label>Engagement Level</label>
+        <small> measures the student’s observed participation, attention and motivation during an activity</small>
+
+        <div class="general2-grid">
+            
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="LOW" required>
+                <span>LOW: Minimal interest, required frequent prompts or full assistance. Likely distracted or dysregulated</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="MEDIUM">
+                <span>MEDIUM: Some participation with verbal/gestural prompts. Shows moments of focus but may be inconsistent.</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="HIGH">
+                <span>HIGH: Actively engaged, motivated, and involved. Minimal support needed.</span>
+            </label>
+        </div>
+    </div>
+
+
+    <label>Remarks </label>
+    <input type="text" name="Remarks" placeholder="My Answer is..." >
+
+
+    <label>ACTIVITY 2</label>
+
+    <label>Activity 2 with CPT code:</label>
+    <select name="Activity2CPTCode" required>
+        <option value="">---Please Choose---</option>
+        <option value="97532">97532 Braingym</option>
+        <option value="97533">97533 Sensory Walk</option>
+        <option value="97110">97110 Animal Walk</option>
+        <option value="97533">97533 Sensory Path</option>
+        <option value="97110">97110 Obstacle Course</option>
+        <option value="97532">97532 Meditation</option>
+        <option value="97110">97110 Figure 8-Walk</option>
+        <option value="97533">97533 Rocking on gymball</option>
+        <option value="97533">97533 Rocking Toys</option>
+        <option value="97530">97530 Belly Breathing </option>
+        <option value="97530">97530 Handstand</option>
+        <option value="97530">97530 Take a break</option>
+        <option value="97110">97110 Stretching</option>
+        <option value="97110">97110 Mat Exercise</option>
+        <option value="97110">97110 Trampoline</option>
+        <option value="97110">97110 Ball pass</option>
+        <option value="97110">97110 Scooter pull</option>
+        <option value="97110">97110 Peanut Ball Plank</option>
+        <option value="97530">97530 Hands and Knee</option>
+        <option value="97530">97530 Bumpy Roll</option>
+        <option value="97110">97110 Crawling</option>
+        <option value="97110">97110 Wheelbarrow Walk</option>
+        <option value="97110">97110 Exercise Band</option>
+        <option value="97110">97110 Finger Chair Push-up</option>
+        <option value="97110">97110 Cycling</option>
+    </select>
+
+    <label>Description of Activity</label>
+    <input type="text" name="DescOfActivity" placeholder="My Answer is..." >
+    
+    <label>Activity Duration</label>
+    <small>Please select total duration of time that student attend for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="duration" name="ActivityDuration" placeholder="Enter number" style="padding-right: 70px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            minutes
+        </span>
+    </div>
+
+    <label>Activity Sets</label>
+    <small>Please select total set of repetitions that student perform for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="set" name="ActivitySets" placeholder="Enter number" style="padding-right: 70px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            sets
+        </span>
+    </div>
+    
+    <label>Activity Repetitions</label>
+    <small>Please select total of repetitions per set that student perform for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="Repetitions" name="ActivityRepetitions" placeholder="Enter number" style="padding-right: 90px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            repetitions
+        </span>
+    </div>
+
+    <div class="general2-group">
+        <label>Level of Difficulties</label>
+        <small>the complexity and demands of an activity assigned to the student</small>
+
+        <div class="general2-grid">
+            
+            <label class="general2-item">
+                <input type="radio" name="redZone" value="easy" required>
+                <span>EASY: Passive or guided, low energy, 1-step tasks, minimal instruction</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="redZone" value="MEDIUM">
+                <span>MEDIUM: Requires child to engage actively, 2–3 step tasks, modulated physical or sensory use</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="redZone" value="HARD">
+                <span>HARD: Child-led, sustained or complex activity, high regulation, endurance or coordination</span>
+            </label>
+        </div>
+    </div>
+
+    <div class="general2-group">
+        <label>Engagement Level</label>
+        <small> measures the student’s observed participation, attention and motivation during an activity</small>
+
+        <div class="general2-grid">
+            
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="LOW" required>
+                <span>LOW: Minimal interest, required frequent prompts or full assistance. Likely distracted or dysregulated</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="MEDIUM">
+                <span>MEDIUM: Some participation with verbal/gestural prompts. Shows moments of focus but may be inconsistent.</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="HIGH">
+                <span>HIGH: Actively engaged, motivated, and involved. Minimal support needed.</span>
+            </label>
+        </div>
+    </div>
+
+
+    <label>Remarks </label>
+    <input type="text" name="Remarks" placeholder="My Answer is..." >
+
+
+    <label>ACTIVITY 3</label>
+
+    <label>Activity 3 with CPT code:</label>
+    <select name="Activity3CPTCode" required>
+        <option value="">---Please Choose---</option>
+        <option value="97532">97532 Braingym</option>
+        <option value="97533">97533 Sensory Walk</option>
+        <option value="97110">97110 Animal Walk</option>
+        <option value="97533">97533 Sensory Path</option>
+        <option value="97110">97110 Obstacle Course</option>
+        <option value="97532">97532 Meditation</option>
+        <option value="97110">97110 Figure 8-Walk</option>
+        <option value="97533">97533 Rocking on gymball</option>
+        <option value="97533">97533 Rocking Toys</option>
+        <option value="97530">97530 Belly Breathing </option>
+        <option value="97530">97530 Handstand</option>
+        <option value="97530">97530 Take a break</option>
+        <option value="97110">97110 Stretching</option>
+        <option value="97110">97110 Mat Exercise</option>
+        <option value="97110">97110 Trampoline</option>
+        <option value="97110">97110 Ball pass</option>
+        <option value="97110">97110 Scooter pull</option>
+        <option value="97110">97110 Peanut Ball Plank</option>
+        <option value="97530">97530 Hands and Knee</option>
+        <option value="97530">97530 Bumpy Roll</option>
+        <option value="97110">97110 Crawling</option>
+        <option value="97110">97110 Wheelbarrow Walk</option>
+        <option value="97110">97110 Exercise Band</option>
+        <option value="97110">97110 Finger Chair Push-up</option>
+        <option value="97110">97110 Cycling</option>
+    </select>
+
+    <label>Description of Activity </label>
+    <input type="text" name="DescOfActivity" placeholder="My Answer is..." >
+    
+    <label>Activity Duration</label>
+    <small>Please select total duration of time that student attend for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="duration" name="ActivityDuration" placeholder="Enter number" style="padding-right: 70px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            minutes
+        </span>
+    </div>
+
+    <label>Activity Sets</label>
+    <small>Please select total set of repetitions that student perform for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="set" name="ActivitySets" placeholder="Enter number" style="padding-right: 70px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            sets
+        </span>
+    </div>
+    
+    <label>Activity Repetitions</label>
+    <small>Please select total of repetitions per set that student perform for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="Repetitions" name="ActivityRepetitions" placeholder="Enter number" style="padding-right: 90px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            repetitions
+        </span>
+    </div>
+
+    <div class="general2-group">
+        <label>Level of Difficulties</label>
+        <small>the complexity and demands of an activity assigned to the student</small>
+
+        <div class="general2-grid">
+            
+            <label class="general2-item">
+                <input type="radio" name="redZone" value="easy" required>
+                <span>EASY: Passive or guided, low energy, 1-step tasks, minimal instruction</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="redZone" value="MEDIUM">
+                <span>MEDIUM: Requires child to engage actively, 2–3 step tasks, modulated physical or sensory use</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="redZone" value="HARD">
+                <span>HARD: Child-led, sustained or complex activity, high regulation, endurance or coordination</span>
+            </label>
+        </div>
+    </div>
+
+    <div class="general2-group">
+        <label>Engagement Level</label>
+        <small> measures the student’s observed participation, attention and motivation during an activity</small>
+
+        <div class="general2-grid">
+            
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="LOW" required>
+                <span>LOW: Minimal interest, required frequent prompts or full assistance. Likely distracted or dysregulated</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="MEDIUM">
+                <span>MEDIUM: Some participation with verbal/gestural prompts. Shows moments of focus but may be inconsistent.</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="HIGH">
+                <span>HIGH: Actively engaged, motivated, and involved. Minimal support needed.</span>
+            </label>
+        </div>
+    </div>
+
+
+    <label>Remarks </label>
+    <input type="text" name="Remarks" placeholder="My Answer is..." >
+    
+
+
+
+
+
+    <label>BLUE ZONE ACTIVITY</label>
+
+    <label>ACTIVITY 1</label>
+
+    <label>Activity 1 with CPT code:</label>
+    <select name="Activity1CPTCode" required>
+        <option value="">---Please Choose---</option>
+        <option value="97110">97110 Animal Walks</option>
+        <option value="97110">97110 Obastacle Course</option>
+        <option value="97110">97110 Balloon Volleyball</option>
+        <option value="97110">97110 Freeze Dance</option>
+        <option value="97110">97110 Trampoline - Fast Bounce</option>
+        <option value="97150">97150 Scavenger Hunt</option>
+        <option value="97110">97110 Marching Games</option>
+        <option value="97533">97533 Singing Loud Songs</option>
+        <option value="97533">97533 Mirror Mimic Game</option>
+        <option value="97110">97110 Happy Ball Play</option>
+        <option value="97150">97150 Upbeat Action Songs</option>
+        <option value="97110">97110 Bouncing on Therapy Ball</option>
+    </select>
+
+    <label>Description of Activity </label>
+    <input type="text" name="DescOfActivity" placeholder="My Answer is..." >
+    
+    <label>Activity Duration</label>
+    <small>Please select total duration of time that student attend for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="duration" name="ActivityDuration" placeholder="Enter number" style="padding-right: 70px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            minutes
+        </span>
+    </div>
+
+    <label>Activity Sets</label>
+    <small>Please select total set of repetitions that student perform for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="set" name="ActivitySets" placeholder="Enter number" style="padding-right: 70px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            sets
+        </span>
+    </div>
+    
+    <label>Activity Repetitions</label>
+    <small>Please select total of repetitions per set that student perform for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="Repetitions" name="ActivityRepetitions" placeholder="Enter number" style="padding-right: 90px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            repetitions
+        </span>
+    </div>
+
+    <div class="general2-group">
+        <label>Level of Difficulties</label>
+        <small>the complexity and demands of an activity assigned to the student</small>
+
+        <div class="general2-grid">
+            
+            <label class="general2-item">
+                <input type="radio" name="levelDifficulties" value="easy" required>
+                <span>EASY: Passive or guided, low energy, 1-step tasks, minimal instruction</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="levelDifficulties" value="MEDIUM">
+                <span>MEDIUM: Requires child to engage actively, 2–3 step tasks, modulated physical or sensory use</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="levelDifficulties" value="HARD">
+                <span>HARD: Child-led, sustained or complex activity, high regulation, endurance or coordination</span>
+            </label>
+        </div>
+    </div>
+
+    <div class="general2-group">
+        <label>Engagement Level</label>
+        <small> measures the student’s observed participation, attention and motivation during an activity</small>
+
+        <div class="general2-grid">
+            
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="LOW" required>
+                <span>LOW: Minimal interest, required frequent prompts or full assistance. Likely distracted or dysregulated</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="MEDIUM">
+                <span>MEDIUM: Some participation with verbal/gestural prompts. Shows moments of focus but may be inconsistent.</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="HIGH">
+                <span>HIGH: Actively engaged, motivated, and involved. Minimal support needed.</span>
+            </label>
+        </div>
+    </div>
+
+
+    <label>Remarks </label>
+    <input type="text" name="Remarks" placeholder="My Answer is..." >
+
+
+    <label>ACTIVITY 2</label>
+
+    <label>Activity 2 with CPT code:</label>
+    <select name="Activity2CPTCode" required>
+        <option value="97110">97110 Animal Walks</option>
+        <option value="97110">97110 Obastacle Course</option>
+        <option value="97110">97110 Balloon Volleyball</option>
+        <option value="97110">97110 Freeze Dance</option>
+        <option value="97110">97110 Trampoline - Fast Bounce</option>
+        <option value="97150">97150 Scavenger Hunt</option>
+        <option value="97110">97110 Marching Games</option>
+        <option value="97533">97533 Singing Loud Songs</option>
+        <option value="97533">97533 Mirror Mimic Game</option>
+        <option value="97110">97110 Happy Ball Play</option>
+        <option value="97150">97150 Upbeat Action Songs</option>
+        <option value="97110">97110 Bouncing on Therapy Ball</option>
+    </select>
+
+    <label>Description of Activity</label>
+    <input type="text" name="DescOfActivity" placeholder="My Answer is..." >
+    
+    <label>Activity Duration</label>
+    <small>Please select total duration of time that student attend for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="duration" name="ActivityDuration" placeholder="Enter number" style="padding-right: 70px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            minutes
+        </span>
+    </div>
+
+    <label>Activity Sets</label>
+    <small>Please select total set of repetitions that student perform for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="set" name="ActivitySets" placeholder="Enter number" style="padding-right: 70px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            sets
+        </span>
+    </div>
+    
+    <label>Activity Repetitions</label>
+    <small>Please select total of repetitions per set that student perform for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="Repetitions" name="ActivityRepetitions" placeholder="Enter number" style="padding-right: 90px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            repetitions
+        </span>
+    </div>
+
+    <div class="general2-group">
+        <label>Level of Difficulties</label>
+        <small>the complexity and demands of an activity assigned to the student</small>
+
+        <div class="general2-grid">
+            
+            <label class="general2-item">
+                <input type="radio" name="redZone" value="easy" required>
+                <span>EASY: Passive or guided, low energy, 1-step tasks, minimal instruction</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="redZone" value="MEDIUM">
+                <span>MEDIUM: Requires child to engage actively, 2–3 step tasks, modulated physical or sensory use</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="redZone" value="HARD">
+                <span>HARD: Child-led, sustained or complex activity, high regulation, endurance or coordination</span>
+            </label>
+        </div>
+    </div>
+
+    <div class="general2-group">
+        <label>Engagement Level</label>
+        <small> measures the student’s observed participation, attention and motivation during an activity</small>
+
+        <div class="general2-grid">
+            
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="LOW" required>
+                <span>LOW: Minimal interest, required frequent prompts or full assistance. Likely distracted or dysregulated</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="MEDIUM">
+                <span>MEDIUM: Some participation with verbal/gestural prompts. Shows moments of focus but may be inconsistent.</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="HIGH">
+                <span>HIGH: Actively engaged, motivated, and involved. Minimal support needed.</span>
+            </label>
+        </div>
+    </div>
+
+
+    <label>Remarks </label>
+    <input type="text" name="Remarks" placeholder="My Answer is..." >
+
+
+    <label>ACTIVITY 3</label>
+
+    <label>Activity 3 with CPT code:</label>
+    <select name="Activity3CPTCode" required>
+        <option value="97110">97110 Animal Walks</option>
+        <option value="97110">97110 Obastacle Course</option>
+        <option value="97110">97110 Balloon Volleyball</option>
+        <option value="97110">97110 Freeze Dance</option>
+        <option value="97110">97110 Trampoline - Fast Bounce</option>
+        <option value="97150">97150 Scavenger Hunt</option>
+        <option value="97110">97110 Marching Games</option>
+        <option value="97533">97533 Singing Loud Songs</option>
+        <option value="97533">97533 Mirror Mimic Game</option>
+        <option value="97110">97110 Happy Ball Play</option>
+        <option value="97150">97150 Upbeat Action Songs</option>
+        <option value="97110">97110 Bouncing on Therapy Ball</option>
+    </select>
+
+    <label>Description of Activity </label>
+    <input type="text" name="DescOfActivity" placeholder="My Answer is..." >
+    
+    <label>Activity Duration</label>
+    <small>Please select total duration of time that student attend for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="duration" name="ActivityDuration" placeholder="Enter number" style="padding-right: 70px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            minutes
+        </span>
+    </div>
+
+    <label>Activity Sets</label>
+    <small>Please select total set of repetitions that student perform for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="set" name="ActivitySets" placeholder="Enter number" style="padding-right: 70px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            sets
+        </span>
+    </div>
+    
+    <label>Activity Repetitions</label>
+    <small>Please select total of repetitions per set that student perform for this activity</small>
+    <div style="position: relative; display: inline-block;">
+        <input type="number" id="Repetitions" name="ActivityRepetitions" placeholder="Enter number" style="padding-right: 90px;">
+        <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #555;">
+            repetitions
+        </span>
+    </div>
+
+    <div class="general2-group">
+        <label>Level of Difficulties</label>
+        <small>the complexity and demands of an activity assigned to the student</small>
+
+        <div class="general2-grid">
+            
+            <label class="general2-item">
+                <input type="radio" name="redZone" value="easy" required>
+                <span>EASY: Passive or guided, low energy, 1-step tasks, minimal instruction</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="redZone" value="MEDIUM">
+                <span>MEDIUM: Requires child to engage actively, 2–3 step tasks, modulated physical or sensory use</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="redZone" value="HARD">
+                <span>HARD: Child-led, sustained or complex activity, high regulation, endurance or coordination</span>
+            </label>
+        </div>
+    </div>
+
+    <div class="general2-group">
+        <label>Engagement Level</label>
+        <small> measures the student’s observed participation, attention and motivation during an activity</small>
+
+        <div class="general2-grid">
+            
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="LOW" required>
+                <span>LOW: Minimal interest, required frequent prompts or full assistance. Likely distracted or dysregulated</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="MEDIUM">
+                <span>MEDIUM: Some participation with verbal/gestural prompts. Shows moments of focus but may be inconsistent.</span>
+            </label>
+
+            <label class="general2-item">
+                <input type="radio" name="EngagementLevel" value="HIGH">
+                <span>HIGH: Actively engaged, motivated, and involved. Minimal support needed.</span>
+            </label>
+        </div>
+    </div>
+
+
+    <label>Remarks </label>
+    <input type="text" name="Remarks" placeholder="My Answer is..." >
+    
+
+
+
+    <!-- =================next page ================= -->
+    <label class="section-title">PART D: RESULT</label>
+    <small class="section-desc">
+        Please  state the student status after doing activity  based on the Zone of Regulation
+    </small>
+
+    <div class="input-group">
+        <label>Blue Zone</label>
+        <small>Low energy or low engagement states like feeling sad, tired, bored or physically unwell. Children in this zone often appear withdrawn, lethargic, or disengaged. Use calming or alerting strategies to bring energy up.</small>
+
+        <div class="general-grid">
+            
+            <label class="general-item">
+                <input type="radio" name="BlueZone" value="Sad" required>
+                <span>Sad</span>
+            </label>
+
+            <label class="general-item">
+                <input type="radio" name="BlueZone" value="Tired">
+                <span>Tired</span>
+            </label>
+
+            <label class="general-item">
+                <input type="radio" name="BlueZone" value="Bored">
+                <span>Bored</span>
+            </label>
+            
+            <label class="general-item">
+                <input type="radio" name="BlueZone" value="Sick">
+                <span>Sick</span>
+            </label>
+
+            <!-- Pilihan "Other" -->
+            <label class="general-item">
+                <input type="radio" name="BlueZone" value="Other" id="BlueZoneOther">
+                <span>Other:</span>
+                <input type="text" name="BlueZoneOtherText" id="BlueZoneOtherText" placeholder="Please specify">
+            </label>
+        </div>
+    </div>
+
+
+    <div class="input-group">
+        <label>Green Zone</label>
+        <small>Optimal state for learning. Student is calm, focused and receptive. Appropriate for cognitive tasks or higher-level challenges. Minimal support required.</small>
+
+        <div class="general-grid">
+            
+            <label class="general-item">
+                <input type="radio" name="GreenZone" value="Calm" required>
+                <span>Calm</span>
+            </label>
+
+            <label class="general-item">
+                <input type="radio" name="GreenZone" value="Focused">
+                <span>Focused</span>
+            </label>
+
+            <label class="general-item">
+                <input type="radio" name="GreenZone" value="Ready to Learn">
+                <span>Ready to Learn</span>
+            </label>
+
+            <!-- Pilihan "Other" -->
+            <label class="general-item">
+                <input type="radio" name="GreenZone" value="Other" id="GreenZoneOther">
+                <span>Other:</span>
+                <input type="text" name="GreenZoneOtherText" id="GreenZoneOtherText" placeholder="Please specify">
+            </label>
+        </div>
+    </div>
+
+
+    <div class="input-group">
+        <label>Yellow Zone</label>
+        <small>Elevated emotions like anxiety, excitement, silliness, or restlessness. Student may fidget, act impulsively or seem easily distracted. Requires mild regulation interventions.</small>
+
+        <div class="general-grid">
+            
+            <label class="general-item">
+                <input type="radio" name="YellowZone" value="Frustrated" required>
+                <span>Frustrated</span>
+            </label>
+
+            <label class="general-item">
+                <input type="radio" name="YellowZone" value="Silly">
+                <span>Silly</span>
+            </label>
+
+            <label class="general-item">
+                <input type="radio" name="YellowZone" value="Wiggly">
+                <span>Wiggly</span>
+            </label>
+            
+            <label class="general-item">
+                <input type="radio" name="YellowZone" value="Anxious">
+                <span>Anxious</span>
+            </label>
+
+            <!-- Pilihan "Other" -->
+            <label class="general-item">
+                <input type="radio" name="YellowZone" value="Other" id="YellowZoneOther">
+                <span>Other:</span>
+                <input type="text" name="YellowZoneOtherText" id="YellowZoneOtherText" placeholder="Please specify">
+            </label>
+        </div>
+    </div>
+
+
+    <div class="input-group">
+        <label>Red Zone</label>
+        <small>Low energy or low engagement states like feeling sad, tired, bored or physically unwell. Children in this zone often appear withdrawn, lethargic, or disengaged. Use calming or alerting strategies to bring energy up.</small>
+
+        <div class="general-grid">
+            
+            <label class="general-item">
+                <input type="radio" name="redZone" value="Angry" required>
+                <span>Angry</span>
+            </label>
+
+            <label class="general-item">
+                <input type="radio" name="redZone" value="Aggresive">
+                <span>Aggresive</span>
+            </label>
+
+            <label class="general-item">
+                <input type="radio" name="redZone" value="Out of Control">
+                <span>Out of Control</span>
+            </label>
+
+            <!-- Pilihan "Other" -->
+            <label class="general-item">
+                <input type="radio" name="redZone" value="Other" id="redZoneOther">
+                <span>Other:</span>
+                <input type="text" name="redZoneOtherText" id="redZoneOtherText" placeholder="Please specify">
+            </label>
+        </div>
+    </div>
+    
+
+
+
+    <!-- =================next page ================= -->
+        <div class="input-group">
+            <label>Therapist's Take-Over</label>
+            <small>Tick therapist name </small>
+
+            <div class="general-grid">
+               
+                <label class="general-item">
+                    <input type="radio" name="SessionConductedBy" value="Idzmir Shahril Idzham Shah" required>
+                    <span>Idzmir Shahril Idzham Shah</span>
+                </label>
+
+                <label class="general-item">
+                    <input type="radio" name="SessionConductedBy" value="Nur Dalila Kamilan" required>
+                    <span>Nur Dalila Kamilan</span>
+                </label>
+
+                <label class="general-item">
+                    <input type="radio" name="SessionConductedBy" value="Shilla Nurayeisha Mohamad Khir">
+                    <span>Shilla Nurayeisha Mohamad Khir</span>
+                </label>
+
+                <label class="general-item">
+                    <input type="radio" name="SessionConductedBy" value="Ricxstalonce Sating">
+                    <span>Ricxstalonce Sating</span>
+                </label>
+                
+                <label class="general-item">
+                    <input type="radio" name="SessionConductedBy" value="Siti Nor Farahin Mohd Rahid">
+                    <span>Siti Nor Farahin Mohd Rahid</span>
+                </label>
+
+                <label class="general-item">
+                    <input type="radio" name="SessionConductedBy" value="Nur Fatilah Mohamad">
+                    <span>Nur Fatilah Mohamad</span>
+                </label>
+
+                <label class="general-item">
+                    <input type="radio" name="SessionConductedBy" value="Siti Aqilah Sofia M.Tamizi">
+                    <span>Siti Aqilah Sofia M.Tamizi</span>
+                </label>
+
+                <!-- Pilihan "Other" -->
+                <label class="general-item">
+                    <input type="radio" name="SessionConductedBy" value="Other" id="SessionConductedByOther">
+                    <span>Other:</span>
+                    <input type="text" name="SessionConductedByOtherText" id="SessionConductedByOtherText" placeholder="Please specify">
+                </label>
+            </div>
+        </div>
+
+        <label>Thank You</label>
+
+        <div class="th05-buttons">
+            <button type="button" class="th05-btn th05-backbtn">Back</button>
+            <button type="submit" class="th05-btn">Submit</button>
+        </div>    
+  </form>
+</div>
+
+<script src="../../Forms/TH05/formth05.js"></script>
+
+</body>
+</html>

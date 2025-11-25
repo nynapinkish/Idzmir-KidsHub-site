@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Session Booking & Payment Form - Admin View</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", Arial, sans-serif;
+            background-color: transparent;
+            padding: 0;
+            margin: 0;
+        }
+
+        .cc02-form-wrapper {
+            font-family: "Poppins", Arial, sans-serif;
+            position: relative;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 30px 40px;
+            border-radius: 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            color: #002060;
+            background-color: #f6f8fb;
+            overflow: hidden;
+        }
+
+        .cc02-form-wrapper::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: url('../../../../assets/images/bg.webp') center center / cover no-repeat;
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .cc02-form-wrapper > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cc02-form-wrapper h2 {
+            text-align: center;
+            color: #004aad;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .cc02-form-wrapper h3 {
+            color: #004aad;
+            border-bottom: 2px solid #ffcc00;
+            display: inline-block;
+            padding-bottom: 3px;
+            margin-top: 25px;
+            font-size: 1rem;
+        }
+
+        .cc02-section {
+            margin-top: 30px;
+        }
+
+        .cc02-form-wrapper label {
+            display: block;
+            margin-top: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .cc02-form-wrapper small {
+            display: block;
+            font-size: 0.75rem;
+            color: #666;
+            margin-top: 6px;
+        }
+
+        .cc02-form-wrapper input,
+        .cc02-form-wrapper select,
+        .cc02-form-wrapper textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 4px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-family: "Poppins", Arial, sans-serif;
+            background-color: #f5f5f5;
+            cursor: not-allowed;
+        }
+
+        .cc02-form-wrapper input:disabled,
+        .cc02-form-wrapper select:disabled,
+        .cc02-form-wrapper textarea:disabled {
+            background-color: #f5f5f5;
+            color: #666;
+        }
+
+        /* Session List */
+        .session-list {
+            margin: 15px 0;
+        }
+
+        .booking-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: rgba(249, 249, 249, 0.9);
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .booking-row label {
+            margin: 0;
+            font-weight: 500;
+            flex: 1;
+            font-size: 0.85rem;
+        }
+
+        .qty-box {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .qty-box button {
+            width: 28px;
+            height: 28px;
+            border: none;
+            background-color: #ccc;
+            color: #666;
+            font-size: 16px;
+            cursor: not-allowed;
+            border-radius: 4px;
+        }
+
+        .qty-box .num {
+            display: inline-block;
+            width: 30px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .cc02-btn {
+            display: block;
+            width: 100%;
+            margin-top: 25px;
+            padding: 12px;
+            background-color: #ccc;
+            color: #666;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: not-allowed;
+            font-family: "Poppins", Arial, sans-serif;
+        }
+
+        @media (max-width: 600px) {
+            .cc02-form-wrapper {
+                padding: 20px;
+            }
+            .cc02-form-wrapper h2 {
+                font-size: 1.2rem;
+            }
+            .booking-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cc02-form-wrapper">
+        <h2>SESSION BOOKING & PAYMENT FORM</h2>
+
+        <form id="formCC02">
+            <label>Prepared by (Staff)</label>
+            <select name="Preparedby" disabled>
+                <option value="">-- Please choose --</option>
+                <option value="Nur Dalila binti Kamilan">Nur Dalila binti Kamilan</option>
+                <option value="Ricxstalonce Sating">Ricxstalonce Sating</option>
+                <option value="Shilla Nurayeisha binti Mohamad Khir">Shilla Nurayeisha binti Mohamad Khir</option>
+                <option value="Siti Nor Farahin binti Mohd Rashid">Siti Nor Farahin binti Mohd Rashid</option>
+                <option value="Siti Aqilah Sofia binti M.Tamizi">Siti Aqilah Sofia binti M.Tamizi</option>
+                <option value="Nur Fatilah binti Mohamad">Nur Fatilah binti Mohamad</option>
+                <option value="Siti Nur Afiqah binti Basiran">Siti Nur Afiqah binti Basiran</option>
+                <option value="Nurlizah binti Khazani">Nurlizah binti Khazani</option>
+                <option value="Yoganantini a/p Aiyaru">Yoganantini a/p Aiyaru</option>
+                <option value="Ainul Bahrain bin Azman">Ainul Bahrain bin Azman</option>
+                <option value="Noramanina binti Jamaludin">Noramanina binti Jamaludin</option>
+            </select>
+
+            <label>Date of Report</label>
+            <input type="date" name="DateofReport" disabled>
+
+            <!-- SECTION 1 -->
+            <div class="cc02-section">
+                <h3>SECTION 1: Parent / Guardian Details</h3>
+
+                <label>Full Name</label>
+                <input type="text" name="ParentGuardianFullName" placeholder="Hamidah binti Hadi" disabled>
+
+                <label>Phone Number (Validated as +60)</label>
+                <input type="tel" name="PhoneNumber" placeholder="e.g. +60123456789" disabled>
+
+                <label>Email</label>
+                <input type="email" name="Email" placeholder="hamidahhadi@gmail.com" disabled>
+            </div>
+
+            <!-- SECTION 2 -->
+            <div class="cc02-section">
+                <h3>SECTION 2: Child / Client Details</h3>
+
+                <label>Child Full Name</label>
+                <input type="text" name="ChildFullName" placeholder="Aish NurAini binti Akmal" disabled>
+
+                <label>Date of Birth</label>
+                <input type="date" name="DateofBirth" disabled>
+
+                <label>Diagnosis / Concern</label>
+                <select name="ClientStatus" disabled>
+                    <option value="">-- Please choose --</option>
+                    <option value="Active">Active</option>
+                    <option value="On Break">On Break</option>
+                    <option value="Discharged">Discharged</option>
+                </select>
+
+                <label>Current School / Centre</label>
+                <input type="text" name="CurrentSchoolCentre" placeholder="My Answer is..." disabled>
+            </div>
+
+            <!-- SECTION 3 -->
+            <div class="cc02-section">
+                <h3>SECTION 3: Booking Details</h3>
+
+                <label>Choose Session Package:</label>
+                <small>Optional - Use +/- buttons to select quantity</small>
+                <div class="session-list">
+                    <div class="booking-row">
+                        <label>Screening & Consultation</label>
+                        <div class="qty-box">
+                            <button type="button" class="minus" disabled>−</button>
+                            <span class="num">0</span>
+                            <button type="button" class="plus" disabled>+</button>
+                        </div>
+                    </div>
+                    <div class="booking-row">
+                        <label>Assessment</label>
+                        <div class="qty-box">
+                            <button type="button" class="minus" disabled>−</button>
+                            <span class="num">0</span>
+                            <button type="button" class="plus" disabled>+</button>
+                        </div>
+                    </div>
+                    <div class="booking-row">
+                        <label>Intervention</label>
+                        <div class="qty-box">
+                            <button type="button" class="minus" disabled>−</button>
+                            <span class="num">0</span>
+                            <button type="button" class="plus" disabled>+</button>
+                        </div>
+                    </div>
+                    <div class="booking-row">
+                        <label>Ready to School Program</label>
+                        <div class="qty-box">
+                            <button type="button" class="minus" disabled>−</button>
+                            <span class="num">0</span>
+                            <button type="button" class="plus" disabled>+</button>
+                        </div>
+                    </div>
+                    <div class="booking-row">
+                        <label>Register Parents Growth Circle</label>
+                        <div class="qty-box">
+                            <button type="button" class="minus" disabled>−</button>
+                            <span class="num">0</span>
+                            <button type="button" class="plus" disabled>+</button>
+                        </div>
+                    </div>
+                    <div class="booking-row">
+                        <label>Register Bengkel Komunikasi Ibubapa</label>
+                        <div class="qty-box">
+                            <button type="button" class="minus" disabled>−</button>
+                            <span class="num">0</span>
+                            <button type="button" class="plus" disabled>+</button>
+                        </div>
+                    </div>
+                    <div class="booking-row">
+                        <label>Consultation / Therapist Meeting</label>
+                        <div class="qty-box">
+                            <button type="button" class="minus" disabled>−</button>
+                            <span class="num">0</span>
+                            <button type="button" class="plus" disabled>+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Appointments -->
+                <div class="form-group">
+                    <label>Purpose Appointment 1</label>
+                    <select name="PurposeAppointment1" disabled>
+                        <option value="">-- Please choose --</option>
+                        <optgroup label="A. Intake & Assessment">
+                            <option value="Initial Assessment">Initial Assessment</option>
+                            <option value="Developmental Screening">Developmental Screening</option>
+                            <option value="Speech & Language Assessment">Speech & Language Assessment</option>
+                            <option value="Occupational Therapy Assessment">Occupational Therapy Assessment</option>
+                            <option value="Physiotherapy Assessment">Physiotherapy Assessment</option>
+                        </optgroup>
+                        <optgroup label="B. Therapy Session">
+                            <option value="Occupational Therapy Session">Occupational Therapy Session</option>
+                            <option value="Speech Therapy Session">Speech Therapy Session</option>
+                            <option value="Physiotherapy Session">Physiotherapy Session</option>
+                        </optgroup>
+                        <optgroup label="C. Parent & Customer Care">
+                            <option value="Parent Consultation">Parent Consultation</option>
+                            <option value="Progress Discussion">Progress Discussion</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Date Appointment 1</label>
+                    <small>Confirm the appointment date and time directly with the parent or guardian.</small>
+                    <input type="date" name="dateAppointment1" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label>Purpose Appointment 2</label>
+                    <select name="PurposeAppointment2" disabled>
+                        <option value="">-- Please choose --</option>
+                        <optgroup label="A. Intake & Assessment">
+                            <option value="Initial Assessment">Initial Assessment</option>
+                            <option value="Developmental Screening">Developmental Screening</option>
+                        </optgroup>
+                        <optgroup label="B. Therapy Session">
+                            <option value="Occupational Therapy Session">Occupational Therapy Session</option>
+                            <option value="Speech Therapy Session">Speech Therapy Session</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Date Appointment 2</label>
+                    <small>Confirm the appointment date and time directly with the parent or guardian.</small>
+                    <input type="date" name="dateAppointment2" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label>Purpose Appointment 3</label>
+                    <select name="PurposeAppointment3" disabled>
+                        <option value="">-- Please choose --</option>
+                        <optgroup label="A. Intake & Assessment">
+                            <option value="Initial Assessment">Initial Assessment</option>
+                        </optgroup>
+                        <optgroup label="B. Therapy Session">
+                            <option value="Occupational Therapy Session">Occupational Therapy Session</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Date Appointment 3</label>
+                    <small>Confirm the appointment date and time directly with the parent or guardian.</small>
+                    <input type="date" name="dateAppointment3" disabled>
+                </div>
+            </div>
+
+            <!-- SECTION 4 -->
+            <div class="cc02-section">
+                <h3>SECTION 4: Payment Detail & Booking Confirmation</h3>
+
+                <label>Payment Date</label>
+                <small>Record the exact date payment was made.</small>
+                <input type="date" name="PaymentDate" disabled>
+
+                <label>Payment Method</label>
+                <small>Select the correct payment method used by the customer.</small>
+                <select name="PaymentMethod" disabled>
+                    <option value="">-- Please choose --</option>
+                    <option value="Cash">Cash</option>
+                    <option value="Online transfer">Online transfer</option>
+                    <option value="Credit Card">Credit Card</option>
+                    <option value="Debit Card">Debit Card</option>
+                    <option value="QR Pay">QR Pay</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <label>Upload Proof of Payment</label>
+                <small>Accepted formats: JPG, JPEG, PNG, PDF</small>
+                <input type="file" name="ProofOfPayment" accept="image/*,.pdf" disabled>
+
+                <label>Amount Paid (RM)</label>
+                <small>Record the exact payment amount in Malaysia Ringgit (RM).</small>
+                <input type="number" name="AmountPaid" placeholder="e.g. 250.00" step="0.01" min="0" disabled>
+
+                <label>Receipt / Reference Number</label>
+                <small>Record the official receipt or transaction reference number.</small>
+                <input type="text" name="ReceiptNumber" placeholder="e.g. RCP-2024-001" disabled>
+
+                <label>Sales Invoice No.</label>
+                <small>Record the official invoice number generated for this payment.</small>
+                <input type="text" name="SalesInvoiceNo" placeholder="e.g. INV-2024-001" disabled>
+            </div>
+
+            <button type="submit" class="cc02-btn" disabled>Submit Booking & Payment</button>
+        </form>
+    </div>
+</body>
+</html>

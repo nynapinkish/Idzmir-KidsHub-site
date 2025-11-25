@@ -1,75 +1,152 @@
-// initHeader.js - Universal header loader for all pages
-// This file should be loaded at the END of every page
-// Adjust headerPath based on current page location!
+// ========================================
+// INIT HEADER SYSTEM - FIXED VERSION
+// ========================================
 
-function initializeHeader(headerPath = '/header.html') {
+function initializeHeader(headerPath, assetsPath = '../../../assets') {
+  console.log('🔍 Loading header from:', headerPath);
+  console.log('🔍 Assets path:', assetsPath);
+  
   const headerPlaceholder = document.getElementById('header-placeholder');
   
   if (!headerPlaceholder) {
-    console.warn('⚠️ No #header-placeholder found on this page');
+    console.error('❌ header-placeholder not found!');
     return;
   }
 
-  // Fetch header component
+  // Store assets path globally for use in fallback
+  window._assetsPath = assetsPath;
+
+  // Fetch header HTML
   fetch(headerPath)
     .then(response => {
-      if (!response.ok) throw new Error('Header not found at: ' + headerPath);
+      if (!response.ok) {
+        throw new Error(`Failed to load header: ${response.status}`);
+      }
       return response.text();
     })
     .then(html => {
+      console.log('✅ Header HTML loaded');
+      
+      // Replace asset paths in the loaded HTML
+      html = html.replace(/\{\{ASSETS_PATH\}\}/g, assetsPath);
+      
       headerPlaceholder.innerHTML = html;
-      console.log('✅ Header loaded successfully from:', headerPath);
-      updateHeaderUI();
+      
+      // Initialize header UI after DOM is ready
+      setTimeout(() => {
+        updateHeaderUI();
+        console.log('✅ Header initialized');
+      }, 50);
     })
     .catch(error => {
       console.error('❌ Error loading header:', error);
+      
+      // Fallback: Create header directly
+      createFallbackHeader(assetsPath);
     });
 }
 
-// Update header based on user data
+// Update Header UI based on login status
 function updateHeaderUI() {
-  const signupBtn = document.getElementById('signupBtn');
   const userProfile = document.getElementById('userProfile');
   const profileName = document.getElementById('profileName');
   const profilePic = document.getElementById('profilePic');
   
-  if (!signupBtn || !userProfile) {
+  // Wait for elements if not ready
+  if (!userProfile || !profileName || !profilePic) {
+    console.log('⏳ Waiting for header elements...');
     setTimeout(updateHeaderUI, 100);
     return;
   }
   
-  const savedUser = localStorage.getItem('currentUser');
+  // Get login data from sessionStorage
+  const userName = sessionStorage.getItem('userName');
+  const userRole = sessionStorage.getItem('userRole');
+  const userAnimal = sessionStorage.getItem('userAnimal');
   
-  if (savedUser) {
-    try {
-      const userData = JSON.parse(savedUser);
-      signupBtn.style.display = 'none';
-      userProfile.style.display = 'flex';
-      profileName.textContent = userData.name;
-      profilePic.src = `/assets/images/${userData.animal.toLowerCase()}.png`;
-      console.log('✅ Header updated with user:', userData.name);
-    } catch (error) {
-      console.error('Error parsing user data:', error);
+  // If user is logged in as student
+  if (userName && userRole === 'student') {
+    userProfile.style.display = 'flex';
+    profileName.textContent = userName;
+    
+    // Use saved animal or pick random
+    let animalImage = userAnimal || 'lion';
+    const animals = ['lion', 'elephant', 'tiger'];
+    if (!userAnimal) {
+      animalImage = animals[Math.floor(Math.random() * animals.length)];
+      sessionStorage.setItem('userAnimal', animalImage);
     }
+    
+    // Use the stored assets path
+    const assetsPath = window._assetsPath || '../../../assets';
+    profilePic.src = `${assetsPath}/images/${animalImage}.png`;
+    console.log('✅ Header synced with student:', userName);
+  } else {
+    // Show default profile if no user logged in
+    userProfile.style.display = 'flex';
+    profileName.textContent = 'nyna';
+    
+    // Use the stored assets path
+    const assetsPath = window._assetsPath || '../../../assets';
+    profilePic.src = `${assetsPath}/images/lion.png`;
+    console.log('ℹ️ Showing default profile');
   }
+}
+
+// Fallback function if fetch fails
+function createFallbackHeader(assetsPath = '../../../assets') {
+  console.log('⚠️ Using fallback header with assets path:', assetsPath);
+  
+  const headerPlaceholder = document.getElementById('header-placeholder');
+  if (!headerPlaceholder) return;
+  
+  headerPlaceholder.innerHTML = `
+    <header class="header">
+      <div class="logo">
+        <img src="${assetsPath}/images/logo1.png" alt="Logo" onerror="console.error('Failed to load logo1')">
+        <img src="${assetsPath}/images/logo2.png" alt="Idzmir Kids Hub" onerror="console.error('Failed to load logo2')">
+      </div>
+
+      <nav class="nav-menu">
+        <a href="/html/homepage/homepage.html" class="nav-item">Home</a>
+        <a href="#about" class="nav-item">About</a>
+        <a href="#tutorial" class="nav-item tutorial">Tutorial</a>
+        <a href="#contact" class="nav-item">Contact</a>
+      </nav>
+
+      <div class="user-profile" id="userProfile" onclick="toggleUserMenu()">
+        <img src="${assetsPath}/images/lion.png" alt="User Avatar" class="profile-pic" id="profilePic" onerror="console.error('Failed to load profile pic')">
+        <span class="profile-name" id="profileName">nyna</span>
+      </div>
+    </header>
+  `;
+  
+  setTimeout(updateHeaderUI, 50);
 }
 
 // Toggle user menu
 function toggleUserMenu() {
-  const savedUser = localStorage.getItem('currentUser');
-  if (savedUser) {
-    const userData = JSON.parse(savedUser);
-    alert(`🎮 Explorer Profile:\n\nName: ${userData.name}\nAge: ${userData.age}\nBuddy: ${userData.animal}`);
-  }
+  console.log('👤 User menu toggled');
+  // Add your dropdown menu logic here if needed
 }
 
-// Initialize on page load
-document.addEventListener('DOMContentLoaded', () => {
-  initializeHeader('/header.html'); // Change this path based on page location
+// Listen for storage changes (sync across tabs)
+window.addEventListener('storage', (e) => {
+  if (e.key === 'userName' || e.key === 'userRole') {
+    console.log('🔄 Storage changed, updating header...');
+    updateHeaderUI();
+  }
 });
 
-// Listen for user signup events
-window.addEventListener('userSignedUp', updateHeaderUI);
+// Listen for custom events
+window.addEventListener('userLogin', () => {
+  console.log('🔄 User login event, updating header...');
+  updateHeaderUI();
+});
 
-// Listen for storage changes
-window.addEventListener('storage', updateHeaderUI);
+window.addEventListener('userLogout', () => {
+  console.log('🔄 User logout event, updating header...');
+  updateHeaderUI();
+});
+
+console.log('✅ initHeader.js loaded!');

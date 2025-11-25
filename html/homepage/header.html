@@ -1,44 +1,54 @@
 <header class="header">
   <div class="logo">
-    <img src="/assets/images/logo1.png" alt="Idzmir Kids Hub Logo">
-    <img src="/assets/images/logo2.png" alt="Idzmir Kids Hub">
+    <img src="{{ASSETS_PATH}}/images/logo1.png" alt="Logo" onerror="console.error('Failed to load logo1')">
+    <img src="{{ASSETS_PATH}}/images/logo2.png" alt="Idzmir Kids Hub" onerror="console.error('Failed to load logo2')">
   </div>
 
   <nav class="nav-menu">
-    <a href="../../../html/homepage/homepage.html" class="nav-item">Home</a>
+    <a href="/html/homepage/homepage.html" class="nav-item">Home</a>
     <a href="#about" class="nav-item">About</a>
     <a href="#tutorial" class="nav-item tutorial">Tutorial</a>
     <a href="#contact" class="nav-item">Contact</a>
   </nav>
 
-  <button id="signupBtn" class="sign-up-btn">Sign Up</button>
-
-  <div class="user-profile" id="userProfile" style="display: none;" onclick="toggleUserMenu()">
-    <img src="../../../../../assets/images/default-avatar.png" alt="User Avatar" class="profile-pic" id="profilePic">
-    <span class="profile-name" id="profileName">Guest</span>
+  <div class="user-profile" id="userProfile" onclick="toggleUserMenu()">
+    <img src="{{ASSETS_PATH}}/images/lion.png" alt="User Avatar" class="profile-pic" id="profilePic" onerror="console.error('Failed to load profile pic')">
+    <span class="profile-name" id="profileName">nyna</span>
   </div>
 </header>
-
 <script>
-  // Handle Sign Up button click
-  document.addEventListener('DOMContentLoaded', function() {
-    const signupBtn = document.getElementById('signupBtn');
-    if (signupBtn) {
-      signupBtn.addEventListener('click', handleHeaderSignUpClick);
-    }
+  document.addEventListener('DOMContentLoaded', () => {
+    updateHeaderUI();
   });
 
-  function handleHeaderSignUpClick() {
-    // Check if we're on homepage
-    if (window.location.href.includes('homepage.html')) {
-      // On homepage - trigger modal directly
-      if (typeof showWelcomeFlow === 'function') {
-        showWelcomeFlow();
-      }
+  function updateHeaderUI() {
+    const userProfile = document.getElementById('userProfile');
+    const profileName = document.getElementById('profileName');
+    const profilePic = document.getElementById('profilePic');
+
+    const userName = sessionStorage.getItem('userName');
+    const userRole = sessionStorage.getItem('userRole');
+    const userAge = sessionStorage.getItem('userAge');
+
+    if (userName && userRole === 'student') {
+      userProfile.style.display = 'flex';
+      profileName.textContent = userName;
+
+      const animals = ['lion', 'elephant', 'tiger'];
+      const randomAnimal = animals[Math.floor(Math.random() * animals.length)];
+      profilePic.src = `../../../assets/images/${randomAnimal}.png`;
     } else {
-      // On other pages - redirect to homepage with signup flag
-      localStorage.setItem('redirectToSignUp', 'true');
-      window.location.href = '../../html/homepage/homepage.html';
+      userProfile.style.display = 'none';
     }
   }
+
+  function toggleUserMenu() {
+    const userName = sessionStorage.getItem('userName');
+    const userAge = sessionStorage.getItem('userAge');
+    if (userName) alert(`🎮 Explorer Profile:\n\nName: ${userName}\nAge: ${userAge}`);
+  }
+
+  window.addEventListener('storage', updateHeaderUI);
 </script>
+
+<link rel="stylesheet" href="../../../css/homepage/header.css">

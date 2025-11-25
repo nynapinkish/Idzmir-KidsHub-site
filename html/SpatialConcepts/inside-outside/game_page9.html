@@ -8,12 +8,11 @@
   <link rel="stylesheet" href="../../../css/SpatialConcepts/inside-outside/game_page9.css">
   <link rel="stylesheet" href="../../../css/homepage/header.css">
 
-  <!-- Firebase Scripts -->
-  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js"></script>
+  <!-- ✅ 1. LOAD FIREBASE FIRST (WITHOUT defer) -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
-  <!-- Firebase Init -->
+  <!-- ✅ 2. INITIALIZE FIREBASE -->
   <script>
     const firebaseConfig = {
       apiKey: "AIzaSyCpDrWgLXXHK7_9nioEQGBKJkUv4byCEd4",
@@ -21,21 +20,14 @@
       projectId: "idzmir-kids-hub",
       storageBucket: "idzmir-kids-hub.firebasestorage.app",
       messagingSenderId: "301692363279",
-      appId: "1:301692363279:web:86c6270d0593dee46eb97a",
-      measurementId: "G-183FXZP3H1"
+      appId: "1:301692363279:web:86c6270d0593dee46eb97a"
     };
     firebase.initializeApp(firebaseConfig);
     console.log("✅ Firebase initialized");
   </script>
-
-  <!-- Load header script -->
-  <script src="../../../js/homepage/initHeader.js" defer></script>
-  
-  <!-- Game Script -->
-  <script src="../../../js/SpatialConcepts/inside-outside/game_page9.js" defer></script>
 </head>
 <body>
-  <!-- Header Placeholder -->
+  <!-- Header -->
   <div id="header-placeholder"></div>
 
   <!-- Score Display -->
@@ -44,9 +36,9 @@
     <span id="scoreText">0/2</span>
   </div>
 
+  <!-- Game Content -->
   <div class="game-container">
     <div class="game-title">Jom Pilih!</div>
-
     <div class="main-layout">
       <div class="left-section">
         <div class="question-label">dalam</div>
@@ -59,17 +51,14 @@
 
       <div class="right-section">
         <div class="question-prompt">Mana yang di dalam?</div>
-        
         <div class="options-section">
           <div class="option-card" data-answer="correct">
-              <img src="../../../assets/images/inside.png" alt="dalam" class="card-image">
+            <img src="../../../assets/images/inside.png" alt="dalam" class="card-image">
           </div>
-
           <div class="option-card" data-answer="wrong">
-              <img src="../../../assets/images/outside.png" alt="luar" class="card-image">
+            <img src="../../../assets/images/outside.png" alt="luar" class="card-image">
           </div>
         </div>
-
         <div class="feedback" id="feedback"></div>
       </div>
     </div>
@@ -97,7 +86,11 @@
     </div>
   </div>
 
-  <!-- Initialize header AFTER DOM loaded -->
+  <!-- ✅ 3. LOAD SCRIPTS IN ORDER (AFTER Firebase init) -->
+  <script src="../../../js/homepage/initHeader.js"></script>
+  <script src="../../../js/SpatialConcepts/inside-outside/game_page9.js"></script>
+  
+  <!-- ✅ 4. INITIALIZE HEADER -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       initializeHeader('../../homepage/header.html');

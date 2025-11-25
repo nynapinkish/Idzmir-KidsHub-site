@@ -1,0 +1,246 @@
+
+/* ================= GLOBAL ================= */
+.th05-form-wrapper {
+    position: relative;
+    min-height: 100vh;
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+
+.th05-form-wrapper::before {
+    content: " "; /* ⚠️ Space, bukan empty string */
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: red; /* Test dengan warna dulu */
+    background-image: url('/assets/images/bg.webp');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.4;
+    pointer-events: none; 
+    z-index: 1;
+}
+
+.th05-form-wrapper > * { 
+    position: relative; 
+    z-index: 2;
+}
+
+.th05-form-wrapper h2 {
+  margin-bottom: 32px;
+  font-size: 1.95rem;
+  font-weight: 700;
+  color: #001a4d;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* ================= TEXT & LABEL ================= */
+label {
+    font-weight: 600;
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    color: #083963;
+}
+
+small {
+    display: block;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    color: #666;
+}
+
+.section-title {
+    margin-top: 40px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.section-desc {
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    color: #666;
+}
+
+.input-group {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+/* ================= INPUT FIELDS ================= */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+
+/* ================= TWO COLUMN ================= */
+.two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+/* ================= RADIO GRID (GENERAL 1) ================= */
+.general-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    margin-bottom: 5px;
+}
+
+.general-item {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background:transparent;
+    padding: 12px 8px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.general-item:hover {
+    background: #e8eefc;
+}
+
+.general-item input[type="radio"] {
+    transform: scale(1.3);
+}
+
+
+
+/* ================= OTHER INPUT ================= */
+.other-input {
+    margin-top: 8px;
+    border: 1px solid #aaa;
+    padding: 10px;
+    border-radius: 8px;
+    width: 100%;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+/* ================= SUFFIX INPUT (minutes, sets, repetitions) ================= */
+.suffix-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.suffix-wrapper input {
+    width: 100%;
+    padding-right: 80px;
+}
+
+.suffix-text {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #555;
+    font-size: 14px;
+}
+
+/* ================= RADIO GRID (GENERAL 2 - SPECIAL ACTIVITIES) ================= */
+.general2-group {
+    margin-top: 20px;
+}
+
+.general2-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.general2-item {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background:transparent;
+    padding: 12px 8px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.general2-item:hover {
+    background: #e9eefc;
+}
+
+.general2-item input[type="radio"] {
+    transform: scale(1.3);
+    margin-top: 3px;
+}
+
+/* ================= BUTTON CONTAINER ================= */
+.th05-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* pastikan vertikal juga center */
+    gap: 12px;
+    margin-top: 25px;
+    flex-wrap: wrap; /* supaya responsive: button boleh turun jika sempit */
+    width: 100%;
+}
+
+/* ================= BUTTON ================= */
+.th05-btn {
+    background-color: #002060;
+    color: #fff;
+    border: none;
+    padding: 13px 30px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+
+.th05-btn:hover {
+    background-color: #013a9c;
+    transform: translateY(-2px);
+}
+
+/* Back button */
+/* Back button override warna sahaja */
+.th05-backbtn {
+    background-color: #eb0000;
+}
+
+.th05-backbtn:hover {
+    background-color: #333;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 480px) {
+    .th05-buttons {
+        flex-direction: column; /* stack button vertikal */
+        gap: 10px;
+    }
+
+    .th05-btn, .th05-backbtn[type="back"] {
+        width: 100%; /* penuh container */
+        text-align: center;
+    }
+}

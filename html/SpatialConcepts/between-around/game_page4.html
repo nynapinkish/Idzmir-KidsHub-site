@@ -25,24 +25,24 @@
 
   <div class="main-layout">
     <div class="left-section">
-      <div class="question-label">belakang</div>
+      <div class="question-label">antara</div>
       <div class="question-box" id="questionBox">
         <div class="question-mark">?</div>
-        <img src="../../../assets/images/behind.png" alt="belakang" class="question-icon">
+        <img src="../../../assets/images/between.png" alt="antara" class="question-icon">
         <img class="answer-image" id="answerImage" src="" alt="Jawapan">
       </div>
     </div>
 
     <div class="right-section">
-      <div class="question-prompt">Mana yang di depan?</div>
+      <div class="question-prompt">Mana yang antara?</div>
       
       <div class="options-section">
         <div class="option-card" data-answer="correct">
-            <img src="../../../assets/images/inFrontOf.png" alt="depan" class="card-image">
+            <img src="../../../assets/images/between.png" alt="antara" class="card-image">
         </div>
 
         <div class="option-card" data-answer="wrong">
-            <img src="../../../assets/images/behind.png" alt="belakang" class="card-image">
+            <img src="../../../assets/images/around.png" alt="sekeliling" class="card-image">
         </div>
       </div>
 
@@ -85,12 +85,40 @@
       <img src="../../../assets/images/next.png" alt="Next Button" class="next-button">
     </a>
 
+<!-- ================= SCRIPTS ================= -->
+
+<!-- 1. FIREBASE SDK (MUST BE FIRST!) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<!-- 2. FIREBASE CONFIGURATION -->
+<script>
+  // TODO: Replace with your actual Firebase config
+  const firebaseConfig = {
+apiKey: "AIzaSyCpDrWgLXXHK7_9nioEQGBKJkUv4byCEd4",
+  authDomain: "idzmir-kids-hub.firebaseapp.com",
+  projectId: "idzmir-kids-hub",
+  storageBucket: "idzmir-kids-hub.firebasestorage.app",
+  messagingSenderId: "301692363279",
+  appId: "1:301692363279:web:ba7c6547b36e433d6eb97a"  };
+
+  // Initialize Firebase
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+    console.log('✅ Firebase initialized successfully');
+  } else {
+    console.log('ℹ️ Firebase already initialized');
+  }
+</script>
+
+<!-- 3. GAME SESSION MANAGER -->
+<script src="../../../js/gameSessionManager.js"></script>
+
+<!-- 4. GAME LOGIC -->
 <script src="../../../js/SpatialConcepts/between-around/game_page4.js"></script>
 
-  <!-- Load initHeader.js FIRST -->
-<script src="../../../../js/homepage/initHeader.js"></script>
-
-<!-- THEN call initializeHeader with correct path -->
+<!-- 5. HEADER (LAST!) -->
+<script src="../../../js/homepage/initHeader.js"></script>
 <script>
   initializeHeader('../../homepage/header.html');
 </script>

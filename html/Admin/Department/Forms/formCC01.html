@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Communication Work Form</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", Arial, sans-serif;
+      background-color: transparent;
+      padding: 0;
+      margin: 0;
+    }
+
+    .cc01-form-wrapper {
+      font-family: "Poppins", Arial, sans-serif;
+      position: relative;
+      max-width: 650px;
+      margin: 0 auto;
+      padding: 30px 40px;
+      border-radius: 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      color: #002060;
+      background-color: #f6f8fb;
+      overflow: hidden;
+    }
+
+    .cc01-form-wrapper::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url('../../../../assets/images/bg.webp') center center / cover no-repeat;
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .cc01-form-wrapper > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cc01-form-wrapper h2 {
+      text-align: center;
+      color: #004aad;
+      margin-bottom: 15px;
+      font-size: 1.4rem;
+    }
+
+    .cc01-form-wrapper h3 {
+      color: #004aad;
+      border-bottom: 2px solid #ffcc00;
+      display: inline-block;
+      padding-bottom: 3px;
+      margin-top: 25px;
+      font-size: 1rem;
+    }
+
+    .cc01-section {
+      margin-top: 30px;
+    }
+
+    .cc01-form-wrapper label {
+      display: block;
+      margin-top: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .cc01-form-wrapper small {
+      display: block;
+      font-size: 0.75rem;
+      color: #666;
+      margin-top: 6px;
+    }
+
+    .cc01-form-wrapper input,
+    .cc01-form-wrapper select,
+    .cc01-form-wrapper textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 4px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-family: "Poppins", Arial, sans-serif;
+      background-color: #f5f5f5;
+      cursor: not-allowed;
+    }
+
+    .cc01-form-wrapper input:disabled,
+    .cc01-form-wrapper select:disabled,
+    .cc01-form-wrapper textarea:disabled {
+      background-color: #f5f5f5;
+      color: #666;
+    }
+
+    .cc01-form-wrapper textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    /* Signature Pad Styles */
+    .signature-container {
+      margin-top: 20px;
+      padding: 15px;
+      background: #fff;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .signature-container label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+      color: #004aad;
+    }
+
+    #signature-pad {
+      width: 100%;
+      height: 150px;
+      border: 2px dashed #ccc;
+      border-radius: 4px;
+      background-color: #fff;
+      cursor: crosshair;
+    }
+
+    #clearButton {
+      margin-top: 10px;
+      padding: 8px 20px;
+      background-color: #ef5350;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: "Poppins", Arial, sans-serif;
+      font-size: 0.85rem;
+      transition: 0.3s;
+    }
+
+    #clearButton:hover {
+      background-color: #c62828;
+    }
+
+    .cc01-btn {
+      display: block;
+      width: 100%;
+      margin-top: 25px;
+      padding: 12px;
+      background-color: #004aad;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: "Poppins", Arial, sans-serif;
+      transition: 0.3s;
+    }
+
+    .cc01-btn:hover {
+      background-color: #003080;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 74, 173, 0.3);
+    }
+
+    @media (max-width: 600px) {
+      .cc01-form-wrapper {
+        padding: 20px;
+      }
+
+      .cc01-form-wrapper h2 {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="cc01-form-wrapper">
+  <h2>CUSTOMER COMMUNICATION WORK FORM</h2>
+
+  <!-- Signature Pad Library -->
+  <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+
+  <form id="formCC01">
+
+    <!-- SECTION A: BASIC CLIENT INFORMATION -->
+    <div class="cc01-section">
+      <h3>SECTION A: BASIC CLIENT INFORMATION</h3>
+
+      <label>Report Completed by</label>
+      <small>Name of staff</small>
+      <select name="ReportCompletedby" disabled>
+        <option value="">-- Please choose --</option>
+        <option value="Nur Dalila binti Kamilan">Nur Dalila binti Kamilan</option>
+        <option value="Ricxstalonce Sating">Ricxstalonce Sating</option>
+        <option value="Shilla Nurayeisha binti Mohamad Khir">Shilla Nurayeisha binti Mohamad Khir</option>
+      </select>
+        
+      <label>Parent / Guardian Full Name</label>
+      <input type="text" name="Parent/GuardianFullName" placeholder="Hamidah binti Hadi" disabled>
+
+      <label>Child / Client Full Name</label>
+      <input type="text" name="Child/ClientFullName" placeholder="Aish NurAini binti Akmal" disabled>
+
+      <label>Customer Phone Number</label>
+      <input type="tel" name="PhoneNumber" placeholder="e.g. +60123456789" disabled>
+
+      <label>Service Type</label>
+      <select name="ServiceType" disabled>
+        <option value="">-- Please choose --</option>
+        <option value="Screening & Consultation">Screening & Consultation</option>
+        <option value="Assessment (New)">Assessment (New)</option>
+        <option value="Consultation Only (Old)">Consultation Only (Old)</option>
+        <option value="Therapy Class 1 Session">Therapy Class 1 Session</option>
+        <option value="Therapy Class 2 Session">Therapy Class 2 Session</option>
+        <option value="Therapy Class 3 Session">Therapy Class 3 Session</option>
+        <option value="Therapy Class 4 Session">Therapy Class 4 Session</option>
+        <option value="Therapy Class 8 Session">Therapy Class 8 Session</option>
+        <option value="Therapy Class 12 Session">Therapy Class 12 Session</option>
+        <option value="Education & Readiness School Program">Education & Readiness School Program</option>
+        <option value="Home Program">Home Program</option>
+        <option value="Parents Growth Circle">Parents Growth Circle</option>
+        <option value="Buy New T-shirt">Buy New T-shirt</option>
+      </select>
+
+      <label>Therapist/PIC</label>
+      <small>Name of assigned therapist</small>
+      <select name="Therapist/PIC" disabled>
+        <option value="">-- Please choose --</option>
+        <option value="Nur Dalila binti Kamilan">Nur Dalila binti Kamilan</option>
+        <option value="Ricxstalonce Sating">Ricxstalonce Sating</option>
+        <option value="Shilla Nurayeisha binti Mohamad Khir">Shilla Nurayeisha binti Mohamad Khir</option>
+        <option value="Siti Nor Farahin binti Mohd Rashid">Siti Nor Farahin binti Mohd Rashid</option>
+        <option value="Siti Aqilah Sofia binti M.Tamizi">Siti Aqilah Sofia binti M.Tamizi</option>
+        <option value="Nur Fatilah binti Mohamad">Nur Fatilah binti Mohamad</option>
+      </select>
+
+      <label>Registration Date</label>
+      <input type="date" name="registrationDate" disabled>
+
+      <label>Client Status</label>
+      <select name="ClientStatus" disabled>
+        <option value="">-- Please choose --</option>
+        <option value="Active">Active</option>
+        <option value="On Break">On Break</option>
+        <option value="Discharged">Discharged</option>
+      </select>
+    </div>
+
+    <!-- SECTION B: SESSION / SERVICE UPDATE -->
+    <div class="cc01-section">
+      <h3>SECTION B: SESSION / SERVICE UPDATE</h3>
+
+      <label>Date of Communication</label>
+      <small>Date when the parent was conducted</small>
+      <input type="date" name="DateofCommunication" disabled>
+
+      <label>Type of Contact</label>
+      <select name="TypeofContact" disabled>
+        <option value="">-- Please choose --</option>
+        <option value="Call">Call</option>
+        <option value="In-person">In-person</option>
+        <option value="WhatsApp">WhatsApp</option>
+        <option value="Email">Email</option>
+      </select>
+
+      <label>Purpose of Communication</label>
+      <small>Please select from any category description. Do not select category.</small>
+      <select name="PurposeofCommunication" disabled>
+        <option value="">-- Please choose --</option>
+        <option value="1. Session Management">1. Session Management</option>
+        <option value="Session Confirmation">Session Confirmation</option>
+        <option value="Session Reschedule / Cancellation">Session Reschedule / Cancellation</option>
+        <option value="Missed Session Follow-up">Missed Session Follow-up</option>
+        <option value="Session Reminder">Session Reminder</option>
+        <option value="2. Parent Feedback & Progress">2. Parent Feedback & Progress</option>
+        <option value="Session Feedback">Session Feedback</option>
+        <option value="Child Progress Inquiry">Child Progress Inquiry</option>
+        <option value="Parent Concern or Observation">Parent Concern or Observation</option>
+        <option value="Progress Report Discussion">Progress Report Discussion</option>
+        <option value="3. Billing & Payment">3. Billing & Payment</option>
+        <option value="Payment Reminder">Payment Reminder</option>
+        <option value="Receipt or Invoice Request">Receipt or Invoice Request</option>
+        <option value="Payment Discrepancy Clarification">Payment Discrepancy Clarification</option>
+        <option value="4. Complaint / Concern Resolution">4. Complaint / Concern Resolution</option>
+        <option value="Service Complaint">Service Complaint</option>
+        <option value="Facility Concern">Facility Concern</option>
+        <option value="Staff Behaviour Feedback">Staff Behaviour Feedback</option>
+        <option value="Unmet Expectation Follow-Up">Unmet Expectation Follow-Up</option>
+        <option value="5. Program & Package Communication">5. Program & Package Communication</option>
+        <option value="Program Renewal Inquiry">Program Renewal Inquiry</option>
+        <option value="Package Upgrade / Change Request">Package Upgrade / Change Request</option>
+        <option value="Promotion or Discount Inquiry">Promotion or Discount Inquiry</option>
+        <option value="New Service Information">New Service Information</option>
+        <option value="6. Consultation / Parent Meeting">6. Consultation / Parent Meeting</option>
+        <option value="Scheduling Parent Consultation">Scheduling Parent Consultation</option>
+        <option value="Discuss Child Development / Therapy Plan">Discuss Child Development / Therapy Plan</option>
+        <option value="Post-Assessment Discussion">Post-Assessment Discussion</option>
+        <option value="7. Special Requests">7. Special Requests</option>
+        <option value="Schedule Adjustment Request">Schedule Adjustment Request</option>
+        <option value="Child-Specific Note (Health / Behaviour)">Child-Specific Note (Health / Behaviour)</option>
+        <option value="Therapy Material Request">Therapy Material Request</option>
+        <option value="8. General Communication">8. General Communication</option>
+        <option value="Relationship Building / Check-In">Relationship Building / Check-In</option>
+        <option value="Appreciation / Thank You Message">Appreciation / Thank You Message</option>
+        <option value="Event or Campaign Announcement">Event or Campaign Announcement</option>
+        <option value="On leave">On leave</option>
+        <option value="Discharge">Discharge</option>
+        <option value="Time of Slip">Time of Slip</option>
+      </select>
+
+      <label>Communication from Parent based on Purpose Above</label>
+      <small>Record parent's comment or concern</small>
+      <input type="text" name="CommunicationfromParentbasedonPurposeAbove" placeholder="Let me tell you about this..." disabled>
+      
+      <label>Action Taken by Customer Care</label>
+      <small>Please write solution provided to the parents based on concern</small>
+      <input type="text" name="ActionTakenbyCustomerCare" placeholder="Let me tell you about this..." disabled>
+      
+      <label>Follow-up Needed</label>
+      <small>Please record this important message for next action</small>
+      <select name="Follow-upNeeded" disabled>
+        <option value="">-- Please choose --</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+    </div>
+
+    <!-- SECTION C: SESSION / THERAPY FEEDBACK -->
+    <div class="cc01-section">
+      <h3>SECTION C: SESSION / THERAPY FEEDBACK</h3>
+
+      <label>Ask Parent Previous Session Feedback</label>
+      <small>Politely ask for feedback after greeting or confirming the purpose of the call.</small>
+      <select name="AskParentPreviousSessionFeedback" disabled>
+        <option value="">-- Please choose --</option>
+        <option value="Excellent (Cemerlang)">Excellent (Cemerlang)</option>
+        <option value="Good (Baik)">Good (Baik)</option>
+        <option value="Average (Sederhana)">Average (Sederhana)</option>
+        <option value="Concerned (Bimbang)">Concerned (Bimbang)</option>
+      </select>
+
+      <label>Parent Comment Summary</label>
+      <small>Key summary of parent's observation or feedback</small>
+      <input type="text" name="ParentCommentSummary" placeholder="Let me tell you about this..." disabled>
+
+      <label>Therapist Feedback (if applicable)</label>
+      <small>Short note from therapist if parent shared therapy-related issues</small>
+      <input type="text" name="TherapistFeedback" placeholder="Let me tell you about this..." disabled>
+
+      <label>Next Step / Recommendation</label>
+      <small>This is where you turns parent feedback into real action.</small>
+      <select name="NextStep/Recommendation" disabled>
+        <option value="">-- Please choose --</option>
+        <option value="1. Service Continuation">1. Service Continuation</option>
+        <option value="Continue Current Plan">Continue Current Plan</option>
+        <option value="Maintain Frequency & Schedule">Maintain Frequency & Schedule</option>
+        <option value="Proceed to Next Session Cycle">Proceed to Next Session Cycle</option>
+        <option value="2. Therapy Adjustment">2. Therapy Adjustment</option>
+        <option value="Modify Current Goal">Modify Current Goal</option>
+        <option value="Adjust Therapy Intensity or Method">Adjust Therapy Intensity or Method</option>
+        <option value="Introduce New Activity / Focus Area">Introduce New Activity / Focus Area</option>
+        <option value="3. Consultation / Parent Review">3. Consultation / Parent Review</option>
+        <option value="Schedule Parent Consultation">Schedule Parent Consultation</option>
+        <option value="Arrange Case Discussion">Arrange Case Discussion</option>
+        <option value="Provide Therapist Feedback Summary">Provide Therapist Feedback Summary</option>
+        <option value="4. Escalation">4. Escalation</option>
+        <option value="Escalate to Therapist For Clarification">Escalate to Therapist For Clarification</option>
+        <option value="Escalate to Operation Manager for Action">Escalate to Operation Manager for Action</option>
+        <option value="Report Serious Concern to Director">Report Serious Concern to Director</option>
+        <option value="5. Assessment & Evaluation">5. Assessment & Evaluation</option>
+        <option value="Plan Reassessment / Progress Check">Plan Reassessment / Progress Check</option>
+        <option value="Evaluate Child Development Goals">Evaluate Child Development Goals</option>
+        <option value="Prepare Written Report">Prepare Written Report</option>
+        <option value="6. Parent Support">6. Parent Support</option>
+        <option value="Provide Resource Materials">Provide Resource Materials</option>
+        <option value="Send Educational Video / Link">Send Educational Video / Link</option>
+        <option value="7. Follow-Up & Monitoring">7. Follow-Up & Monitoring</option>
+        <option value="Follow-Up in 1 Week">Follow-Up in 1 Week</option>
+        <option value="Follow-Up After Next Session">Follow-Up After Next Session</option>
+        <option value="Track Parent Response">Track Parent Response</option>
+        <option value="8. Closure">8. Closure</option>
+        <option value="Issue Resolved">Issue Resolved</option>
+        <option value="Parent Confirmed Satisfaction">Parent Confirmed Satisfaction</option>
+        <option value="Close Case Officially">Close Case Officially</option>
+      </select>
+    </div>
+
+    <!-- SECTION D: ISSUE LOG (IF ANY) -->
+    <div class="cc01-section">
+      <h3>SECTION D: ISSUE LOG (IF ANY)</h3>
+
+      <label>Issue Type</label>
+      <select name="IssueType" disabled>
+        <option value="">-- Please choose --</option>
+        <option value="Complaint">Complaint</option>
+        <option value="Inquiry">Inquiry</option>
+        <option value="Service Concern">Service Concern</option>
+        <option value="Suggestion">Suggestion</option>
+      </select>
+
+      <label>Description of Issue</label>
+      <small>Write detailed note of what parent reported</small>
+      <input type="text" name="DescriptionofIssue" placeholder="Let me tell you about this..." disabled>
+
+      <label>Immediate Action Taken</label>
+      <small>What CC did immediately</small>
+      <input type="text" name="ImmediateActionTaken" placeholder="My answer is..." disabled>
+
+      <label>Reported To</label>
+      <small>Who was informed</small>
+      <select name="ReportedTo" disabled>
+        <option value="">-- Please choose --</option>
+        <option value="Manager">Manager</option>
+        <option value="Assistant Manager">Assistant Manager</option>
+        <option value="Manager Trainee">Manager Trainee</option>
+      </select>
+
+      <label>Resolution Status</label>
+      <select name="ResolutionStatus" disabled>
+        <option value="">-- Please choose --</option>
+        <option value="Resolved">Resolved</option>
+        <option value="Pending">Pending</option>
+        <option value="Escalated">Escalated</option>
+      </select>
+
+      <label>Date Closed</label>
+      <small>When issue was fully settled</small>
+      <input type="date" name="DateClosed" disabled>
+    </div>
+
+    <!-- SECTION E: FOLLOW-UP RECORD -->
+    <div class="cc01-section">
+      <h3>SECTION E: FOLLOW-UP RECORD</h3>
+
+      <label>Follow-up Date</label>
+      <small>Planned next contact date</small>
+      <input type="date" name="Follow-upDate" disabled>
+
+      <label>Assigned Staff</label>
+      <small>Name of Customer Care responsible</small>
+      <select name="AssignedStaff" disabled>
+        <option value="">-- Please choose --</option>
+        <option value="Nur Dalila (MANAGER)">Nur Dalila (MANAGER)</option>
+        <option value="Ricxstalonce Sating (MT)">Ricxstalonce Sating (MT)</option>
+        <option value="Shilla Nurayeisha (ASM)">Shilla Nurayeisha (ASM)</option>
+        <option value="Siti Nurafiqah (CC)">Siti Nurafiqah (CC)</option>
+        <option value="Nur Lizah (CA)">Nur Lizah (CA)</option>
+      </select>
+
+      <label>Method of Follow-up</label>
+      <select name="MethodOfFollowup" disabled>
+        <option value="">-- Please choose --</option>
+        <option value="Call">Call</option>
+        <option value="WhatsApp">WhatsApp</option>
+        <option value="Email">Email</option>
+      </select>
+
+      <label>Follow-up Summary</label>
+      <small>Short update of what's next</small>
+      <input type="text" name="Follow-upSummary" placeholder="My answer is..." disabled>
+
+      <label>Status</label>
+      <small>Status customer based on follow-up summary record</small>
+      <select name="Status" disabled>
+        <option value="">-- Please choose --</option>
+        <option value="Ongoing">Ongoing</option>
+        <option value="Complete">Complete</option>
+      </select>
+    </div>
+
+    <!-- SECTION F: MANAGER'S REVIEW -->
+    <div class="cc01-section">
+      <h3>SECTION F: MANAGER'S REVIEW</h3>
+
+      <label>Review by</label>
+      <small>Name of Manager or Quality Manager</small>
+      <select name="Reviewby" disabled>
+        <option value="">-- Please choose --</option>
+        <option value="Nur Dalila binti Kamilan">Nur Dalila binti Kamilan (MANAGER)</option>
+        <option value="Ricxstalonce Sating">Ricxstalonce Sating (MT)</option>
+        <option value="Shilla Nurayeisha binti Mohamad Khir">Shilla Nurayeisha binti Mohamad Khir (ASM)</option>
+      </select>
+
+      <label>Date Reviewed</label>
+      <input type="date" name="DateReviewed" disabled>
+
+      <label>Feedback / Instruction</label>
+      <small>Manager's notes for CC or therapist</small>
+      <input type="text" name="FeedbackInstruction" placeholder="My answer is..." disabled>
+
+      <label>Category Type</label>
+      <select name="CategoryType" disabled>
+        <option value="">-- Please choose --</option>
+        <option value="Service">Service</option>
+        <option value="Report">Report</option>
+        <option value="Billing">Billing</option>
+        <option value="Complaint">Complaint</option>
+        <option value="Others">Others</option>
+      </select>
+
+      <label>Severity Level</label>
+      <select name="SeverityLevel" disabled>
+        <option value="">-- Please choose --</option>
+        <option value="Low (3 days)">Low (3 days)</option>
+        <option value="Medium (between 24-48 hours)">Medium (between 24-48 hours)</option>
+        <option value="High (critical, fast action)">High (critical, fast action)</option>
+      </select>
+
+      <!-- Signature -->
+      <input type="hidden" name="signatureData" id="signatureData">
+      <div class="signature-container">
+        <label for="signature-pad">Your Signature</label>
+        <small>Add a digital signature using your mouse, stylus, or finger.</small>
+        <canvas id="signature-pad"></canvas>
+        <button type="button" id="clearButton">Clear</button>
+        <div id="signatureError" style="color: red; display: none;">Sila tandatangan sebelum submit.</div>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="cc01-btn">Submit</button>
+  </form>
+</div>
+
+<script>
+  // Initialize Signature Pad
+  const canvas = document.getElementById('signature-pad');
+  const signaturePad = new SignaturePad(canvas, {
+    backgroundColor: 'rgb(255, 255, 255)'
+  });
+
+  // === DISABLE SIGNATURE PAD FOR ADMIN ===
+  function disableSignaturePad() {
+    signaturePad.off();  // disable drawing
+    canvas.style.pointerEvents = "none"; // disable mouse/touch
+    document.getElementById("clearButton").style.display = "none"; // hide clear btn
+  }
+
+  // Call this function when admin open form
+  disableSignaturePad();
+
+  // Resize canvas
+  function resizeCanvas() {
+    const ratio = Math.max(window.devicePixelRatio || 1, 1);
+    canvas.width = canvas.offsetWidth * ratio;
+    canvas.height = canvas.offsetHeight * ratio;
+    canvas.getContext("2d").scale(ratio, ratio);
+    signaturePad.clear();
+  }
+
+  window.addEventListener("resize", resizeCanvas);
+  resizeCanvas();
+
+  // Clear button
+  document.getElementById('clearButton').addEventListener('click', function() {
+    signaturePad.clear();
+  });
+</script>
+
+</body>
+</html>

@@ -3,15 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jom Pilih! - Idzmir Kids Hub</title>
+  <title>Atas & Bawah - Idzmir Kids Hub</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../../css/SpatialConcepts/above-below/game_page2.css">
   <link rel="stylesheet" href="../../../css/homepage/header.css">
-
 </head>
 <body>
 
-<!-- Header Placeholder - will be loaded dynamically -->
+<!-- Header Placeholder -->
 <div id="header-placeholder"></div>
 
 <!-- Score Display -->
@@ -51,10 +50,9 @@
   </div>
 </div>
 
-      <!-- 🎉 SCORE MODAL (Hidden by default) -->
+<!-- Score Modal -->
 <div class="score-modal" id="scoreModal" style="display: none;">
   <div class="score-container">
-    <!-- ⭐ Stars embedded at top of bukit -->
     <div class="stars-container">
       <div class="star star-small">
         <img src="../../../assets/images/star1.png" class="star-image" alt="Star" />
@@ -67,30 +65,57 @@
       </div>
     </div>
 
-    <!-- 🏷️ Title -->
     <div class="score-title">Markah anda</div>
 
-    <!-- 📦 Score Box -->
     <div class="score-box-wrapper">
       <div class="score-box">
-        <div class="score-value" id="finalScoreDisplay">2/2</div>
+        <div class="score-value" id="finalScoreDisplay">0/3</div>
       </div>
     </div>
   </div>
 </div>
 
-      <!-- NEXT BUTTON -->
-  <div class="next-button-container">
+<!-- Next Button -->
+<div class="next-button-container">
   <a href="../../../../html/SpatialConcepts/behind-inFrontOf/game_page3.html">
-      <img src="../../../assets/images/next.png" alt="Next Button" class="next-button">
-    </a>
+    <img src="../../../assets/images/next.png" alt="Next Button" class="next-button">
+  </a>
+</div>
 
+<!-- ================= SCRIPTS ================= -->
+
+<!-- 1. FIREBASE SDK (MUST BE FIRST!) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<!-- 2. FIREBASE CONFIGURATION -->
+<script>
+  // TODO: Replace with your actual Firebase config
+  const firebaseConfig = {
+apiKey: "AIzaSyCpDrWgLXXHK7_9nioEQGBKJkUv4byCEd4",
+  authDomain: "idzmir-kids-hub.firebaseapp.com",
+  projectId: "idzmir-kids-hub",
+  storageBucket: "idzmir-kids-hub.firebasestorage.app",
+  messagingSenderId: "301692363279",
+  appId: "1:301692363279:web:ba7c6547b36e433d6eb97a"  };
+
+  // Initialize Firebase
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+    console.log('✅ Firebase initialized successfully');
+  } else {
+    console.log('ℹ️ Firebase already initialized');
+  }
+</script>
+
+<!-- 3. GAME SESSION MANAGER -->
+<script src="../../../js/gameSessionManager.js"></script>
+
+<!-- 4. GAME LOGIC -->
 <script src="../../../js/SpatialConcepts/above-below/game_page2.js"></script>
 
-  <!-- Load initHeader.js FIRST -->
-<script src="../../../../js/homepage/initHeader.js"></script>
-
-<!-- THEN call initializeHeader with correct path -->
+<!-- 5. HEADER (LAST!) -->
+<script src="../../../js/homepage/initHeader.js"></script>
 <script>
   initializeHeader('../../homepage/header.html');
 </script>

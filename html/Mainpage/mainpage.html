@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Idzmir Kids Hub - Where Young Minds Flourish</title>
     <link rel="stylesheet" href="../../../../css/Mainpage/mainpage.css">
-  <link rel="stylesheet" href="../../../../css/Mainpage/header.css">
-
 </head>
 <body>
     <!-- Navigation -->
@@ -39,21 +37,51 @@
         <a href="#" onclick="openModal(); toggleMobileMenu();">Login</a>
     </div>
 
-    <!-- Hero Section with Video Background -->
+    <!-- Hero Section - Modern Split Layout -->
     <section class="hero">
-        <video class="hero-video" autoplay muted loop playsinline>
-            <source src="../../assets/video/mainpage1.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <div class="hero-overlay"></div>
+        <!-- Decorative dots pattern -->
+        <div class="hero-dots"></div>
+        <div class="hero-dots"></div>
+        
+        <!-- Left Side: Content -->
         <div class="hero-content">
-            <div class="hero-badge">🏆 Award-Winning Early Childhood Education</div>
-            <h1 class="hero-title">Where Young Minds Flourish & Dreams Take Flight</h1>
+            <div class="hero-badge">
+                🏆 Award-Winning Early Childhood Education
+            </div>
+            <h1 class="hero-title">Idzmir Kids Hub</h1>
+            <p class="hero-subtitle">
+                Empowering children through innovative bilingual education, therapeutic support, and character development. Join Malaysia's leading early childhood center in Danga Bay, Johor Bahru.
+            </p>
             <div class="hero-buttons">
                 <a href="#contact" class="btn-primary">Schedule a Visit</a>
                 <a href="#about" class="btn-secondary">Learn More</a>
             </div>
         </div>
+        
+        <!-- Right Side: Image with Floating Stats -->
+        <div class="hero-image">
+            <div class="hero-image-wrapper">
+                <img src="../../assets/images/cover.jpg" alt="Happy Children Learning" class="hero-main-image">
+                
+                <!-- Floating Stats Cards -->
+                <div class="hero-stats">
+                    <div class="hero-stats-value">500+</div>
+                    <div class="hero-stats-label">Happy Students</div>
+                </div>
+                
+                <div class="hero-stats">
+                    <div class="hero-stats-value">8+</div>
+                    <div class="hero-stats-label">Years Experience</div>
+                </div>
+                
+                <div class="hero-stats">
+                    <div class="hero-stats-value">4.9★</div>
+                    <div class="hero-stats-label">Parent Rating</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
         <div class="scroll-hint">
             <span>DISCOVER MORE</span>
             <span>↓</span>
@@ -413,14 +441,13 @@
         <img src="../../assets/images/whatsapp.png" alt="WhatsApp">
     </a>
 
-<!-- Login Modal - Professional Style -->
+<!-- LOGIN MODAL - COMPACT VERSION -->
 <div class="modal" id="loginModal">
     <div class="modal-content">
         <button class="modal-close" onclick="closeModal()">&times;</button>
         
         <!-- Portal Selection View -->
         <div class="portal-selection" id="loginOptions">
-            <!-- Logo will show from CSS ::before -->
             <div class="portal-header">
                 <h2>Sign In</h2>
                 <p>Select your role to continue</p>
@@ -441,7 +468,6 @@
 
         <!-- Login Form View -->
         <div class="login-form-container" id="loginFormContainer" style="display: none;">
-            <!-- Logo will show from CSS ::before -->
             <div class="form-header">
                 <h2 id="portalTitle">Sign In</h2>
                 <p id="welcomeMessage">Welcome back!</p>
@@ -449,52 +475,139 @@
             
             <form id="loginForm" onsubmit="handleLogin(event)">
                 <div class="form-group">
-                    <label for="username">User Name <span>*</span></label>
+                    <label for="loginUsername">Username</label>
                     <input 
                         type="text" 
-                        id="username" 
-                        class="form-input"
-                        placeholder="user name" 
+                        id="loginUsername" 
+                        class="form-input" 
+                        placeholder="Enter username" 
                         required
-                    >
+                        autocomplete="username">
                 </div>
                 
-                <div class="form-group password-group">
-                    <label for="password">Password <span>*</span></label>
+            <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <div class="password-group">
                     <input 
                         type="password" 
-                        id="password" 
-                        class="form-input"
-                        placeholder="password" 
+                        id="loginPassword" 
+                        class="form-input" 
+                        placeholder="Enter password" 
                         required
-                    >
-                    <button type="button" class="toggle-password" onclick="togglePassword()">
-                        👁️
+                        autocomplete="current-password">
+                    <button 
+                        type="button" 
+                        class="toggle-password" 
+                        onclick="togglePassword('loginPassword', this)"
+                        aria-label="Show password">
+                        <!-- Mata terbuka SVG -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8z"/>
+                            <path d="M8 5.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5z"/>
+                        </svg>
                     </button>
                 </div>
+            </div>
                 
+                <!-- Forgot Password Link -->
                 <div class="forgot-password">
-                    <a href="#forgot">Forget password ?</a>
+                    <a href="#" onclick="handleForgotPassword(event)">Forgot password?</a>
                 </div>
                 
-                <button type="submit" class="submit-btn">Sign In</button>
+                <button type="submit" class="submit-btn">Login</button>
             </form>
             
             <button type="button" class="back-btn" onclick="backToPortalSelection()">
-                ← Back to Portal Selection
+                ← Back
             </button>
+            
+            <!-- Sign Up Link (Only shown for Student portal) -->
+            <div class="form-footer" style="display: none;">
+                <p>New student? <a href="#" onclick="showSignUpForm(); return false;">Sign up here</a></p>
+            </div>
+        </div>
+
+        <!-- Sign Up Form View (Only for Students) -->
+        <div class="signup-form-container" id="signupFormContainer" style="display: none;">
+            <div class="form-header">
+                <h2>Create Account</h2>
+                <p>Join Idzmir Kids Hub!</p>
+            </div>
+            
+            <form id="signupForm" onsubmit="handleSignUp(event)">
+                <div class="form-group">
+                    <label for="signupUsername">Username</label>
+                    <input 
+                        type="text" 
+                        id="signupUsername" 
+                        class="form-input" 
+                        placeholder="Choose username" 
+                        required
+                        pattern="[a-zA-Z0-9]+"
+                        title="Only letters and numbers">
+                    <small class="form-hint">Letters and numbers only</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <div class="password-group">
+                        <input 
+                            type="password" 
+                            id="signupPassword" 
+                            class="form-input" 
+                            placeholder="Create password" 
+                            required 
+                            minlength="6">
+                        <button 
+                            type="button" 
+                            class="toggle-password" 
+                            onclick="togglePassword('signupPassword')"
+                            aria-label="Show password">
+                            show
+                        </button>
+                    </div>
+                    <small class="form-hint">Min. 6 characters</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="signupAge">Age</label>
+                    <input 
+                        type="number" 
+                        id="signupAge" 
+                        class="form-input" 
+                        placeholder="Age (3-12)" 
+                        min="3" 
+                        max="12" 
+                        required>
+                </div>
+
+                <button type="submit" class="submit-btn" id="signupSubmitBtn">
+                    Create Account
+                </button>
+                
+                <button type="button" class="back-btn" onclick="backToPortalSelection()">
+                    ← Back
+                </button>
+            </form>
+            
+            <div class="form-footer">
+                <p>Have an account? <a href="#" onclick="showLoginForm('student'); return false;">Login</a></p>
+            </div>
         </div>
     </div>
 </div>
-<!-- Load initHeader.js FIRST -->
-<script src="../../../js/homepage/initHeader.js"></script>
-
-<script src="../../../../js/Mainpage/mainpage.js"></script>
-
-<!-- THEN call initializeHeader with correct path -->
-<script>
-  initializeHeader('header.html');
-</script>
+    <!-- ==========================================
+         SCRIPTS - LOAD IN CORRECT ORDER
+         ========================================== -->
+    
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>    
+    <!-- 3. Login Script -->
+    <script src="../../../../js/Mainpage/mainpage-login.js"></script>
+    
+    <!-- 4. Main Script -->
+    <script src="../../../../js/Mainpage/mainpage.js"></script>
 
 </body>
 </html>

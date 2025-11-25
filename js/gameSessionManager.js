@@ -1,36 +1,32 @@
 // ===============================================
-// GAME TEMPLATE WITH LOCK SYSTEM (First Try Only)
-// GAME: DEPAN / BELAKANG
+// UNIVERSAL GAME TEMPLATE WITH LOCK SYSTEM
+// Copy this for ALL games - just change the 3 variables below!
 // ===============================================
 
-// ================= GAME CONFIGURATION =================
+// ================= ⚠️ CHANGE THESE 3 LINES FOR EACH GAME ⚠️ =================
 const CONCEPT_TYPE = 'Spatial Concepts';
-const GAME_NAME = 'depan / belakang';   // ⚠️ TUKAR MENGIKUT GAME
-const GAME_KEY = 'depan_/_belakang';    // ⚠️ UNIQUE KEY (with underscores)
-const TOTAL_QUESTIONS = 2;              // ⚠️ TOTAL QUESTIONS
+const GAME_NAME = 'atas / bawah';      // Example: 'dalam / luar', 'depan / belakang'
+const GAME_KEY = 'atas_/_bawah';        // Example: 'dalam_/_luar', 'belakang_/_depan'
+const TOTAL_QUESTIONS = 2;              // Total number of questions
 
-// ================= GAME LOCK STATE =================
-let gameAlreadyPlayed = false;
-let existingScore = 0;
-
-// ================= GAME DATA =================
+// ================= GAME DATA - REPLACE WITH YOUR QUESTIONS =================
 const questions = [
   {
-    label: "belakang",
-    question: "Mana yang di belakang?",
-    correctImg: "../../../assets/images/behind.png",
+    label: "bawah",
+    question: "Mana yang di bawah?",
+    correctImg: "../../../assets/images/below.png",
     options: [
-      { answer: "correct", img: "../../../assets/images/behind.png" },
-      { answer: "wrong", img: "../../../assets/images/inFrontOf.png" },
+      { answer: "wrong", img: "../../../assets/images/above.png" },
+      { answer: "correct", img: "../../../assets/images/below.png" }
     ]
   },
   {
-    label: "depan",
-    question: "Mana yang di depan?",
-    correctImg: "../../../assets/images/inFrontOf.png",
+    label: "atas",
+    question: "Mana yang di atas?",
+    correctImg: "../../../assets/images/above.png",
     options: [
-      { answer: "wrong", img: "../../../assets/images/behind.png" },
-      { answer: "correct", img: "../../../assets/images/inFrontOf.png" },
+      { answer: "correct", img: "../../../assets/images/above.png" },
+      { answer: "wrong", img: "../../../assets/images/below.png" }
     ]
   }
 ];
@@ -38,14 +34,21 @@ const questions = [
 // ================= GAME STATE =================
 let currentQuestionIndex = 0;
 let answered = false;
-let correctAnswers = 0;  // Track correct answers
-let attemptCount = 0;    // Track total attempts
+let correctAnswers = 0;
+let attemptCount = 0;
+
+// ================= GAME LOCK STATE =================
+let gameAlreadyPlayed = false;
+let existingScore = 0;
 
 // ================= CHECK IF GAME ALREADY PLAYED =================
 async function checkGameStatus() {
   try {
     const studentId = sessionStorage.getItem('studentId');
-    if (!studentId) return false;
+    if (!studentId) {
+      console.warn('No studentId in session');
+      return false;
+    }
 
     const db = firebase.firestore();
     const studentQuery = await db.collection('students')
@@ -59,12 +62,12 @@ async function checkGameStatus() {
 
     const studentDoc = studentQuery.docs[0];
     const studentData = studentDoc.data();
-
+    
     const conceptProgress = studentData.conceptProgress || {};
     const spatialProgress = conceptProgress['Spatial Concepts'] || {};
     const gamesCompleted = spatialProgress.gamesCompleted || {};
-
-    // If this game already has a non-zero score, treat as played
+    
+    // Check if THIS game already has a score
     if (gamesCompleted[GAME_KEY] && gamesCompleted[GAME_KEY] > 0) {
       existingScore = gamesCompleted[GAME_KEY];
       gameAlreadyPlayed = true;
@@ -84,45 +87,51 @@ async function checkGameStatus() {
 // ================= SHOW "ALREADY PLAYED" SCREEN =================
 async function showAlreadyPlayedScreen() {
   console.log('🚫 Game already completed - showing existing score');
-
+  
   const scoreModal = document.getElementById('scoreModal');
   const finalScoreDisplay = document.getElementById('finalScoreDisplay');
   const nextButtonContainer = document.querySelector('.next-button-container');
   const nextButton = document.querySelector('.next-button');
+  
+  if (!scoreModal || !finalScoreDisplay) {
+    console.error('❌ Modal elements not found');
+    return;
+  }
 
   // Hide game interface
   const gameContainer = document.querySelector('.game-container');
-  if (gameContainer) gameContainer.style.display = 'none';
-
-  if (finalScoreDisplay) {
-    finalScoreDisplay.textContent = `${existingScore}/${TOTAL_QUESTIONS}`;
+  if (gameContainer) {
+    gameContainer.style.display = 'none';
   }
 
-  if (scoreModal) {
-    scoreModal.style.cssText = '';
-    scoreModal.style.display = 'flex';
-    scoreModal.style.position = 'fixed';
-    scoreModal.style.top = '0';
-    scoreModal.style.left = '0';
-    scoreModal.style.width = '100%';
-    scoreModal.style.height = '100%';
-    scoreModal.style.zIndex = '10000';
-    scoreModal.style.backgroundColor = 'rgba(0, 0, 0, 0.6)';
-    scoreModal.style.backdropFilter = 'blur(5px)';
-    scoreModal.style.alignItems = 'center';
-    scoreModal.style.justifyContent = 'center';
-
-    // Add "Already Completed" banner inside modal content if not present
-    const modalContent = scoreModal.querySelector('.modal-content') || scoreModal.querySelector('.score-modal-content');
-    if (modalContent && !document.getElementById('alreadyPlayedMsg')) {
-      const msg = document.createElement('div');
-      msg.id = 'alreadyPlayedMsg';
-      msg.style.cssText = 'background: #ffc107; color: #000; padding: 12px 20px; border-radius: 8px; margin-bottom: 15px; text-align: center; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.2);';
-      msg.textContent = '🔒 Anda sudah main game ini! Ini markah anda.';
-      modalContent.insertBefore(msg, modalContent.firstChild);
-    }
+  // Show existing score
+  finalScoreDisplay.textContent = `${existingScore}/${TOTAL_QUESTIONS}`;
+  
+  // Style modal
+  scoreModal.style.cssText = '';
+  scoreModal.style.display = 'flex';
+  scoreModal.style.position = 'fixed';
+  scoreModal.style.top = '0';
+  scoreModal.style.left = '0';
+  scoreModal.style.width = '100%';
+  scoreModal.style.height = '100%';
+  scoreModal.style.zIndex = '10000';
+  scoreModal.style.backgroundColor = 'rgba(0, 0, 0, 0.6)';
+  scoreModal.style.backdropFilter = 'blur(5px)';
+  scoreModal.style.alignItems = 'center';
+  scoreModal.style.justifyContent = 'center';
+  
+  // Add "Already Completed" banner
+  const modalContent = scoreModal.querySelector('.modal-content') || scoreModal.querySelector('.score-modal-content');
+  if (modalContent && !document.getElementById('alreadyPlayedMsg')) {
+    const msg = document.createElement('div');
+    msg.id = 'alreadyPlayedMsg';
+    msg.style.cssText = 'background: #ffc107; color: #000; padding: 12px 20px; border-radius: 8px; margin-bottom: 15px; text-align: center; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.2);';
+    msg.textContent = '🔒 Anda sudah main game ini! Ini markah anda.';
+    modalContent.insertBefore(msg, modalContent.firstChild);
   }
-
+  
+  // Setup Next button
   if (nextButtonContainer && nextButton) {
     nextButtonContainer.style.zIndex = '10001';
     nextButton.style.opacity = '1';
@@ -130,47 +139,48 @@ async function showAlreadyPlayedScreen() {
     nextButton.style.pointerEvents = 'auto';
     nextButton.style.animation = 'bounceButton 1s ease-in-out infinite';
   }
+  
+  console.log('✅ Existing score displayed');
 }
 
 // ================= INITIALIZE GAME =================
 document.addEventListener('DOMContentLoaded', async () => {
   console.log('🎮 Game page loaded');
-
-  // 1) Check if already played
+  
+  // ⚠️ STEP 1: CHECK IF GAME ALREADY PLAYED - CRITICAL!
   const hasPlayed = await checkGameStatus();
+  
   if (hasPlayed) {
+    // Game already played - show existing score and STOP
     await showAlreadyPlayedScreen();
-    return; // STOP initialization if already played
+    return; // 🛑 EXIT - Don't initialize gameplay
   }
-
-  // 2) Initialize game session (assumes initializeGame exists globally)
+  
+  // ✅ STEP 2: First time playing - initialize with gameSessionManager
   const initialized = initializeGame(CONCEPT_TYPE, GAME_NAME, TOTAL_QUESTIONS);
+  
   if (!initialized) {
     console.error('❌ Failed to initialize game');
     return;
   }
 
-  // Get DOM elements
+  // STEP 3: Get DOM elements
   const options = document.querySelectorAll('.option-card');
   const feedback = document.getElementById('feedback');
   const questionBox = document.getElementById('questionBox');
   const answerImage = document.getElementById('answerImage');
 
-  // Show and update score display
+  // STEP 4: Show score display
   showScoreDisplay();
   updateScoreDisplay();
 
-  // Attach event listeners to options
+  // STEP 5: Attach event listeners to options
   options.forEach(option => {
     option.addEventListener('click', function() {
-      console.log("Option clicked:", this);
-      console.log("Answered flag:", answered);
-
       if (answered) return;
 
       const answer = this.getAttribute('data-answer');
-      console.log("Answer selected:", answer);
-
+      
       if (answer === 'correct') {
         handleCorrectAnswerClick(this, options, questionBox, answerImage, feedback);
       } else {
@@ -179,7 +189,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   });
 
-  console.log('✅ Game initialized successfully');
+  console.log('✅ Game initialized - First attempt only!');
 });
 
 // ================= SHOW SCORE DISPLAY =================
@@ -192,108 +202,90 @@ function showScoreDisplay() {
 
 // ================= UPDATE SCORE DISPLAY =================
 function updateScoreDisplay() {
+  const scoreDisplay = document.getElementById('scoreDisplay');
   const scoreText = document.getElementById('scoreText');
-  if (scoreText) {
+  if (scoreDisplay && scoreText) {
+    scoreDisplay.style.display = 'flex';
     scoreText.textContent = `${correctAnswers}/${attemptCount}`;
-    console.log(`📊 Score display updated: ${correctAnswers}/${attemptCount}`);
+    console.log(`📊 Score: ${correctAnswers}/${attemptCount}`);
   }
 }
 
-// ================= HANDLE CORRECT ANSWER CLICK =================
+// ================= HANDLE CORRECT ANSWER =================
 function handleCorrectAnswerClick(selectedCard, options, questionBox, answerImage, feedback) {
-  console.log("✅ CORRECT! Score before increment:", correctAnswers);
-
-  // Update game state
+  console.log('✅ CORRECT!');
+  
   answered = true;
   attemptCount++;
   correctAnswers++;
-  console.log("✅ Attempt:", attemptCount, "Correct:", correctAnswers);
-
-  // Update Firebase and display
-  if (typeof handleCorrectAnswer === 'function') {
-    try { handleCorrectAnswer(); } catch (e) { console.warn('handleCorrectAnswer error', e); }
-  }
+  console.log(`✅ Attempt: ${attemptCount}, Correct: ${correctAnswers}`);
+  
+  // Update Firebase via gameSessionManager
+  handleCorrectAnswer(); 
   updateScoreDisplay();
-
-  // Remove wrong classes from all cards
+  
+  // Visual feedback
   options.forEach(opt => opt.classList.remove('wrong-answer'));
-
-  // Mark this card as correct
   selectedCard.classList.add('correct-answer');
-
-  // Update feedback
-  if (feedback) {
-    feedback.textContent = '🎉 Betul! Hebat!';
-    feedback.classList.add('correct');
-  }
-
-  // Get the image from the correct card
+  
   const correctImg = selectedCard.querySelector('img:not(.arrow-indicator)') || selectedCard.querySelector('img');
   if (answerImage && correctImg) {
     answerImage.src = correctImg.src;
   }
-
-  // Add animation to move card to question box
   selectedCard.classList.add('correct-move');
-
-  // After animation, reveal answer in question box
+  
+  if (feedback) {
+    feedback.textContent = '🎉 Betul! Hebat!';
+    feedback.classList.add('correct');
+  }
+  
   setTimeout(() => {
     if (questionBox) questionBox.classList.add('reveal');
   }, 800);
-
-  // Check if all questions completed
-  console.log("Checking: attemptCount(" + attemptCount + ") >= TOTAL_QUESTIONS(" + TOTAL_QUESTIONS + ")");
+  
+  // Check if game complete
   if (attemptCount >= TOTAL_QUESTIONS) {
-    console.log("🎉 ALL QUESTIONS COMPLETED! Showing popup...");
+    console.log('🎉 All questions completed!');
     setTimeout(() => {
       showFinalScoreModal();
     }, 2000);
   } else {
-    console.log("➡️ More questions remaining, changing question...");
     setTimeout(() => {
       changeQuestion();
     }, 2000);
   }
 }
 
-// ================= HANDLE WRONG ANSWER CLICK =================
+// ================= HANDLE WRONG ANSWER =================
 function handleWrongAnswerClick(selectedCard, feedback) {
-  console.log("❌ WRONG!");
-
-  // Update game state
+  console.log('❌ WRONG!');
+  
   answered = true;
   attemptCount++;
-  console.log("❌ Attempt:", attemptCount, "Correct:", correctAnswers);
-
-  // Update Firebase and display
-  if (typeof handleWrongAnswer === 'function') {
-    try { handleWrongAnswer(); } catch (e) { console.warn('handleWrongAnswer error', e); }
-  }
+  console.log(`❌ Attempt: ${attemptCount}, Correct: ${correctAnswers}`);
+  
+  // Update Firebase via gameSessionManager
+  handleWrongAnswer();
   updateScoreDisplay();
-
-  // Add shake animation
+  
   selectedCard.classList.add('wrong-answer');
-
-  // Update feedback
+  
   if (feedback) {
     feedback.textContent = '❌ Cuba lagi!';
     feedback.classList.add('incorrect');
   }
-
-  // Remove shake animation after it completes
+  
   setTimeout(() => {
     selectedCard.classList.remove('wrong-answer');
   }, 600);
-
-  // Check if all questions completed
-  console.log("Checking: attemptCount(" + attemptCount + ") >= TOTAL_QUESTIONS(" + TOTAL_QUESTIONS + ")");
+  
+  // Check if game complete
   if (attemptCount >= TOTAL_QUESTIONS) {
-    console.log("🎉 ALL QUESTIONS COMPLETED! Showing popup...");
+    console.log('🎉 All questions completed!');
     setTimeout(() => {
       showFinalScoreModal();
     }, 2000);
   } else {
-    console.log("➡️ More questions remaining, changing question...");
     setTimeout(() => {
       changeQuestion();
     }, 2000);
@@ -302,16 +294,10 @@ function handleWrongAnswerClick(selectedCard, feedback) {
 
 // ================= CHANGE QUESTION =================
 function changeQuestion() {
-  console.log("Changing question...");
-
-  // Reset answered flag
   answered = false;
-
-  // Move to next question
   currentQuestionIndex = (currentQuestionIndex + 1) % questions.length;
+  
   const currentQuestion = questions[currentQuestionIndex];
-
-  // Get DOM elements
   const questionLabel = document.querySelector('.question-label');
   const questionPrompt = document.querySelector('.question-prompt');
   const questionIcon = document.querySelector('.question-icon');
@@ -319,61 +305,42 @@ function changeQuestion() {
   const answerImage = document.getElementById('answerImage');
   const feedback = document.getElementById('feedback');
 
-  // Update the question label (belakang/depan)
   if (questionLabel) questionLabel.textContent = currentQuestion.label;
-
-  // Update the question text
   if (questionPrompt) questionPrompt.textContent = currentQuestion.question;
-
-  // Update question box icon
   if (questionIcon) questionIcon.src = currentQuestion.correctImg;
 
-  // Change options with animation
   const optionCards = document.querySelectorAll(".option-card");
   optionCards.forEach((option, index) => {
     const optionImg = option.querySelector("img:not(.arrow-indicator)") || option.querySelector("img");
     if (optionImg) optionImg.src = currentQuestion.options[index].img;
     option.dataset.answer = currentQuestion.options[index].answer;
-
-    // Remove any previous classes
     option.classList.remove('correct-answer', 'wrong-answer', 'correct-move');
-
-    // Add animation to smoothly transition
-    option.classList.add('change-animation');
-    setTimeout(() => {
-      option.classList.remove('change-animation');
-    }, 500);
   });
 
-  // Reset question box
   if (questionBox) questionBox.classList.remove('reveal');
   if (answerImage) answerImage.src = "";
-
-  // Clear feedback
   if (feedback) {
     feedback.textContent = "";
     feedback.className = "feedback";
   }
 }
 
-// ================= SHOW FINAL SCORE MODAL (WITH FIREBASE SAVE!) =================
+// ================= SHOW FINAL SCORE MODAL =================
 async function showFinalScoreModal() {
   const scoreModal = document.getElementById('scoreModal');
   const finalScoreDisplay = document.getElementById('finalScoreDisplay');
   const nextButtonContainer = document.querySelector('.next-button-container');
   const nextButton = document.querySelector('.next-button');
-
-  console.log("🎉 showFinalScoreModal triggered!");
+  
+  console.log('🎉 Game completed!');
   console.log(`Final Score: ${correctAnswers}/${attemptCount}`);
-
+  
   if (scoreModal && finalScoreDisplay) {
-    // Update score display dengan score yang dikira dari game
     finalScoreDisplay.textContent = `${correctAnswers}/${attemptCount}`;
-    console.log("Score updated to:", `${correctAnswers}/${attemptCount}`);
-
-    // Clear any previous inline styles
+    
+    // Clear previous styles
     scoreModal.style.cssText = '';
-
+    
     // Show modal - centered
     scoreModal.style.display = 'flex';
     scoreModal.style.position = 'fixed';
@@ -387,53 +354,43 @@ async function showFinalScoreModal() {
     scoreModal.style.alignItems = 'center';
     scoreModal.style.justifyContent = 'center';
     scoreModal.style.animation = 'modalBounce 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
-
-    console.log("Modal displayed!");
-
-    // Setup next button container and button
+    
+    // Setup next button
     if (nextButtonContainer && nextButton) {
       nextButtonContainer.style.zIndex = '10001';
       nextButtonContainer.style.position = 'fixed';
-
+      
       nextButton.style.opacity = '0';
       nextButton.style.display = 'block';
       nextButton.style.pointerEvents = 'none';
-
-      // After 1 second, fade in and animate next button
+      
       setTimeout(() => {
-        nextButton.style.transition = 'opacity 0.5s ease-in-out, transform 0.3s ease';
+        nextButton.style.transition = 'opacity 0.5s ease-in-out';
         nextButton.style.opacity = '1';
         nextButton.style.pointerEvents = 'auto';
         nextButton.style.animation = 'bounceButton 1s ease-in-out infinite';
-        console.log("Next button faded in and animating!");
       }, 1000);
     }
-
-    // 🔥 SAVE TO FIREBASE (via global gameSession)
-    console.log("💾 Attempting to save score to Firebase...");
-
+    
+    // 🔥 SAVE TO FIREBASE (First attempt only via gameSessionManager)
+    console.log('💾 Saving first attempt score to Firebase...');
+    
     if (typeof gameSession !== 'undefined' && gameSession.endSession) {
-      // ensure currentScore is set
-      try {
-        gameSession.currentScore = correctAnswers;
-      } catch (e) {
-        console.warn('Unable to set gameSession.currentScore', e);
-      }
-
-      try {
-        const saved = await gameSession.endSession();
-        if (saved) {
-          console.log("✅ Score successfully saved to Firebase!");
-        } else {
-          console.error("❌ Failed to save score to Firebase");
-        }
-      } catch (err) {
-        console.error("❌ Exception while saving score:", err);
+      // Ensure currentScore is set correctly
+      gameSession.currentScore = correctAnswers;
+      console.log(`🎯 Setting gameSession score: ${correctAnswers}/${TOTAL_QUESTIONS}`);
+      
+      const saved = await gameSession.endSession();
+      
+      if (saved) {
+        console.log('✅ First attempt score saved to Firebase!');
+      } else {
+        console.error('❌ Failed to save score to Firebase');
       }
     } else {
-      console.error("❌ gameSession not found - check if gameSessionManager.js loaded");
+      console.error('❌ gameSession not found - check if gameSessionManager.js is loaded');
     }
   }
 }
 
-console.log('✅ Game script with lock system loaded for DEPAN / BELAKANG!');
+console.log(`✅ Game script loaded: ${GAME_NAME} with lock system!`);

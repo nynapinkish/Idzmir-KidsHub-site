@@ -965,6 +965,104 @@ button:hover {
   justify-self: center; /* Center the card */
   width: 45%; /* Adjust width to match other cards visually */
 }
+
+/* Coming Soon Overlay for Cards */
+.card.coming-soon {
+  position: relative;
+  opacity: 0.7;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.card.coming-soon::before {
+  content: 'SOON';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-15deg);
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff8787 100%);
+  color: white;
+  font-family: 'Lilita One', cursive;
+  font-size: 28px;
+  font-weight: 800;
+  padding: 8px 25px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.5);
+  z-index: 10;
+  letter-spacing: 2px;
+  border: 3px solid white;
+}
+
+.card.coming-soon .card-img,
+.card.coming-soon .card-title {
+  filter: grayscale(50%) blur(1px);
+}
+
+/* Alternative: Small Badge Style */
+.card.coming-soon-badge {
+  position: relative;
+}
+
+.card.coming-soon-badge::after {
+  content: 'Coming Soon';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #ff6b6b;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  box-shadow: 0 3px 8px rgba(255, 107, 107, 0.4);
+  z-index: 10;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Section Level - Coming Soon Overlay */
+.section.coming-soon-section {
+  position: relative;
+}
+
+
+.coming-soon-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 101;
+  text-align: center;
+  pointer-events: none;
+}
+
+.coming-soon-icon {
+  font-size: 80px;
+  margin-bottom: 15px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.coming-soon-text {
+  font-family: 'Lilita One', cursive;
+  font-size: 42px;
+  color: #003e8d;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 8px;
+  letter-spacing: 2px;
+}
+
+.coming-soon-subtext {
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  color: #64748b;
+  font-weight: 500;
+}
 /* ============================================
    RESPONSIVE DESIGN
    ============================================ */
