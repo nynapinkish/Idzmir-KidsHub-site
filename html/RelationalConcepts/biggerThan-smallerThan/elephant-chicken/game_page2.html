@@ -113,18 +113,41 @@
   </a>
 </div>
 
-<!-- Load initHeader.js FIRST -->
+<!-- FIREBASE SDK (MUST BE FIRST!) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<!-- FIREBASE CONFIGURATION -->
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyCpDrWgLXXHK7_9nioEQGBKJkUv4byCEd4",
+    authDomain: "idzmir-kids-hub.firebaseapp.com",
+    projectId: "idzmir-kids-hub",
+    storageBucket: "idzmir-kids-hub.firebasestorage.app",
+    messagingSenderId: "301692363279",
+    appId: "1:301692363279:web:ba7c6547b36e433d6eb97a"
+  };
+
+  // Initialize Firebase
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+    console.log('✅ Firebase initialized successfully');
+  }
+</script>
+
+<!-- GAME SESSION MANAGER -->
+<script src="../../../../js/gameSessionManager.js"></script>
+
+<!-- CAT MATCHING GAME SCRIPT -->
+<script src="../../../../js/RelationalConcepts/biggerThan-smallerThan/elephant-chicken/game_page2.js"></script>
+
+<!-- Load initHeader.js -->
 <script src="../../../../js/homepage/initHeader.js"></script>
 
 <!-- Initialize Header -->
 <script>
-  if (typeof initializeHeader === 'function') {
-    initializeHeader('../../../homepage/header.html');
-  }
+  initializeHeader('../../../homepage/header.html', '/assets');
 </script>
-
-<!-- Load Game Logic -->
-<script src="../../../../js/RelationalConcepts/biggerThan-smallerThan/elephant-chicken/game_page2.js"></script>
 
 </body>
 </html>

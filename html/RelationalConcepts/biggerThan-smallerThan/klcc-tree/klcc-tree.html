@@ -7,67 +7,69 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../../../css/RelationalConcepts/biggerThan-smallerThan/klcc-tree/klcc-tree.css">
   <link rel="stylesheet" href="../../../../css/homepage/header.css">
-
 </head>
 <body>
 
 <!-- Header Placeholder - will be loaded dynamically -->
 <div id="header-placeholder"></div>
-    <div class="banner-section">
-        <div class="banner-yellow">Lebih Besar Daripada VS Lebih Kecil Daripada</div>
-        <div class="banner-blue">Mari Belajar!</div>
-    </div>
+
+<!-- Banner Section -->
+<div class="banner-section">
+  <div class="banner-yellow">Lebih Tinggi VS Lebih Rendah</div>
+  <div class="banner-blue">Mari Belajar!</div>
+</div>
+
+<!-- Image Row -->
 <div class="image-row">
-    <div class="item">
-      <div class="label" onclick="document.getElementById('audio-besar').play();">
-        Besar
-        <!-- Speaker Icon dalam label (sebelah kanan) -->
-        <img src="../../../../assets/images/speaker.png" alt="Play Audio" class="speaker-icon">
-      </div>
-      
-      <img src="../../../../assets/images/klcc.png" alt="klcc" class="besar" onclick="document.getElementById('audio-besar').play();">
-      
-      <!-- Hidden Audio untuk Besar -->
-      <audio id="audio-besar">
-        <source src="../../../../assets/audio/big.mp3" type="audio/mpeg">
-      </audio>
+  <!-- TINGGI - KLCC -->
+  <div class="item">
+    <div class="label" onclick="document.getElementById('audio-tinggi').play();">
+      Tinggi
+      <img src="../../../../assets/images/speaker.png" alt="Play Audio" class="speaker-icon">
     </div>
     
-    <div class="item">
-      <div class="label" onclick="document.getElementById('audio-kecil').play();">
-        Kecil
-        <!-- Speaker Icon dalam label (sebelah kanan) -->
-        <img src="../../../../assets/images/speaker.png" alt="Play Audio" class="speaker-icon">
-      </div>
-      
-      <img src="../../../../assets/images/tree.png" alt="pokok" class="kecil" onclick="document.getElementById('audio-kecil').play();">
-      
-      <!-- Hidden Audio untuk Kecil -->
-      <audio id="audio-kecil">
-        <source src="../../../../assets/audio/small.mp3" type="audio/mpeg">
-      </audio>
-    </div>
+    <img src="../../../../assets/images/klcc.png" alt="KLCC Tinggi" class="besar" onclick="document.getElementById('audio-tinggi').play();">
+    
+    <audio id="audio-tinggi">
+      <source src="../../../../assets/audio/tall.mp3" type="audio/mpeg">
+    </audio>
   </div>
+  
+  <!-- RENDAH - Tree -->
+  <div class="item">
+    <div class="label" onclick="document.getElementById('audio-rendah').play();">
+      Rendah
+      <img src="../../../../assets/images/speaker.png" alt="Play Audio" class="speaker-icon">
+    </div>
+    
+    <img src="../../../../assets/images/tree.png" alt="Pokok Rendah" class="kecil" onclick="document.getElementById('audio-rendah').play();">
+    
+    <audio id="audio-rendah">
+      <source src="../../../../assets/audio/short.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+</div>
 
-<!-- BACK BUTTON -->
+<!-- Navigation Buttons -->
 <div class="back-button-container">
   <a href="../../../../html/RelationalConcepts/biggerThan-smallerThan/elephant-chicken/elephant-chicken.html">
     <img src="../../../../assets/images/back.png" alt="Back Button" class="back-button">
   </a>
 </div>
 
-<!-- START THE GAME Button (SEPARATE, OUTSIDE back container) -->
-<div class="start-button-container">
+<div class="next-button-container">
   <a href="../../../../html/RelationalConcepts/biggerThan-smallerThan/ball-key/game_page1.html">
-    <button class="start-button">MULAKAN PERMAINAN</button>
+    <img src="../../../../assets/images/next.png" alt="Next Button" class="next-button">
   </a>
 </div>
-  <!-- Load initHeader.js FIRST -->
+
+<!-- Load initHeader.js -->
 <script src="../../../../js/homepage/initHeader.js"></script>
 
-<!-- THEN call initializeHeader with correct path -->
+<!-- Initialize Header with BOTH parameters -->
 <script>
-  initializeHeader('../../../homepage/header.html');
+  // ✅ CORRECT: Pass both headerPath AND assetsPath
+  initializeHeader('../../../homepage/header.html', '/assets');
 </script>
 
 </body>

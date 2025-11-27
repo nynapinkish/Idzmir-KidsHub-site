@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../../../css/RelationalConcepts/Same-different/tomato/game_page1.css">
     <link rel="stylesheet" href="../../../../css/homepage/header.css">
-
 </head>
 <body>
 
@@ -17,65 +16,66 @@
 <!-- Score Display (masa main game) -->
 <div class="score-display" id="scoreDisplay" style="display: none;">
   <span class="score-label">SKOR</span>
-  <span id="scoreText">0/2</span>
+  <span id="scoreText">0/4</span>
 </div>
 
 <!-- Banner Section -->
-    <div class="banner-section">
-        <div class="banner-yellow">Konsep warna dan bentuk</div>
-        <div class="banner-blue">pilih buah tomato</div>
-    </div>
+<div class="banner-section">
+    <div class="banner-yellow">Konsep warna dan bentuk</div>
+    <div class="banner-blue">pilih buah tomato</div>
+</div>
 
-    <!-- Game Container -->
-    <div class="game-container">
-        <!-- LEFT: Example Box -->
-        <div class="example-box">
-            <div class="example-label">
-                <div class="example-label-text">tomato</div>
-            </div>
-            <div class="example-image-container">
-                <img src="../../../../assets/images/tomato.png" alt="Red Tomato">
-            </div>
+<!-- Game Container -->
+<div class="game-container">
+    <!-- LEFT: Example Box -->
+    <div class="example-box">
+        <div class="example-label">
+            <div class="example-label-text">tomato</div>
         </div>
-
-        <!-- CENTER: Drop Zone (Dulang) -->
-        <div class="drop-zone" id="dropZone">
-        <img src="../../../../assets/images/tray.png" alt="Tray" class="tray-background">            <div class="drop-placeholder">Seret ke sini</div>
-        </div>
-
-        <!-- RIGHT: Draggable Fruits -->
-        <div class="fruits-grid">
-            <div class="fruit-item" draggable="true" data-fruit="apple1" data-color="red">
-                <img src="../../../../assets/images/apple1.png" alt="Apple">
-            </div>
-            <div class="fruit-item" draggable="true" data-fruit="tomato3" data-color="red">
-                <img src="../../../../assets/images/tomato3.png" alt="tomato">
-            </div>
-            <div class="fruit-item" draggable="true" data-fruit="apple3" data-color="green">
-                <img src="../../../../assets/images/Apple3.png" alt="Apple">
-            </div>
-            <div class="fruit-item" draggable="true" data-fruit="tomato" data-color="red">
-                <img src="../../../../assets/images/tomato5.png" alt="Tomato">
-            </div>
-            <div class="fruit-item" draggable="true" data-fruit="apple4" data-color="red">
-                <img src="../../../../assets/images/apple4.png" alt="Apple">
-            </div>
-            <div class="fruit-item" draggable="true" data-fruit="tomato1" data-color="red">
-                <img src="../../../../assets/images/tomato1.png" alt="Tomato">
-            </div>
-            <div class="fruit-item" draggable="true" data-fruit="tomato2" data-color="red">
-                <img src="../../../../assets/images/tomato2.png" alt="Tomato">
-            </div>
-            <div class="fruit-item" draggable="true" data-fruit="apple3" data-color="green">
-                <img src="../../../../assets/images/apple3.png" alt="Green Apple">
-            </div>
-            <div class="fruit-item" draggable="true" data-fruit="apple4" data-color="red">
-                <img src="../../../../assets/images/apple4.png" alt="Red Apple">
-            </div>
+        <div class="example-image-container">
+            <img src="../../../../assets/images/tomato.png" alt="Red Tomato">
         </div>
     </div>
 
-<!-- Score Modal -->
+    <!-- CENTER: Drop Zone (Dulang) -->
+    <div class="drop-zone" id="dropZone">
+        <img src="../../../../assets/images/tray.png" alt="Tray" class="tray-background">
+        <div class="drop-placeholder">Seret ke sini</div>
+    </div>
+
+    <!-- RIGHT: Draggable Fruits -->
+    <div class="fruits-grid">
+        <div class="fruit-item" draggable="true" data-fruit="apple1" data-color="red">
+            <img src="../../../../assets/images/apple1.png" alt="Apple">
+        </div>
+        <div class="fruit-item" draggable="true" data-fruit="tomato3" data-color="red">
+            <img src="../../../../assets/images/tomato3.png" alt="Tomato">
+        </div>
+        <div class="fruit-item" draggable="true" data-fruit="apple3" data-color="green">
+            <img src="../../../../assets/images/Apple3.png" alt="Apple">
+        </div>
+        <div class="fruit-item" draggable="true" data-fruit="tomato" data-color="red">
+            <img src="../../../../assets/images/tomato5.png" alt="Tomato">
+        </div>
+        <div class="fruit-item" draggable="true" data-fruit="apple4" data-color="red">
+            <img src="../../../../assets/images/apple4.png" alt="Apple">
+        </div>
+        <div class="fruit-item" draggable="true" data-fruit="tomato1" data-color="red">
+            <img src="../../../../assets/images/tomato1.png" alt="Tomato">
+        </div>
+        <div class="fruit-item" draggable="true" data-fruit="tomato2" data-color="red">
+            <img src="../../../../assets/images/tomato2.png" alt="Tomato">
+        </div>
+        <div class="fruit-item" draggable="true" data-fruit="apple3" data-color="green">
+            <img src="../../../../assets/images/apple3.png" alt="Green Apple">
+        </div>
+        <div class="fruit-item" draggable="true" data-fruit="apple4" data-color="red">
+            <img src="../../../../assets/images/apple4.png" alt="Red Apple">
+        </div>
+    </div>
+</div>
+
+<!-- Score Modal (with overall scores) -->
 <div class="score-modal" id="scoreModal" style="display: none;">
   <div class="score-container">
     <div class="stars-container">
@@ -84,7 +84,7 @@
       <div class="star star-small"><img src="../../../../assets/images/star3.png" class="star-image" /></div>
     </div>
     <div class="score-title">Keseluruhan Markah</div>
-    <div class="score-subtitle">Konsep Kuantitatif</div>
+    <div class="score-subtitle">Konsep Sama / Beza</div>
     <div class="games-score-list" id="gamesScoreList"></div>
     <div class="total-score-box">
       <div class="label">Peratusan Markah Keseluruhan (%)</div>
@@ -104,14 +104,40 @@
   </a>
 </div>
 
-    <script src="../../../../js/RelationalConcepts/tomato/game_page1.js"></script>
+<!-- FIREBASE SDK (MUST BE FIRST!) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
-      <!-- Load initHeader.js FIRST -->
+<!-- FIREBASE CONFIGURATION (Initialize once only) -->
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyCpDrWgLXXHK7_9nioEQGBKJkUv4byCEd4",
+    authDomain: "idzmir-kids-hub.firebaseapp.com",
+    projectId: "idzmir-kids-hub",
+    storageBucket: "idzmir-kids-hub.firebasestorage.app",
+    messagingSenderId: "301692363279",
+    appId: "1:301692363279:web:ba7c6547b36e433d6eb97a"
+  };
+
+  // Initialize Firebase (once only)
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+    console.log('✅ Firebase initialized successfully');
+  }
+</script>
+
+<!-- GAME SESSION MANAGER (MUST LOAD BEFORE GAME SCRIPT) -->
+<script src="../../../../js/gameSessionManager.js"></script>
+
+<!-- TOMATO GAME SCRIPT -->
+<script src="../../../../js/RelationalConcepts/Same-different/tomato/game_page1.js"></script>
+
+<!-- Load initHeader.js -->
 <script src="../../../../js/homepage/initHeader.js"></script>
 
-<!-- THEN call initializeHeader with correct path -->
+<!-- Initialize Header -->
 <script>
-  initializeHeader('../../../homepage/header.html');
+  initializeHeader('../../../homepage/header.html', '/assets');
 </script>
 
 </body>

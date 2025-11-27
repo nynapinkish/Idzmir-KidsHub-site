@@ -3,11 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-  
+    
   <!-- Link to Google Fonts for Poppins -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Lilita+One&display=swap" rel="stylesheet">
   
@@ -33,39 +29,47 @@
   <!-- Main Content Grid -->
   <main class="main-container">
     <!-- Assessment Section -->
-    <section class="section assessment" data-title="Assessment">
-      <div class="cards-wrapper">
-        <div class="card" onclick="handleCardClick('spatial')">
-          <img src="../../assets/images/spatial.png" alt="Spatial Concepts" class="card-img">
-          <div class="card-title">Spatial Concepts <br> (Position & Direction)</div>
-        </div>
-        <div class="card" onclick="handleCardClick('quantitative')">
-          <img src="../../assets/images/quantitative.png" alt="Quantitative Concepts" class="card-img">
-          <div class="card-title">Quantitative Concepts <br> (Amount & Number)</div>
-        </div>
-        <div class="card" onclick="handleCardClick('qualitative')">
-          <img src="../../assets/images/qualitative.png" alt="Qualitative Concepts" class="card-img">
-          <div class="card-title">Qualitative Concepts <br> (Descriptive Features)</div>
-        </div>
-        <div class="card" onclick="handleCardClick('temporal')">
-          <img src="../../assets/images/temporal.png" alt="Temporal Concepts" class="card-img">
-          <div class="card-title">Temporal Concepts <br> (Time & Sequence)</div>
-        </div>
-        <div class="card" onclick="handleCardClick('color-shape')">
-          <img src="../../assets/images/color-shape.png" alt="Color & Shape" class="card-img">
-          <div class="card-title">Color & Shape Concepts</div>
-        </div>
-        <div class="card" onclick="handleCardClick('relational')">
-          <img src="../../assets/images/comparative.png" alt="Comparative Concepts" class="card-img">
-          <div class="card-title">Comparative / <br> Relational Concepts</div>
-        </div>
-        <div class="card" onclick="handleCardClick('social-emotional')">
-          <img src="../../assets/images/social.png" alt="Social Emotional" class="card-img">
-          <div class="card-title">Social / Emotional <br> Concepts</div>
-        </div>
-      </div>
-    </section>
+<section class="section assessment" data-title="Assessment">
+  <!-- Spider Web Button - Position dalam section -->
+  <button class="spider-web-section-btn" onclick="openSpiderWeb()" title="View Spider Web Analysis">
+    <div class="spider-dots">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  </button>
 
+  <div class="cards-wrapper">
+    <div class="card" onclick="handleCardClick('spatial')">
+      <img src="../../assets/images/spatial.png" alt="Spatial Concepts" class="card-img">
+      <div class="card-title">Spatial Concepts <br> (Position & Direction)</div>
+    </div>
+    <div class="card" onclick="handleCardClick('quantitative')">
+      <img src="../../assets/images/quantitative.png" alt="Quantitative Concepts" class="card-img">
+      <div class="card-title">Quantitative Concepts <br> (Amount & Number)</div>
+    </div>
+    <div class="card" onclick="handleCardClick('qualitative')">
+      <img src="../../assets/images/qualitative.png" alt="Qualitative Concepts" class="card-img">
+      <div class="card-title">Qualitative Concepts <br> (Descriptive Features)</div>
+    </div>
+    <div class="card" onclick="handleCardClick('temporal')">
+      <img src="../../assets/images/temporal.png" alt="Temporal Concepts" class="card-img">
+      <div class="card-title">Temporal Concepts <br> (Time & Sequence)</div>
+    </div>
+    <div class="card" onclick="handleCardClick('color-shape')">
+      <img src="../../assets/images/color-shape.png" alt="Color & Shape" class="card-img">
+      <div class="card-title">Color & Shape Concepts</div>
+    </div>
+    <div class="card" onclick="handleCardClick('relational')">
+      <img src="../../assets/images/comparative.png" alt="Comparative Concepts" class="card-img">
+      <div class="card-title">Comparative / <br> Relational Concepts</div>
+    </div>
+    <div class="card" onclick="handleCardClick('social-emotional')">
+      <img src="../../assets/images/social.png" alt="Social Emotional" class="card-img">
+      <div class="card-title">Social / Emotional <br> Concepts</div>
+    </div>
+  </div>
+</section>
     <!-- Therapy Card Section -->
     <section class="section therapy" data-title="Therapy Card">
       <div class="cards-wrapper">

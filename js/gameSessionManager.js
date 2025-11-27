@@ -1,6 +1,6 @@
 // ===============================================
-// IDZMIR KIDS HUB - GAME SESSION MANAGER (FINAL FIX)
-// 100% Working - Score saves properly to Firebase
+// IDZMIR KIDS HUB - GAME SESSION MANAGER (UPDATED)
+// With Relational Concepts Added
 // ===============================================
 
 const db = firebase.firestore();
@@ -21,7 +21,29 @@ const CONCEPT_STRUCTURE = {
             'atas_/_bawah_/_tengah': 3
         }
     },
+    'Relational Concepts': {
+        maxScore: 0,
+        games: {
+            'same_/_different_/_apple': 4,           
+            'same_/_different_/_carrot': 4,
+            'same_/_different_/_grapes': 4,          
+            'same_/_different_/_lemon': 4,          
+            'same_/_different_/_tomato': 4,          
+            'match_/_mismatch_/_cat': 2,        
+            'match_/_mismatch_/_cow': 2,                  
+            'match_/_mismatch_/_snake': 2, 
+            'match_/_mismatch_/_dog': 2,                   
+            'match_/_mismatch_/_spider': 2,
+            'biggerThan_/_smallerThan_/_ball': 4,        
+            'biggerThan_/_smallerThan_/_key': 4,                  
+            'biggerThan_/_smallerThan_/_elephant': 4, 
+            'biggerThan_/_smallerThan_/_chicken': 4,                   
+            'biggerThan_/_smallerThan_/_klcc': 4,
+            'biggerThan_/_smallerThan_/_tree': 4                                                                                          
+        }
+    },
     'Quantitative Concepts': {
+        maxScore: 0,
         games: {
             'banyak_/_kurang': 2,
             'semua_/_tiada_/_sesetengah': 3,
@@ -72,6 +94,7 @@ const CONCEPT_STRUCTURE = {
         }
     },
     'Social/Emotional': {
+        maxScore: 0,
         games: {
             'gembira_/_sedih_/_marah_/_takut': 4,  
             'bersama_/_bersendirian': 2,          
@@ -125,7 +148,6 @@ class GameSessionManager {
         return this.studentData !== null;
     }
 
-    // ✅ FIXED: Properly check if game was played (allows score 0)
     async checkGameStatus(gameKey) {
         try {
             const studentId = sessionStorage.getItem('studentId');
@@ -150,12 +172,10 @@ class GameSessionManager {
             
             const conceptProgress = studentData.conceptProgress || {};
             
-            // Loop through ALL concepts to find the game
             for (const conceptType in conceptProgress) {
                 const conceptData = conceptProgress[conceptType];
                 const gamesCompleted = conceptData.gamesCompleted || {};
                 
-                // ✅ FIXED: Check if game exists (even with score 0!)
                 if (gamesCompleted[gameKey] !== undefined) {
                     console.log(`🔒 Game already played in ${conceptType}!`);
                     console.log(`   Score: ${gamesCompleted[gameKey]}`);
@@ -182,13 +202,11 @@ class GameSessionManager {
             return false;
         }
 
-        // Convert game name to key format
-        this.gameKey = gameName.replace(/\s*\/\s*/g, '_/_').replace(/\s+/g, '_');
+        this.gameKey = gameName.replace(/\s*\/\s*/g, '_/_').replace(/\s+/g, '_').toLowerCase();
         
         console.log(`🎮 Starting session for: "${gameName}"`);
         console.log(`🔑 Game key: "${this.gameKey}"`);
         
-        // CHECK IF GAME ALREADY PLAYED
         const gameStatus = await this.checkGameStatus(this.gameKey);
         
         if (gameStatus.played) {
@@ -253,14 +271,14 @@ class GameSessionManager {
         document.body.appendChild(overlay);
     }
 
-    // ✅ Update score properly
+    // CRITICAL: This updates gameSession internal score
     addScore(points = 1) {
         if (!this.isSessionActive) {
             console.error('❌ No active game session');
             return;
         }
         this.currentScore += points;
-        console.log(`✅ Score updated: ${this.currentScore}/${this.maxScore}`);
+        console.log(`✅ Score updated in gameSession: ${this.currentScore}/${this.maxScore}`);
     }
 
     getScore() {
@@ -271,7 +289,6 @@ class GameSessionManager {
         };
     }
 
-    // ✅ Save score to Firebase
     async saveScore() {
         if (!this.isSessionActive || !this.isLoggedIn()) {
             console.error('❌ Cannot save score - invalid session');
@@ -285,7 +302,6 @@ class GameSessionManager {
             console.log('   Game Key:', this.gameKey);
             console.log('   Score:', this.currentScore + '/' + this.maxScore);
             
-            // Double-check if already saved
             const gameStatus = await this.checkGameStatus(this.gameKey);
             if (gameStatus.played) {
                 console.log('🔒 Score already exists:', gameStatus.score);
@@ -295,7 +311,6 @@ class GameSessionManager {
             const duration = Date.now() - this.sessionStartTime;
             const percentage = Math.round((this.currentScore / this.maxScore) * 100);
 
-            // 1️⃣ Save to gameScores collection
             const gameScoreData = {
                 studentId: this.studentData.studentId,
                 username: this.studentData.username,
@@ -315,7 +330,6 @@ class GameSessionManager {
             await db.collection('gameScores').add(gameScoreData);
             console.log('✅ Saved to gameScores!');
 
-            // 2️⃣ Update student progress
             console.log('📝 Updating student progress...');
             await this.updateStudentProgress();
             console.log('✅ Student progress updated!');
@@ -329,7 +343,6 @@ class GameSessionManager {
         }
     }
 
-    // ✅ Update student's concept progress
     async updateStudentProgress() {
         try {
             const studentQuery = await db.collection('students')
@@ -347,7 +360,6 @@ class GameSessionManager {
 
             let conceptProgress = currentData.conceptProgress || {};
 
-            // Initialize concept if not exists
             if (!conceptProgress[this.conceptType]) {
                 conceptProgress[this.conceptType] = {
                     totalScore: 0,
@@ -357,7 +369,6 @@ class GameSessionManager {
                 };
             }
 
-            // ✅ CRITICAL: Check if game already has a score
             const previousScore = conceptProgress[this.conceptType].gamesCompleted[this.gameKey];
             
             if (previousScore !== undefined) {
@@ -365,20 +376,17 @@ class GameSessionManager {
                 return;
             }
 
-            // ✅ Save first attempt score
             console.log(`💾 Recording: ${this.gameKey} = ${this.currentScore}/${this.maxScore}`);
             
             conceptProgress[this.conceptType].totalScore += this.currentScore;
             conceptProgress[this.conceptType].gamesCompleted[this.gameKey] = this.currentScore;
             conceptProgress[this.conceptType].lastPlayed = firebase.firestore.FieldValue.serverTimestamp();
 
-            // Calculate overall total
             let overallTotalScore = 0;
             Object.values(conceptProgress).forEach(concept => {
                 overallTotalScore += concept.totalScore;
             });
 
-            // Calculate spider web data
             const spiderWebData = {};
             Object.keys(CONCEPT_STRUCTURE).forEach(conceptName => {
                 if (conceptProgress[conceptName]) {
@@ -398,7 +406,6 @@ class GameSessionManager {
                 }
             });
 
-            // Update Firebase
             await studentRef.update({
                 conceptProgress: conceptProgress,
                 totalScore: overallTotalScore,
@@ -413,7 +420,6 @@ class GameSessionManager {
         }
     }
 
-    // End session and save
     async endSession() {
         if (!this.isSessionActive) {
             console.error('❌ No active session to end');
@@ -456,24 +462,16 @@ async function initializeGame(conceptType, gameName, maxScore) {
     return started;
 }
 
-function updateScoreDisplay() {
-    const scoreDisplay = document.getElementById('scoreDisplay');
-    const scoreText = document.getElementById('scoreText');
-    
-    if (scoreDisplay && scoreText) {
-        const score = gameSession.getScore();
-        scoreText.textContent = `${score.current}/${score.max}`;
-        scoreDisplay.style.display = 'flex';
-    }
-}
+// REMOVED updateScoreDisplay() - Let game handle its own display
+// Only provide addScore functionality
 
 function handleCorrectAnswer() {
     gameSession.addScore(1);
-    updateScoreDisplay();
+    console.log('✅ handleCorrectAnswer called - score:', gameSession.currentScore);
 }
 
 function handleWrongAnswer() {
-    updateScoreDisplay();
+    console.log('❌ handleWrongAnswer called - no score change');
 }
 
 // ================= EXPORTS =================
@@ -481,8 +479,8 @@ window.gameSession = gameSession;
 window.initializeGame = initializeGame;
 window.handleCorrectAnswer = handleCorrectAnswer;
 window.handleWrongAnswer = handleWrongAnswer;
-window.updateScoreDisplay = updateScoreDisplay;
 
-console.log('✅ Game Session Manager loaded! (FINAL VERSION)');
+console.log('✅ Game Session Manager loaded! (WITH RELATIONAL CONCEPTS)');
 console.log('🔒 First attempt only - No replays allowed');
 console.log('📊 Concepts loaded:', Object.keys(CONCEPT_STRUCTURE).length);
+console.log('📋 Relational Concepts games:', Object.keys(CONCEPT_STRUCTURE['Relational Concepts'].games));

@@ -72,7 +72,7 @@
     <!-- 📦 Score Box -->
     <div class="score-box-wrapper">
       <div class="score-box">
-        <div class="score-value" id="finalScoreDisplay">2/2</div>
+        <div class="score-value" id="finalScoreDisplay">0/2</div>
       </div>
     </div>
   </div>
@@ -87,19 +87,45 @@
 
 <!-- NEXT BUTTON -->
 <div class="next-button-container">
-  <a href="../../../../html/RelationalConcepts/match-mismatch/cow/game_page1.html">
+  <a href="../cow/game_page1.html">
     <img src="../../../../assets/images/next.png" alt="Next Button" class="next-button" id="nextButton" style="display: none;">
   </a>
 </div>
 
+<!-- FIREBASE SDK (MUST BE FIRST!) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<!-- FIREBASE CONFIGURATION -->
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyCpDrWgLXXHK7_9nioEQGBKJkUv4byCEd4",
+    authDomain: "idzmir-kids-hub.firebaseapp.com",
+    projectId: "idzmir-kids-hub",
+    storageBucket: "idzmir-kids-hub.firebasestorage.app",
+    messagingSenderId: "301692363279",
+    appId: "1:301692363279:web:ba7c6547b36e433d6eb97a"
+  };
+
+  // Initialize Firebase
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+    console.log('✅ Firebase initialized successfully');
+  }
+</script>
+
+<!-- GAME SESSION MANAGER -->
+<script src="../../../../js/gameSessionManager.js"></script>
+
+<!-- CAT MATCHING GAME SCRIPT -->
 <script src="../../../../js/RelationalConcepts/match-mismatch/cat/game_page1.js"></script>
 
-<!-- Load initHeader.js FIRST -->
+<!-- Load initHeader.js -->
 <script src="../../../../js/homepage/initHeader.js"></script>
 
-<!-- THEN call initializeHeader with correct path -->
+<!-- Initialize Header -->
 <script>
-  initializeHeader('../../../homepage/header.html');
+  initializeHeader('../../../homepage/header.html', '/assets');
 </script>
 
 </body>

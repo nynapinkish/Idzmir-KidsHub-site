@@ -1,142 +1,34 @@
-// 🎮 Game Page 2 - Lebih Rendah (Tree) - WITH DYNAMIC STAR COLORS
-console.log("🎮 Game Page 2 loaded!");
-
-// Game state variables
+// ==================== GLOBAL VARIABLES ====================
 let score = 0;
-let totalAttempts = 4;
 let attemptsUsed = 0;
+const totalAttempts = 4;
+let clickedImages = new Set();
+let isGameLocked = false;
 
-// Game names
-const GAME_NAMES = {
-  page1: "KLCC vs Objects (Lebih Tinggi)",
-  page2: "Tree vs Objects (Lebih Rendah)"
-};
-
-// Initialize game when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-  console.log("✅ DOM loaded - Game 2 ready!");
-  
-  const scoreDisplay = document.getElementById('scoreDisplay');
-  
-  // Show score display
-  if (scoreDisplay) {
-    scoreDisplay.style.display = 'flex';
-    updateScoreDisplay();
-    console.log("📊 Score display initialized");
-  }
-  
-  console.log(`🎯 Game 2 started! Total attempts: ${totalAttempts}`);
-});
-
-// Select option function
-function selectOption(element, imageName, itemName) {
-  console.log(`🎯 Clicked: ${itemName} (${imageName})`);
-  
-  // Prevent clicking same image twice
-  if (element.classList.contains('clicked')) {
-    console.log("⚠️ Already clicked!");
-    return;
-  }
-
-  // Check if max attempts reached
-  if (attemptsUsed >= totalAttempts) {
-    console.log("⚠️ Max attempts reached!");
-    return;
-  }
-
-  // Mark as clicked
-  element.classList.add('clicked');
-  attemptsUsed++;
-  console.log(`📝 Attempt ${attemptsUsed}/${totalAttempts}`);
-
-  const answer = element.getAttribute('data-answer');
-
-  if (answer === 'correct') {
-    // ✅ CORRECT - Highlight hijau je
-    score++;
-    element.classList.add('correct-glow');
-    console.log(`✅ CORRECT! Score: ${score}/${totalAttempts}`);
-    
-    updateScoreDisplay();
-    
-    setTimeout(() => {
-      element.style.pointerEvents = 'none';
-      element.style.opacity = '1';
-    }, 800);
-    
-  } else if (answer === 'wrong') {
-    // ❌ WRONG - Shake merah je
-    element.classList.add('wrong-shake');
-    console.log(`❌ WRONG! Score remains: ${score}/${totalAttempts}`);
-    
-    setTimeout(() => {
-      element.classList.remove('wrong-shake');
-      element.style.opacity = '0.5';
-      element.style.pointerEvents = 'none';
-    }, 800);
-  }
-
-  // Check if game should end
-  if (attemptsUsed >= totalAttempts) {
-    console.log("🏁 Game 2 Over!");
-    
-    // Save current game score
-    saveGameScore('page2', score, totalAttempts);
-    
-    // Disable all remaining images
-    const allImages = document.querySelectorAll('.clickable-image');
-    allImages.forEach(img => {
-      img.style.pointerEvents = 'none';
-    });
-    
-    // Show result with score list
-    setTimeout(() => {
-      showScoringPopup();
-    }, 1000);
+// ==================== UTILITY FUNCTIONS ====================
+function addPulseToNextButton() {
+  const nextButton = document.getElementById('nextButton');
+  if (nextButton) {
+    nextButton.classList.add('pulse');
   }
 }
 
-// Update score display
-function updateScoreDisplay() {
+function updateLocalScoreDisplay(currentScore, maxAttempts) {
   const scoreText = document.getElementById('scoreText');
+  const scoreDisplay = document.querySelector('.score-display');
+  
   if (scoreText) {
-    scoreText.textContent = `${score}/${totalAttempts}`;
-    console.log(`📊 Score updated: ${score}/${totalAttempts}`);
+    scoreText.textContent = `${currentScore}/${maxAttempts}`;
+  }
+  
+  if (scoreDisplay) {
+    scoreDisplay.classList.add('score-update');
+    setTimeout(() => {
+      scoreDisplay.classList.remove('score-update');
+    }, 500);
   }
 }
 
-// Save game score to localStorage
-function saveGameScore(gamePage, score, total) {
-  const gameScores = JSON.parse(localStorage.getItem('gameScores') || '{}');
-  gameScores[gamePage] = {
-    score: score,
-    total: total,
-    name: GAME_NAMES[gamePage]
-  };
-  localStorage.setItem('gameScores', JSON.stringify(gameScores));
-  console.log(`💾 Saved ${gamePage} score: ${score}/${total}`);
-}
-
-// Get all game scores from localStorage
-function getAllGameScores() {
-  return JSON.parse(localStorage.getItem('gameScores') || '{}');
-}
-
-// Calculate total percentage
-function calculateTotalPercentage(gameScores) {
-  let totalScore = 0;
-  let totalPossible = 0;
-  
-  Object.values(gameScores).forEach(game => {
-    totalScore += game.score;
-    totalPossible += game.total;
-  });
-  
-  if (totalPossible === 0) return 0;
-  return Math.round((totalScore / totalPossible) * 100);
-}
-
-// ==================== DYNAMIC STAR COLORS ====================
 function updateStarColors(correctAnswers, totalQuestions) {
   const percentage = (correctAnswers / totalQuestions) * 100;
   const stars = document.querySelectorAll('.star-image');
@@ -162,112 +54,446 @@ function updateStarColors(correctAnswers, totalQuestions) {
   });
 }
 
-// Populate games score list
-function populateGamesList(gameScores) {
-  const gamesList = document.getElementById('gamesScoreList');
-  if (!gamesList) return;
+// ==================== GAME LOGIC - MUST BE GLOBAL ====================
+function selectOption(element, imageName, itemName) {
+  console.log(`🎯 Clicked: ${itemName} (${imageName})`);
   
-  gamesList.innerHTML = '';
+  // Check if game is locked
+  if (isGameLocked) {
+    console.log("🔒 Game is locked - cannot play!");
+    return;
+  }
   
-  Object.entries(gameScores).forEach(([key, game]) => {
-    const row = document.createElement('div');
-    row.className = 'game-score-row';
-    row.innerHTML = `
-      <div class="game-name">${game.name}</div>
-      <div class="game-points">${game.score}/${game.total}</div>
-    `;
-    gamesList.appendChild(row);
-  });
-  
-  console.log("📋 Games list populated with", Object.keys(gameScores).length, "games");
+  // Prevent clicking same image twice
+  if (clickedImages.has(element)) {
+    console.log("⚠️ Image already clicked!");
+    return;
+  }
+
+  // Check if max attempts reached
+  if (attemptsUsed >= totalAttempts) {
+    console.log("⚠️ Max attempts reached!");
+    return;
+  }
+
+  clickedImages.add(element);
+  attemptsUsed++;
+  console.log(`\n📊 CLICK #${attemptsUsed}/${totalAttempts}`);
+
+  const answer = element.getAttribute('data-answer');
+
+  if (answer === 'correct') {
+    // ✅ CORRECT ANSWER - GLOW HIJAU JE
+    score++;
+    element.classList.add('correct-glow');
+    console.log("✅ CORRECT! Score:", score);
+    
+    // Update gameSession score if available
+    if (typeof handleCorrectAnswer === 'function' && window.gameSession) {
+      handleCorrectAnswer();
+      console.log('   ✅ handleCorrectAnswer() called');
+      console.log('   📊 GameSession score:', window.gameSession.currentScore, '/', window.gameSession.maxScore);
+    }
+    
+    updateLocalScoreDisplay(score, totalAttempts);
+
+    // Disable this image
+    element.style.pointerEvents = 'none';
+    element.style.opacity = '1';
+
+  } else if (answer === 'wrong') {
+    // ❌ WRONG ANSWER - SHAKE MERAH JE
+    element.classList.add('wrong-shake');
+    console.log("❌ WRONG! Score remains:", score);
+    
+    // Remove shake animation after it completes and fade out
+    setTimeout(() => {
+      element.classList.remove('wrong-shake');
+      element.style.opacity = '0.5';
+      element.style.pointerEvents = 'none';
+    }, 800);
+    
+    updateLocalScoreDisplay(score, totalAttempts);
+  }
+
+  // Check if game should end
+  if (attemptsUsed >= totalAttempts) {
+    console.log('\n🎉 GAME FINISHED!');
+    console.log('========================================');
+    console.log('📊 FINAL SCORES:');
+    console.log('   Local score:', score, '/', totalAttempts);
+    if (window.gameSession) {
+      console.log('   GameSession score:', window.gameSession.currentScore, '/', window.gameSession.maxScore);
+      console.log('   Session active?', window.gameSession.isSessionActive);
+    }
+    console.log('========================================');
+    
+    // Disable all remaining images
+    const clickableImagesAll = document.querySelectorAll('.clickable-image');
+    clickableImagesAll.forEach(img => {
+      img.style.pointerEvents = 'none';
+    });
+    
+    // Show result with concept summary
+    setTimeout(() => showFinalResult(), 500);
+  }
 }
 
-// Show scoring popup (final result)
-function showScoringPopup() {
-  console.log("🎉 Showing scoring popup!");
+// ==================== FINAL RESULT & SUMMARY ====================
+async function showFinalResult() {
+  console.log('\n💾 ATTEMPTING TO SAVE TO FIREBASE...');
+  
+  // Save to Firebase if gameSession available
+  if (window.gameSession && window.gameSession.isSessionActive) {
+    console.log('   Before save - gameSession.currentScore:', window.gameSession.currentScore);
+    console.log('   Before save - gameSession.isSessionActive:', window.gameSession.isSessionActive);
+    
+    try {
+      const saved = await window.gameSession.endSession();
+      
+      console.log('\n📊 SAVE RESULT:', saved ? '✅ SUCCESS' : '❌ FAILED');
+      
+      if (!saved) {
+        console.error('❌ FIREBASE SAVE FAILED!');
+      }
+    } catch (error) {
+      console.error('❌ EXCEPTION during save:', error);
+    }
+  } else {
+    console.warn('⚠️ No active gameSession - score not saved');
+  }
+  
+  // Show concept summary
+  await showConceptSummary();
+}
+
+// Get all games score from Firebase for summary display
+async function getAllGamesScoreFromFirebase() {
+  try {
+    const studentId = sessionStorage.getItem('studentId');
+    if (!studentId) return null;
+
+    const db = firebase.firestore();
+    const studentQuery = await db.collection('students')
+      .where('studentId', '==', studentId)
+      .get();
+
+    if (studentQuery.empty) return null;
+
+    const studentDoc = studentQuery.docs[0];
+    const studentData = studentDoc.data();
+    const conceptProgress = studentData.conceptProgress || {};
+    const relationalConcepts = conceptProgress['Relational Concepts'];
+
+    if (!relationalConcepts) return null;
+
+    console.log('✅ Firebase data retrieved:', relationalConcepts);
+    return relationalConcepts;
+  } catch (error) {
+    console.error('❌ Error getting Firebase data:', error);
+    return null;
+  }
+}
+
+async function showConceptSummary() {
+  console.log("🎉 Showing concept summary from Firebase!");
   
   const scoreModal = document.getElementById('scoreModal');
+  const gamesScoreList = document.getElementById('gamesScoreList');
   const totalScorePercentage = document.getElementById('totalScorePercentage');
   const continueBtn = document.getElementById('continueBtn');
   const finishBtn = document.getElementById('finishBtn');
   
-  if (!scoreModal) return;
-  
-  // Get all game scores
-  const gameScores = getAllGameScores();
-  console.log("📊 All game scores:", gameScores);
-  
-  // Populate games list
-  populateGamesList(gameScores);
-  
-  // Calculate total score and percentage
-  let totalScore = 0;
-  let totalPossible = 0;
-  
-  Object.values(gameScores).forEach(game => {
-    totalScore += game.score;
-    totalPossible += game.total;
-  });
-  
-  const percentage = calculateTotalPercentage(gameScores);
-  
-  // Update total percentage display
-  if (totalScorePercentage) {
-    totalScorePercentage.textContent = `${percentage}%`;
-    console.log(`📊 Total percentage: ${percentage}%`);
+  if (!scoreModal || !gamesScoreList) {
+    console.error('❌ Modal elements not found!');
+    return;
   }
   
-  // Update star colors based on TOTAL percentage
-  updateStarColors(totalScore, totalPossible);
+  // Get student ID
+  const studentId = sessionStorage.getItem('studentId');
   
-  // Show modal with animation
-  scoreModal.style.display = 'flex';
-  scoreModal.style.animation = 'fadeIn 0.3s ease';
-  console.log("🎨 Score modal displayed!");
-  
-  // Setup continue button with fade-in
-  if (continueBtn) {
-    continueBtn.style.opacity = '0';
-    continueBtn.style.pointerEvents = 'none';
-    
-    setTimeout(() => {
-      continueBtn.style.transition = 'opacity 0.5s ease-in-out, transform 0.1s ease';
-      continueBtn.style.opacity = '1';
-      continueBtn.style.pointerEvents = 'auto';
-      continueBtn.style.animation = 'bounceButton 1s ease-in-out infinite';
-      console.log("➡️ Continue button activated!");
-    }, 1000);
-    
-    continueBtn.onclick = () => {
-      console.log("➡️ Continue to next section");
-      // Navigate to next game/section
-      window.location.href = '../html/homepage/socialEmoConcepts.html';
-    };
+  if (!studentId) {
+    console.error('❌ No studentId found!');
+    return;
   }
   
-  // Setup finish button with fade-in
-  if (finishBtn) {
-    finishBtn.style.opacity = '0';
-    finishBtn.style.pointerEvents = 'none';
+  try {
+    console.log('📡 Fetching Relational Concepts data from Firebase...');
+    console.log('👤 Student ID:', studentId);
     
-    setTimeout(() => {
-      finishBtn.style.transition = 'opacity 0.4s ease-in-out, transform 0.3s ease';
-      finishBtn.style.opacity = '1';
-      finishBtn.style.pointerEvents = 'auto';
-      console.log("🏁 Finish button activated!");
-    }, 1000);
+    // ✅ Use the helper function to get Firebase data
+    const firebaseData = await getAllGamesScoreFromFirebase();
     
-    finishBtn.onclick = () => {
-      console.log("🏁 Finish - Going to homepage");
-      // Clear scores and go to homepage
-      localStorage.removeItem('gameScores');
-      window.location.href = '../../../homepage/homepage.html';
-    };
+    // ✅ FALLBACK: If no data found, show current game score only
+    if (!firebaseData || !firebaseData.gamesCompleted) {
+      console.warn('⚠️ No games found in Firebase - showing current game only!');
+      
+      // Use current game score
+      const gamesHTML = `
+        <div class="game-score-item">
+          <span class="game-name">biggerThan / smallerThan / tree</span>
+          <span class="game-score">${score}/${totalAttempts}</span>
+        </div>
+      `;
+      
+      const percentage = Math.round((score / totalAttempts) * 100);
+      
+      gamesScoreList.innerHTML = gamesHTML;
+      if (totalScorePercentage) {
+        totalScorePercentage.textContent = `${percentage}%`;
+      }
+      
+      updateStarColors(score, totalAttempts);
+      
+      console.log('✅ Using fallback - Current game score only');
+      console.log('   Score:', score, '/', totalAttempts, '=', percentage + '%');
+      
+    } else {
+      // ✅ NORMAL FLOW: Build complete games list from Firebase
+      console.log('\n📋 GAMES FOUND IN FIREBASE:');
+      console.log('========================================');
+      
+      const gamesCompleted = firebaseData.gamesCompleted;
+      
+      // Define game display names and their max scores
+      const GAME_CONFIG = [
+        { key: 'biggerthan_/_smallerthan_/_ball', name: 'Bigger Than - Ball', max: 4 },
+        { key: 'biggerthan_/_smallerthan_/_key', name: 'Smaller Than - Key', max: 4 },
+        { key: 'biggerthan_/_smallerthan_/_elephant', name: 'Bigger Than - Elephant', max: 4 },
+        { key: 'biggerthan_/_smallerthan_/_chicken', name: 'Smaller Than - Chicken', max: 4 },
+        { key: 'biggerthan_/_smallerthan_/_klcc', name: 'Bigger Than - KLCC', max: 4 },
+        { key: 'biggerthan_/_smallerthan_/_tree', name: 'Smaller Than - Tree', max: 4 }
+      ];
+      
+      let totalScore = 0;
+      let totalMaxScore = 0;
+      let gamesHTML = '';
+      
+      // Build list from games that have been completed
+      GAME_CONFIG.forEach(game => {
+        const gameScore = gamesCompleted[game.key];
+        
+        // Only show games that have been completed
+        if (gameScore !== undefined) {
+          totalScore += gameScore;
+          totalMaxScore += game.max;
+          
+          console.log(`   ${game.name}: ${gameScore}/${game.max}`);
+          
+          gamesHTML += `
+            <div class="game-score-item">
+              <span class="game-name">${game.name}</span>
+              <span class="game-score">${gameScore}/${game.max}</span>
+            </div>
+          `;
+        }
+      });
+      
+      console.log('========================================');
+      console.log('📊 TOTALS:');
+      console.log('   Total Score:', totalScore);
+      console.log('   Max Score:', totalMaxScore);
+      
+      // Calculate percentage
+      const percentage = totalMaxScore > 0 
+        ? Math.round((totalScore / totalMaxScore) * 100) 
+        : 0;
+      
+      console.log('   Percentage:', percentage + '%');
+      console.log('========================================\n');
+      
+      // Update modal content
+      gamesScoreList.innerHTML = gamesHTML;
+      
+      if (totalScorePercentage) {
+        totalScorePercentage.textContent = `${percentage}%`;
+      }
+      
+      // Update star colors based on total percentage
+      updateStarColors(totalScore, totalMaxScore);
+    }
+    
+    // ✅ SHOW MODAL (Same for both paths)
+    scoreModal.style.display = 'flex';
+    scoreModal.style.position = 'fixed';
+    scoreModal.style.top = '0';
+    scoreModal.style.left = '0';
+    scoreModal.style.width = '100%';
+    scoreModal.style.height = '100%';
+    scoreModal.style.zIndex = '10000';
+    scoreModal.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+    scoreModal.style.alignItems = 'center';
+    scoreModal.style.justifyContent = 'center';
+    
+    console.log("🎨 Concept summary modal displayed!");
+    
+    // Setup button handlers with fade-in
+    if (continueBtn) {
+      continueBtn.style.opacity = '0';
+      continueBtn.style.pointerEvents = 'none';
+      
+      setTimeout(() => {
+        continueBtn.style.transition = 'opacity 0.5s ease-in-out';
+        continueBtn.style.opacity = '1';
+        continueBtn.style.pointerEvents = 'auto';
+        continueBtn.style.animation = 'bounceButton 1s ease-in-out infinite';
+        console.log("➡️ Continue button activated!");
+      }, 1000);
+      
+      continueBtn.onclick = () => {
+        console.log("➡️ Continue to next concept");
+        window.location.href = '../../../../html/RelationalConcepts/relationalConcepts.html';
+      };
+    }
+    
+    if (finishBtn) {
+      finishBtn.style.opacity = '0';
+      finishBtn.style.pointerEvents = 'none';
+      
+      setTimeout(() => {
+        finishBtn.style.transition = 'opacity 0.5s ease-in-out';
+        finishBtn.style.opacity = '1';
+        finishBtn.style.pointerEvents = 'auto';
+        console.log("🏁 Finish button activated!");
+      }, 1000);
+      
+      finishBtn.onclick = () => {
+        console.log("🏁 Finish - Going to homepage");
+        window.location.href = '../../../../html/homepage/homepage.html';
+      };
+    }
+    
+  } catch (error) {
+    console.error('❌ Error fetching concept summary:', error);
+    console.error('Error details:', error.message);
+    
+    // ✅ EMERGENCY FALLBACK
+    console.log('🆘 Using emergency fallback!');
+    
+    const gamesHTML = `
+      <div class="game-score-item">
+        <span class="game-name">Current Game</span>
+        <span class="game-score">${score}/${totalAttempts}</span>
+      </div>
+    `;
+    
+    const percentage = Math.round((score / totalAttempts) * 100);
+    
+    gamesScoreList.innerHTML = gamesHTML;
+    if (totalScorePercentage) {
+      totalScorePercentage.textContent = `${percentage}%`;
+    }
+    
+    updateStarColors(score, totalAttempts);
+    
+    // Show modal anyway
+    scoreModal.style.display = 'flex';
+    scoreModal.style.position = 'fixed';
+    scoreModal.style.top = '0';
+    scoreModal.style.left = '0';
+    scoreModal.style.width = '100%';
+    scoreModal.style.height = '100%';
+    scoreModal.style.zIndex = '10000';
+    scoreModal.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+    scoreModal.style.alignItems = 'center';
+    scoreModal.style.justifyContent = 'center';
   }
 }
 
-// Optional: Reset all games
-function resetAllGames() {
-  localStorage.removeItem('gameScores');
-  console.log("🔄 All game scores reset!");
-}
+// ==================== DOM INITIALIZATION ====================
+document.addEventListener('DOMContentLoaded', async () => {
+  console.log('========================================');
+  console.log('🌳 TREE Game (Lebih Rendah) - LAST GAME');
+  console.log('========================================');
+  
+  // Check sessionStorage
+  console.log('📋 Session Data:');
+  console.log('   - userName:', sessionStorage.getItem('userName'));
+  console.log('   - studentId:', sessionStorage.getItem('studentId'));
+  console.log('   - userRole:', sessionStorage.getItem('userRole'));
+  
+  // Wait for gameSessionManager to load
+  await new Promise(resolve => setTimeout(resolve, 500));
+  
+  // Check if gameSession is available
+  if (typeof window.gameSession === 'undefined') {
+    console.error('❌ gameSessionManager not loaded!');
+    console.error('⚠️ Game will continue without score tracking');
+  } else {
+    console.log('✅ gameSessionManager loaded');
+  }
+  
+  console.log('✅ Firebase ready:', typeof firebase !== 'undefined');
+  
+  // Initialize game session
+  console.log('\n🌳 Initializing tree game...');
+  let gameStarted = true;
+  
+  if (typeof initializeGame === 'function') {
+    // ✅ Use exact game key from gameSessionManager
+    gameStarted = await initializeGame('Relational Concepts', 'biggerThan / smallerThan / tree', 4);
+  } else {
+    console.warn('⚠️ initializeGame not available - running without tracking');
+  }
+
+  // Initialize elements
+  const scoreDisplay = document.getElementById('scoreDisplay');
+  const scoreText = document.getElementById('scoreText');
+  const scoreModal = document.getElementById('scoreModal');
+  const clickableImagesElements = document.querySelectorAll('.clickable-image');
+
+  // ✅ HANDLE GAME ALREADY PLAYED (After Refresh)
+  if (!gameStarted && window.gameSession) {
+    console.log('🔒 Game already played - showing concept summary');
+    isGameLocked = true;
+    
+    const existingScore = window.gameSession.existingScore;
+    console.log('   📊 Existing Score:', existingScore, '/', totalAttempts);
+    
+    // Update global score variable
+    score = existingScore;
+    attemptsUsed = totalAttempts;
+    
+    // Show score at top
+    if (scoreDisplay) {
+      scoreDisplay.style.display = 'flex';
+      updateLocalScoreDisplay(existingScore, totalAttempts);
+      console.log('   ✅ Top score display shown');
+    }
+    
+    // Disable all clickable images
+    clickableImagesElements.forEach(img => {
+      img.style.pointerEvents = 'none';
+      img.style.opacity = '0.5';
+      img.style.cursor = 'not-allowed';
+    });
+    
+    // Show concept summary directly
+    await showConceptSummary();
+    
+    console.log('✅ Concept summary displayed - game locked');
+    console.log('========================================\n');
+    return; // Stop execution here
+  }
+
+  // ✅ NEW GAME - First time playing
+  if (window.gameSession) {
+    console.log('✅ Game session started successfully');
+    console.log('   - Concept:', window.gameSession.conceptType);
+    console.log('   - Game:', window.gameSession.gameName);
+    console.log('   - Game Key:', window.gameSession.gameKey);
+    console.log('   - Max Score:', window.gameSession.maxScore);
+    console.log('   - Active:', window.gameSession.isSessionActive);
+  }
+
+  // Show score display
+  if (scoreDisplay) {
+    scoreDisplay.style.display = 'flex';
+    updateLocalScoreDisplay(score, totalAttempts);
+    console.log('✅ Score display shown');
+  }
+
+  console.log("\n🚀 Game ready! You have 4 attempts!");
+  console.log(`🎯 Click wisely - only ${totalAttempts} clicks allowed!`);
+  console.log('========================================\n');
+});

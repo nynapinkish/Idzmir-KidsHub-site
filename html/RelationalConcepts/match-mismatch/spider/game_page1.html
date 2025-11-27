@@ -7,7 +7,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../../../css/RelationalConcepts/match-mismatch/spider/game_page1.css">
   <link rel="stylesheet" href="../../../../css/homepage/header.css">
-
 </head>
 <body>
 
@@ -29,29 +28,29 @@
   </div>
   <div class="banner-blue">yang mana labah-labah?</div>
 </div>
-  <!-- =============================
-       LAYOUT GAMBAR
-  ============================= -->
-  <div class="image-layout">
-    <div class="left-image">
-      <img src="../../../../assets/images/spider.png" alt="labah-labah" data-answer="correct">
-      <div class="answer-btn-container">
-        <div class="answer-design">
-          <span class="answer-text">labah-labah</span>
-        </div>
+
+<!-- =============================
+     LAYOUT GAMBAR
+============================= -->
+<div class="image-layout">
+  <div class="left-image">
+    <img src="../../../../assets/images/spider.png" alt="Labah-labah" data-answer="reference">
+    <div class="answer-btn-container">
+      <div class="answer-design">
+        <span class="answer-text">labah-labah</span>
       </div>
-    </div>
-
-    <div class="right-images">
-      <img src="../../../../assets/images/spider.png" alt="Labah-labah" data-answer="correct" class="clickable-image">
-      <img src="../../../../assets/images/butterfly.png" alt="rama-rama" data-answer="wrong" class="clickable-image">
-      <img src="../../../../assets/images/ladybird.png" alt="ladybird" data-answer="wrong" class="clickable-image">
-      <img src="../../../../assets/images/spider1.png" alt="labah-labah1" data-answer="correct" class="clickable-image">
-
     </div>
   </div>
 
-  <!-- Score Modal -->
+  <div class="right-images">
+    <img src="../../../../assets/images/spider.png" alt="Labah-labah" data-answer="correct" class="clickable-image">
+    <img src="../../../../assets/images/butterfly.png" alt="Rama-rama" data-answer="wrong" class="clickable-image">
+    <img src="../../../../assets/images/ladybird.png" alt="Kumbang" data-answer="wrong" class="clickable-image">
+    <img src="../../../../assets/images/spider1.png" alt="Labah-labah 1" data-answer="correct" class="clickable-image">
+  </div>
+</div>
+
+<!-- 🎉 SCORE MODAL - SUMMARY (Last Game in Category) -->
 <div class="score-modal" id="scoreModal" style="display: none;">
   <div class="score-container">
     <div class="stars-container">
@@ -60,7 +59,7 @@
       <div class="star star-small"><img src="../../../../assets/images/star3.png" class="star-image" /></div>
     </div>
     <div class="score-title">Keseluruhan Markah</div>
-    <div class="score-subtitle">Quantitative Concepts</div>
+    <div class="score-subtitle">Match / Mismatch</div>
     <div class="games-score-list" id="gamesScoreList"></div>
     <div class="total-score-box">
       <div class="label">Peratusan Markah Keseluruhan (%)</div>
@@ -75,20 +74,45 @@
 
 <!-- BACK BUTTON -->
 <div class="back-button-container">
-  <a href="../../../../html/RelationalConcepts/match-mismatch/dog/game_page1.html">
+  <a href="../dog/game_page1.html">
     <img src="../../../../assets/images/back.png" alt="Back Button" class="back-button">
   </a>
 </div>
 
-    <script src="../../../../js/RelationalConcepts/match-mismatch/spider/game_page1.js"></script>
+<!-- FIREBASE SDK (MUST BE FIRST!) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
+<!-- FIREBASE CONFIGURATION -->
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyCpDrWgLXXHK7_9nioEQGBKJkUv4byCEd4",
+    authDomain: "idzmir-kids-hub.firebaseapp.com",
+    projectId: "idzmir-kids-hub",
+    storageBucket: "idzmir-kids-hub.firebasestorage.app",
+    messagingSenderId: "301692363279",
+    appId: "1:301692363279:web:ba7c6547b36e433d6eb97a"
+  };
 
-    <!-- Load initHeader.js FIRST -->
+  // Initialize Firebase
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+    console.log('✅ Firebase initialized successfully');
+  }
+</script>
+
+<!-- GAME SESSION MANAGER -->
+<script src="../../../../js/gameSessionManager.js"></script>
+
+<!-- SPIDER MATCHING GAME SCRIPT -->
+<script src="../../../../js/RelationalConcepts/match-mismatch/spider/game_page1.js"></script>
+
+<!-- Load initHeader.js -->
 <script src="../../../../js/homepage/initHeader.js"></script>
 
-<!-- THEN call initializeHeader with correct path -->
+<!-- Initialize Header -->
 <script>
-  initializeHeader('../../../homepage/header.html');
+  initializeHeader('../../../homepage/header.html', '/assets');
 </script>
 
 </body>

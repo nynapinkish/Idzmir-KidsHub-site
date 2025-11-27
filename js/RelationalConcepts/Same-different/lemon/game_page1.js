@@ -1,71 +1,3 @@
-// Initialize persistent score storage for ALL games
-async function initializeGameScore() {
-  try {
-    const existing = await window.storage.get('socialEmoAllGames', true);
-    if (!existing) {
-      await window.storage.set('socialEmoAllGames', JSON.stringify({ 
-        game1: { score: 0, total: 4, questionsAnswered: [] },
-        game2: { score: 0, total: 2, questionsAnswered: [] },
-        game3: { score: 0, total: 2, questionsAnswered: [] },
-        game4: { score: 0, total: 3, questionsAnswered: [] }
-      }), true);
-    }
-  } catch (error) {
-    console.log('Storage not available, using session only');
-  }
-}
-
-// Get all games score
-async function getAllGamesScore() {
-  try {
-    const data = await window.storage.get('socialEmoAllGames', true);
-    if (data) {
-      return JSON.parse(data.value);
-    }
-  } catch (error) {
-    console.log('Error getting score');
-  }
-  return {
-    game1: { score: 0, total: 4, questionsAnswered: [] },
-    game2: { score: 0, total: 2, questionsAnswered: [] },
-    game3: { score: 0, total: 2, questionsAnswered: [] },
-    game4: { score: 0, total: 3, questionsAnswered: [] }
-  };
-}
-
-// Add score for Game 1 (Apple Sorting)
-async function addGame1Score() {
-  try {
-    const allData = await getAllGamesScore();
-    allData.game1.score += 1;
-    await window.storage.set('socialEmoAllGames', JSON.stringify(allData), true);
-    return allData.game1.score;
-  } catch (error) {
-    console.log('Error adding score');
-    return 0;
-  }
-}
-
-// Update score display with animation
-async function updateScoreDisplay(currentScore, maxAttempts) {
-  const allData = await getAllGamesScore();
-  const scoreText = document.getElementById('scoreText');
-  const scoreDisplay = document.querySelector('.score-display');
-  
-  if (scoreText) {
-    // ✅ Display format: currentScore/maxAttempts
-    scoreText.textContent = `${currentScore}/${maxAttempts}`;
-  }
-  
-  // Add popup animation
-  if (scoreDisplay) {
-    scoreDisplay.classList.add('score-update');
-    setTimeout(() => {
-      scoreDisplay.classList.remove('score-update');
-    }, 500);
-  }
-}
-
 // Add pulse animation to Next button
 function addPulseToNextButton() {
   const nextButtonContainer = document.querySelector(".next-button-container");
@@ -74,23 +6,117 @@ function addPulseToNextButton() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", async () => {
-  // Initialize storage
-  await initializeGameScore();
+// Local score display update (visual only)
+function updateLocalScoreDisplay(currentScore, maxAttempts) {
+  const scoreText = document.getElementById('scoreText');
+  const scoreDisplay = document.querySelector('.score-display');
+  
+  if (scoreText) {
+    scoreText.textContent = `${currentScore}/${maxAttempts}`;
+  }
+  
+  if (scoreDisplay) {
+    scoreDisplay.classList.add('score-update');
+    setTimeout(() => {
+      scoreDisplay.classList.remove('score-update');
+    }, 500);
+  }
+}
 
-  // Initialize elements (IKUT HTML YANG BETUL)
+document.addEventListener("DOMContentLoaded", async () => {
+  console.log('========================================');
+  console.log('🍋 LEMON SORTING GAME');
+  console.log('========================================');
+  
+  // Check sessionStorage
+  console.log('📋 Session Data:');
+  console.log('   - userName:', sessionStorage.getItem('userName'));
+  console.log('   - studentId:', sessionStorage.getItem('studentId'));
+  console.log('   - userRole:', sessionStorage.getItem('userRole'));
+  console.log('   - userAge:', sessionStorage.getItem('userAge'));
+  
+  // Wait for gameSessionManager to load
+  await new Promise(resolve => setTimeout(resolve, 500));
+  
+  // Check if gameSession is available (DON'T BLOCK if missing!)
+  if (typeof gameSession === 'undefined') {
+    console.error('❌ gameSessionManager not loaded!');
+    console.error('⚠️ Game will continue without score tracking');
+    // DON'T return - let game continue
+  } else {
+    console.log('✅ gameSessionManager loaded');
+  }
+  
+  console.log('✅ Firebase ready:', typeof firebase !== 'undefined');
+  
+  // Initialize game session for LEMON game
+  console.log('\n🍋 Initializing lemon game...');
+  let gameStarted = true; // Default to true if no gameSession
+  
+  if (typeof initializeGame === 'function') {
+    gameStarted = await initializeGame('Relational Concepts', 'same / different / lemon', 4);
+  } else {
+    console.warn('⚠️ initializeGame not available - running without tracking');
+  }
+  
+  // Initialize elements
   const fruits = document.querySelectorAll(".fruit-item");
   const dropZone = document.getElementById("dropZone");
-  const scoreText = document.getElementById("scoreText");
-  const scoreDisplay = document.getElementById("scoreDisplay"); // ✅ Score display atas (hidden awal)
-  const scoreModal = document.getElementById("scoreModal"); // ✅ Score Modal
-  const finalScoreDisplay = document.getElementById("finalScoreDisplay"); // ✅ Final Score Display dalam modal
+  const scoreDisplay = document.getElementById("scoreDisplay");
+  const scoreModal = document.getElementById("scoreModal");
+  const finalScoreDisplay = document.getElementById("finalScoreDisplay");
   const nextButtonContainer = document.querySelector(".next-button-container");
 
   let score = 0;
   let totalAttempts = 0;
-  const maxAttempts = 4; // ✅ TOTAL 4 DRAGS (based on HTML - ada 4 lemon)
+  const maxAttempts = 4;
   let draggedElement = null;
+
+  if (!gameStarted && typeof gameSession !== 'undefined') {
+    console.log('🔒 Game already played - showing previous score');
+    
+    const existingScore = gameSession.existingScore;
+    
+    // Show score at top
+    if (scoreDisplay) {
+      scoreDisplay.style.display = 'flex';
+      updateLocalScoreDisplay(existingScore, maxAttempts);
+    }
+    
+    // Show final score modal (stays visible on refresh)
+    if (scoreModal && finalScoreDisplay) {
+      finalScoreDisplay.textContent = `${existingScore}/${maxAttempts}`;
+      scoreModal.style.display = 'flex';
+      scoreModal.style.opacity = '1';
+      scoreModal.style.visibility = 'visible';
+      
+      if (nextButtonContainer) {
+        nextButtonContainer.style.display = 'block';
+        nextButtonContainer.style.opacity = '1';
+        nextButtonContainer.style.visibility = 'visible';
+        addPulseToNextButton();
+      }
+    }
+    
+    // Disable drag for all fruits
+    fruits.forEach(fruit => {
+      fruit.setAttribute('draggable', 'false');
+      fruit.style.opacity = '0.5';
+      fruit.style.cursor = 'not-allowed';
+    });
+    
+    console.log('✅ Previous score displayed');
+    return;
+  }
+
+  if (typeof gameSession !== 'undefined') {
+    console.log('✅ Game session started successfully');
+    console.log('   - Concept:', gameSession.conceptType);
+    console.log('   - Game:', gameSession.gameName);
+    console.log('   - Game Key:', gameSession.gameKey);
+    console.log('   - Max Score:', gameSession.maxScore);
+    console.log('   - Active:', gameSession.isSessionActive);
+  }
 
   // Create container for dropped fruits
   const fruitContainer = document.createElement("div");
@@ -107,16 +133,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   fruitContainer.style.pointerEvents = "none";
   dropZone.appendChild(fruitContainer);
 
-  // ✅ Update initial score display (0/4)
-  await updateScoreDisplay(score, maxAttempts);
+  // Update initial score display
+  updateLocalScoreDisplay(score, maxAttempts);
 
-  // ✅ SHOW score display at game start
+  // Show score display
   if (scoreDisplay) {
     scoreDisplay.style.display = 'flex';
-    console.log('✅ Score display shown!');
+    console.log('✅ Score display shown');
   }
 
-  // Hide next button initially
+  // Hide next button
   if (nextButtonContainer) {
     nextButtonContainer.style.display = 'none';
   }
@@ -156,24 +182,23 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (!draggedElement || draggedElement.classList.contains("used")) return;
 
-    // ✅ Check if max attempts reached
     if (totalAttempts >= maxAttempts) {
-      console.log('❌ Maximum attempts reached!');
+      console.log('❌ Maximum attempts reached');
       return;
     }
 
     const fruitType = draggedElement.dataset.fruit;
-    const isApple = fruitType.toLowerCase().includes("lemon");
+    const isLemon = fruitType.toLowerCase().includes("lemon");
 
-    // ✅ COUNT EVERY DROP (betul atau salah)
     totalAttempts++;
-    console.log(`📊 Attempt ${totalAttempts}/${maxAttempts}`);
+    console.log(`\n📊 DROP #${totalAttempts}/${maxAttempts}`);
+    console.log('   Fruit:', fruitType);
+    console.log('   Is Lemon?', isLemon);
 
     const placeholder = dropZone.querySelector(".drop-placeholder");
     if (placeholder) placeholder.style.display = "none";
 
-    if (isApple) {
-      // ✅ CORRECT - Add to tray and mark as used
+    if (isLemon) {
       draggedElement.classList.add("used");
       
       const droppedImg = document.createElement("img");
@@ -184,44 +209,75 @@ document.addEventListener("DOMContentLoaded", async () => {
       droppedImg.style.animation = "dropBounce 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)";
       fruitContainer.appendChild(droppedImg);
 
-      // Increment score and save to storage
       score++;
-      await addGame1Score();
+      console.log('✅ CORRECT!');
       
-      console.log(`✅ Correct! Score: ${score}/${totalAttempts}`);
+      // Update gameSession score if available
+      if (typeof handleCorrectAnswer === 'function') {
+        handleCorrectAnswer();
+        console.log('   ✅ handleCorrectAnswer() called');
+        if (typeof gameSession !== 'undefined') {
+          console.log('   📊 GameSession score:', gameSession.currentScore, '/', gameSession.maxScore);
+        }
+      }
+      
+      console.log('   📊 Local score:', score, '/', totalAttempts);
     } else {
-      // ❌ WRONG - Only shake animation, DON'T mark as used
       draggedElement.classList.add("wrong");
       
       setTimeout(() => {
         draggedElement.classList.remove("wrong");
       }, 600);
       
-      console.log(`❌ Wrong! Score: ${score}/${totalAttempts}`);
+      console.log('❌ WRONG!');
+      console.log('   📊 Local score:', score, '/', totalAttempts);
     }
 
-    // ✅ Update score display after each drop
-    await updateScoreDisplay(score, maxAttempts);
+    updateLocalScoreDisplay(score, maxAttempts);
 
-    // ✅ Check if game finished (4 attempts done)
     if (totalAttempts >= maxAttempts) {
-      console.log('🎉 Game finished!');
+      console.log('\n🎉 GAME FINISHED!');
+      console.log('========================================');
+      console.log('📊 FINAL SCORES:');
+      console.log('   Local score:', score, '/', maxAttempts);
+      if (typeof gameSession !== 'undefined') {
+        console.log('   GameSession score:', gameSession.currentScore, '/', gameSession.maxScore);
+        console.log('   Session active?', gameSession.isSessionActive);
+      }
+      console.log('========================================');
+      
       setTimeout(() => showScoreModal(), 800);
     }
   });
 
-  // ✅ Show Score Modal with Next Button
-  function showScoreModal() {
-    console.log(`🎉 Final Score: ${score}/${maxAttempts}`);
+  // Show Score Modal and save to Firebase
+  async function showScoreModal() {
+    console.log('\n💾 ATTEMPTING TO SAVE TO FIREBASE...');
+    
+    if (typeof gameSession !== 'undefined') {
+      console.log('   Before save - gameSession.currentScore:', gameSession.currentScore);
+      console.log('   Before save - gameSession.isSessionActive:', gameSession.isSessionActive);
+      
+      try {
+        const saved = await gameSession.endSession();
+        
+        console.log('\n📊 SAVE RESULT:', saved ? '✅ SUCCESS' : '❌ FAILED');
+        
+        if (!saved) {
+          console.error('❌ FIREBASE SAVE FAILED!');
+          console.error('   Check the error messages above for details');
+        }
+      } catch (error) {
+        console.error('❌ EXCEPTION during save:', error);
+      }
+    } else {
+      console.warn('⚠️ No gameSession available - score not saved');
+    }
     
     if (scoreModal && finalScoreDisplay) {
-      // Update final score display (format: "3/4")
       finalScoreDisplay.textContent = `${score}/${maxAttempts}`;
-      
-      // Show modal
       scoreModal.style.display = 'flex';
       
-      // Show next button after 1 second with pulse
       setTimeout(() => {
         if (nextButtonContainer) {
           nextButtonContainer.style.display = 'block';
@@ -229,36 +285,13 @@ document.addEventListener("DOMContentLoaded", async () => {
           
           setTimeout(() => {
             nextButtonContainer.style.opacity = '1';
-            addPulseToNextButton(); // ✅ Add pulse animation
+            addPulseToNextButton();
           }, 100);
         }
       }, 1000);
     }
   }
 
-  // Optional: Restart game function
-  window.restartGame = function() {
-    score = 0;
-    totalAttempts = 0;
-    fruitContainer.innerHTML = "";
-    fruits.forEach(fruit => {
-      fruit.classList.remove("used", "correct", "wrong", "dragging");
-      fruit.style.opacity = "1";
-      fruit.style.pointerEvents = "auto";
-    });
-    const placeholder = dropZone.querySelector(".drop-placeholder");
-    if (placeholder) placeholder.style.display = "block";
-    
-    if (scoreModal) scoreModal.style.display = "none";
-    
-    // Remove pulse from next button
-    if (nextButtonContainer) {
-      nextButtonContainer.classList.remove('pulse');
-      nextButtonContainer.style.display = 'none';
-    }
-    
-    updateScoreDisplay(0, maxAttempts);
-  };
-
-  console.log('🎮 Apple Sorting Game loaded! Max attempts:', maxAttempts);
+  console.log('\n✅ Lemon Sorting Game fully loaded!');
+  console.log('========================================\n');
 });

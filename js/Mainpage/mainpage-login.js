@@ -134,6 +134,7 @@ function togglePassword(fieldId, btn) {
         `;
     }
 }
+
 // ================= FORGOT PASSWORD =================
 function handleForgotPassword(event) {
     event.preventDefault();
@@ -141,7 +142,7 @@ function handleForgotPassword(event) {
     alert(`🔐 ${portalName} Password Reset\nContact admin: info@idzmirkidshub.com`);
 }
 
-// ================= HANDLE LOGIN =================
+// ================= HANDLE LOGIN - FIXED VERSION =================
 async function handleLogin(event) {
     event.preventDefault();
     if (!firebaseReady || !db) return alert("System not ready.");
@@ -178,26 +179,49 @@ async function handleLogin(event) {
             return;
         }
 
-        await db.collection(collectionName).doc(docId).update({ lastLogin: firebase.firestore.FieldValue.serverTimestamp() });
+        // Update last login
+        await db.collection(collectionName).doc(docId).update({ 
+            lastLogin: firebase.firestore.FieldValue.serverTimestamp() 
+        });
 
-        // Store session
-        sessionStorage.setItem('userName', username);
+        // ✅ FIXED: Clear old session first!
+        console.log('🧹 Clearing previous session...');
+        sessionStorage.clear();
+
+        // ✅ FIXED: Use userData from Firebase, not input!
+        console.log('📝 Setting new session for:', userData.username);
+        sessionStorage.setItem('userName', userData.username);  // ← FROM FIREBASE!
         sessionStorage.setItem('userRole', selectedRole);
+        
         if (selectedRole === 'student') {
-            sessionStorage.setItem('userAge', userData.age);
+            sessionStorage.setItem('userAge', userData.age || '');
             sessionStorage.setItem('studentId', userData.studentId || 'N/A');
         }
 
-        // REMOVED: alert("Login successful!");
+        // Log session data
+        console.log('✅ Session established:', {
+            userName: sessionStorage.getItem('userName'),
+            studentId: sessionStorage.getItem('studentId'),
+            userRole: sessionStorage.getItem('userRole'),
+            userAge: sessionStorage.getItem('userAge')
+        });
+
+        // Trigger header update event
+        window.dispatchEvent(new Event('userLogin'));
+
+        // Close modal
         closeModal(true);
 
+        // Redirect
         const redirectUrl = selectedRole === 'student' ? '../homepage/homepage.html'
-            : selectedRole === 'staff' ? '../Staff/dashboard.html'
+            : selectedRole === 'staff' ? '../Admin/Department/dashboard.html'
             : '../Admin/dashboard.html';
+        
+        console.log('🚀 Redirecting to:', redirectUrl);
         window.location.href = redirectUrl;
 
     } catch (error) {
-        console.error("Login Error:", error);
+        console.error("❌ Login Error:", error);
         alert("Login failed: " + error.message);
     } finally {
         submitBtn.textContent = originalText;
@@ -205,7 +229,7 @@ async function handleLogin(event) {
     }
 }
 
-// ================= HANDLE SIGN UP =================
+// ================= HANDLE SIGN UP - UPDATED WITH USERNAME FIELD =================
 async function handleSignUp(event) {
     event.preventDefault();
     if (!firebaseReady || !db) return alert("System not ready.");
@@ -226,28 +250,37 @@ async function handleSignUp(event) {
 
     try {
         const checkUser = await db.collection('students').where('username', '==', username.toLowerCase()).get();
-        if (!checkUser.empty) return alert("Username exists!");
+        if (!checkUser.empty) {
+            alert("Username exists!");
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+            return;
+        }
 
         const studentsSnapshot = await db.collection('students').get();
         const studentId = 'S' + String(studentsSnapshot.size + 1).padStart(4, '0');
 
+        // ✅ Create proper student document with all required fields
         await db.collection('students').add({
-            username: username.toLowerCase(),
+            username: username.toLowerCase(),  // ← Store lowercase for consistency
             password: password,
             age: age,
             studentId: studentId,
             totalScore: 0,
-            gameScores: { game1:0, game2:0, game3:0, game4:0, game5:0 },
+            conceptProgress: {},  // ← NEW: For new system
+            spiderWebData: {},    // ← NEW: For spider chart
+            gameScores: { game1:0, game2:0, game3:0, game4:0, game5:0 },  // ← OLD: Keep for compatibility
             registrationDate: firebase.firestore.FieldValue.serverTimestamp(),
             status: 'active',
             lastLogin: null
         });
 
+        console.log('✅ New student registered:', username);
         alert(`Registration Successful!\nUsername: ${username}\nStudent ID: ${studentId}\nAge: ${age}`);
         showLoginForm('student');
 
     } catch (error) {
-        console.error("Sign Up Error:", error);
+        console.error("❌ Sign Up Error:", error);
         alert("Registration failed: " + error.message);
     } finally {
         submitBtn.textContent = originalText;
@@ -277,4 +310,4 @@ document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') closeModal();
 });
 
-console.log("✅ Login system script loaded!");
+console.log("✅ Login system script loaded with session management!");

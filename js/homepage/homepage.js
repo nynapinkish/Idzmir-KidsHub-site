@@ -127,6 +127,267 @@ function updateHeaderProfile() {
   }
 }
 
+// Data Structure
+const CONCEPT_STRUCTURE = {
+  'Spatial': { maxScore: 20 },
+  'Relational': { maxScore: 62 },
+  'Quantitative': { maxScore: 11 },
+  'Qualitative': { maxScore: 20 },
+  'Temporal': { maxScore: 6 },
+  'Color & Shape': { maxScore: 10 },
+  'Comparative': { maxScore: 7 },
+  'Social': { maxScore: 11 }
+};
+
+// Mock Student Data (Replace dengan data dari Firebase)
+const studentData = {
+  username: 'Ahmad bin Ali',
+  spiderWebData: {
+    'Spatial Concepts': { score: 15, maxScore: 20, percentage: 75 },
+    'Relational Concepts': { score: 45, maxScore: 62, percentage: 73 },
+    'Quantitative Concepts': { score: 8, maxScore: 11, percentage: 73 },
+    'Qualitative Concepts': { score: 12, maxScore: 20, percentage: 60 },
+    'Temporal Concepts': { score: 4, maxScore: 6, percentage: 67 },
+    'Color & Shape': { score: 8, maxScore: 10, percentage: 80 },
+    'Comparative': { score: 5, maxScore: 7, percentage: 71 },
+    'Social/Emotional': { score: 7, maxScore: 11, percentage: 64 }
+  }
+};
+
+let hoveredConcept = null;
+
+// Open/Close Functions
+function openSpiderWeb() {
+  document.getElementById('spiderWebOverlay').classList.add('active');
+  drawSpiderWeb();
+  generateConceptCards();
+  updateOverallProgress();
+}
+
+function closeSpiderWeb() {
+  document.getElementById('spiderWebOverlay').classList.remove('active');
+}
+
+// Calculate Overall Progress
+function updateOverallProgress() {
+  const values = Object.values(studentData.spiderWebData);
+  const avg = values.reduce((sum, item) => sum + item.percentage, 0) / values.length;
+  document.getElementById('overallPercentage').textContent = Math.round(avg) + '%';
+  document.getElementById('studentName').textContent = studentData.username;
+}
+
+// Generate Concept Cards
+function generateConceptCards() {
+  const container = document.getElementById('conceptCards');
+  container.innerHTML = '';
+  
+  Object.keys(CONCEPT_STRUCTURE).forEach(concept => {
+    const fullName = `${concept} Concepts`;
+    const data = studentData.spiderWebData[fullName] || 
+                studentData.spiderWebData[concept] || 
+                { score: 0, maxScore: CONCEPT_STRUCTURE[concept].maxScore, percentage: 0 };
+    
+    const card = document.createElement('div');
+    card.className = 'concept-card';
+    card.onmouseenter = () => setHoveredConcept(concept);
+    card.onmouseleave = () => clearHoveredConcept();
+    
+    card.innerHTML = `
+      <h4>${concept}</h4>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: ${data.percentage}%"></div>
+      </div>
+      <div class="concept-stats">
+        <span class="concept-score">${data.score}/${data.maxScore}</span>
+        <span class="concept-percentage">${data.percentage}%</span>
+      </div>
+    `;
+    
+    container.appendChild(card);
+  });
+}
+
+// Hover Handlers
+function setHoveredConcept(concept) {
+  hoveredConcept = concept;
+  const fullName = `${concept} Concepts`;
+  const data = studentData.spiderWebData[fullName] || 
+              studentData.spiderWebData[concept] || 
+              { score: 0, maxScore: CONCEPT_STRUCTURE[concept].maxScore };
+  
+  const hoverInfo = document.getElementById('hoverInfo');
+  document.getElementById('hoverTitle').textContent = fullName;
+  document.getElementById('hoverText').textContent = `${data.score} / ${data.maxScore} points`;
+  hoverInfo.style.display = 'block';
+  
+  drawSpiderWeb();
+}
+
+function clearHoveredConcept() {
+  hoveredConcept = null;
+  document.getElementById('hoverInfo').style.display = 'none';
+  drawSpiderWeb();
+}
+
+// Draw Spider Web
+function drawSpiderWeb() {
+  const svg = document.getElementById('spiderWebSVG');
+  const concepts = Object.keys(CONCEPT_STRUCTURE);
+  const numPoints = concepts.length;
+  const centerX = 200;
+  const centerY = 200;
+  const maxRadius = 140;
+  const levels = 5;
+  
+  // Helper Functions
+  const getAxisPoint = (index, radius) => {
+    const angle = (Math.PI * 2 * index) / numPoints - Math.PI / 2;
+    return {
+      x: centerX + radius * Math.cos(angle),
+      y: centerY + radius * Math.sin(angle)
+    };
+  };
+  
+  const getDataPoint = (index, percentage) => {
+    const angle = (Math.PI * 2 * index) / numPoints - Math.PI / 2;
+    const radius = (maxRadius * percentage) / 100;
+    return {
+      x: centerX + radius * Math.cos(angle),
+      y: centerY + radius * Math.sin(angle)
+    };
+  };
+  
+  // Clear SVG
+  svg.innerHTML = `
+    <defs>
+      <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#21537c;stop-opacity:0.6" />
+        <stop offset="100%" style="stop-color:#003e8d;stop-opacity:0.8" />
+      </linearGradient>
+    </defs>
+  `;
+  
+  // Draw Web Circles
+  for (let i = 1; i <= levels; i++) {
+    const radius = (maxRadius * i) / levels;
+    const points = [];
+    for (let j = 0; j < numPoints; j++) {
+      const point = getAxisPoint(j, radius);
+      points.push(`${point.x},${point.y}`);
+    }
+    
+    const polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+    polygon.setAttribute('points', points.join(' '));
+    polygon.setAttribute('fill', 'none');
+    polygon.setAttribute('stroke', i === levels ? '#21537c' : '#cbd5e1');
+    polygon.setAttribute('stroke-width', i === levels ? '2' : '1');
+    polygon.setAttribute('opacity', i === levels ? '0.8' : '0.4');
+    svg.appendChild(polygon);
+  }
+  
+  // Draw Axis Lines
+  concepts.forEach((concept, index) => {
+    const end = getAxisPoint(index, maxRadius);
+    const isHovered = hoveredConcept === concept;
+    
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', centerX);
+    line.setAttribute('y1', centerY);
+    line.setAttribute('x2', end.x);
+    line.setAttribute('y2', end.y);
+    line.setAttribute('stroke', isHovered ? '#fbbf24' : '#21537c');
+    line.setAttribute('stroke-width', isHovered ? '3' : '1.5');
+    line.setAttribute('opacity', isHovered ? '1' : '0.5');
+    svg.appendChild(line);
+  });
+  
+  // Draw Data Polygon
+  const dataPoints = concepts.map((concept, index) => {
+    const fullName = `${concept} Concepts`;
+    const data = studentData.spiderWebData[fullName] || 
+                studentData.spiderWebData[concept] || 
+                { percentage: 0 };
+    return getDataPoint(index, data.percentage);
+  });
+  
+  const dataPolygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+  dataPolygon.setAttribute('points', dataPoints.map(p => `${p.x},${p.y}`).join(' '));
+  dataPolygon.setAttribute('fill', 'url(#blueGradient)');
+  dataPolygon.setAttribute('fill-opacity', '0.4');
+  dataPolygon.setAttribute('stroke', '#003e8d');
+  dataPolygon.setAttribute('stroke-width', '3');
+  svg.appendChild(dataPolygon);
+  
+  // Draw Data Points
+  dataPoints.forEach((point, index) => {
+    const concept = concepts[index];
+    const isHovered = hoveredConcept === concept;
+    
+    if (isHovered) {
+      const hoverCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      hoverCircle.setAttribute('cx', point.x);
+      hoverCircle.setAttribute('cy', point.y);
+      hoverCircle.setAttribute('r', '12');
+      hoverCircle.setAttribute('fill', '#fbbf24');
+      hoverCircle.setAttribute('opacity', '0.3');
+      svg.appendChild(hoverCircle);
+    }
+    
+    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', point.x);
+    circle.setAttribute('cy', point.y);
+    circle.setAttribute('r', isHovered ? '7' : '5');
+    circle.setAttribute('fill', isHovered ? '#fbbf24' : '#003e8d');
+    circle.setAttribute('stroke', 'white');
+    circle.setAttribute('stroke-width', '3');
+    svg.appendChild(circle);
+  });
+  
+  // Draw Labels
+  concepts.forEach((concept, index) => {
+    const labelPoint = getAxisPoint(index, maxRadius + 50);
+    const fullName = `${concept} Concepts`;
+    const data = studentData.spiderWebData[fullName] || 
+                studentData.spiderWebData[concept] || 
+                { percentage: 0 };
+    const isHovered = hoveredConcept === concept;
+    
+    const text1 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    text1.setAttribute('x', labelPoint.x);
+    text1.setAttribute('y', labelPoint.y);
+    text1.setAttribute('text-anchor', 'middle');
+    text1.setAttribute('fill', isHovered ? '#fbbf24' : '#003e8d');
+    text1.setAttribute('font-size', isHovered ? '14' : '12');
+    text1.setAttribute('font-weight', '700');
+    text1.textContent = concept;
+    svg.appendChild(text1);
+    
+    const text2 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    text2.setAttribute('x', labelPoint.x);
+    text2.setAttribute('y', labelPoint.y + 18);
+    text2.setAttribute('text-anchor', 'middle');
+    text2.setAttribute('fill', '#fbbf24');
+    text2.setAttribute('font-size', '16');
+    text2.setAttribute('font-weight', '800');
+    text2.textContent = data.percentage + '%';
+    svg.appendChild(text2);
+  });
+  
+  // Center Point
+  const center = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+  center.setAttribute('cx', centerX);
+  center.setAttribute('cy', centerY);
+  center.setAttribute('r', '6');
+  center.setAttribute('fill', '#003e8d');
+  svg.appendChild(center);
+}
+
+// Close on outside click
+document.getElementById('spiderWebOverlay').addEventListener('click', function(e) {
+  if (e.target === this) {
+    closeSpiderWeb();
+  }
+});
 // ================= HANDLE CARD CLICK =================
 function handleCardClick(cardId) {
   console.log('🎮 Card clicked:', cardId);

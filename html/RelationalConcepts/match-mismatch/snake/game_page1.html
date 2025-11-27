@@ -93,15 +93,38 @@
         </a>
     </div>
 
-    <script src="../../../../js/RelationalConcepts/match-mismatch/snake/game_page1.js"></script>
+<!-- FIREBASE SDK (MUST BE FIRST!) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
-    <!-- Load initHeader.js FIRST -->
-<script src="../../../../js/homepage/initHeader.js"></script>
-
-<!-- THEN call initializeHeader with correct path -->
+<!-- FIREBASE CONFIGURATION -->
 <script>
-  initializeHeader('../../../homepage/header.html');
+  const firebaseConfig = {
+    apiKey: "AIzaSyCpDrWgLXXHK7_9nioEQGBKJkUv4byCEd4",
+    authDomain: "idzmir-kids-hub.firebaseapp.com",
+    projectId: "idzmir-kids-hub",
+    storageBucket: "idzmir-kids-hub.firebasestorage.app",
+    messagingSenderId: "301692363279",
+    appId: "1:301692363279:web:ba7c6547b36e433d6eb97a"
+  };
+
+  // Initialize Firebase
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+    console.log('✅ Firebase initialized successfully');
+  }
 </script>
 
-</body>
-</html>
+<!-- GAME SESSION MANAGER -->
+<script src="../../../../js/gameSessionManager.js"></script>
+
+<!-- CHICKEN MATCHING GAME SCRIPT -->
+<script src="../../../../js/RelationalConcepts/match-mismatch/snake/game_page1.js"></script>
+
+<!-- Load initHeader.js -->
+<script src="../../../../js/homepage/initHeader.js"></script>
+
+<!-- Initialize Header -->
+<script>
+  initializeHeader('../../../homepage/header.html', '/assets');
+</script>

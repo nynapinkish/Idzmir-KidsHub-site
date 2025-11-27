@@ -62,10 +62,18 @@ function updateHeaderUI() {
   // Get login data from sessionStorage
   const userName = sessionStorage.getItem('userName');
   const userRole = sessionStorage.getItem('userRole');
+  const studentId = sessionStorage.getItem('studentId');
   const userAnimal = sessionStorage.getItem('userAnimal');
   
+  console.log('🔍 Header checking session:', {
+    userName,
+    userRole,
+    studentId,
+    userAnimal
+  });
+  
   // If user is logged in as student
-  if (userName && userRole === 'student') {
+  if (userName && userRole === 'student' && studentId) {
     userProfile.style.display = 'flex';
     profileName.textContent = userName;
     
@@ -80,16 +88,16 @@ function updateHeaderUI() {
     // Use the stored assets path
     const assetsPath = window._assetsPath || '../../../assets';
     profilePic.src = `${assetsPath}/images/${animalImage}.png`;
-    console.log('✅ Header synced with student:', userName);
+    console.log('✅ Header synced with student:', userName, '(ID:', studentId, ')');
   } else {
     // Show default profile if no user logged in
     userProfile.style.display = 'flex';
-    profileName.textContent = 'nyna';
+    profileName.textContent = 'Guest';  // ← FIXED: Changed from 'nyna' to 'Guest'
     
     // Use the stored assets path
     const assetsPath = window._assetsPath || '../../../assets';
     profilePic.src = `${assetsPath}/images/lion.png`;
-    console.log('ℹ️ Showing default profile');
+    console.log('ℹ️ Showing default profile (Guest)');
   }
 }
 
@@ -116,7 +124,7 @@ function createFallbackHeader(assetsPath = '../../../assets') {
 
       <div class="user-profile" id="userProfile" onclick="toggleUserMenu()">
         <img src="${assetsPath}/images/lion.png" alt="User Avatar" class="profile-pic" id="profilePic" onerror="console.error('Failed to load profile pic')">
-        <span class="profile-name" id="profileName">nyna</span>
+        <span class="profile-name" id="profileName">Guest</span>
       </div>
     </header>
   `;
@@ -127,12 +135,12 @@ function createFallbackHeader(assetsPath = '../../../assets') {
 // Toggle user menu
 function toggleUserMenu() {
   console.log('👤 User menu toggled');
-  // Add your dropdown menu logic here if needed
+  // This will be handled by homepage.js or other page scripts
 }
 
 // Listen for storage changes (sync across tabs)
 window.addEventListener('storage', (e) => {
-  if (e.key === 'userName' || e.key === 'userRole') {
+  if (e.key === 'userName' || e.key === 'userRole' || e.key === 'studentId') {
     console.log('🔄 Storage changed, updating header...');
     updateHeaderUI();
   }
@@ -141,7 +149,7 @@ window.addEventListener('storage', (e) => {
 // Listen for custom events
 window.addEventListener('userLogin', () => {
   console.log('🔄 User login event, updating header...');
-  updateHeaderUI();
+  setTimeout(updateHeaderUI, 100);
 });
 
 window.addEventListener('userLogout', () => {

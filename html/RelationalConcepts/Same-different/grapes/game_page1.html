@@ -7,78 +7,78 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../../../css/RelationalConcepts/Same-different/grapes/game_page1.css">
     <link rel="stylesheet" href="../../../../css/homepage/header.css">
-
 </head>
 <body>
-    
+
 <!-- Header Placeholder - will be loaded dynamically -->
 <div id="header-placeholder"></div>
 
 <!-- Score Display (masa main game) -->
 <div class="score-display" id="scoreDisplay" style="display: none;">
   <span class="score-label">SKOR</span>
-  <span id="scoreText">0/2</span>
+  <span id="scoreText">0/4</span>
 </div>
 
 <!-- Banner Section -->
-    <div class="banner-section">
-        <div class="banner-yellow">Konsep warna dan bentuk</div>
-        <div class="banner-blue">pilih buah anggur</div>
-    </div>
+<div class="banner-section">
+    <div class="banner-yellow">Konsep warna dan bentuk</div>
+    <div class="banner-blue">pilih buah anggur</div>
+</div>
 
-    <!-- Game Container -->
-    <div class="game-container">
-        <!-- LEFT: Example Box -->
-        <div class="example-box">
-            <div class="example-label">
-                <div class="example-label-text">anggur</div>
-            </div>
-            <div class="example-image-container">
-                <img src="../../../../assets/images/grapes.png" alt="Purple Grapes">
-            </div>
+<!-- Game Container -->
+<div class="game-container">
+    <!-- LEFT: Example Box -->
+    <div class="example-box">
+        <div class="example-label">
+            <div class="example-label-text">anggur</div>
         </div>
-
-        <!-- CENTER: Drop Zone (Dulang) -->
-        <div class="drop-zone" id="dropZone">
-        <img src="../../../../assets/images/tray.png" alt="Tray" class="tray-background">            <div class="drop-placeholder">Seret ke sini</div>
-        </div>
-
-        <!-- RIGHT: Draggable Fruits -->
-        <div class="fruits-grid">
-            <div class="fruit-item" draggable="true" data-fruit="grapes1" data-color="purple">
-                <img src="../../../../assets/images/grapes1.png" alt="Grape">
-            </div>
-            <div class="fruit-item" draggable="true" data-fruit="banana2" data-color="yellow">
-                <img src="../../../../assets/images/banana2.png" alt="Banana">
-            </div>
-            <div class="fruit-item" draggable="true" data-fruit="eggPlant" data-color="purple">
-                <img src="../../../../assets/images/eggPlant.png" alt="EggPlant">
-            </div>
-            <div class="fruit-item" draggable="true" data-fruit="apple4" data-color="red">
-                <img src="../../../../assets/images/apple4.png" alt="Green Apple">
-            </div>
-            <div class="fruit-item" draggable="true" data-fruit="grapes" data-color="purple">
-                <img src="../../../../assets/images/grapes.png" alt="Grape">
-            </div>
-            <div class="fruit-item" draggable="true" data-fruit="mangosteen" data-color="purple">
-                <img src="../../../../assets/images/mangosteen.png" alt="Mangosteen">
-            </div>
-            <div class="fruit-item" draggable="true" data-fruit="grapes2" data-color="purple">
-                <img src="../../../../assets/images/grapes2.png" alt="Grape">
-            </div>
-            <div class="fruit-item" draggable="true" data-fruit="apple3" data-color="green">
-                <img src="../../../../assets/images/apple3.png" alt="Green Apple">
-            </div>
-            <div class="fruit-item" draggable="true" data-fruit="grapes3" data-color="purple">
-                <img src="../../../../assets/images/grapes3.png" alt="grapes">
-            </div>
+        <div class="example-image-container">
+            <img src="../../../../assets/images/grapes.png" alt="Purple Grapes">
         </div>
     </div>
 
-      <!-- 🎉 SCORE MODAL (Hidden by default) -->
+    <!-- CENTER: Drop Zone (Dulang) -->
+    <div class="drop-zone" id="dropZone">
+        <img src="../../../../assets/images/tray.png" alt="Tray" class="tray-background">
+        <div class="drop-placeholder">Seret ke sini</div>
+    </div>
+
+    <!-- RIGHT: Draggable Fruits -->
+    <div class="fruits-grid">
+        <div class="fruit-item" draggable="true" data-fruit="grapes1" data-color="purple">
+            <img src="../../../../assets/images/grapes1.png" alt="Grape">
+        </div>
+        <div class="fruit-item" draggable="true" data-fruit="banana2" data-color="yellow">
+            <img src="../../../../assets/images/banana2.png" alt="Banana">
+        </div>
+        <div class="fruit-item" draggable="true" data-fruit="eggPlant" data-color="purple">
+            <img src="../../../../assets/images/eggPlant.png" alt="EggPlant">
+        </div>
+        <div class="fruit-item" draggable="true" data-fruit="apple4" data-color="red">
+            <img src="../../../../assets/images/apple4.png" alt="Green Apple">
+        </div>
+        <div class="fruit-item" draggable="true" data-fruit="grapes" data-color="purple">
+            <img src="../../../../assets/images/grapes.png" alt="Grape">
+        </div>
+        <div class="fruit-item" draggable="true" data-fruit="mangosteen" data-color="purple">
+            <img src="../../../../assets/images/mangosteen.png" alt="Mangosteen">
+        </div>
+        <div class="fruit-item" draggable="true" data-fruit="grapes2" data-color="purple">
+            <img src="../../../../assets/images/grapes2.png" alt="Grape">
+        </div>
+        <div class="fruit-item" draggable="true" data-fruit="apple3" data-color="green">
+            <img src="../../../../assets/images/apple3.png" alt="Green Apple">
+        </div>
+        <div class="fruit-item" draggable="true" data-fruit="grapes3" data-color="purple">
+            <img src="../../../../assets/images/grapes3.png" alt="grapes">
+        </div>
+    </div>
+</div>
+
+<!-- Score Modal (Hidden by default) -->
 <div class="score-modal" id="scoreModal" style="display: none;">
   <div class="score-container">
-    <!-- ⭐ Stars embedded at top of bukit -->
+    <!-- Stars embedded at top of bukit -->
     <div class="stars-container">
       <div class="star star-small">
         <img src="../../../../assets/images/star1.png" class="star-image" alt="Star" />
@@ -91,13 +91,13 @@
       </div>
     </div>
 
-    <!-- 🏷️ Title -->
-    <div class="score-title">Total Score</div>
+    <!-- Title -->
+    <div class="score-title">Jumlah Skor</div>
 
-    <!-- 📦 Score Box -->
+    <!-- Score Box -->
     <div class="score-box-wrapper">
       <div class="score-box">
-        <div class="score-value" id="finalScoreDisplay">2/2</div>
+        <div class="score-value" id="finalScoreDisplay">0/4</div>
       </div>
     </div>
   </div>
@@ -117,14 +117,322 @@
   </a>
 </div>
 
-<script src="../../../../js/RelationalConcepts/grapes/game_page1.js"></script>
+<!-- FIREBASE SDK (MUST BE FIRST!) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
-      <!-- Load initHeader.js FIRST -->
+<!-- FIREBASE CONFIGURATION (Initialize once only) -->
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyCpDrWgLXXHK7_9nioEQGBKJkUv4byCEd4",
+    authDomain: "idzmir-kids-hub.firebaseapp.com",
+    projectId: "idzmir-kids-hub",
+    storageBucket: "idzmir-kids-hub.firebasestorage.app",
+    messagingSenderId: "301692363279",
+    appId: "1:301692363279:web:ba7c6547b36e433d6eb97a"
+  };
+
+  // Initialize Firebase (once only)
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+    console.log('✅ Firebase initialized successfully');
+  }
+</script>
+
+<!-- GAME SESSION MANAGER (MUST LOAD BEFORE GAME SCRIPT) -->
+<script src="../../../../js/gameSessionManager.js"></script>
+
+<!-- GRAPES GAME SCRIPT (NO ALERT VERSION) -->
+<script>
+// Add pulse animation to Next button
+function addPulseToNextButton() {
+  const nextButtonContainer = document.querySelector(".next-button-container");
+  if (nextButtonContainer) {
+    nextButtonContainer.classList.add('pulse');
+  }
+}
+
+// Local score display update (visual only)
+function updateLocalScoreDisplay(currentScore, maxAttempts) {
+  const scoreText = document.getElementById('scoreText');
+  const scoreDisplay = document.querySelector('.score-display');
+  
+  if (scoreText) {
+    scoreText.textContent = `${currentScore}/${maxAttempts}`;
+  }
+  
+  if (scoreDisplay) {
+    scoreDisplay.classList.add('score-update');
+    setTimeout(() => {
+      scoreDisplay.classList.remove('score-update');
+    }, 500);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+  console.log('========================================');
+  console.log('🍇 GRAPES SORTING GAME - NO ALERT VERSION');
+  console.log('========================================');
+  
+  // Check sessionStorage
+  console.log('📋 Session Data:');
+  console.log('   - userName:', sessionStorage.getItem('userName'));
+  console.log('   - studentId:', sessionStorage.getItem('studentId'));
+  console.log('   - userRole:', sessionStorage.getItem('userRole'));
+  console.log('   - userAge:', sessionStorage.getItem('userAge'));
+  
+  // Wait for gameSessionManager to load
+  await new Promise(resolve => setTimeout(resolve, 500));
+  
+  // Check if gameSession is available
+  if (typeof gameSession === 'undefined') {
+    console.error('❌ gameSessionManager not loaded!');
+    alert('ERROR: gameSessionManager tidak load!');
+    return;
+  }
+  
+  console.log('✅ gameSessionManager loaded');
+  console.log('✅ Firebase ready:', typeof firebase !== 'undefined');
+  
+  // Initialize game session for GRAPES game
+  console.log('\n🍇 Initializing grapes game...');
+  const gameStarted = await initializeGame('Relational Concepts', 'same / different / grapes', 4);
+  
+  // Initialize elements
+  const fruits = document.querySelectorAll(".fruit-item");
+  const dropZone = document.getElementById("dropZone");
+  const scoreDisplay = document.getElementById("scoreDisplay");
+  const scoreModal = document.getElementById("scoreModal");
+  const finalScoreDisplay = document.getElementById("finalScoreDisplay");
+  const nextButtonContainer = document.querySelector(".next-button-container");
+
+  let score = 0;
+  let totalAttempts = 0;
+  const maxAttempts = 4;
+  let draggedElement = null;
+
+  if (!gameStarted) {
+    console.log('🔒 Game already played - showing previous score');
+    
+    const existingScore = gameSession.existingScore;
+    
+    // Show score at top
+    if (scoreDisplay) {
+      scoreDisplay.style.display = 'flex';
+      updateLocalScoreDisplay(existingScore, maxAttempts);
+    }
+    
+    // Show final score modal (stays visible on refresh) - NO ALERT!
+    if (scoreModal && finalScoreDisplay) {
+      finalScoreDisplay.textContent = `${existingScore}/${maxAttempts}`;
+      scoreModal.style.display = 'flex';
+      scoreModal.style.opacity = '1';
+      scoreModal.style.visibility = 'visible';
+      
+      if (nextButtonContainer) {
+        nextButtonContainer.style.display = 'block';
+        nextButtonContainer.style.opacity = '1';
+        nextButtonContainer.style.visibility = 'visible';
+        addPulseToNextButton();
+      }
+    }
+    
+    // Disable drag for all fruits
+    fruits.forEach(fruit => {
+      fruit.setAttribute('draggable', 'false');
+      fruit.style.opacity = '0.5';
+      fruit.style.cursor = 'not-allowed';
+    });
+    
+    console.log('✅ Previous score displayed without alert');
+    return;
+  }
+
+  console.log('✅ Game session started successfully');
+  console.log('   - Concept:', gameSession.conceptType);
+  console.log('   - Game:', gameSession.gameName);
+  console.log('   - Game Key:', gameSession.gameKey);
+  console.log('   - Max Score:', gameSession.maxScore);
+  console.log('   - Active:', gameSession.isSessionActive);
+
+  // Create container for dropped fruits
+  const fruitContainer = document.createElement("div");
+  fruitContainer.style.position = "absolute";
+  fruitContainer.style.top = "42%";
+  fruitContainer.style.left = "45%";
+  fruitContainer.style.right = "auto";
+  fruitContainer.style.transform = "translate(-50%, -50%)";
+  fruitContainer.style.display = "grid";
+  fruitContainer.style.gridTemplateColumns = "repeat(2, 110px)";
+  fruitContainer.style.gridTemplateRows = "repeat(2, 110px)";
+  fruitContainer.style.gap = "20px";
+  fruitContainer.style.zIndex = "10";
+  fruitContainer.style.pointerEvents = "none";
+  dropZone.appendChild(fruitContainer);
+
+  // Update initial score display
+  updateLocalScoreDisplay(score, maxAttempts);
+
+  // Show score display
+  if (scoreDisplay) {
+    scoreDisplay.style.display = 'flex';
+    console.log('✅ Score display shown');
+  }
+
+  // Hide next button
+  if (nextButtonContainer) {
+    nextButtonContainer.style.display = 'none';
+  }
+
+  // Drag events
+  fruits.forEach(fruit => {
+    fruit.addEventListener("dragstart", (e) => {
+      if (fruit.classList.contains("used")) {
+        e.preventDefault();
+        return;
+      }
+      draggedElement = fruit;
+      fruit.classList.add("dragging");
+      e.dataTransfer.effectAllowed = "move";
+    });
+
+    fruit.addEventListener("dragend", () => {
+      if (draggedElement) {
+        draggedElement.classList.remove("dragging");
+      }
+    });
+  });
+
+  dropZone.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+    dropZone.classList.add("drag-over");
+  });
+
+  dropZone.addEventListener("dragleave", () => {
+    dropZone.classList.remove("drag-over");
+  });
+
+  dropZone.addEventListener("drop", async (e) => {
+    e.preventDefault();
+    dropZone.classList.remove("drag-over");
+
+    if (!draggedElement || draggedElement.classList.contains("used")) return;
+
+    if (totalAttempts >= maxAttempts) {
+      console.log('❌ Maximum attempts reached');
+      return;
+    }
+
+    const fruitType = draggedElement.dataset.fruit;
+    const isGrapes = fruitType.toLowerCase().includes("grapes");
+
+    totalAttempts++;
+    console.log(`\n📊 DROP #${totalAttempts}/${maxAttempts}`);
+    console.log('   Fruit:', fruitType);
+    console.log('   Is Grapes?', isGrapes);
+
+    const placeholder = dropZone.querySelector(".drop-placeholder");
+    if (placeholder) placeholder.style.display = "none";
+
+    if (isGrapes) {
+      draggedElement.classList.add("used");
+      
+      const droppedImg = document.createElement("img");
+      droppedImg.src = draggedElement.querySelector("img").src;
+      droppedImg.style.width = "180px";
+      droppedImg.style.height = "180px";
+      droppedImg.style.objectFit = "contain";
+      droppedImg.style.animation = "dropBounce 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)";
+      fruitContainer.appendChild(droppedImg);
+
+      score++;
+      console.log('✅ CORRECT!');
+      
+      // CRITICAL: Update gameSession score
+      if (typeof handleCorrectAnswer === 'function') {
+        handleCorrectAnswer();
+        console.log('   ✅ handleCorrectAnswer() called');
+        console.log('   📊 GameSession score:', gameSession.currentScore, '/', gameSession.maxScore);
+      } else {
+        console.error('   ❌ handleCorrectAnswer not found!');
+      }
+      
+      console.log('   📊 Local score:', score, '/', totalAttempts);
+    } else {
+      draggedElement.classList.add("wrong");
+      
+      setTimeout(() => {
+        draggedElement.classList.remove("wrong");
+      }, 600);
+      
+      console.log('❌ WRONG!');
+      console.log('   📊 Local score:', score, '/', totalAttempts);
+    }
+
+    updateLocalScoreDisplay(score, maxAttempts);
+
+    if (totalAttempts >= maxAttempts) {
+      console.log('\n🎉 GAME FINISHED!');
+      console.log('========================================');
+      console.log('📊 FINAL SCORES:');
+      console.log('   Local score:', score, '/', maxAttempts);
+      console.log('   GameSession score:', gameSession.currentScore, '/', gameSession.maxScore);
+      console.log('   Session active?', gameSession.isSessionActive);
+      console.log('========================================');
+      
+      setTimeout(() => showScoreModal(), 800);
+    }
+  });
+
+  // Show Score Modal and save to Firebase
+  async function showScoreModal() {
+    console.log('\n💾 ATTEMPTING TO SAVE TO FIREBASE...');
+    console.log('   Before save - gameSession.currentScore:', gameSession.currentScore);
+    console.log('   Before save - gameSession.isSessionActive:', gameSession.isSessionActive);
+    
+    try {
+      const saved = await gameSession.endSession();
+      
+      console.log('\n📊 SAVE RESULT:', saved ? '✅ SUCCESS' : '❌ FAILED');
+      
+      if (!saved) {
+        console.error('❌ FIREBASE SAVE FAILED!');
+        console.error('   Check the error messages above for details');
+      }
+    } catch (error) {
+      console.error('❌ EXCEPTION during save:', error);
+    }
+    
+    if (scoreModal && finalScoreDisplay) {
+      finalScoreDisplay.textContent = `${score}/${maxAttempts}`;
+      scoreModal.style.display = 'flex';
+      
+      setTimeout(() => {
+        if (nextButtonContainer) {
+          nextButtonContainer.style.display = 'block';
+          nextButtonContainer.style.opacity = '0';
+          
+          setTimeout(() => {
+            nextButtonContainer.style.opacity = '1';
+            addPulseToNextButton();
+          }, 100);
+        }
+      }, 1000);
+    }
+  }
+
+  console.log('\n✅ Grapes Sorting Game fully loaded!');
+  console.log('========================================\n');
+});
+</script>
+
+<!-- Load initHeader.js -->
 <script src="../../../../js/homepage/initHeader.js"></script>
 
-<!-- THEN call initializeHeader with correct path -->
+<!-- Initialize Header -->
 <script>
-  initializeHeader('../../../homepage/header.html');
+  initializeHeader('../../../homepage/header.html', '/assets');
 </script>
 
 </body>
