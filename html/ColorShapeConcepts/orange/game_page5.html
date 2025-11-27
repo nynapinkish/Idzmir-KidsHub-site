@@ -25,15 +25,15 @@
     Konsep warna dan bentuk
   </div>
   <div class="banner-blue">
-    pilih buah yang berwarna orange
+    pilih buah yang berwarna oren
   </div>
 </div>
 
 <!-- Fruit Selection Section -->
 <div class="fruit-selection">
-  <img src="../../../assets/images/carrot.png" alt="Carrot" draggable="true" data-fruit="carrot1" data-color="orange" />
+  <img src="../../../assets/images/carrot.png" alt="Carrot" draggable="true" data-fruit="carrot1" data-color="oren" />
   <img src="../../../assets/images/mango.png" alt="Mango" draggable="true" data-fruit="mango1" data-color="yellow" />
-  <img src="../../../assets/images/papaya.png" alt="Papaya" draggable="true" data-fruit="papaya1" data-color="orange" />
+  <img src="../../../assets/images/papaya.png" alt="Papaya" draggable="true" data-fruit="papaya1" data-color="oren" />
   <img src="../../../assets/images/tomato.png" alt="Tomato" draggable="true" data-fruit="tomato1" data-color="red" />
   <img src="../../../assets/images/apple.png" alt="Apple" draggable="true" data-fruit="apple1" data-color="apple" />
   <img src="../../../assets/images/mangosteen.png" alt="Mangosteen" draggable="true" data-fruit="mangosteen1" data-color="purple" />
@@ -79,12 +79,40 @@
   </div>
 </div>
 
-<script src="../../../js/ColorShapeConcepts/orange/game_page5.js"></script>
+<!-- ================= SCRIPTS ================= -->
 
-<!-- Load initHeader.js FIRST -->
-<script src="../../../../js/homepage/initHeader.js"></script>
+<!-- 1. FIREBASE SDK (MUST BE FIRST!) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
-<!-- THEN call initializeHeader with correct path -->
+<!-- 2. FIREBASE CONFIGURATION -->
+<script>
+  // TODO: Replace with your actual Firebase config
+  const firebaseConfig = {
+apiKey: "AIzaSyCpDrWgLXXHK7_9nioEQGBKJkUv4byCEd4",
+  authDomain: "idzmir-kids-hub.firebaseapp.com",
+  projectId: "idzmir-kids-hub",
+  storageBucket: "idzmir-kids-hub.firebasestorage.app",
+  messagingSenderId: "301692363279",
+  appId: "1:301692363279:web:ba7c6547b36e433d6eb97a"  };
+
+  // Initialize Firebase
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+    console.log('✅ Firebase initialized successfully');
+  } else {
+    console.log('ℹ️ Firebase already initialized');
+  }
+</script>
+
+<!-- 3. GAME SESSION MANAGER -->
+<script src="../../../js/gameSessionManager.js"></script>
+
+<!-- 4. GAME LOGIC -->
+<script src="../../../js/colorShapeConcepts/orange/game_page5.js"></script>
+
+<!-- 5. HEADER (LAST!) -->
+<script src="../../../js/homepage/initHeader.js"></script>
 <script>
   initializeHeader('../../homepage/header.html');
 </script>

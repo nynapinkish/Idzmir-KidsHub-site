@@ -23,13 +23,13 @@
 <!-- Banners -->
 <div class="banner-container">
   <div class="banner-yellow">Konsep Jumlah & Bilangan</div>
-  <div class="banner-blue">Mana lebih Sejuk?</div>
+  <div class="banner-blue">Mana lebih sejuk?</div>
 </div>
 
 <!-- Images on grass -->
 <div class="image-container">
-  <img src="../../../assets/images/cold.png" alt="Sejuk" class="image-item cold" data-answer="wrong">
-  <img src="../../../assets/images/hot.png" alt="Panas" class="image-item hot" data-answer="correct">
+  <img src="../../../assets/images/cold.png" alt="sejuk" class="image-item cold" data-answer="wrong">
+  <img src="../../../assets/images/hot.png" alt="panas" class="image-item hot" data-answer="correct">
 </div>
 
 <!-- 🎉 SCORE MODAL (Hidden by default) -->
@@ -67,12 +67,40 @@
       </a>
     </div>
 
+<!-- ================= SCRIPTS ================= -->
+
+<!-- 1. FIREBASE SDK (MUST BE FIRST!) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<!-- 2. FIREBASE CONFIGURATION -->
+<script>
+  // TODO: Replace with your actual Firebase config
+  const firebaseConfig = {
+apiKey: "AIzaSyCpDrWgLXXHK7_9nioEQGBKJkUv4byCEd4",
+  authDomain: "idzmir-kids-hub.firebaseapp.com",
+  projectId: "idzmir-kids-hub",
+  storageBucket: "idzmir-kids-hub.firebasestorage.app",
+  messagingSenderId: "301692363279",
+  appId: "1:301692363279:web:ba7c6547b36e433d6eb97a"  };
+
+  // Initialize Firebase
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+    console.log('✅ Firebase initialized successfully');
+  } else {
+    console.log('ℹ️ Firebase already initialized');
+  }
+</script>
+
+<!-- 3. GAME SESSION MANAGER -->
+<script src="../../../js/gameSessionManager.js"></script>
+
+<!-- 4. GAME LOGIC -->
 <script src="../../../js/QualitativeConcepts/cold-hot/game_page3.js"></script>
 
-  <!-- Load initHeader.js FIRST -->
-<script src="../../../../js/homepage/initHeader.js"></script>
-
-<!-- THEN call initializeHeader with correct path -->
+<!-- 5. HEADER (LAST!) -->
+<script src="../../../js/homepage/initHeader.js"></script>
 <script>
   initializeHeader('../../homepage/header.html');
 </script>

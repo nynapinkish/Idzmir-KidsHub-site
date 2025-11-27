@@ -1,4 +1,170 @@
-document.addEventListener('DOMContentLoaded', () => {
+// ===============================================
+// TEMPORAL CONCEPTS - Sebelum / Selepas
+// With Firebase Integration (First Attempt Only)
+// FIXED: Proper score display + LOCK system
+// ===============================================
+
+// ================= GAME CONFIGURATION =================
+const CONCEPT_TYPE = 'Temporal Concepts';
+const GAME_NAME = 'sebelum / selepas';
+const GAME_KEY = 'sebelum_/_selepas';
+const TOTAL_QUESTIONS = 2;
+
+// ================= GAME LOCK STATE =================
+let gameAlreadyPlayed = false;
+let existingScore = 0;
+
+// ================= GAME STATE =================
+let currentQuestion = 1;
+let answered = false;
+let correctAnswers = 0;
+let totalAttempts = 0;
+
+// ================= CHECK IF GAME ALREADY PLAYED =================
+async function checkGameStatus() {
+  try {
+    const studentId = sessionStorage.getItem('studentId');
+    if (!studentId) {
+      console.warn('No studentId in session');
+      return false;
+    }
+
+    const db = firebase.firestore();
+    const studentQuery = await db.collection('students')
+      .where('studentId', '==', studentId)
+      .get();
+
+    if (studentQuery.empty) {
+      console.warn('Student not found in Firebase');
+      return false;
+    }
+
+    const studentDoc = studentQuery.docs[0];
+    const studentData = studentDoc.data();
+    
+    const conceptProgress = studentData.conceptProgress || {};
+    const temporalProgress = conceptProgress['Temporal Concepts'] || {};
+    const gamesCompleted = temporalProgress.gamesCompleted || {};
+    
+    console.log('🔍 Looking for game key:', GAME_KEY);
+    console.log('🔍 Available keys:', Object.keys(gamesCompleted));
+    
+    if (gamesCompleted[GAME_KEY] && gamesCompleted[GAME_KEY] > 0) {
+      existingScore = gamesCompleted[GAME_KEY];
+      gameAlreadyPlayed = true;
+      console.log('🔒 Game already played! Score:', existingScore);
+      return true;
+    }
+
+    console.log('✅ First time playing this game');
+    return false;
+
+  } catch (error) {
+    console.error('❌ Error checking game status:', error);
+    return false;
+  }
+}
+
+// ================= SHOW "ALREADY PLAYED" SCREEN =================
+async function showAlreadyPlayedScreen() {
+  console.log('🚫 Game already completed - showing existing score');
+  
+  const scoreModal = document.getElementById('scoreModal');
+  const finalScoreDisplay = document.getElementById('finalScoreDisplay');
+  const nextButtonContainer = document.querySelector('.next-button-container');
+  const nextButton = document.querySelector('.next-button');
+
+  // ✅ UPDATE SCORE BANNER FIRST before hiding!
+  const scoreDisplay = document.getElementById('scoreDisplay');
+  const scoreText = document.getElementById('scoreText');
+  
+  if (scoreDisplay && scoreText) {
+    scoreDisplay.style.display = 'flex';
+    scoreText.textContent = `${existingScore}/${TOTAL_QUESTIONS}`;
+    console.log(`📊 Score banner updated: ${existingScore}/${TOTAL_QUESTIONS}`);
+  }
+
+  // ⚠️ HIDE GAME ELEMENTS AFTER updating score
+  const imageContainer = document.querySelector('.image-container');
+  const bannerContainer = document.querySelector('.banner-container');
+  
+  if (imageContainer) {
+    imageContainer.style.display = 'none';
+    console.log('✅ Hidden: .image-container');
+  }
+  
+  if (bannerContainer) {
+    bannerContainer.style.display = 'none';
+    console.log('✅ Hidden: .banner-container');
+  }
+
+  if (finalScoreDisplay) {
+    finalScoreDisplay.textContent = `${existingScore}/${TOTAL_QUESTIONS}`;
+  }
+
+  if (scoreModal) {
+    scoreModal.style.cssText = '';
+    scoreModal.style.display = 'flex';
+    scoreModal.style.position = 'fixed';
+    scoreModal.style.top = '0';
+    scoreModal.style.left = '0';
+    scoreModal.style.width = '100%';
+    scoreModal.style.height = '100%';
+    scoreModal.style.zIndex = '10000';
+    scoreModal.style.backgroundColor = 'rgba(0, 0, 0, 0.6)';
+    scoreModal.style.backdropFilter = 'blur(5px)';
+    scoreModal.style.alignItems = 'center';
+    scoreModal.style.justifyContent = 'center';
+    scoreModal.style.animation = 'modalBounce 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+  }
+
+  if (nextButtonContainer && nextButton) {
+    nextButtonContainer.style.zIndex = '10001';
+    nextButtonContainer.style.position = 'fixed';
+    nextButton.style.opacity = '1';
+    nextButton.style.display = 'block';
+    nextButton.style.pointerEvents = 'auto';
+    nextButton.style.animation = 'bounceButton 1s ease-in-out infinite';
+  }
+
+  console.log('✅ Existing score displayed - Game LOCKED');
+}
+
+// ================= INITIALIZE GAME =================
+document.addEventListener('DOMContentLoaded', async () => {
+  console.log("🎮 Sebelum/Selepas Game loaded!");
+  console.log("🔍 DEBUG: Checking game status...");
+
+  // ⚠️ WAIT for Firebase to be ready
+  await new Promise(resolve => setTimeout(resolve, 500));
+  
+  console.log("✅ Firebase ready, checking game status...");
+
+  // Check if game already played
+  const hasPlayed = await checkGameStatus();
+  
+  console.log("🔍 DEBUG: hasPlayed =", hasPlayed);
+  console.log("🔍 DEBUG: existingScore =", existingScore);
+  console.log("🔍 DEBUG: gameAlreadyPlayed =", gameAlreadyPlayed);
+  
+  if (hasPlayed) {
+    console.log("🔒 DEBUG: Game WAS played before - showing existing score");
+    await showAlreadyPlayedScreen();
+    return; // ⚠️ STOP HERE - Don't initialize game
+  }
+
+  console.log("✅ First time playing - initializing game...");
+
+  // Initialize game session
+  const initialized = await initializeGame(CONCEPT_TYPE, GAME_NAME, TOTAL_QUESTIONS);
+  if (!initialized) {
+    console.error('❌ Failed to initialize game');
+    alert('Game initialization failed. Please refresh the page.');
+    return;
+  }
+
+  console.log("✅ Game session initialized successfully");
+
   // ✅ Get all elements from HTML
   const images = document.querySelectorAll('.image-item');
   const scoreModal = document.getElementById('scoreModal');
@@ -9,19 +175,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const nextButtonContainer = document.querySelector('.next-button-container');
   const bannerBlue = document.querySelector('.banner-blue');
   const answerText = document.querySelector('.answer-text');
-  
-  // Game state
-  let currentQuestion = 1; // Start with question 1 (Sebelum)
-  let answered = false;
-  let correctAnswers = 0;
-  let totalAttempts = 0;
-  const totalQuestions = 2; // ✅ 2 soalan dalam 1 page
 
   console.log("🎮 Game initialized!");
   console.log("📸 Images found:", images.length);
   console.log("📊 Score modal:", scoreModal);
   console.log("⏭️ Next button:", nextButton);
   console.log("🎯 Current question:", currentQuestion);
+
+  if (scoreDisplay) scoreDisplay.style.display = 'block';
 
   // ============================================
   // Function: Setup question display
@@ -63,12 +224,36 @@ document.addEventListener('DOMContentLoaded', () => {
   // ============================================
   // Function: Show completion modal
   // ============================================
-  function showCompletionModal() {
+  async function showCompletionModal() {
     console.log("🎉 Showing completion modal!");
     
     if (!scoreModal || !finalScoreDisplay) {
       console.error("❌ Modal elements not found!");
       return;
+    }
+
+    // ⚠️ CRITICAL: Force set gameSession.currentScore BEFORE saving!
+    if (typeof gameSession !== 'undefined') {
+      gameSession.currentScore = correctAnswers;
+      console.log(`🎯 FORCED gameSession.currentScore = ${correctAnswers} (before save)`);
+    }
+
+    // ✅ CRITICAL: Save score to Firebase FIRST
+    console.log('💾 Saving score to Firebase...');
+    console.log(`   Local score: ${correctAnswers}/${totalAttempts}`);
+    console.log(`   gameSession.currentScore: ${gameSession?.currentScore}`);
+    
+    if (typeof gameSession !== 'undefined' && gameSession.endSession) {
+      const saved = await gameSession.endSession();
+      
+      if (saved) {
+        console.log('✅ Score saved successfully!');
+        console.log('🔒 Game is now LOCKED - Cannot replay');
+      } else {
+        console.error('❌ Failed to save score');
+      }
+    } else {
+      console.error('❌ gameSession not found');
     }
 
     // Update final score in modal
@@ -83,7 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
     scoreModal.style.width = '100%';
     scoreModal.style.height = '100%';
     scoreModal.style.zIndex = '10000';
-    scoreModal.style.backgroundColor = 'rgba(0, 0, 0, 0.6)';
+    scoreModal.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
     scoreModal.style.backdropFilter = 'blur(5px)';
     scoreModal.style.alignItems = 'center';
     scoreModal.style.justifyContent = 'center';
@@ -123,10 +308,10 @@ document.addEventListener('DOMContentLoaded', () => {
       // Determine correct answer based on current question
       let correctAnswer;
       if (currentQuestion === 1) {
-        // Question 1: Mana Sebelum? → Correct = "before.png"
+        // Question 1: Mana Sebelum? → Correct = "Sebelum"
         correctAnswer = this.alt === 'Sebelum' ? 'correct' : 'wrong';
       } else {
-        // Question 2: Mana Selepas? → Correct = "after.png"
+        // Question 2: Mana Selepas? → Correct = "Selepas"
         correctAnswer = this.alt === 'Selepas' ? 'correct' : 'wrong';
       }
       
@@ -142,6 +327,12 @@ document.addEventListener('DOMContentLoaded', () => {
       if (correctAnswer === 'correct') {
         console.log("✅ CORRECT ANSWER!");
         correctAnswers++;
+        
+        // ⚠️ Update gameSession score immediately!
+        if (typeof gameSession !== 'undefined') {
+          gameSession.currentScore = correctAnswers;
+          console.log(`🎯 Updated gameSession.currentScore to: ${correctAnswers}`);
+        }
         
         // Add green glow animation to correct image
         this.classList.add('correct-glow');
@@ -179,14 +370,14 @@ document.addEventListener('DOMContentLoaded', () => {
       // Update score display di top right
       updateScoreDisplay();
 
-      console.log(`📈 Progress: ${totalAttempts}/${totalQuestions} attempts`);
+      console.log(`📈 Progress: ${totalAttempts}/${TOTAL_QUESTIONS} attempts`);
       console.log(`🎯 Score: ${correctAnswers}/${totalAttempts}`);
       
       // ============================================
       // Move to next question OR show modal
       // ============================================
       setTimeout(() => {
-        if (currentQuestion < totalQuestions) {
+        if (currentQuestion < TOTAL_QUESTIONS) {
           // Move to next question
           console.log("➡️ Moving to next question...");
           currentQuestion++;
@@ -207,5 +398,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateScoreDisplay();
   
   console.log("🚀 Game ready! Click an image to start.");
-  console.log("📋 Total questions in this page:", totalQuestions);
+  console.log("📋 Total questions in this page:", TOTAL_QUESTIONS);
 });
+
+console.log('✅ Temporal Concepts (sebelum/selepas) game with LOCKED score system loaded!');

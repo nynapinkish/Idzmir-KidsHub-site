@@ -78,12 +78,40 @@
       </a>
     </div>
 
-<script src="../../../js/ColorShapeConcepts/red/game_page3.js"></script>
+<!-- ================= SCRIPTS ================= -->
 
-<!-- Load initHeader.js FIRST -->
-<script src="../../../../js/homepage/initHeader.js"></script>
+<!-- 1. FIREBASE SDK (MUST BE FIRST!) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
-<!-- THEN call initializeHeader with correct path -->
+<!-- 2. FIREBASE CONFIGURATION -->
+<script>
+  // TODO: Replace with your actual Firebase config
+  const firebaseConfig = {
+apiKey: "AIzaSyCpDrWgLXXHK7_9nioEQGBKJkUv4byCEd4",
+  authDomain: "idzmir-kids-hub.firebaseapp.com",
+  projectId: "idzmir-kids-hub",
+  storageBucket: "idzmir-kids-hub.firebasestorage.app",
+  messagingSenderId: "301692363279",
+  appId: "1:301692363279:web:ba7c6547b36e433d6eb97a"  };
+
+  // Initialize Firebase
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+    console.log('✅ Firebase initialized successfully');
+  } else {
+    console.log('ℹ️ Firebase already initialized');
+  }
+</script>
+
+<!-- 3. GAME SESSION MANAGER -->
+<script src="../../../js/gameSessionManager.js"></script>
+
+<!-- 4. GAME LOGIC -->
+<script src="../../../js/colorShapeConcepts/red/game_page3.js"></script>
+
+<!-- 5. HEADER (LAST!) -->
+<script src="../../../js/homepage/initHeader.js"></script>
 <script>
   initializeHeader('../../homepage/header.html');
 </script>

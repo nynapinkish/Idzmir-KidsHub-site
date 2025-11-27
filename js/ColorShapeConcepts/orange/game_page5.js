@@ -1,209 +1,202 @@
-const fruits = document.querySelectorAll('.fruit-selection img');
-const backgroundArea = document.getElementById('backgroundArea');
-const scoreModal = document.getElementById('scoreModal');
-const scoreDisplay = document.getElementById('scoreDisplay');
-const scoreText = document.getElementById('scoreText');
+// ===============================================
+// COLOR & SHAPE CONCEPTS - Oren (Orange Color)
+// With Firebase Integration (First Attempt Only)
+// FIXED: Proper score retrieval + Full Score List
+// ===============================================
 
-// Track score
+// ================= GAME CONFIGURATION =================
+const CONCEPT_TYPE = 'Color & Shape';
+const GAME_NAME = 'oren';
+const GAME_KEY = 'oren';
+const TOTAL_QUESTIONS = 2; // maxDrags
+
+// ================= GAME LOCK STATE =================
+let gameAlreadyPlayed = false;
+let existingScore = 0;
+
+// ================= GAME STATE =================
 let score = 0;
 let totalAttempts = 0;
 let fruitCount = 0;
 const maxDrags = 2; // Maximum 2 correct answers
 
-// Show score display at start
-if (scoreDisplay) {
-  scoreDisplay.style.display = 'flex';
-  updateScoreDisplay();
-  console.log('✅ Score display shown!');
-}
-
-// Update score display function
-function updateScoreDisplay() {
-  if (scoreText) {
-    scoreText.textContent = `${score}/${totalAttempts}`;
-    console.log("📊 Score updated:", `${score}/${totalAttempts}`);
-  }
-}
-
-fruits.forEach(fruit => {
-  fruit.addEventListener('dragstart', e => {
-    e.dataTransfer.setData('color', fruit.dataset.color);
-    e.dataTransfer.setData('src', fruit.src);
-    e.dataTransfer.setData('fruit', fruit.dataset.fruit);
-  });
-});
-
-backgroundArea.addEventListener('dragover', e => e.preventDefault());
-
-backgroundArea.addEventListener('drop', e => {
-  e.preventDefault();
-
-  // Check if already reached max drags
-  if (totalAttempts >= maxDrags) {
-    console.log('❌ Maximum drags reached!');
-    return;
-  }
-
-  const color = e.dataTransfer.getData('color');
-  const src = e.dataTransfer.getData('src');
-  const fruitId = e.dataTransfer.getData('fruit');
-
-  // Check if fruit already used
-  const usedFruit = document.querySelector(`.fruit-selection img[data-fruit="${fruitId}"]`);
-  if (usedFruit && usedFruit.classList.contains('fruit-used')) {
-    return;
-  }
-
-  totalAttempts++;
-  updateScoreDisplay();
-
-  // Mark fruit as used
-  if (usedFruit) {
-    usedFruit.classList.add('fruit-used');
-  }
-
-  // Check if correct answer (orange)
-  if (color === 'orange') {
-    score++;
-    updateScoreDisplay();
-    
-    const dropped = document.createElement('img');
-    dropped.src = src;
-    dropped.classList.add('dropped-fruit');
-
-    // Spacing for fruits
-    const spacing = 200;
-    const maxPerRow = 3;
-    const row = Math.floor(fruitCount / maxPerRow);
-    const col = fruitCount % maxPerRow;
-
-    const offsetX = col * spacing - (spacing * (maxPerRow - 1)) / 2;
-    const offsetY = row * 120;
-
-    dropped.style.left = `calc(50% + ${offsetX}px)`;
-    dropped.style.bottom = `${160 + offsetY}px`;
-
-    backgroundArea.appendChild(dropped);
-    fruitCount++;
-  } else {
-    // Wrong answer - shake animation
-    if (usedFruit) {
-      usedFruit.classList.add('shake-error');
-      
-      setTimeout(() => {
-        usedFruit.classList.remove('shake-error');
-      }, 600);
+// ================= CHECK IF GAME ALREADY PLAYED =================
+async function checkGameStatus() {
+  try {
+    const studentId = sessionStorage.getItem('studentId');
+    if (!studentId) {
+      console.warn('⚠️ No studentId in session - allowing first play');
+      return false;
     }
-  }
 
-  // Check if reached max drags (game over)
-  if (totalAttempts >= maxDrags) {
-    console.log('🎉 Game over! Max drags reached.');
-    setTimeout(showFinalScore, 1500);
-  }
-});
+    const db = firebase.firestore();
+    const studentQuery = await db.collection('students')
+      .where('studentId', '==', studentId)
+      .get();
 
-// ==================== DATABASE SCORE RETRIEVAL ====================
+    if (studentQuery.empty) {
+      console.warn('⚠️ Student not found in Firebase - allowing first play');
+      return false;
+    }
+
+    const studentDoc = studentQuery.docs[0];
+    const studentData = studentDoc.data();
+    
+    console.log('🔍 Checking game status...');
+    console.log('   Looking for game key:', GAME_KEY);
+    
+    const conceptProgress = studentData.conceptProgress || {};
+    
+    // Search in Color & Shape concept
+    if (conceptProgress[CONCEPT_TYPE]) {
+      const gamesCompleted = conceptProgress[CONCEPT_TYPE].gamesCompleted || {};
+      
+      console.log('   Games in Color & Shape:', Object.keys(gamesCompleted));
+      
+      // Check if game exists (allow score of 0)
+      if (gamesCompleted[GAME_KEY] !== undefined && gamesCompleted[GAME_KEY] >= 0) {
+        existingScore = gamesCompleted[GAME_KEY];
+        gameAlreadyPlayed = true;
+        console.log('🔒 Game FOUND!');
+        console.log(`   Score: ${existingScore}/${TOTAL_QUESTIONS}`);
+        return true;
+      }
+    }
+
+    console.log('✅ Game not found - first time playing');
+    return false;
+
+  } catch (error) {
+    console.error('❌ Error checking game status:', error);
+    return false;
+  }
+}
+
+// ================= FETCH ALL COLOR & SHAPE GAMES =================
 async function fetchAllGameScores() {
   try {
-    const response = await fetch('/api/games/all-scores', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
+    const studentId = sessionStorage.getItem('studentId');
+    if (!studentId) {
+      console.warn('⚠️ No studentId for fetching scores');
+      return [];
+    }
+
+    const db = firebase.firestore();
+    const studentQuery = await db.collection('students')
+      .where('studentId', '==', studentId)
+      .get();
+
+    if (studentQuery.empty) {
+      console.warn('⚠️ Student not found in Firebase');
+      return [];
+    }
+
+    const studentDoc = studentQuery.docs[0];
+    const studentData = studentDoc.data();
+    
+    const conceptProgress = studentData.conceptProgress || {};
+    
+    console.log('🎮 Fetching all Color & Shape game scores...');
+    
+    // Get Color & Shape games
+    let gamesCompleted = {};
+    
+    if (conceptProgress[CONCEPT_TYPE]) {
+      gamesCompleted = conceptProgress[CONCEPT_TYPE].gamesCompleted || {};
+    }
+    
+    console.log('🎮 Games Completed from Firebase:', gamesCompleted);
+    
+    // List ALL Color & Shape games
+    const gamesList = [
+      { key: 'kuning', name: 'Kuning', maxScore: 2 },
+      { key: 'hijau', name: 'Hijau', maxScore: 2 },
+      { key: 'merah', name: 'Merah', maxScore: 2 },
+      { key: 'ungu', name: 'Ungu', maxScore: 2 },
+      { key: 'oren', name: 'Oren', maxScore: 2 }
+    ];
+
+    const allGames = gamesList.map(game => {
+      const firebaseScore = gamesCompleted[game.key] || 0;
+      
+      console.log(`📊 ${game.name}: ${firebaseScore}/${game.maxScore}`);
+      
+      return {
+        gameName: game.name,
+        points: firebaseScore,
+        maxPoints: game.maxScore
+      };
     });
 
-    if (!response.ok) throw new Error('Failed to fetch scores');
-    
-    const data = await response.json();
-    console.log("All game scores fetched:", data);
-    
-    return data.games;
+    console.log('📋 All Games Synced:', allGames);
+    return allGames;
+
   } catch (error) {
-    console.error("Error fetching game scores:", error);
-    // Mock data for development
-    return [
-      { gameId: 'game1', gameName: 'Red Color', points: 2, maxPoints: 2 },
-      { gameId: 'game2', gameName: 'Green Color', points: 2, maxPoints: 2 },
-      { gameId: 'game3', gameName: 'Blue Color', points: 2, maxPoints: 2 },
-      { gameId: 'game4', gameName: 'Yellow Color', points: 2, maxPoints: 2 },
-      { gameId: 'game5', gameName: 'Orange Color', points: 0, maxPoints: 2 }
-    ];
+    console.error('❌ Error fetching game scores:', error);
+    return [];
   }
 }
 
-async function calculateTotalScore() {
+// ================= CALCULATE TOTAL SCORE =================
+async function calculateTotalScore(currentGameScore) {
+  console.log('🧮 Calculating total score...');
+  console.log('   Current game score:', currentGameScore);
+  
   const allGameScores = await fetchAllGameScores();
   
-  if (!allGameScores) {
-    console.warn("Could not retrieve game scores");
-    return { totalPoints: 0, totalMaxPoints: 0, percentage: 0 };
+  if (!allGameScores || allGameScores.length === 0) {
+    console.warn('⚠️ Could not retrieve game scores');
+    return { totalPoints: 0, totalMaxPoints: 0, percentage: 0, allGames: [] };
   }
+
+  // Update current game score (oren)
+  const updatedGames = allGameScores.map(game => {
+    if (game.gameName === 'Oren') {
+      console.log(`   Updating ${game.gameName}: ${game.points} → ${currentGameScore}`);
+      return { ...game, points: currentGameScore };
+    }
+    return game;
+  });
 
   let totalPoints = 0;
   let totalMaxPoints = 0;
 
-  allGameScores.forEach(game => {
+  updatedGames.forEach(game => {
     totalPoints += game.points || 0;
     totalMaxPoints += game.maxPoints || 0;
+    console.log(`   ${game.gameName}: ${game.points}/${game.maxPoints}`);
   });
 
   const percentage = totalMaxPoints > 0 ? (totalPoints / totalMaxPoints) * 100 : 0;
+
+  console.log('📊 TOTAL SCORE:', totalPoints, '/', totalMaxPoints, '=', Math.round(percentage) + '%');
 
   return {
     totalPoints,
     totalMaxPoints,
     percentage: Math.round(percentage),
-    allGames: allGameScores
+    allGames: updatedGames
   };
 }
 
-async function saveGameScore(points, maxPoints) {
-  try {
-    const response = await fetch('/api/games/save-score', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        gameId: 'game5-orange-color',
-        gameName: 'Orange Color',
-        points: points,
-        maxPoints: maxPoints,
-        percentage: (points / maxPoints) * 100
-      })
-    });
-
-    if (!response.ok) throw new Error('Failed to save score');
-    
-    const result = await response.json();
-    console.log("Game score saved:", result);
-    return result;
-  } catch (error) {
-    console.error("Error saving game score:", error);
-    return null;
-  }
-}
-
-// ==================== DYNAMIC STAR COLORS ====================
-function updateStarColors(correctAnswers, totalQuestions) {
-  const percentage = (correctAnswers / totalQuestions) * 100;
+// ================= UPDATE STAR COLORS =================
+function updateStarColors(percentage) {
   const stars = document.querySelectorAll('.star-image');
   
-  console.log("Updating star colors - Score:", correctAnswers, "/", totalQuestions, "=", percentage.toFixed(0) + "%");
+  console.log('⭐ Updating star colors based on', percentage + '%');
   
   let filterStyle;
   
   if (percentage >= 80) {
     filterStyle = 'brightness(1.2) saturate(1.3) hue-rotate(0deg)';
-    console.log("⭐ GOLD STARS - Excellent score!");
+    console.log('   ⭐ GOLD STARS - Excellent!');
   } else if (percentage >= 50) {
     filterStyle = 'brightness(0.7) saturate(1.2) hue-rotate(15deg)';
-    console.log("🟠 ORANGE STARS - Good score!");
+    console.log('   🟠 ORANGE STARS - Good!');
   } else {
     filterStyle = 'brightness(0.4) saturate(1.3) hue-rotate(-25deg)';
-    console.log("🔴 RED STARS - Keep practicing!");
-  }    
+    console.log('   🔴 RED STARS - Keep practicing!');
+  }
 
   stars.forEach(star => {
     star.style.filter = filterStyle;
@@ -211,14 +204,19 @@ function updateStarColors(correctAnswers, totalQuestions) {
   });
 }
 
-// ==================== POPULATE GAMES LIST ====================
-async function populateGamesList(allGames) {
+// ================= POPULATE GAMES LIST =================
+function populateGamesList(allGames) {
   const gamesList = document.getElementById('gamesScoreList');
-  if (!gamesList) return;
+  if (!gamesList) {
+    console.warn('⚠️ gamesScoreList element not found');
+    return;
+  }
   
+  console.log('📝 Populating games list...');
   gamesList.innerHTML = '';
 
   allGames.forEach(game => {
+    console.log(`   Adding: ${game.gameName} - ${game.points}/${game.maxPoints}`);
     const row = document.createElement('div');
     row.className = 'game-score-row';
     row.innerHTML = `
@@ -227,39 +225,142 @@ async function populateGamesList(allGames) {
     `;
     gamesList.appendChild(row);
   });
+  
+  console.log('✅ Games list populated with', allGames.length, 'games');
 }
 
-// ==================== SCORING POPUP ====================
+// ================= SHOW "ALREADY PLAYED" SCREEN =================
+async function showAlreadyPlayedScreen() {
+  console.log('🔒 Showing LOCKED screen - score already saved');
+  console.log(`   Existing score: ${existingScore}/${TOTAL_QUESTIONS}`);
+  
+  // 1️⃣ UPDATE SCORE BANNER (TOP RIGHT)
+  const scoreDisplay = document.getElementById('scoreDisplay');
+  const scoreText = document.getElementById('scoreText');
+  
+  if (scoreDisplay && scoreText) {
+    scoreDisplay.style.display = 'flex';
+    scoreText.textContent = `${existingScore}/${TOTAL_QUESTIONS}`;
+    console.log(`📊 Score banner: ${existingScore}/${TOTAL_QUESTIONS}`);
+  }
+
+  // 2️⃣ HIDE GAME ELEMENTS
+  const fruitSelection = document.querySelector('.fruit-selection');
+  const backgroundArea = document.getElementById('backgroundArea');
+  
+  if (fruitSelection) {
+    fruitSelection.style.display = 'none';
+    console.log('✅ Hidden: .fruit-selection');
+  }
+  if (backgroundArea) {
+    backgroundArea.style.pointerEvents = 'none';
+    console.log('✅ Disabled: #backgroundArea');
+  }
+
+  // 3️⃣ FETCH ALL GAMES & CALCULATE TOTAL
+  console.log('📊 Fetching all games for summary...');
+  const totalScoreData = await calculateTotalScore(existingScore);
+  
+  populateGamesList(totalScoreData.allGames);
+  updateStarColors(totalScoreData.percentage);
+
+  // 4️⃣ UPDATE MODAL CONTENT
+  const scoreModal = document.getElementById('scoreModal');
+  const totalScorePercentage = document.getElementById('totalScorePercentage');
+  const continueBtn = document.getElementById('continueBtn');
+  const finishBtn = document.getElementById('finishBtn');
+  
+  if (totalScorePercentage) {
+    totalScorePercentage.textContent = `${totalScoreData.percentage}%`;
+    console.log(`📊 Total percentage: ${totalScoreData.percentage}%`);
+  }
+
+  // 5️⃣ SHOW MODAL
+  if (scoreModal) {
+    scoreModal.style.display = 'flex';
+    scoreModal.style.position = 'fixed';
+    scoreModal.style.top = '0';
+    scoreModal.style.left = '0';
+    scoreModal.style.width = '100%';
+    scoreModal.style.height = '100%';
+    scoreModal.style.zIndex = '10000';
+    scoreModal.style.backgroundColor = 'rgba(0, 0, 0, 0.6)';
+    scoreModal.style.backdropFilter = 'blur(5px)';
+    scoreModal.style.alignItems = 'center';
+    scoreModal.style.justifyContent = 'center';
+    scoreModal.style.animation = 'modalBounce 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+    console.log('✅ Modal displayed');
+  }
+
+  // 6️⃣ SETUP BUTTONS
+  if (continueBtn) {
+    continueBtn.style.opacity = '1';
+    continueBtn.style.display = 'block';
+    continueBtn.style.pointerEvents = 'auto';
+    continueBtn.style.animation = 'bounceButton 1s ease-in-out infinite';
+    
+    continueBtn.addEventListener('click', () => {
+      console.log('➡️ Continue to next concept');
+      window.location.href = '/html/homepage/relationalConcepts.html';
+    });
+  }
+
+  if (finishBtn) {
+    finishBtn.style.opacity = '1';
+    finishBtn.style.display = 'block';
+    finishBtn.style.pointerEvents = 'auto';
+    
+    finishBtn.addEventListener('click', () => {
+      console.log('✅ Finish - Return to homepage');
+      window.location.href = '/html/homepage/homepage.html';
+    });
+  }
+
+  console.log('✅ LOCKED screen fully displayed - Cannot replay');
+}
+
+// ================= SHOW FINAL SCORE (After completing game) =================
 async function showFinalScore() {
   console.log('🎉 Showing final score:', `${score}/${totalAttempts}`);
   
+  const scoreModal = document.getElementById('scoreModal');
   if (!scoreModal) return;
 
-  // Save THIS game's score
-  await saveGameScore(score, totalAttempts);
+  // ⚠️ CRITICAL: Force set gameSession.currentScore BEFORE saving!
+  if (typeof gameSession !== 'undefined') {
+    gameSession.currentScore = score;
+    console.log(`🎯 FORCED gameSession.currentScore = ${score}`);
+  }
 
-  // Fetch ALL game scores
-  const totalScoreData = await calculateTotalScore();
+  // ✅ CRITICAL: Save score to Firebase FIRST
+  console.log('💾 Saving final score to Firebase...');
+  console.log(`   Final score: ${score}/${totalAttempts}`);
   
-  // Update THIS game's score with current attempt
-  const updatedGames = totalScoreData.allGames.map(game => {
-    if (game.gameId === 'game5-orange-color') {
-      return { ...game, points: score, maxPoints: totalAttempts };
+  if (typeof gameSession !== 'undefined' && gameSession.endSession) {
+    const saved = await gameSession.endSession();
+    
+    if (saved) {
+      console.log('✅ Score saved successfully to Firebase!');
+      console.log('🔒 Game is now LOCKED - Cannot replay');
+    } else {
+      console.error('❌ Failed to save score to Firebase');
     }
-    return game;
-  });
+  } else {
+    console.error('❌ gameSession not found or endSession missing');
+  }
 
-  // Populate games list
-  await populateGamesList(updatedGames);
+  // Fetch all games and calculate total
+  console.log('📊 Calculating final summary...');
+  const totalScoreData = await calculateTotalScore(score);
   
-  // Update total score display
+  populateGamesList(totalScoreData.allGames);
+  updateStarColors(totalScoreData.percentage);
+  
   const totalScorePercentage = document.getElementById('totalScorePercentage');
   if (totalScorePercentage) {
     totalScorePercentage.textContent = `${totalScoreData.percentage}%`;
+    console.log(`📊 Total percentage displayed: ${totalScoreData.percentage}%`);
   }
-  
-  // Update star colors
-  updateStarColors(score, totalAttempts);
   
   // Show modal
   scoreModal.style.display = 'flex';
@@ -308,4 +409,156 @@ async function showFinalScore() {
   }
 }
 
-console.log('🎮 Drag & Drop Game loaded with scoring!');
+// ================= UPDATE SCORE DISPLAY =================
+function updateScoreDisplay() {
+  const scoreText = document.getElementById('scoreText');
+  if (scoreText) {
+    scoreText.textContent = `${score}/${totalAttempts}`;
+    console.log("📊 Score updated:", `${score}/${totalAttempts}`);
+  }
+}
+
+// ================= INITIALIZE GAME =================
+document.addEventListener('DOMContentLoaded', async () => {
+  console.log("🎮 Orange Color Game loading...");
+  console.log("   Game Key:", GAME_KEY);
+  
+  // Wait for Firebase
+  let attempts = 0;
+  const maxAttempts = 15;
+  
+  while (attempts < maxAttempts) {
+    if (typeof firebase !== 'undefined' && firebase.firestore) {
+      console.log('✅ Firebase ready!');
+      break;
+    }
+    console.log(`⏳ Waiting for Firebase... (${attempts + 1}/${maxAttempts})`);
+    await new Promise(resolve => setTimeout(resolve, 300));
+    attempts++;
+  }
+  
+  if (attempts >= maxAttempts) {
+    console.error('❌ Firebase failed to load');
+    alert('Firebase gagal dimuat. Sila refresh halaman.');
+    return;
+  }
+
+  console.log("🔍 Checking if game already played...");
+  const hasPlayed = await checkGameStatus();
+  
+  console.log("📊 Game Status Check Result:");
+  console.log("   hasPlayed:", hasPlayed);
+  console.log("   existingScore:", existingScore);
+  
+  if (hasPlayed) {
+    console.log("🔒 Game WAS played before - showing existing score");
+    await showAlreadyPlayedScreen();
+    return;
+  }
+
+  console.log("✅ First time playing - initializing new game session...");
+
+  // Initialize NEW game session
+  const initialized = await initializeGame(CONCEPT_TYPE, GAME_NAME, TOTAL_QUESTIONS);
+  if (!initialized) {
+    console.error('❌ Failed to initialize game session');
+    alert('Gagal memulakan game. Sila refresh halaman.');
+    return;
+  }
+
+  console.log("✅ Game session initialized successfully");
+
+  // Get elements
+  const fruits = document.querySelectorAll('.fruit-selection img');
+  const backgroundArea = document.getElementById('backgroundArea');
+  const scoreModal = document.getElementById('scoreModal');
+  const scoreDisplay = document.getElementById('scoreDisplay');
+
+  if (scoreDisplay) {
+    scoreDisplay.style.display = 'flex';
+    updateScoreDisplay();
+    console.log('✅ Score display shown!');
+  }
+
+  // Drag start
+  fruits.forEach(fruit => {
+    fruit.addEventListener('dragstart', e => {
+      e.dataTransfer.setData('color', fruit.dataset.color);
+      e.dataTransfer.setData('src', fruit.src);
+      e.dataTransfer.setData('fruit', fruit.dataset.fruit);
+    });
+  });
+
+  backgroundArea.addEventListener('dragover', e => e.preventDefault());
+
+  // Drop handler
+  backgroundArea.addEventListener('drop', e => {
+    e.preventDefault();
+
+    if (totalAttempts >= maxDrags) {
+      console.log('❌ Maximum drags reached!');
+      return;
+    }
+
+    const color = e.dataTransfer.getData('color');
+    const src = e.dataTransfer.getData('src');
+    const fruitId = e.dataTransfer.getData('fruit');
+
+    const usedFruit = document.querySelector(`.fruit-selection img[data-fruit="${fruitId}"]`);
+    if (usedFruit && usedFruit.classList.contains('fruit-used')) {
+      return;
+    }
+
+    totalAttempts++;
+    updateScoreDisplay();
+
+    if (usedFruit) {
+      usedFruit.classList.add('fruit-used');
+    }
+
+    // Check if correct (orange)
+    if (color === 'orange') {
+      score++;
+      updateScoreDisplay();
+      
+      const dropped = document.createElement('img');
+      dropped.src = src;
+      dropped.classList.add('dropped-fruit');
+
+      const spacing = 200;
+      const maxPerRow = 3;
+      const row = Math.floor(fruitCount / maxPerRow);
+      const col = fruitCount % maxPerRow;
+
+      const offsetX = col * spacing - (spacing * (maxPerRow - 1)) / 2;
+      const offsetY = row * 120;
+
+      dropped.style.left = `calc(50% + ${offsetX}px)`;
+      dropped.style.bottom = `${160 + offsetY}px`;
+
+      backgroundArea.appendChild(dropped);
+      fruitCount++;
+    } else {
+      // Wrong answer
+      if (usedFruit) {
+        usedFruit.classList.add('shake-error');
+        
+        setTimeout(() => {
+          usedFruit.classList.remove('shake-error');
+        }, 600);
+      }
+    }
+
+    // Check if game over
+    if (totalAttempts >= maxDrags) {
+      console.log('🎉 Game over! Max drags reached.');
+      setTimeout(showFinalScore, 1500);
+    }
+  });
+
+  console.log('🎮 Drag & Drop Game loaded with scoring!');
+});
+
+console.log('✅ Orange Color Game loaded with Firebase integration!');
+console.log('🔒 Game lock system active - First attempt only');
+console.log('📊 Full score list displayed');

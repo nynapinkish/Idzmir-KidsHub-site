@@ -7,82 +7,102 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../../css/QuantitativeConcepts/heavy-light/game_page5.css">
   <link rel="stylesheet" href="../../../css/homepage/header.css">
-
-  <!-- Firebase Scripts -->
-  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js"></script>
-
-  <!-- Firebase Init -->
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyCpDrWgLXXHK7_9nioEQGBKJkUv4byCEd4",
-      authDomain: "idzmir-kids-hub.firebaseapp.com",
-      projectId: "idzmir-kids-hub",
-      storageBucket: "idzmir-kids-hub.firebasestorage.app",
-      messagingSenderId: "301692363279",
-      appId: "1:301692363279:web:86c6270d0593dee46eb97a",
-      measurementId: "G-183FXZP3H1"
-    };
-    firebase.initializeApp(firebaseConfig);
-    console.log("✅ Firebase initialized");
-  </script>
-
-  <!-- Load header script -->
-  <script src="../../../js/homepage/initHeader.js" defer></script>
-  
-  <!-- Game Script -->
-  <script src="../../../js/QuantitativeConcepts/heavy-light/game_page5.js" defer></script>
 </head>
 <body>
-  <!-- Header Placeholder -->
-  <div id="header-placeholder"></div>
 
-  <!-- Score Display -->
-  <div class="score-display" id="scoreDisplay" style="display: none;">
-    <span class="score-label">SKOR</span>
-    <span id="scoreText">0/0</span>
-  </div>
+<!-- Header Placeholder -->
+<div id="header-placeholder"></div>
 
-  <!-- Banner Section -->
-  <div class="banner-container">
-    <div class="banner-yellow">Konsep Jumlah & Bilangan</div>
-    <div class="banner-blue">Yang manakah berat?</div>
-  </div>
+<!-- Score Display -->
+<div class="score-display" id="scoreDisplay" style="display: none;">
+  <span class="score-label">SKOR</span>
+  <span id="scoreText">0/0</span>
+</div>
 
-  <!-- Image Container -->
-  <div class="image-container">
-    <img src="../../../assets/images/heavy.png" alt="Berat" class="image-item">
-    <img src="../../../assets/images/light.png" alt="Ringan" class="image-item">
-  </div>
+<!-- Banner Section -->
+<div class="banner-container">
+  <div class="banner-yellow">Konsep Jumlah & Bilangan</div>
+  <div class="banner-blue">Yang manakah berat?</div>
+</div>
 
-  <!-- Score Modal -->
-  <div class="score-modal" id="scoreModal" style="display: none;">
-    <div class="score-container">
-      <div class="stars-container">
-        <div class="star star-small"><img src="../../../assets/images/star1.png" class="star-image" alt="Star" /></div>
-        <div class="star star-large"><img src="../../../assets/images/star2.png" class="star-image" alt="Star" /></div>
-        <div class="star star-small"><img src="../../../assets/images/star3.png" class="star-image" alt="Star" /></div>
+<!-- Image Container -->
+<div class="image-container">
+  <img src="../../../assets/images/heavy.png" alt="Berat" class="image-item">
+  <img src="../../../assets/images/light.png" alt="Ringan" class="image-item">
+</div>
+
+<!-- Score Modal with Full Marks Display -->
+<div class="score-modal" id="scoreModal" style="display: none;">
+  <div class="score-container">
+    <div class="stars-container">
+      <div class="star star-small">
+        <img src="../../../assets/images/star1.png" class="star-image" alt="Star" />
       </div>
-      <div class="score-title">Keseluruhan Markah</div>
-      <div class="score-subtitle">Quantitative Concepts</div>
-      <div class="games-score-list" id="gamesScoreList"></div>
-      <div class="total-score-box">
-        <div class="label">Peratusan Markah Keseluruhan (%)</div>
-        <div class="percentage" id="totalScorePercentage">0%</div>
+      <div class="star star-large">
+        <img src="../../../assets/images/star2.png" class="star-image" alt="Star" />
       </div>
-      <div class="modal-buttons">
-        <button class="modal-button" id="continueBtn">Teruskan</button>
-        <button class="modal-button" id="finishBtn">Selesai</button>
+      <div class="star star-small">
+        <img src="../../../assets/images/star3.png" class="star-image" alt="Star" />
       </div>
     </div>
+    
+    <div class="score-title">Keseluruhan Markah</div>
+    <div class="score-subtitle">Quantitative Concepts</div>
+    
+    <!-- Games Score List -->
+    <div class="games-score-list" id="gamesScoreList"></div>
+    
+    <!-- Total Score -->
+    <div class="total-score-box">
+      <div class="label">Peratusan Markah Keseluruhan (%)</div>
+      <div class="percentage" id="totalScorePercentage">0%</div>
+    </div>
+    
+    <!-- Buttons -->
+    <div class="modal-buttons">
+      <button class="modal-button" id="continueBtn">Teruskan</button>
+      <button class="modal-button" id="finishBtn">Selesai</button>
+    </div>
   </div>
+</div>
 
-  <!-- Initialize header AFTER DOM loaded -->
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      initializeHeader('../../homepage/header.html');
-    });
-  </script>
+<!-- ================= SCRIPTS ================= -->
+
+<!-- 1. FIREBASE SDK v8 (MUST BE FIRST!) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<!-- 2. FIREBASE CONFIGURATION -->
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyCpDrWgLXXHK7_9nioEQGBKJkUv4byCEd4",
+    authDomain: "idzmir-kids-hub.firebaseapp.com",
+    projectId: "idzmir-kids-hub",
+    storageBucket: "idzmir-kids-hub.firebasestorage.app",
+    messagingSenderId: "301692363279",
+    appId: "1:301692363279:web:ba7c6547b36e433d6eb97a"
+  };
+
+  // Initialize Firebase
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+    console.log('✅ Firebase initialized successfully');
+  } else {
+    console.log('ℹ️ Firebase already initialized');
+  }
+</script>
+
+<!-- 3. GAME SESSION MANAGER -->
+<script src="../../../js/gameSessionManager.js"></script>
+
+<!-- 4. GAME LOGIC -->
+<script src="../../../js/QuantitativeConcepts/heavy-light/game_page5.js"></script>
+
+<!-- 5. HEADER (LAST!) -->
+<script src="../../../js/homepage/initHeader.js"></script>
+<script>
+  initializeHeader('../../homepage/header.html');
+</script>
+
 </body>
 </html>

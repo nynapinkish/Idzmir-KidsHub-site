@@ -18,6 +18,7 @@ body {
   height: 100vh;
 }
 
+/* ✅ DARKER & BLURRED BACKGROUND */
 body::before {
   content: '';
   position: absolute;
@@ -28,7 +29,8 @@ body::before {
   background: url('../../../../assets/images/backgroundSpatial.webp') no-repeat center center fixed;
   background-size: cover;
   z-index: -1;
-  opacity: 0.7;
+  opacity: 0.7; /* Slightly lighter for blur visibility */
+  filter: blur(9px); /* ✅ ADDED: Blur effect */
 }
 
 /* =========================================
