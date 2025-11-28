@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>New Prospect Inquiry Form</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
   <style>
     * {
       margin: 0;
@@ -49,289 +49,336 @@
   z-index: 1;
 }
 
-    .ca01-form-wrapper h2 {
-      text-align: center;
-      color: #004aad;
-      margin-bottom: 15px;
-      font-size: 1.4rem;
-    }
+.ca01-form-wrapper h2 {
+  text-align: center;
+  color: #004aad;
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+}
 
-    .ca01-form-wrapper h3 {
-      color: #004aad;
-      border-bottom: 2px solid #ffcc00;
-      display: inline-block;
-      padding-bottom: 3px;
-      margin-top: 25px;
-      font-size: 1rem;
-    }
+.ca01-form-wrapper h3 {
+  color: #004aad;
+  border-bottom: 2px solid #ffcc00;
+  display: inline-block;
+  padding-bottom: 3px;
+  margin-top: 25px;
+  font-size: 1rem;
+}
 
-    .ca01-section {
-      margin-top: 30px;
-    }
+.ca01-section {
+  margin-top: 30px;
+}
 
-    .ca01-form-wrapper label {
-      display: block;
-      margin-top: 8px;
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
+.ca01-form-wrapper label {
+  display: block;
+  margin-top: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
 
-    .ca01-form-wrapper small {
-      display: block;
-      font-size: 0.75rem;
-      color: #666;
-      margin-top: 6px;
-    }
+.ca01-form-wrapper small {
+  display: block;
+  font-size: 0.75rem;
+  color: #666;
+  margin-top: 6px;
+}
 
-    .ca01-form-wrapper input,
-    .ca01-form-wrapper select,
-    .ca01-form-wrapper textarea {
-      width: 100%;
-      padding: 8px;
-      margin-top: 4px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 0.85rem;
-      font-family: "Poppins", Arial, sans-serif;
-      background-color: #f5f5f5;
-      cursor: not-allowed;
-    }
+.ca01-form-wrapper input,
+.ca01-form-wrapper select,
+.ca01-form-wrapper textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 4px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-family: "Poppins", Arial, sans-serif;
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
 
-    .ca01-form-wrapper input:disabled,
-    .ca01-form-wrapper select:disabled,
-    .ca01-form-wrapper textarea:disabled {
-      background-color: #f5f5f5;
-      color: #666;
-    }
+/* Hapus gaya disabled, agar elemen boleh diisi */
+.ca01-form-wrapper input:disabled,
+.ca01-form-wrapper select:disabled,
+.ca01-form-wrapper textarea:disabled {
+  background-color: #f5f5f5;
+  color: #666;
+}
 
-    .ca01-gender-container {
-      display: flex;
-      gap: 5px;
-      margin-top: 8px;
-      margin-bottom: 20px;
-      justify-content: flex-start;
-    }
+/* Gaya untuk pilihan gender */
+.ca01-gender-container {
+  display: flex;
+  gap: 5px;
+  margin-top: 8px;
+  margin-bottom: 20px;
+  justify-content: flex-start;
+}
 
-    .ca01-gender-option {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: transparent;
-      padding: 4px;
-      border-radius: 50%;
-      cursor: not-allowed;
-      transition: 0.3s;
-      width: 80px;
-      height: 95px;
-      opacity: 0.7;
-    }
+.ca01-gender-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  padding: 4px;
+  border-radius: 50%;
+  cursor: pointer; /* ubah dari not-allowed ke pointer */
+  transition: 0.3s;
+  width: 80px;
+  height: 95px;
+}
 
-    .ca01-gender-option span {
-      display: block;
-      width: 100%;
-      margin-left: 12px;
-      margin-top: 4px;
-      font-weight: bold;
-      font-size: 0.85rem;
-    }
+.ca01-gender-option span {
+  display: block;
+  width: 100%;
+  margin-left: 12px;
+  margin-top: 4px;
+  font-weight: bold;
+  font-size: 0.85rem;
+}
 
-    .ca01-gender-option input {
-      display: none;
-    }
+.ca01-gender-option input {
+  display: none;
+}
 
-    .ca01-gender-img {
-      width: 60px;
-      height: 60px;
-      object-fit: cover;
-      border-radius: 60%;
-      border: none;
-      margin-bottom: 8px;
-      transition: transform 0.3s ease, border 0.3s ease;
-    }
+.ca01-gender-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 60%;
+  border: none;
+  margin-bottom: 8px;
+  transition: transform 0.3s ease, border 0.3s ease;
+}
 
-    .ca01-gender-option:hover {
-      background: transparent;
-    }
+/* Hover dan checked styles tetap */
+.ca01-gender-option:hover {
+  background: transparent;
+}
 
-    .ca01-gender-option input:checked + .ca01-gender-img {
-      border: 4px solid #004aad;
-      transform: scale(1.05);
-      background-color: transparent;
-    }
+.ca01-gender-option input:checked + .ca01-gender-img {
+  border: 4px solid #004aad;
+  transform: scale(1.05);
+  background-color: transparent;
+}
 
-    .consent {
-      margin-top: 15px;
-      margin-bottom: 8px;
-    }
+/* Gaya untuk checkbox consent */
+.consent {
+  margin-top: 15px;
+  margin-bottom: 8px;
+}
 
-    .consent-label {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      font-weight: normal;
-      cursor: not-allowed;
-      opacity: 0.7;
-    }
+.consent-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-weight: normal;
+  cursor: pointer; /* ubah dari not-allowed ke pointer */
+  opacity: 1; /* jelas kelihatan */
+}
 
-    .consent-label input[type="checkbox"] {
-      width: auto;
-      margin-top: 2px;
-      cursor: not-allowed;
-    }
+.consent-label input[type="checkbox"] {
+  width: auto;
+  margin-top: 2px;
+  cursor: pointer; /* ubah dari not-allowed ke pointer */
+}
 
-    .consent-label span {
-      flex: 1;
-      font-size: 0.8rem;
-      line-height: 1.4;
-    }
+.consent-label span {
+  flex: 1;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
 
-    .ca01-btn {
-      display: none;
-    }
+/* Paparkan button submit */
+.ca01-btn {
+  display: inline-block; /* luasnya akan ikut isi */
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #004aad;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
 
-    @media (max-width: 600px) {
-      .ca01-form-wrapper {
-        padding: 20px;
-      }
+.ca01-btn:hover {
+  background-color: #0066cc;
+}
 
-      .ca01-form-wrapper h2 {
-        font-size: 1.2rem;
-      }
-    }
-  </style>
+/* Responsif */
+@media (max-width: 600px) {
+  .ca01-form-wrapper {
+    padding: 20px;
+  }
+  .ca01-form-wrapper h2 {
+    font-size: 1.2rem;
+  }
+}
+</style>
 </head>
 <body>
-  <div class="ca01-form-wrapper">
-    <h2>NEW PROSPECT INQUIRY FORM</h2>
+<div class="ca01-form-wrapper">
+  <h2>NEW PROSPECT INQUIRY FORM</h2>
 
-    <form id="formCA01">
-      <div class="ca01-section">
-        <h3>SECTION A: PARENT / GUARDIAN DETAILS</h3>
+  <form id="formCA01">
+    <div class="ca01-section">
+      <h3>SECTION A: PARENT / GUARDIAN DETAILS</h3>
 
-        <label>Parent's Full Name</label>
-        <small>First Name</small>
-        <input type="text" name="ParentFirstName" placeholder="Hamidah" disabled>
-        <small>Last Name</small>
-        <input type="text" name="ParentLastName" placeholder="binti Hadi" disabled>
+      <label>Parent's Full Name</label>
+      <small>First Name</small>
+      <input type="text" name="ParentFirstName" placeholder="Hamidah">
+      <small>Last Name</small>
+      <input type="text" name="ParentLastName" placeholder="binti Hadi">
 
-        <label>Phone Number</label>
-        <input type="tel" name="PhoneNumber" placeholder="60123456789" disabled>
+      <label>Phone Number</label>
+      <input type="tel" name="PhoneNumber" placeholder="60123456789">
 
-        <label>Email</label>
-        <input type="email" name="Email" placeholder="hamidahhadi@gmail.com" disabled>
+      <label>Email</label>
+      <input type="email" name="Email" placeholder="hamidahhadi@gmail.com">
+    </div>
+
+    <div class="ca01-section">
+      <h3>SECTION B: CHILD / CLIENT DETAILS</h3>
+
+      <label>Child's Full Name</label>
+      <small>First Name</small>
+      <input type="text" name="ChildFirstName" placeholder="Hamidah">
+      <small>Last Name</small>
+      <input type="text" name="ChildLastName" placeholder="binti Hadi">
+
+      <label>Date of Birth</label>
+      <input type="date" name="DateofBirth">
+
+      <label>Gender</label>
+      <div class="ca01-gender-container">
+        <label class="ca01-gender-option">
+          <input type="radio" name="gender" value="male">
+          <img src="../../../../assets/images/boy.png" alt="Male" class="ca01-gender-img" />
+          <span>Male</span>
+        </label>
+        <label class="ca01-gender-option">
+          <input type="radio" name="gender" value="female" />
+          <img src="../../../../assets/images/girl.png" alt="Female" class="ca01-gender-img" />
+          <span>Female</span>
+        </label>
       </div>
 
-      <div class="ca01-section">
-        <h3>SECTION B: CHILD / CLIENT DETAILS</h3>
+      <label>Diagnosis</label>
+      <select name="Diagnosis">
+        <option value="">-- Please choose --</option>
+        <option value="Speech Delay">Speech Delay</option>
+        <option value="ASD">ASD</option>
+        <option value="Developmental Delay">Developmental Delay</option>
+        <option value="Not Diagnosed Yet">Not Diagnosed Yet</option>
+      </select>
+    </div>
 
-        <label>Child's Full Name</label>
-        <small>First Name</small>
-        <input type="text" name="ChildFirstName" placeholder="Hamidah" disabled>
-        <small>Last Name</small>
-        <input type="text" name="ChildLastName" placeholder="binti Hadi" disabled>
+    <div class="ca01-section">
+      <h3>SECTION C: INQUIRY DETAILS</h3>
 
-        <label>Date of Birth</label>
-        <input type="date" name="DateofBirth" disabled>
+      <label>Service Interested In</label>
+      <select name="ServiceInterested">
+        <option value="">-- Please choose --</option>
+        <option value="Screening and Consultation">Screening and Consultation</option>
+        <option value="Consultation">Consultation</option>
+        <option value="Assessment">Assessment</option>
+        <option value="Therapy Class">Therapy Class</option>
+        <option value="Education and Readiness School Program">Education & Readiness School Program</option>
+        <option value="Home Program">Home Program</option>
+        <option value="Parenting Class">Parenting Class</option>
+        <option value="Parents Growth Circle">Parents Growth Circle</option>
+        <option value="Other/Special Service">Other / Special Service</option>
+      </select>
 
-        <label>Gender</label>
-        <div class="ca01-gender-container">
-          <label class="ca01-gender-option">
-            <input type="radio" name="gender" value="male" disabled>
-            <img src="../../../../assets/images/boy.png" alt="Male" class="ca01-gender-img">
-            <span>Male</span>
-          </label>
-          <label class="ca01-gender-option">
-            <input type="radio" name="gender" value="female" disabled>
-            <img src="../../../../assets/images/girl.png" alt="Female" class="ca01-gender-img">
-            <span>Female</span>
-          </label>
-        </div>
+      <label>Preferred Day</label>
+      <select name="PreferredDay">
+        <option value="">-- Please choose --</option>
+        <option value="Weekday">Weekday</option>
+        <option value="Saturday">Saturday</option>
+        <option value="Flexible">Flexible</option>
+      </select>
 
-        <label>Diagnosis</label>
-        <select name="Diagnosis" disabled>
-          <option value="">-- Please choose --</option>
-          <option value="Speech Delay">Speech Delay</option>
-          <option value="ASD">ASD</option>
-          <option value="Developmental Delay">Developmental Delay</option>
-          <option value="Not Diagnosed Yet">Not Diagnosed Yet</option>
-        </select>
+      <label>Preferred Time</label>
+      <select name="PreferredTime">
+        <option value="">-- Please choose --</option>
+        <option value="Morning">Morning</option>
+        <option value="Afternoon">Afternoon</option>
+        <option value="Evening">Evening</option>
+      </select>
+    </div>
+
+    <div class="ca01-section">
+      <h3>SECTION D: HOW DID YOU HEAR ABOUT US?</h3>
+
+      <label>Source of Information</label>
+      <select name="SourceOfInformation">
+        <option value="">-- Please choose --</option>
+        <option value="Google">Google</option>
+        <option value="Facebook">Facebook</option>
+        <option value="Instagram">Instagram</option>
+        <option value="Walk In">Walk In</option>
+        <option value="Referral">Referral</option>
+        <option value="Friends and Family">Friends and Family</option>
+        <option value="Website">Website</option>
+        <option value="Event Booth">Event Booth</option>
+      </select>
+
+      <label>Referral Name (if applicable)</label>
+      <input type="text" name="ReferralName" placeholder="e.g. Ms. Aida">
+
+      <div class="consent">
+        <label class="consent-label">
+          <input type="checkbox" name="consent" />
+          <span>I agree to allow Idzmir Kids Hub to use my information for service communication, registration and follow-up related to programs I am interested in.</span>
+        </label>
       </div>
+    </div>
 
-      <div class="ca01-section">
-        <h3>SECTION C: INQUIRY DETAILS</h3>
+    <button type="submit" class="ca01-btn">Submit</button>
+  </form>
+</div>
 
-        <label>Service Interested In</label>
-        <select name="ServiceInterested" disabled>
-          <option value="">-- Please choose --</option>
-          <option value="Screening and Consultation">Screening and Consultation</option>
-          <option value="Consultation">Consultation</option>
-          <option value="Assessment">Assessment</option>
-          <option value="Therapy Class">Therapy Class</option>
-          <option value="Education and Readiness School Program">Education & Readiness School Program</option>
-          <option value="Home Program">Home Program</option>
-          <option value="Parenting Class">Parenting Class</option>
-          <option value="Parents Growth Circle">Parents Growth Circle</option>
-          <option value="Other/Special Service">Other / Special Service</option>
-        </select>
-
-        <label>Preferred Day</label>
-        <select name="PreferredDay" disabled>
-          <option value="">-- Please choose --</option>
-          <option value="Weekday">Weekday</option>
-          <option value="Saturday">Saturday</option>
-          <option value="Flexible">Flexible</option>
-        </select>
-
-        <label>Preferred Time</label>
-        <select name="PreferredTime" disabled>
-          <option value="">-- Please choose --</option>
-          <option value="Morning">Morning</option>
-          <option value="Afternoon">Afternoon</option>
-          <option value="Evening">Evening</option>
-        </select>
-      </div>
-
-      <div class="ca01-section">
-        <h3>SECTION D: HOW DID YOU HEAR ABOUT US?</h3>
-
-        <label>Source of Information</label>
-        <select name="SourceOfInformation" disabled>
-          <option value="">-- Please choose --</option>
-          <option value="Google">Google</option>
-          <option value="Facebook">Facebook</option>
-          <option value="Instagram">Instagram</option>
-          <option value="Walk In">Walk In</option>
-          <option value="Referral">Referral</option>
-          <option value="Friends and Family">Friends and Family</option>
-          <option value="Website">Website</option>
-          <option value="Event Booth">Event Booth</option>
-        </select>
-
-        <label>Referral Name (if applicable)</label>
-        <input type="text" name="ReferralName" placeholder="e.g. Ms. Aida" disabled>
-
-        <div class="consent">
-          <label class="consent-label">
-            <input type="checkbox" name="consent" disabled>
-            <span>I agree to allow Idzmir Kids Hub to use my information for service communication, registration and follow-up related to programs I am interested in.</span>
-          </label>
-        </div>
-      </div>
-
-      <button type="submit" class="ca01-btn">Submit</button>
-    </form>
-  </div>
-
-  <script>
+<script>
     document.addEventListener("DOMContentLoaded", () => {
       const form = document.getElementById("formCA01");
 
       if (form) {
-        form.addEventListener("submit", (e) => {
+        form.addEventListener("submit", async (e) => {
           e.preventDefault();
-          alert("Thank you! Your inquiry has been submitted successfully.");
-          form.reset();
+          
+          // Collect form data
+          const formData = new FormData(form);
+          const data = Object.fromEntries(formData.entries());
+          
+          // Validate consent
+          if (!data.consent) {
+            alert("Please agree to the consent before submitting.");
+            return;
+          }
+          
+          try {
+            // Send to MongoDB backend
+            const response = await fetch('http://localhost:5000/api/prospects', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(data)
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+              alert("✅ Thank you! Your inquiry has been submitted successfully and saved to our database.");
+              form.reset();
+            } else {
+              alert("❌ Error: " + result.message);
+            }
+          } catch (error) {
+            alert("❌ Network error. Please make sure the backend server is running.\n\nError: " + error.message);
+            console.error('Error:', error);
+          }
         });
       }
     });

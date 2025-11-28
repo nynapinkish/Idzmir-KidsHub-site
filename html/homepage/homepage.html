@@ -29,49 +29,57 @@
   <!-- Main Content Grid -->
   <main class="main-container">
     <!-- Assessment Section -->
-<section class="section assessment" data-title="Assessment">
-  <!-- Spider Web Button - Position dalam section -->
-  <button class="spider-web-section-btn" onclick="openSpiderWeb()" title="View Spider Web Analysis">
-    <div class="spider-dots">
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-    </div>
-  </button>
+    <section class="section assessment" data-title="Assessment">
+      <div class="spider-menu-btn" onclick="openSpiderWeb('assessment')">
+        <div class="dots-icon">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+      </div>
 
-  <div class="cards-wrapper">
-    <div class="card" onclick="handleCardClick('spatial')">
-      <img src="../../assets/images/spatial.png" alt="Spatial Concepts" class="card-img">
-      <div class="card-title">Spatial Concepts <br> (Position & Direction)</div>
-    </div>
-    <div class="card" onclick="handleCardClick('quantitative')">
-      <img src="../../assets/images/quantitative.png" alt="Quantitative Concepts" class="card-img">
-      <div class="card-title">Quantitative Concepts <br> (Amount & Number)</div>
-    </div>
-    <div class="card" onclick="handleCardClick('qualitative')">
-      <img src="../../assets/images/qualitative.png" alt="Qualitative Concepts" class="card-img">
-      <div class="card-title">Qualitative Concepts <br> (Descriptive Features)</div>
-    </div>
-    <div class="card" onclick="handleCardClick('temporal')">
-      <img src="../../assets/images/temporal.png" alt="Temporal Concepts" class="card-img">
-      <div class="card-title">Temporal Concepts <br> (Time & Sequence)</div>
-    </div>
-    <div class="card" onclick="handleCardClick('color-shape')">
-      <img src="../../assets/images/color-shape.png" alt="Color & Shape" class="card-img">
-      <div class="card-title">Color & Shape Concepts</div>
-    </div>
-    <div class="card" onclick="handleCardClick('relational')">
-      <img src="../../assets/images/comparative.png" alt="Comparative Concepts" class="card-img">
-      <div class="card-title">Comparative / <br> Relational Concepts</div>
-    </div>
-    <div class="card" onclick="handleCardClick('social-emotional')">
-      <img src="../../assets/images/social.png" alt="Social Emotional" class="card-img">
-      <div class="card-title">Social / Emotional <br> Concepts</div>
-    </div>
-  </div>
-</section>
+      <div class="cards-wrapper">
+        <div class="card" onclick="handleCardClick('spatial')">
+          <img src="../../assets/images/spatial.png" alt="Spatial Concepts" class="card-img">
+          <div class="card-title">Spatial Concepts <br> (Position & Direction)</div>
+        </div>
+        <div class="card" onclick="handleCardClick('quantitative')">
+          <img src="../../assets/images/quantitative.png" alt="Quantitative Concepts" class="card-img">
+          <div class="card-title">Quantitative Concepts <br> (Amount & Number)</div>
+        </div>
+        <div class="card" onclick="handleCardClick('qualitative')">
+          <img src="../../assets/images/qualitative.png" alt="Qualitative Concepts" class="card-img">
+          <div class="card-title">Qualitative Concepts <br> (Descriptive Features)</div>
+        </div>
+        <div class="card" onclick="handleCardClick('temporal')">
+          <img src="../../assets/images/temporal.png" alt="Temporal Concepts" class="card-img">
+          <div class="card-title">Temporal Concepts <br> (Time & Sequence)</div>
+        </div>
+        <div class="card" onclick="handleCardClick('color-shape')">
+          <img src="../../assets/images/color-shape.png" alt="Color & Shape" class="card-img">
+          <div class="card-title">Color & Shape Concepts</div>
+        </div>
+        <div class="card" onclick="handleCardClick('relational')">
+          <img src="../../assets/images/comparative.png" alt="Comparative Concepts" class="card-img">
+          <div class="card-title">Comparative / <br> Relational Concepts</div>
+        </div>
+        <div class="card" onclick="handleCardClick('social-emotional')">
+          <img src="../../assets/images/social.png" alt="Social Emotional" class="card-img">
+          <div class="card-title">Social / Emotional <br> Concepts</div>
+        </div>
+      </div>
+    </section>
+
     <!-- Therapy Card Section -->
     <section class="section therapy" data-title="Therapy Card">
+      <div class="spider-menu-btn" onclick="openSpiderWeb('therapy')">
+        <div class="dots-icon">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+      </div>
+
       <div class="cards-wrapper">
         <div class="card" onclick="handleCardClick('sensory')">
           <img src="../../assets/images/sensory.png" alt="Physical Motor" class="card-img">
@@ -108,17 +116,17 @@
       </div>
     </section>
 
-    <!-- Seasonal Section -->
-<section class="section seasonal coming-soon-section" data-title="School">
-  <div class="coming-soon-overlay">
-    <div class="coming-soon-icon">🚀</div>
-    <div class="coming-soon-text">COMING SOON</div>
-    <div class="coming-soon-subtext">We're working on something awesome!</div>
-  </div>
-</section>
+    <!-- School Section -->
+    <section class="section seasonal coming-soon-section" data-title="School">
+      <div class="coming-soon-overlay">
+        <div class="coming-soon-icon">🚀</div>
+        <div class="coming-soon-text">COMING SOON</div>
+        <div class="coming-soon-subtext">We're working on something awesome!</div>
+      </div>
+    </section>
   </main>
 
-  <!-- New Modal System -->
+  <!-- Welcome & Signup Modal System -->
   <div id="modalOverlay" class="modal-overlay">
     <!-- Welcome Parents Modal -->
     <div id="welcomeParents" class="welcome-modal">
@@ -217,9 +225,9 @@
         <p id="animalMessage">Pick your favorite animal to be your learning partner!</p>
 
         <div class="animal-options">
-          <img src="/assets/images/lion.png" alt="Lion" class="animal" onclick="selectAnimal('Lion', this)">
-          <img src="/assets/images/elephant.png" alt="Elephant" class="animal" onclick="selectAnimal('Elephant', this)">
-          <img src="/assets/images/tiger.png" alt="Tiger" class="animal" onclick="selectAnimal('Tiger', this)">
+          <img src="../../assets/images/lion.png" alt="Lion" class="animal" onclick="selectAnimal('Lion', this)">
+          <img src="../../assets/images/elephant.png" alt="Elephant" class="animal" onclick="selectAnimal('Elephant', this)">
+          <img src="../../assets/images/tiger.png" alt="Tiger" class="animal" onclick="selectAnimal('Tiger', this)">
         </div>
 
         <button onclick="finishSignup()">Finish</button>
@@ -267,35 +275,72 @@
     </div>
   </div>
 
-<!-- Firebase & Other Scripts -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<!-- Spider Web Overlay (SEPARATE FROM OTHER MODALS) -->
+<div class="spider-web-overlay" id="spiderWebOverlay">
+  <div class="spider-web-container">
+    <div class="spider-accent"></div>
+    
+    <button class="spider-close-btn" onclick="closeSpiderWeb()">×</button>
+    
+    <div class="spider-web-header">
+      <h2 class="spider-web-title">📊 Progress Chart</h2>
+      <p class="spider-web-student" id="studentName">Loading...</p>
+    </div>
+        
+    <!-- NEW: GRID LAYOUT - SPIDER WEB LEFT, CARDS RIGHT -->
+    <div class="spider-content-grid">
+      <!-- LEFT: Spider Web Chart -->
+<!-- LEFT: Spider Web Chart -->
+<div class="spider-chart-section">
+  <svg id="spiderWebSVG" width="420" height="420" viewBox="0 0 420 420"></svg>
+  <div class="hover-info" id="hoverInfo">
+    <div class="hover-title" id="hoverTitle"></div>
+    <div class="hover-text" id="hoverText"></div>
+  </div>
+</div>      
+      <!-- RIGHT: Concept Cards List -->
+      <div class="concept-cards-section">
+        <h3 class="cards-section-title">Concept Progress</h3>
+        <div class="concept-cards" id="conceptCards"></div>
+      </div>
+    </div>
+        <div class="overall-progress">
+      <div class="overall-label">Overall Progress</div>
+      <div class="overall-percentage" id="overallPercentage">0%</div>
+    </div>
 
-<script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyCpDrWgLXXHK7_9nioEQGBKJkUv4byCEd4",
-    authDomain: "idzmir-kids-hub.firebaseapp.com",
-    projectId: "idzmir-kids-hub",
-    storageBucket: "idzmir-kids-hub.appspot.com",
-    messagingSenderId: "301692363279",
-    appId: "1:301692363279:web:ba7c6547b36e433d6eb97a",
-    measurementId: "G-FB6YEMCCJ3"
-  };
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
-  const auth = firebase.auth();
-</script>
+  </div>
+  
+</div>
 
-<!-- Load Header System -->
-<script src="../../js/homepage/initHeader.js"></script>
-<script>
-  initializeHeader('header.html');
-</script>
+  <!-- Firebase & Other Scripts -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
-<!-- Load Page Scripts -->
-<script src="../../js/homepage/homepage.js"></script>
-<script src="../../js/aidaForm.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCpDrWgLXXHK7_9nioEQGBKJkUv4byCEd4",
+      authDomain: "idzmir-kids-hub.firebaseapp.com",
+      projectId: "idzmir-kids-hub",
+      storageBucket: "idzmir-kids-hub.appspot.com",
+      messagingSenderId: "301692363279",
+      appId: "1:301692363279:web:ba7c6547b36e433d6eb97a",
+      measurementId: "G-FB6YEMCCJ3"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    const auth = firebase.auth();
+  </script>
+
+  <!-- Load Header System -->
+  <script src="../../js/homepage/initHeader.js"></script>
+  <script>
+    initializeHeader('header.html');
+  </script>
+
+  <!-- Load Page Scripts -->
+  <script src="../../js/homepage/homepage.js"></script>
 
 </body>
 </html>

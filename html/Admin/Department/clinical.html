@@ -208,6 +208,12 @@ body {
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zm7-18l-5 5h3v4h4v-4h3l-5-5z"/></svg>
     </button>
 </div>
+<div class="form-card" onclick="viewForm('AT-Form02')">
+    <h3>Client Attendance Form</h3>
+    <button class="btn-export" onclick="exportForm(event,'AT-Form02')">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zm7-18l-5 5h3v4h4v-4h3l-5-5z"/></svg>
+    </button>
+</div>
 </div></div>
 <div class="table-container">
 <h2>STAFF FORM ALLOCATION</h2>
@@ -226,8 +232,14 @@ body {
 <div class="form-cards-wrapper">
 <div class="cards-container">
 <div class="form-card" onclick="viewForm('OT-Form01')">
-    <h3>PATIENT DAILY REPORT 2025</h3>
+    <h3>OT Assessment Form</h3>
     <button class="btn-export" onclick="exportForm(event,'OT-Form01')">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zm7-18l-5 5h3v4h4v-4h3l-5-5z"/></svg>
+    </button>
+</div>
+<div class="form-card" onclick="viewForm('OT-Form02')">
+    <h3>OT Session Notes</h3>
+    <button class="btn-export" onclick="exportForm(event,'OT-Form02')">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zm7-18l-5 5h3v4h4v-4h3l-5-5z"/></svg>
     </button>
 </div>
@@ -247,8 +259,14 @@ body {
 <div class="form-cards-wrapper">
 <div class="cards-container">
 <div class="form-card" onclick="viewForm('RTS-Form01')">
-    <h3>PATIENT DAILY REPORT 2025</h3>
+    <h3>School Readiness Assessment</h3>
     <button class="btn-export" onclick="exportForm(event,'RTS-Form01')">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zm7-18l-5 5h3v4h4v-4h3l-5-5z"/></svg>
+    </button>
+</div>
+<div class="form-card" onclick="viewForm('RTS-Form02')">
+    <h3>RTS Progress Report</h3>
+    <button class="btn-export" onclick="exportForm(event,'RTS-Form02')">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zm7-18l-5 5h3v4h4v-4h3l-5-5z"/></svg>
     </button>
 </div>
@@ -268,8 +286,14 @@ body {
 <div class="form-cards-wrapper">
 <div class="cards-container">
 <div class="form-card" onclick="viewForm('PT-Form01')">
-    <h3>PATIENT DAILY REPORT 2025</h3>
+    <h3>PT Assessment Form</h3>
     <button class="btn-export" onclick="exportForm(event,'PT-Form01')">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zm7-18l-5 5h3v4h4v-4h3l-5-5z"/></svg>
+    </button>
+</div>
+<div class="form-card" onclick="viewForm('PT-Form02')">
+    <h3>PT Session Notes</h3>
+    <button class="btn-export" onclick="exportForm(event,'PT-Form02')">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zm7-18l-5 5h3v4h4v-4h3l-5-5z"/></svg>
     </button>
 </div>
@@ -305,10 +329,14 @@ function showSection(sectionName){
 
 // Form Path Mapping
 const formPaths = {
-    'AT-Form01': 'Forms/TH05/formth05.html',
-    'OT-Form01': 'Forms/TH02/formth02.html',
-    'RTS-Form01': 'Forms/TH04/formth04.html',
-    'PT-Form01': 'Forms/TH01/formth01.html'
+    'AT-Form01': 'Forms/formAT01.html',
+    'AT-Form02': 'Forms/formAT02.html',
+    'OT-Form01': 'Forms/formOT01.html',
+    'OT-Form02': 'Forms/formOT02.html',
+    'RTS-Form01': 'Forms/formRTS01.html',
+    'RTS-Form02': 'Forms/formRTS02.html',
+    'PT-Form01': 'Forms/formPT01.html',
+    'PT-Form02': 'Forms/formPT02.html'
 };
 
 // Staff list
@@ -319,10 +347,10 @@ const staffList=[
 ];
 
 // Form lists
-const formListAssistant = ["Session Progress Report (AT)"];
-const formListOccupational = ["OT Assessment Form"];
-const formListRTS = ["School Readiness Assessment"];
-const formListPhysical = ["PT Assessment Form"];
+const formListAssistant = ["Session Progress Report (AT)", "Client Attendance Form (AT)"];
+const formListOccupational = ["OT Assessment Form", "OT Session Notes"];
+const formListRTS = ["School Readiness Assessment", "RTS Progress Report"];
+const formListPhysical = ["PT Assessment Form", "PT Session Notes"];
 
 let assignments={};
 

@@ -229,7 +229,7 @@ async function handleLogin(event) {
     }
 }
 
-// ================= HANDLE SIGN UP - UPDATED WITH USERNAME FIELD =================
+// ================= HANDLE SIGN UP - FIXED WITH PROPER STUDENTID GENERATION =================
 async function handleSignUp(event) {
     event.preventDefault();
     if (!firebaseReady || !db) return alert("System not ready.");
@@ -249,34 +249,78 @@ async function handleSignUp(event) {
     submitBtn.disabled = true;
 
     try {
+        // ✅ CHECK 1: Username already exists?
         const checkUser = await db.collection('students').where('username', '==', username.toLowerCase()).get();
         if (!checkUser.empty) {
-            alert("Username exists!");
+            alert("Username exists! Please choose another.");
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;
             return;
         }
 
-        const studentsSnapshot = await db.collection('students').get();
-        const studentId = 'S' + String(studentsSnapshot.size + 1).padStart(4, '0');
+        // ✅ FIXED: Get highest existing studentId and increment
+        console.log('🔍 Finding highest existing studentId...');
+        
+        const allStudents = await db.collection('students').get();
+        let highestId = 0;
+        
+        // Loop through all students to find highest ID number
+        allStudents.forEach(doc => {
+            const data = doc.data();
+            if (data.studentId) {
+                // Extract number from "S0003" -> 3
+                const idNumber = parseInt(data.studentId.replace(/\D/g, ''));
+                if (idNumber > highestId) {
+                    highestId = idNumber;
+                }
+            }
+        });
+        
+        // Generate new ID (highest + 1)
+        const newIdNumber = highestId + 1;
+        const studentId = 'S' + String(newIdNumber).padStart(4, '0');
+        
+        console.log('📊 Stats:', {
+            totalStudents: allStudents.size,
+            highestExistingId: highestId,
+            newStudentId: studentId
+        });
 
-        // ✅ Create proper student document with all required fields
+        // ✅ CHECK 2: Make sure new studentId doesn't exist (extra safety)
+        const checkId = await db.collection('students').where('studentId', '==', studentId).get();
+        if (!checkId.empty) {
+            console.error('❌ StudentId collision detected!');
+            alert('System error. Please try again.');
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+            return;
+        }
+
+        // ✅ Create proper student document
         await db.collection('students').add({
-            username: username.toLowerCase(),  // ← Store lowercase for consistency
+            username: username.toLowerCase(),
             password: password,
             age: age,
             studentId: studentId,
             totalScore: 0,
-            conceptProgress: {},  // ← NEW: For new system
-            spiderWebData: {},    // ← NEW: For spider chart
-            gameScores: { game1:0, game2:0, game3:0, game4:0, game5:0 },  // ← OLD: Keep for compatibility
+            conceptProgress: {},
+            spiderWebData: {},
+            gameScores: { game1:0, game2:0, game3:0, game4:0, game5:0 },
             registrationDate: firebase.firestore.FieldValue.serverTimestamp(),
             status: 'active',
-            lastLogin: null
+            lastLogin: null,
+            lastPlayed: null
         });
 
-        console.log('✅ New student registered:', username);
-        alert(`Registration Successful!\nUsername: ${username}\nStudent ID: ${studentId}\nAge: ${age}`);
+        console.log('✅ New student registered:', {
+            username: username.toLowerCase(),
+            studentId: studentId,
+            age: age
+        });
+
+        alert(`✅ Registration Successful!\n\nUsername: ${username}\nStudent ID: ${studentId}\nAge: ${age}\n\nYou can now login!`);
+        
+        // Show login form
         showLoginForm('student');
 
     } catch (error) {

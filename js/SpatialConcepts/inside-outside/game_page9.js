@@ -384,7 +384,7 @@ function handleCorrectAnswerClick(selectedCard, options, questionBox, answerImag
   selectedCard.classList.add('correct-move');
 
   if (feedback) {
-    feedback.textContent = '🎉 Betul! Hebat!';
+    feedback.textContent = '';
     feedback.classList.add('correct');
   }
 
@@ -413,7 +413,7 @@ function handleWrongAnswerClick(selectedCard, feedback) {
   selectedCard.classList.add('wrong-answer');
 
   if (feedback) {
-    feedback.textContent = '❌ Cuba lagi!';
+    feedback.textContent = '';
     feedback.classList.add('incorrect');
   }
 

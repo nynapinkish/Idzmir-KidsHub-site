@@ -25,9 +25,9 @@
         .sidebar.active { transform: translateX(0); }
         .sidebar-logo { text-align: center; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.2); }
         .header-logo { height: 45px; width: auto; object-fit: contain; }
-        .sidebar-logo-img { width: 350%; height: 320%; object-fit: contain; margin-top: 50px; }
+        .sidebar-logo-img { width: 190px; height: 150px; object-fit: contain; margin: 0 auto; display: block; }
         .sidebar-logo-icon { width: 60px; height: 60px; margin: 0 auto 0.3rem; display: flex; align-items: center; justify-content: center; }
-        .sidebar-logo-text { font-size: 0.85rem; font-weight: bold; color: #fed236; margin-top: 50px;}
+        .sidebar-logo-text { font-size: 0.85rem; font-weight: bold; color: #fed236; margin-top: 0.5rem;}
         .sidebar-logo-sub { font-size: 0.55rem; color: rgba(255,255,255,0.7); }
         .sidebar ul { list-style: none; }
         .sidebar ul li { margin-bottom: 2px; }
@@ -46,55 +46,6 @@
         #page-content { width: 100%; height: calc(100vh - 50px); }
         #content-frame { width: 100%; height: 100%; border: none; }
         .main-content.shifted { margin-left: 200px; }
-        .dashboard-section h2 { margin-bottom: 0.5rem; color: #21537c; font-size: 1.25rem; font-weight: bold; }
-        .date-range { margin-bottom: 0.5rem; display: flex; gap: 0.5rem; align-items: center; justify-content: flex-end; }
-        .date-range label { font-weight: 600; font-size: 0.7rem; }
-        .date-range input { padding: 0.25rem 0.4rem; border: 1px solid #bdc3c7; border-radius: 4px; font-size: 0.7rem; }
-        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin-bottom: 0.75rem; }
-        .stat-card { background-color: white; padding: 0.5rem; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); text-align: center; border-top: 3px solid #fed236; }
-        .stat-card h3 { font-size: 1.1rem; color: #21537c; margin-bottom: 0.1rem; }
-        .stat-card p { color: #7f8c8d; font-size: 0.65rem; }
-        .overview-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-bottom: 0.75rem; }
-        .chart-container { background-color: white; padding: 0.75rem; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
-        .chart-container h3 { margin-bottom: 0.5rem; color: #21537c; font-size: 0.8rem; font-weight: bold; }
-        .chart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
-        .chart-header select { padding: 0.2rem 0.4rem; border: 1px solid #bdc3c7; border-radius: 4px; font-size: 0.65rem; }
-        .patient-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; margin-bottom: 0.5rem; }
-        .stat-item { display: flex; align-items: center; gap: 0.4rem; padding: 0.4rem; background: #f8f9fa; border-radius: 4px; }
-        .stat-icon { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; }
-        .stat-icon.male { background: #e8f0fe; }
-        .stat-icon.female { background: #fce8f3; }
-        .stat-value { font-weight: bold; font-size: 0.9rem; color: #21537c; }
-        .stat-label { color: #7f8c8d; font-size: 0.6rem; }
-        .stat-change { font-size: 0.55rem; font-weight: 600; }
-        .stat-change.up { color: #27ae60; }
-        .stat-change.down { color: #e74c3c; }
-        .legend { display: flex; gap: 0.75rem; margin-bottom: 0.5rem; font-size: 0.65rem; }
-        .legend-item { display: flex; align-items: center; gap: 0.3rem; }
-        .legend-color { width: 10px; height: 10px; border-radius: 2px; }
-        .table-container { background-color: white; padding: 0.75rem; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); overflow-x: auto; }
-        .table-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
-        .table-header h3 { color: #21537c; font-size: 0.8rem; font-weight: bold; }
-        .table-controls { display: flex; gap: 0.5rem; }
-        .table-controls input { padding: 0.25rem 0.5rem; border: 1px solid #bdc3c7; border-radius: 4px; font-size: 0.7rem; width: 150px; }
-        table { width: 100%; border-collapse: collapse; font-size: 0.7rem; }
-        th, td { padding: 0.4rem; text-align: left; border-bottom: 1px solid #ecf0f1; }
-        th { background-color: #f8f9fa; font-weight: 600; color: #21537c; font-size: 0.65rem; text-transform: uppercase; }
-        .patient-name { display: flex; align-items: center; gap: 0.3rem; }
-        .patient-avatar { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.6rem; color: white; }
-        .disease-badge { padding: 0.15rem 0.5rem; border-radius: 10px; font-size: 0.6rem; font-weight: 500; }
-        .badge-blue { background: #e3f2fd; color: #2196f3; }
-        .badge-purple { background: #f3e5f5; color: #9c27b0; }
-        .badge-green { background: #e8f5e9; color: #4caf50; }
-        .badge-red { background: #ffebee; color: #f44336; }
-        .badge-cyan { background: #e0f7fa; color: #00bcd4; }
-        .badge-orange { background: #fff3e0; color: #ff9800; }
-        .table-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem; font-size: 0.65rem; }
-        .pagination { display: flex; gap: 0.3rem; }
-        .btn { background-color: #21537c; color: white; border: none; padding: 0.25rem 0.5rem; border-radius: 4px; cursor: pointer; font-size: 0.65rem; }
-        .btn:hover { background-color: #1a4a6a; }
-        .btn-icon { padding: 0.2rem 0.35rem; font-size: 0.7rem; }
-        .btn-secondary { background-color: #fed236; color: #21537c; }
         @media (max-width: 1200px) { .overview-cards { grid-template-columns: repeat(2, 1fr); } .stats-grid { grid-template-columns: repeat(2, 1fr); } }
     </style>
 </head>
@@ -102,42 +53,81 @@
 <header class="header">
     <div class="logo">
         <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
-        <img src="../../assets/images/logo1.png" alt="Logo" class="header-logo"><span class="brand-name">Idzmir Kids Hub</span>
+        <!-- PATH LOGO DIPERBAIKI - NAIK 3 LEVEL -->
+        <img src="../../../assets/images/logo1.png" alt="Logo" class="header-logo" onerror="this.style.display='none'">
+        <span class="brand-name">Idzmir Kids Hub</span>
     </div>
     <div class="user-info">
-        <div class="header-icon" onclick="showNotifications()"><svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/></svg></div>
-        <div class="profile-info" onclick="showProfile()">
-            <div class="profile-img"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
-            <div class="profile-text"><div>IdzmirKidsHub</div><div class="profile-role">Admin</div></div>
+        <div class="header-icon" onclick="showNotifications()">
+            <svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/></svg>
         </div>
-        <div class="header-icon" onclick="logout()"><svg viewBox="0 0 24 24"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg></div>
+        <div class="profile-info" onclick="showProfile()">
+            <div class="profile-img">
+                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            </div>
+            <div class="profile-text">
+                <div>IdzmirKidsHub</div>
+                <div class="profile-role">Admin</div>
+            </div>
+        </div>
+        <div class="header-icon" onclick="logout()">
+            <svg viewBox="0 0 24 24"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+        </div>
     </div>
 </header>
 
 <aside class="sidebar">
     <div class="sidebar-logo">
-        <div class="sidebar-logo-icon"><img src="../../assets/images/logo1.png" alt="Logo" class="sidebar-logo-img"></div>
+        <div class="sidebar-logo-icon">
+            <!-- PATH LOGO DIPERBAIKI - NAIK 3 LEVEL -->
+            <img src="../../../assets/images/logo1.png" alt="Logo" class="sidebar-logo-img" onerror="this.style.display='none'">
+        </div>
         <div class="sidebar-logo-text">IDZMIR KIDS HUB</div>
         <div class="sidebar-logo-sub">Growth • Maturation • Learning</div>
     </div>
     <ul>
         <li><a href="#" onclick="loadPage('./overview.html')" class="active"><span class="menu-left"><span class="menu-icon"><svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg></span>Dashboard</span></a></li>
-        <li><a href="#" onclick="loadPage('./allUser.html')"><span class="menu-left"><span class="menu-icon"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></span>All User</span></a></li>
-        <li>
-            <a href="#" onclick="toggleSubmenu(event, 'deptSubmenu')"><span class="menu-left"><span class="menu-icon"><svg viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10z"/></svg></span>Department</span><span class="arrow" id="deptArrow">›</span></a>
+        <li><a href="#" onclick="toggleSubmenu(event, 'deptSubmenu')"><span class="menu-left"><span class="menu-icon"><svg viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10z"/></svg></span>Department</span><span class="arrow" id="deptArrow">›</span></a>
             <ul class="submenu" id="deptSubmenu">
                 <li><a href="#" onclick="loadPage('./Department/hr.html')">HR</a></li>
                 <li><a href="#" onclick="loadPage('./Department/accountant.html')">Accountant</a></li>
                 <li><a href="#" onclick="loadPage('./Department/adminIT.html')">Admin/IT</a></li>
-                <li><a href="#" onclick="loadPage('./Department/marketing.html')">Marketing</a></li>
+                <li><a href="#" onclick="loadPage('./Department/Marketing/marketing.html')">Marketing</a></li>
                 <li><a href="#" onclick="loadPage('./Department/clinical.html')">Clinical</a></li>
                 <li><a href="#" onclick="loadPage('./Department/development.html')">Development</a></li>
             </ul>
         </li>
-        <li><a href="#" onclick="toggleSubmenu(event, 'prodSubmenu')"><span class="menu-left"><span class="menu-icon"><svg viewBox="0 0 24 24"><path d="M18 6h-2c0-2.21-1.79-4-4-4S8 3.79 8 6H6c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6-2c1.1 0 2 .9 2 2h-4c0-1.1.9-2 2-2z"/></svg></span>Product & Services</span><span class="arrow" id="prodArrow">›</span></a>
+        <li><a href="#" onclick="toggleSubmenu(event, 'appointSubmenu')"><span class="menu-left"><span class="menu-icon"><svg viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10z"/></svg></span>Appointment</span><span class="arrow" id="appointArrow">›</span></a>
+            <ul class="submenu" id="appointSubmenu">
+                <li><a href="#" onclick="loadPage('./appointment/allAppointment.html')">All Appointment</a></li>
+                <li><a href="#" onclick="loadPage('./appointment/addAppointment.html')">Add Appointment</a></li>
+                <li><a href="#" onclick="loadPage('./appointment/calendar.html')">Calendar</a></li>
+            </ul>
+        </li>        
+        <li><a href="#" onclick="toggleSubmenu(event, 'salesSubmenu')"><span class="menu-left"><span class="menu-icon"><svg viewBox="0 0 24 24"><path d="M18 6h-2c0-2.21-1.79-4-4-4S8 3.79 8 6H6c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6-2c1.1 0 2 .9 2 2h-4c0-1.1.9-2 2-2z"/></svg></span>Sales</span><span class="arrow" id="salesArrow">›</span></a>
+            <ul class="submenu" id="salesSubmenu">
+                <li><a href="#" onclick="loadPage('./sales/cashSale.html')">Cash Sale</a></li>
+                <li><a href="#" onclick="loadPage('./sales/saleInvoice.html')">Sale Invoice</a></li>
+                <li><a href="#" onclick="loadPage('./sales/receipt.html')">Receipt</a></li>
+                <li><a href="#" onclick="loadPage('./sales/deliveryOrder.html')">Delivery Order</a></li>
+                <li><a href="#" onclick="loadPage('./sales/customer.html')">Customer</a></li>
+            </ul>
+        </li>
+        <li><a href="#" onclick="toggleSubmenu(event, 'purchaseSubmenu')"><span class="menu-left"><span class="menu-icon"><svg viewBox="0 0 24 24"><path d="M18 6h-2c0-2.21-1.79-4-4-4S8 3.79 8 6H6c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6-2c1.1 0 2 .9 2 2h-4c0-1.1.9-2 2-2z"/></svg></span>Purchase</span><span class="arrow" id="purchaseArrow">›</span></a>
+            <ul class="submenu" id="purchaseSubmenu">
+                <li><a href="#" onclick="loadPage('./purchase/newExpenses.html')">New Expenses</a></li>
+                <li><a href="#" onclick="loadPage('./purchase/purchaseInvoice.html')">Purchase Invoice</a></li>
+                <li><a href="#" onclick="loadPage('./purchase/purchaseOrder.html')">Purchase Order</a></li>
+                <li><a href="#" onclick="loadPage('./purchase/Supplier.html')">Supplier</a></li>
+            </ul>
+        </li>
+        <li><a href="#" onclick="toggleSubmenu(event, 'prodSubmenu')"><span class="menu-left"><span class="menu-icon"><svg viewBox="0 0 24 24"><path d="M18 6h-2c0-2.21-1.79-4-4-4S8 3.79 8 6H6c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6-2c1.1 0 2 .9 2 2h-4c0-1.1.9-2 2-2z"/></svg></span>Products</span><span class="arrow" id="prodArrow">›</span></a>
             <ul class="submenu" id="prodSubmenu">
-                <li><a href="#" onclick="loadPage('./products/list.html')">Product List</a></li>
+                <li><a href="#" onclick="loadPage('./products/productList.html')">Product List</a></li>
                 <li><a href="#" onclick="loadPage('./products/services.html')">Services</a></li>
+                <li><a href="#" onclick="loadPage('./products/inventory.html')">Inventory</a></li>
+                <li><a href="#" onclick="loadPage('./products/price.html')">Price</a></li>
+                <li><a href="#" onclick="loadPage('./products/cost.html')">Cost</a></li>
             </ul>
         </li>
         <li><a href="#" onclick="toggleSubmenu(event, 'dataSubmenu')"><span class="menu-left"><span class="menu-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg></span>Data Analytics</span><span class="arrow" id="dataArrow">›</span></a>
@@ -146,13 +136,32 @@
                 <li><a href="#" onclick="loadPage('./analytics/users.html')">User Analytics</a></li>
             </ul>
         </li>
-        <li><a href="#" onclick="loadPage('./report.html')"><span class="menu-left"><span class="menu-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg></span>Report</span></a></li>
+        <li><a href="#" onclick="toggleSubmenu(event, 'reportSubmenu')"><span class="menu-left"><span class="menu-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg></span>Report</span><span class="arrow" id="reportArrow">›</span></a>
+            <ul class="submenu" id="reportSubmenu">
+                <li><a href="#" onclick="loadPage('./report/customer.html')">Customer</a></li>
+                <li><a href="#" onclick="loadPage('./report/services.html')">Services</a></li>
+                <li><a href="#" onclick="loadPage('./report/staff.html')">Staff</a></li>
+                <li><a href="#" onclick="loadPage('./report/financial.html')">Financial</a></li>
+                <li><a href="#" onclick="loadPage('./report/salesReport.html')">Sales Report</a></li>
+                <li><a href="#" onclick="loadPage('./report/profitLoss.html')">Profit & Lost</a></li>
+                <li><a href="#" onclick="loadPage('./report/cashBookStatement.html')">Cash Book Statement</a></li>
+                <li><a href="#" onclick="loadPage('./report/stockReport.html')">Stock Report</a></li>
+                <li><a href="#" onclick="loadPage('./report/efillingZakat.html')">e-Filling & Zakat</a></li>
+            </ul>
+        </li>
+        <li><a href="#" onclick="toggleSubmenu(event, 'settingSubmenu')"><span class="menu-left"><span class="menu-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg></span>Setting</span><span class="arrow" id="settingArrow">›</span></a>
+            <ul class="submenu" id="settingSubmenu">
+                <li><a href="#" onclick="loadPage('./setting/general.html')">General</a></li>
+                <li><a href="#" onclick="loadPage('./setting/user.html')">User</a></li>
+                <li><a href="#" onclick="loadPage('./setting/document.html')">Document</a></li>
+                <li><a href="#" onclick="loadPage('./setting/product.html')">Product</a></li>
+            </ul>
+        </li>
     </ul>
 </aside>
 
 <main class="main-content">
     <div id="page-content">
-        <!-- Content will be loaded here from separate HTML files -->
         <iframe id="content-frame" src="./overview.html" frameborder="0"></iframe>
     </div>
 </main>
@@ -174,10 +183,7 @@
     
     function loadPage(pagePath) {
         event.preventDefault();
-        // Update iframe src
         document.getElementById('content-frame').src = pagePath;
-        
-        // Update active menu
         document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
         event.target.closest('a').classList.add('active');
     }
@@ -185,7 +191,6 @@
     function logout() { 
         if(confirm('Logout?')) {
             alert('Logged out!');
-            // window.location.href = './login.html';
         }
     }
     

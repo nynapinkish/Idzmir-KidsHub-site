@@ -95,12 +95,11 @@
       font-size: 0.85rem;
       font-family: "Poppins", Arial, sans-serif;
       background-color: #f5f5f5;
-      cursor: not-allowed;
     }
 
-    .ca02-form-wrapper input:disabled,
-    .ca02-form-wrapper select:disabled,
-    .ca02-form-wrapper textarea:disabled {
+    .ca02-form-wrapper input,
+    .ca02-form-wrapper select,
+    .ca02-form-wrapper textarea {
       background-color: #f5f5f5;
       color: #666;
     }
@@ -126,7 +125,6 @@
       background: transparent;
       padding: 4px;
       border-radius: 50%;
-      cursor: not-allowed;
       transition: 0.3s;
       width: 80px;
       height: 95px;
@@ -179,6 +177,19 @@
         font-size: 1.2rem;
       }
     }
+
+    /* Paparkan button submit */
+    .ca02-btn {
+      display: inline-block; /* luasnya akan ikut isi */
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #004aad;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+    }    
   </style>
 </head>
 <body>
@@ -193,17 +204,17 @@
       <h3>SECTION A: BASIC LEAD INFORMATION</h3>
 
       <label>Date Inquiry</label>
-      <input type="date" name="DateInquiry" disabled>
+      <input type="date" name="DateInquiry" required>
 
       <label>Time Inquiry</label>
       <small>Please use 24-hour format Eg:09:30, 15:00</small>
-      <input type="time" name="TimeInquiry" disabled>
+      <input type="time" name="TimeInquiry" required>
 
       <label>Marketing Code</label>
-      <input type="text" name="MarketingCode" placeholder="Enter marketing code" disabled>
+      <input type="text" name="MarketingCode" placeholder="Enter marketing code" required>
 
       <label>Source of Lead</label>
-      <select name="SourceOfLead" disabled>
+      <select name="SourceOfLead" required>
         <option value="">-- Please choose --</option>
         <option value="Call">Call</option>
         <option value="Facebook">Facebook</option>
@@ -217,7 +228,7 @@
       </select>
 
       <label>Captured By</label>
-      <select name="CapturedBy" disabled>
+      <select name="CapturedBy" required>
         <option value="">-- Please choose --</option>
         <option value="Siti Nur Afiqah binti Basiran">Siti Nur Afiqah binti Basiran</option>
         <option value="Nurlizah binti Khazani">Nurlizah binti Khazani</option>
@@ -227,7 +238,7 @@
       </select>
 
       <label>Lead Category</label>
-      <select name="LeadCategory" disabled>
+      <select name="LeadCategory" required>
         <option value="">-- Please choose --</option>
         <option value="New">New</option>
         <option value="Retruning">Retruning</option>
@@ -236,7 +247,7 @@
       </select>
 
       <label>Referral Name (if applicable)</label>
-      <input type="text" name="ReferralFullName" placeholder="Full name + type (if Referral)" disabled>
+      <input type="text" name="ReferralFullName" placeholder="Full name + type (if Referral)" required>
     </div>
 
     <!-- SECTION B: PARENT / GUARDIAN DETAILS -->
@@ -245,29 +256,29 @@
 
       <label>Parent Full Name</label>
       <small>First Name (small letter only)</small>
-      <input type="text" name="ParentFirstName" disabled>
+      <input type="text" name="ParentFirstName" required>
       <small>Last Name (small letter only)</small>
-      <input type="text" name="ParentLastName" disabled>
+      <input type="text" name="ParentLastName" required>
 
       <label>Phone Number</label>
-      <input type="tel" name="PhoneNumber" placeholder="60123456789" disabled>
+      <input type="tel" name="PhoneNumber" placeholder="60123456789" required>
 
       <label>Email</label>
-      <input type="email" name="Email" disabled>
+      <input type="email" name="Email" required>
 
       <label>Your Address</label>
       <small>Street Address Line 1</small>
-      <input type="text" name="StreetAddress1" placeholder="Street Address / Area" disabled>
+      <input type="text" name="StreetAddress1" placeholder="Street Address / Area" required>
       <small>Street Address Line 2</small>
-      <input type="text" name="StreetAddress2" placeholder="Street Address Line 2" disabled>
+      <input type="text" name="StreetAddress2" placeholder="Street Address Line 2" required>
       <small>City</small>
-      <input type="text" name="City" placeholder="City / Area" disabled>
+      <input type="text" name="City" placeholder="City / Area" required>
       <small>State</small>
-      <input type="text" name="State" placeholder="State / Province" disabled>
+      <input type="text" name="State" placeholder="State / Province" required>
       <small>Zip Code</small>
-      <input type="text" name="ZipCode" placeholder="Zip Code" disabled>
+      <input type="text" name="ZipCode" placeholder="Zip Code" required>
       <small>Country</small>
-      <input type="text" name="Country" placeholder="Country" disabled>
+      <input type="text" name="Country" placeholder="Country" required>
     </div>
 
     <!-- SECTION C: CHILD / CLIENT DETAILS -->
@@ -276,34 +287,34 @@
 
       <label>Child's Full Name</label>
       <small>First Name (small letter only)</small>
-      <input type="text" name="ChildFirstName" disabled>
+      <input type="text" name="ChildFirstName" required>
       <small>Last Name (small letter only)</small>
-      <input type="text" name="ChildLastName" disabled>
+      <input type="text" name="ChildLastName" required>
 
       <label>Date of Birth</label>
-      <input type="date" name="DateOfBirth" disabled>
+      <input type="date" name="DateOfBirth" required>
 
       <label>Age of Children</label>
       <small>Please Use Age Calculator</small>
-      <input type="number" name="ChildAgeYears" placeholder="Years" disabled>
-      <input type="number" name="ChildAgeMonths" placeholder="Months" disabled>
+      <input type="number" name="ChildAgeYears" placeholder="Years" required>
+      <input type="number" name="ChildAgeMonths" placeholder="Months" required>
 
       <label>Gender</label>
       <div class="ca02-gender-container">
         <label class="ca02-gender-option">
-          <input type="radio" name="gender" value="male" disabled>
+          <input type="radio" name="gender" value="male" required>
           <img src="../../../../assets/images/boy.png" alt="Male" class="ca02-gender-img">
           <span>Male</span>
         </label>
         <label class="ca02-gender-option">
-          <input type="radio" name="gender" value="female" disabled>
+          <input type="radio" name="gender" value="female" required>
           <img src="../../../../assets/images/girl.png" alt="Female" class="ca02-gender-img">
           <span>Female</span>
         </label>
       </div>
 
       <label>Diagnosis / Concern</label>
-      <select name="Diagnosis" id="Diagnosis" disabled>
+      <select name="Diagnosis" id="Diagnosis" required>
         <option value="">-- Please choose --</option>
         <option value="Speech Delay">Speech Delay</option>
         <option value="ASD">ASD</option>
@@ -311,13 +322,13 @@
         <option value="Other">Other</option>
       </select>
 
-      <input type="text" id="OtherDiagnosis" name="OtherDiagnosis" placeholder="Please specify..." style="display: none; margin-top: 8px;" disabled>
+      <input type="text" id="OtherDiagnosis" name="OtherDiagnosis" placeholder="Please specify..." style="display: none; margin-top: 8px;" required>
 
       <label>Current School / Centre / Hospital</label>
-      <input type="text" name="CurrentSchool" disabled>
+      <input type="text" name="CurrentSchool" required>
 
       <label for="ChildCitizenship">Child Citizenship</label>
-      <select name="ChildCitizenship" id="ChildCitizenship" disabled>
+      <select name="ChildCitizenship" id="ChildCitizenship" required>
         <option value="" selected>Select Citizenship</option>
       </select>
     </div>
@@ -327,7 +338,7 @@
       <h3>SECTION D: INQUIRY DETAILS</h3>
 
       <label>Service Interested In</label>
-      <select name="ServiceInterested" disabled>
+      <select name="ServiceInterested" required>
         <option value="">-- Please choose --</option>
         <option value="Screening and Consultation">Screening and Consultation</option>
         <option value="Consultation">Consultation</option>
@@ -341,7 +352,7 @@
       </select>
 
       <label>Inquiry Type</label>
-      <select name="InquiryType" disabled>
+      <select name="InquiryType" required>
         <option value="">-- Please choose --</option>
         <option value="Info Only-Parent is exploring options or asking for general details">Info Only-Parent is exploring options or asking for general details</option>
         <option value="Trial-Parent wants a one-time or introductory session before committing">Trial-Parent wants a one-time or introductory session before committing</option>
@@ -351,10 +362,10 @@
       </select>
 
       <label>Preferred Date</label>
-      <input type="date" name="PreferredDate" disabled>
+      <input type="date" name="PreferredDate" required>
 
       <label>Preferred Time</label>
-      <select name="PreferredTime" disabled>
+      <select name="PreferredTime" required>
         <option value="">-- Please choose --</option>
         <option value="08:30">08:30</option>
         <option value="09:30">09:30</option>
@@ -366,7 +377,7 @@
       </select>
 
       <label>Special Requests / Notes</label>
-      <textarea name="SpecialRequests" placeholder="Enter special instructions here..." disabled></textarea>
+      <textarea name="SpecialRequests" placeholder="Enter special instructions here..." required></textarea>
     </div>
 
     <!-- SECTION E: FOLLOW-UP -->
@@ -374,7 +385,7 @@
       <h3>SECTION E: FOLLOW-UP</h3>
 
       <label>Follow-Up Assigned To</label>
-      <select name="FollowUpAssigned" disabled>
+      <select name="FollowUpAssigned" required>
         <option value="">-- Please choose --</option>
         <option value="Siti Nur Afiqah binti Basiran">Siti Nur Afiqah binti Basiran</option>
         <option value="Nurlizah binti Khazani">Nurlizah binti Khazani</option>
@@ -384,10 +395,10 @@
       </select>
 
       <label>Follow-Up Date</label>
-      <input type="date" name="FollowUpDate" disabled>
+      <input type="date" name="FollowUpDate" required>
 
       <label>Follow-Up Status</label>
-      <select name="FollowUpStatus" disabled>
+      <select name="FollowUpStatus" required>
         <option value="">-- Please choose --</option>
         <option value="CATEGORY 1: Initial Contact / Waiting for Response">CATEGORY 1: Initial Contact / Waiting for Response</option>
         <option value="Pending Response-Waiting for customer's reply or confirmation">Pending Response-Waiting for customer's reply or confirmation</option>
@@ -410,7 +421,7 @@
       </select>
 
       <label>Follow-Up Remarks</label>
-      <textarea name="FollowUpRemarks" placeholder="Enter key points or next steps..." disabled></textarea>
+      <textarea name="FollowUpRemarks" placeholder="Enter key points or next steps..." required></textarea>
     </div>
 
     <!-- SECTION F: MANAGER REVIEW -->
@@ -418,7 +429,7 @@
       <h3>SECTION F: MANAGER REVIEW</h3>
 
       <label>Review By</label>
-      <select name="ReviewBy" disabled>
+      <select name="ReviewBy" required>
         <option value="">-- Please choose --</option>
         <option value="Shilla Nurayeisha binti Mohamad Khir">Shilla Nurayeisha binti Mohamad Khir</option>
         <option value="Nur Dalila binti Kamilan">Nur Dalila binti Kamilan</option>
@@ -427,7 +438,7 @@
       </select>
 
       <label>Next Step</label>
-      <select name="NextStep" disabled>
+      <select name="NextStep" required>
         <option value="">-- Please choose --</option>
         <option value="Add to Contact Detail">Add to Contact Details</option>
         <option value="Proceed to Assessment">Proceed to Assessment</option>
@@ -438,7 +449,7 @@
       </select>
 
       <label>Date Review</label>
-      <input type="date" name="DateReview" disabled>
+      <input type="date" name="DateReview" required>
     </div>
 
     <!-- Submit Button -->

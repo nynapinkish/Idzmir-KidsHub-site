@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marketing - IDZMR Kids Hub (Admin)</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- 👇 TAMBAH LIBRARY SHEETJS UNTUK PARSE EXCEL -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+/* Base */
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Poppins',sans-serif; background:linear-gradient(135deg,#f8f9fa 0%,#e8f0f5 100%); min-height:100vh; color:#333; line-height:1.4; font-size:12px; padding:1rem; }
+
+/* Tabs */
+.tab-navigation { display:flex; gap:0; margin-bottom:1.5rem; border-radius:12px; overflow:hidden; box-shadow:0 4px 15px rgba(33,83,124,0.1); }
+.tab-item { flex:1; text-align:center; padding:0.85rem 1.5rem; cursor:pointer; color:#666; background:#f8f9fa; font-weight:500; font-size:0.85rem; transition:0.3s; border-bottom:3px solid transparent; }
+.tab-item:hover { background:#e8f0f5; color:#21537c; }
+.tab-item.active { background:white; color:#21537c; font-weight:600; border-bottom:3px solid #fed236; }
+
+/* Sections */
+.section { display:none; }
+.section.active { display:block; }
+.dashboard-section h2 { font-size:1.4rem; font-weight:600; color:#21537c; margin-bottom:0.75rem; display:flex; align-items:center; gap:0.5rem; }
+
+/* Form Cards Row */
+.forms-row { display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:1.5rem; }
+.form-column { display:flex; flex-direction:column; gap:1rem; width:100%; min-width:0; }
+
+/* Form Cards */
+.form-card { background:white; border-radius:12px; padding:20px 15px; text-align:center; cursor:pointer; position:relative; box-shadow:0 4px 15px rgba(33,83,124,0.08); transition:0.3s; border-top:3px solid #fed236; min-height:100px; }
+.form-card:hover { transform:translateY(-5px); box-shadow:0 8px 25px rgba(33,83,124,0.15); }
+.form-card h3 { color:#21537c; font-size:16px; font-weight:600; line-height:1.4; }
+.form-card .btn-export { position:absolute; top:10px; right:10px; background:#fed236; border:none; border-radius:6px; padding:6px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:0.2s; }
+.form-card .btn-export:hover { transform:translateY(-2px); box-shadow:0 2px 8px rgba(0,0,0,0.15); }
+.form-card .btn-export svg { width:16px; height:16px; fill:#000000; }
+
+/* History Tables */
+.history-container { background:white; padding:1rem; border-radius:12px; box-shadow:0 4px 20px rgba(33,83,124,0.1); border:1px solid rgba(33,83,124,0.05); height:500px; display:flex; flex-direction:column; position:relative; }
+.table-scroll { flex:1; overflow-x:auto; overflow-y:auto; }
+.history-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem; position:relative; }
+.history-header h3 { color:#21537c; font-size:0.9rem; font-weight:600; }
+.filter-bar { display:flex; gap:0.4rem; flex-wrap:wrap; align-items:center; position:relative; }
+.filter-bar input,.filter-bar select { padding:0.35rem 0.5rem; border:1px solid #ddd; border-radius:6px; font-size:0.7rem; font-family:'Poppins',sans-serif; }
+.filter-bar button { background:#21537c; color:white; border:none; padding:0.35rem 0.8rem; border-radius:6px; font-size:0.7rem; cursor:pointer; transition:0.2s; white-space:nowrap; }
+.filter-bar button:hover { background:#1a4a6a; transform:translateY(-1px); }
+.column-filter { position:absolute; top:100%; right:0; background:white; border:1px solid #ddd; border-radius:6px; padding:0.8rem; box-shadow:0 4px 12px rgba(0,0,0,0.15); z-index:100; display:flex; flex-direction:column; gap:0.4rem; margin-top:0.3rem; min-width:180px; }
+.column-filter label { display:flex; align-items:center; gap:0.4rem; cursor:pointer; padding:0.3rem; border-radius:4px; font-size:0.7rem; transition:0.2s; }
+.column-filter label:hover { background:#f0f8ff; }
+.column-filter input[type="checkbox"] { cursor:pointer; }
+.history-table { width:100%; border-collapse:collapse; font-size:0.65rem; }
+.history-table th,.history-table td { padding:0.5rem 0.4rem; text-align:left; border-bottom:1px solid #f0f2f5; }
+.history-table thead { background:#21537c; color:white; }
+.history-table th:first-child { border-radius:8px 0 0 0; }
+.history-table th:last-child { border-radius:0 8px 0 0; }
+.history-table tbody tr { transition:0.2s; }
+.history-table tbody tr:hover { background:linear-gradient(90deg,rgba(33,83,124,0.03) 0%,rgba(254,210,54,0.05) 100%); }
+.history-table tbody tr:nth-child(even) { background:#fafbfc; }
+.badge { padding:0.2rem 0.5rem; border-radius:10px; font-size:0.6rem; font-weight:500; white-space:nowrap; }
+.badge-pending { background:#fff3e0; color:#ff9800; }
+.badge-completed { background:#e8f5e9; color:#4caf50; }
+.badge-male { background:#e3f2fd; color:#2196f3; }
+.badge-female { background:#fce8f3; color:#e91e63; }
+
+/* Modal */
+#form-modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; backdrop-filter:blur(5px); background:rgba(0,0,0,0.1); justify-content:center; align-items:center; z-index:1000; }
+#form-modal .modal-content { position:relative; width:90%; max-width:900px; height:80%; background:transparent; overflow:hidden; display:flex; justify-content:center; align-items:center; }
+#form-modal iframe { width:100%; height:100%; border:none; background:transparent; }
+#form-modal .close-btn { position:absolute; top:10px; right:10px; background:#004aad; color:white; border:none; border-radius:50%; width:30px; height:30px; font-weight:bold; font-size:1.2rem; cursor:pointer; z-index:1010; display:flex; align-items:center; justify-content:center; }
+
+/* Responsive */
+@media (max-width:1200px){ 
+    .forms-row { grid-template-columns:1fr; } 
+    .filter-bar { width:100%; } 
+    .filter-bar input,.filter-bar select { flex:1; min-width:100px; }
+    .history-table { min-width:600px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Tabs -->
+<div class="tab-navigation">
+    <div class="tab-item active" id="tab-creative" onclick="showSection('creative-team')">Creative Team</div>
+    <div class="tab-item" id="tab-customer-care" onclick="showSection('customer-care')">Customer Care</div>
+    <div class="tab-item" id="tab-acquisition" onclick="showSection('customer-acquisition')">Customer Acquisition</div>
+</div>
+
+<!-- ========== CREATIVE TEAM SECTION ========== -->
+<section id="creative-team-section" class="dashboard-section section active">
+<h2>📋 CREATIVE TEAM</h2>
+
+<div class="forms-row">
+    <!-- LEFT COLUMN: Form 1 + History 1 -->
+    <div class="form-column">
+        <div class="form-card" onclick="viewForm('CT-Form01')">
+            <h3>New Prospect Inquiry Form</h3>
+            <button class="btn-export" onclick="exportForm(event,'CT-Form01')">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M5 20h14v-2H5v2zm7-18l-5 5h3v4h4v-4h3l-5-5z"/>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="history-container">
+            <div class="history-header">
+                <h3>📊 HISTORY</h3>
+                <div class="filter-bar">
+                    <input type="text" placeholder="Search rows..." id="search-ct1" onkeyup="searchTable('ct1')">
+                    <button onclick="toggleColumnFilter('ct1')">🔽 Columns</button>
+                    <button onclick="exportToExcel('ct1')">📥 Export</button>
+                </div>
+                <div id="column-filter-ct1" class="column-filter" style="display:none;">
+                    <label><input type="checkbox" value="0" checked onchange="toggleColumn('ct1',0)"> Date</label>
+                    <label><input type="checkbox" value="1" checked onchange="toggleColumn('ct1',1)"> Parent Name</label>
+                    <label><input type="checkbox" value="2" checked onchange="toggleColumn('ct1',2)"> Phone</label>
+                    <label><input type="checkbox" value="3" checked onchange="toggleColumn('ct1',3)"> Child Name</label>
+                    <label><input type="checkbox" value="4" checked onchange="toggleColumn('ct1',4)"> Gender</label>
+                    <label><input type="checkbox" value="5" checked onchange="toggleColumn('ct1',5)"> Diagnosis</label>
+                    <label><input type="checkbox" value="6" checked onchange="toggleColumn('ct1',6)"> Service</label>
+                    <label><input type="checkbox" value="7" checked onchange="toggleColumn('ct1',7)"> Status</label>
+                </div>
+            </div>
+            <div class="table-scroll">
+                <table class="history-table" id="table-ct1">
+<thead>
+    <tr>
+        <th>Parents Full Name</th>
+        <th>Phone Number (WhatsApp)</th>
+        <th>Email</th>
+        <th>Child's Full Name</th>
+        <th>Date of Birth</th>
+        <th>Gender</th>
+        <th>Diagnosis</th>
+        <th>Parents Concern</th>
+        <th>Service Interested in</th>
+        <th>Inquiry Type</th>
+        <th>Preferred Day For Appointment</th>
+        <th>Preferred Time</th>
+        <th>Source of your Information</th>
+        <th>Referral Name (if applicable)</th>
+        <th>I agree to allow Idzmir Kids Hub to use my information for service communication, registration and follow-up related to programs I am interested in.</th>
+    </tr>
+</thead>
+                    <tbody id="tbody-ct1"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- RIGHT COLUMN: Form 2 + History 2 -->
+    <div class="form-column">
+        <div class="form-card" onclick="viewForm('CT-Form02')">
+            <h3>Customer Lead Capture Form</h3>
+            <button class="btn-export" onclick="exportForm(event,'CT-Form02')">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M5 20h14v-2H5v2zm7-18l-5 5h3v4h4v-4h3l-5-5z"/>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="history-container">
+            <div class="history-header">
+                <h3>📊 HISTORY</h3>
+                <div class="filter-bar">
+                    <input type="text" placeholder="Search rows..." id="search-ct2" onkeyup="searchTable('ct2')">
+                    <button onclick="toggleColumnFilter('ct2')">🔽 Columns</button>
+                    <button onclick="exportToExcel('ct2')">📥 Export</button>
+                </div>
+<div id="column-filter-ca1" class="column-filter" style="display:none;">
+    <label><input type="checkbox" value="0" checked onchange="toggleColumn('ca1',0)"> Parents Full Name</label>
+    <label><input type="checkbox" value="1" checked onchange="toggleColumn('ca1',1)"> Phone Number (WhatsApp)</label>
+    <label><input type="checkbox" value="2" checked onchange="toggleColumn('ca1',2)"> Email</label>
+    <label><input type="checkbox" value="3" checked onchange="toggleColumn('ca1',3)"> Child's Full Name</label>
+    <label><input type="checkbox" value="4" checked onchange="toggleColumn('ca1',4)"> Date of Birth</label>
+    <label><input type="checkbox" value="5" checked onchange="toggleColumn('ca1',5)"> Gender</label>
+    <label><input type="checkbox" value="6" checked onchange="toggleColumn('ca1',6)"> Diagnosis</label>
+    <label><input type="checkbox" value="7" checked onchange="toggleColumn('ca1',7)"> Parents Concern</label>
+    <label><input type="checkbox" value="8" checked onchange="toggleColumn('ca1',8)"> Service Interested in</label>
+    <label><input type="checkbox" value="9" checked onchange="toggleColumn('ca1',9)"> Inquiry Type</label>
+    <label><input type="checkbox" value="10" checked onchange="toggleColumn('ca1',10)"> Preferred Day For Appointment</label>
+    <label><input type="checkbox" value="11" checked onchange="toggleColumn('ca1',11)"> Preferred Time</label>
+    <label><input type="checkbox" value="12" checked onchange="toggleColumn('ca1',12)"> Source of your Information</label>
+    <label><input type="checkbox" value="13" checked onchange="toggleColumn('ca1',13)"> Referral Name (if applicable)</label>
+    <label><input type="checkbox" value="14" checked onchange="toggleColumn('ca1',14)"> Consent Agreement</label>
+    <label><input type="checkbox" value="15" checked onchange="toggleColumn('ca1',15)"> Full Name</label>
+</div>
+            </div>
+            <div class="table-scroll">
+                <table class="history-table" id="table-ct2">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Lead Name</th>
+                            <th>Contact</th>
+                            <th>Interest</th>
+                            <th>Budget</th>
+                            <th>Timeline</th>
+                            <th>Source</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-ct2"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- ========== CUSTOMER CARE SECTION ========== -->
+<section id="customer-care-section" class="dashboard-section section">
+<h2>💬 CUSTOMER CARE</h2>
+
+<div class="forms-row">
+    <!-- LEFT COLUMN -->
+    <div class="form-column">
+        <div class="form-card" onclick="viewForm('CC-Form01')">
+            <h3>Customer Communication Work Letter</h3>
+            <button class="btn-export" onclick="exportForm(event,'CC-Form01')">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M5 20h14v-2H5v2zm7-18l-5 5h3v4h4v-4h3l-5-5z"/>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="history-container">
+            <div class="history-header">
+                <h3>📊 HISTORY</h3>
+                <div class="filter-bar">
+                    <input type="text" placeholder="Search rows..." id="search-cc1" onkeyup="searchTable('cc1')">
+                    <button onclick="toggleColumnFilter('cc1')">🔽 Columns</button>
+                    <button onclick="exportToExcel('cc1')">📥 Export</button>
+                </div>
+                <div id="column-filter-cc1" class="column-filter" style="display:none;">
+                    <label><input type="checkbox" value="0" checked onchange="toggleColumn('cc1',0)"> Date</label>
+                    <label><input type="checkbox" value="1" checked onchange="toggleColumn('cc1',1)"> Customer</label>
+                    <label><input type="checkbox" value="2" checked onchange="toggleColumn('cc1',2)"> Type</label>
+                    <label><input type="checkbox" value="3" checked onchange="toggleColumn('cc1',3)"> Subject</label>
+                    <label><input type="checkbox" value="4" checked onchange="toggleColumn('cc1',4)"> Channel</label>
+                    <label><input type="checkbox" value="5" checked onchange="toggleColumn('cc1',5)"> Assigned</label>
+                    <label><input type="checkbox" value="6" checked onchange="toggleColumn('cc1',6)"> Status</label>
+                </div>
+            </div>
+            <div class="table-scroll">
+                <table class="history-table" id="table-cc1">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Customer</th>
+                            <th>Type</th>
+                            <th>Subject</th>
+                            <th>Channel</th>
+                            <th>Assigned</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-cc1"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="form-column">
+        <div class="form-card" onclick="viewForm('CC-Form02')">
+            <h3>Session Booking & Payment Form</h3>
+            <button class="btn-export" onclick="exportForm(event,'CC-Form02')">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M5 20h14v-2H5v2zm7-18l-5 5h3v4h4v-4h3l-5-5z"/>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="history-container">
+            <div class="history-header">
+                <h3>📊 HISTORY</h3>
+                <div class="filter-bar">
+                    <input type="text" placeholder="Search rows..." id="search-cc2" onkeyup="searchTable('cc2')">
+                    <button onclick="toggleColumnFilter('cc2')">🔽 Columns</button>
+                    <button onclick="exportToExcel('cc2')">📥 Export</button>
+                </div>
+                <div id="column-filter-cc2" class="column-filter" style="display:none;">
+                    <label><input type="checkbox" value="0" checked onchange="toggleColumn('cc2',0)"> Date</label>
+                    <label><input type="checkbox" value="1" checked onchange="toggleColumn('cc2',1)"> Client Name</label>
+                    <label><input type="checkbox" value="2" checked onchange="toggleColumn('cc2',2)"> Session</label>
+                    <label><input type="checkbox" value="3" checked onchange="toggleColumn('cc2',3)"> Date & Time</label>
+                    <label><input type="checkbox" value="4" checked onchange="toggleColumn('cc2',4)"> Duration</label>
+                    <label><input type="checkbox" value="5" checked onchange="toggleColumn('cc2',5)"> Amount</label>
+                    <label><input type="checkbox" value="6" checked onchange="toggleColumn('cc2',6)"> Payment</label>
+                    <label><input type="checkbox" value="7" checked onchange="toggleColumn('cc2',7)"> Status</label>
+                </div>
+            </div>
+            <div class="table-scroll">
+                <table class="history-table" id="table-cc2">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Client Name</th>
+                            <th>Session</th>
+                            <th>Date & Time</th>
+                            <th>Duration</th>
+                            <th>Amount</th>
+                            <th>Payment</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-cc2"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- ========== CUSTOMER ACQUISITION SECTION ========== -->
+<section id="customer-acquisition-section" class="dashboard-section section">
+<h2>🎯 CUSTOMER ACQUISITION</h2>
+
+<div class="forms-row">
+    <!-- LEFT COLUMN -->
+    <div class="form-column">
+        <div class="form-card" onclick="viewForm('CA-Form01')">
+            <h3>New Prospect Inquiry Form</h3>
+            <button class="btn-export" onclick="exportForm(event,'CA-Form01')">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M5 20h14v-2H5v2zm7-18l-5 5h3v4h4v-4h3l-5-5z"/>
+                </svg>
+            </button>
+        </div>
+        
+<!-- UPDATE TABLE CA1 SECTION IN YOUR HTML -->
+
+<div class="history-container">
+    <div class="history-header">
+        <h3>📊 HISTORY</h3>
+        <div class="filter-bar">
+            <input type="text" placeholder="Search rows..." id="search-ca1" onkeyup="searchTable('ca1')">
+            <button onclick="toggleColumnFilter('ca1')">🔽 Columns</button>
+            <button onclick="exportToExcel('ca1')">📥 Export</button>
+            <button onclick="document.getElementById('import-excel-ca1').click()">📤 Import</button>
+            <input type="file" id="import-excel-ca1" accept=".xlsx,.xls" style="display:none" onchange="importExcel(event, 'ca1')">
+        </div>
+        
+        <!-- UPDATED COLUMN FILTER -->
+<div id="column-filter-ca1" class="column-filter" style="display:none;">
+<label><input type="checkbox" value="0" checked onchange="toggleColumn('ca1',0)"> Email</label>
+<label><input type="checkbox" value="1" checked onchange="toggleColumn('ca1',1)"> ParentName</label>
+<label><input type="checkbox" value="2" checked onchange="toggleColumn('ca1',2)"> PhoneNumber</label>
+<label><input type="checkbox" value="3" checked onchange="toggleColumn('ca1',3)"> ChildName</label>
+<label><input type="checkbox" value="4" checked onchange="toggleColumn('ca1',4)"> DOB</label>
+<label><input type="checkbox" value="5" checked onchange="toggleColumn('ca1',5)"> Gender</label>
+<label><input type="checkbox" value="6" checked onchange="toggleColumn('ca1',6)"> Diagnosis</label>
+<label><input type="checkbox" value="7" checked onchange="toggleColumn('ca1',7)"> ServiceInterestedIn</label>
+<label><input type="checkbox" value="8" checked onchange="toggleColumn('ca1',8)"> InquiryType</label>
+<label><input type="checkbox" value="9" checked onchange="toggleColumn('ca1',9)"> PreferredDayforAppointment</label>
+<label><input type="checkbox" value="10" checked onchange="toggleColumn('ca1',10)"> PreferredTime</label>
+<label><input type="checkbox" value="11" checked onchange="toggleColumn('ca1',11)"> SourceOfYourInformation</label>
+<label><input type="checkbox" value="12" checked onchange="toggleColumn('ca1',12)"> ReferrelName</label>
+<label><input type="checkbox" value="13" checked onchange="toggleColumn('ca1',13)"> ParentsConcern</label>
+<label><input type="checkbox" value="14" checked onchange="toggleColumn('ca1',14)"> ConsentAgreement</label>
+</div>
+    </div>
+    
+    <div class="table-scroll">
+        <!-- UPDATED TABLE HEADERS -->
+        <table class="history-table" id="table-ca1">
+<thead>
+    <tr>
+        <th>Email</th>
+        <th>ParentName</th>
+        <th>PhoneNumber</th>
+        <th>ChildName</th>
+        <th>DOB</th>
+        <th>Gender</th>
+        <th>Diagnosis</th>
+        <th>ServiceInterestedIn</th>
+        <th>InquiryType</th>
+        <th>PreferredDayforAppointment</th>
+        <th>PreferredTime</th>
+        <th>SourceOfYourInformation</th>
+        <th>ReferrelName</th>
+        <th>ParentsConcern</th>
+        <th>ConsentAgreement</th>
+    </tr>
+</thead>            <tbody id="tbody-ca1"></tbody>
+        </table>
+    </div>
+</div>                
+</div> 
+    <!-- RIGHT COLUMN -->
+    <div class="form-column">
+        <div class="form-card" onclick="viewForm('CA-Form02')">
+            <h3>Customer Lead Capture Form</h3>
+            <button class="btn-export" onclick="exportForm(event,'CA-Form02')">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M5 20h14v-2H5v2zm7-18l-5 5h3v4h4v-4h3l-5-5z"/>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="history-container">
+            <div class="history-header">
+                <h3>📊 HISTORY</h3>
+                <div class="filter-bar">
+                    <input type="text" placeholder="Search rows..." id="search-ca2" onkeyup="searchTable('ca2')">
+                    <button onclick="toggleColumnFilter('ca2')">🔽 Columns</button>
+                    <button onclick="exportToExcel('ca2')">📥 Export</button>
+                </div>
+<div id="column-filter-ca1" class="column-filter" style="display:none;">
+    <label><input type="checkbox" value="0" checked onchange="toggleColumn('ca1',0)"> Parents Full Name</label>
+    <label><input type="checkbox" value="1" checked onchange="toggleColumn('ca1',1)"> Phone Number (WhatsApp)</label>
+    <label><input type="checkbox" value="2" checked onchange="toggleColumn('ca1',2)"> Email</label>
+    <label><input type="checkbox" value="3" checked onchange="toggleColumn('ca1',3)"> Child's Full Name</label>
+    <label><input type="checkbox" value="4" checked onchange="toggleColumn('ca1',4)"> Date of Birth</label>
+    <label><input type="checkbox" value="5" checked onchange="toggleColumn('ca1',5)"> Gender</label>
+    <label><input type="checkbox" value="6" checked onchange="toggleColumn('ca1',6)"> Diagnosis</label>
+    <label><input type="checkbox" value="7" checked onchange="toggleColumn('ca1',7)"> Parents Concern</label>
+    <label><input type="checkbox" value="8" checked onchange="toggleColumn('ca1',8)"> Service Interested in</label>
+    <label><input type="checkbox" value="9" checked onchange="toggleColumn('ca1',9)"> Inquiry Type</label>
+    <label><input type="checkbox" value="10" checked onchange="toggleColumn('ca1',10)"> Preferred Day For Appointment</label>
+    <label><input type="checkbox" value="11" checked onchange="toggleColumn('ca1',11)"> Preferred Time</label>
+    <label><input type="checkbox" value="12" checked onchange="toggleColumn('ca1',12)"> Source of your Information</label>
+    <label><input type="checkbox" value="13" checked onchange="toggleColumn('ca1',13)"> Referral Name (if applicable)</label>
+    <label><input type="checkbox" value="14" checked onchange="toggleColumn('ca1',14)"> Consent Agreement</label>
+    <label><input type="checkbox" value="15" checked onchange="toggleColumn('ca1',15)"> Full Name</label>
+</div>
+            </div>
+            <div class="table-scroll">
+                <table class="history-table" id="table-ca2">
+<thead>
+    <tr>
+        <th>Parents Full Name</th>
+        <th>Phone Number (WhatsApp)</th>
+        <th>Email</th>
+        <th>Child's Full Name</th>
+        <th>Date of Birth</th>
+        <th>Gender</th>
+        <th>Diagnosis</th>
+        <th>Parents Concern</th>
+        <th>Service Interested in</th>
+        <th>Inquiry Type</th>
+        <th>Preferred Day For Appointment</th>
+        <th>Preferred Time</th>
+        <th>Source of your Information</th>
+        <th>Referral Name (if applicable)</th>
+        <th>I agree to allow Idzmir Kids Hub to use my information for service communication, registration and follow-up related to programs I am interested in.</th>
+        <th>Full Name</th>
+    </tr>
+</thead>
+                    <tbody id="tbody-ca2"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- Form Modal -->
+<div id="form-modal">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeFormModal()">×</button>
+    <iframe id="form-iframe" src="" allowtransparency="true"></iframe>
+  </div>
+</div>
+
+<script src="/html/Admin/Department/Marketing/marketing.js"></script>
+
+</body>
+</html>
